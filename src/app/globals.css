@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties ─── */
+:root {
+  --bg:           #020617;
+  --navy:         #0a0e27;
+  --blue:         #3b82f6;
+  --cyan:         #06b6d4;
+  --amber:        #fbbf24;
+  --amber-dark:   #d97706;
+  --text:         #cbd5e1;
+  --muted:        #64748b;
+  --border:       rgba(59,130,246,0.18);
+  --glass-bg:     rgba(13,27,75,0.45);
+  --radius:       16px;
+}
+
+/* ─── Base ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+/* ─── Selection ─── */
+::selection { background: rgba(59,130,246,0.35); color: #fff; }
+
+/* ─── Gradient text ─── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 60%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-amber {
+  background: linear-gradient(135deg, var(--amber) 0%, #fb923c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Glass card ─── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* ─── Neon border ─── */
+.neon-border {
+  border: 1px solid rgba(59,130,246,0.5);
+  box-shadow: 0 0 15px rgba(59,130,246,0.25), inset 0 0 15px rgba(59,130,246,0.05);
+}
+
+/* ─── Shimmer button ─── */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--amber) 0%, var(--amber-dark) 100%);
+  color: #020617;
+  font-weight: 700;
+  border-radius: 50px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(251,191,36,0.5);
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+.btn-primary:hover::after { transform: translateX(100%); }
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(59,130,246,0.5);
+  color: var(--blue);
+  font-weight: 600;
+  border-radius: 50px;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.btn-secondary:hover {
+  background: rgba(59,130,246,0.12);
+  box-shadow: 0 0 20px rgba(59,130,246,0.25);
+  transform: translateY(-2px);
+}
+
+/* ─── Section hero overlay ─── */
+.hero-bg {
+  background:
+    radial-gradient(ellipse 90% 60% at 50% -5%, rgba(59,130,246,0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(6,182,212,0.1) 0%, transparent 60%),
+    #020617;
+}
+
+/* ─── Range slider custom ─── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(59,130,246,0.2);
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(59,130,246,0.6);
+  transition: transform 0.2s;
+}
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+input[type="range"]::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 10px rgba(59,130,246,0.6);
+}
+
+/* ─── Form inputs ─── */
+.form-input {
+  background: rgba(13,27,75,0.5);
+  border: 1px solid rgba(59,130,246,0.2);
+  color: #f1f5f9;
+  border-radius: 10px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 0.95rem;
+  outline: none;
+}
+.form-input:focus {
+  border-color: rgba(59,130,246,0.7);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+}
+.form-input::placeholder { color: #475569; }
+
+/* ─── Divider ─── */
+.divider-glow {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.4), rgba(6,182,212,0.4), transparent);
+}
+
+/* ─── Page transition wrapper ─── */
+.page-wrapper {
+  min-height: 100vh;
+}
