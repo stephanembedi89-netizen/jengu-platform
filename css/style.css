@@ -695,3 +695,160 @@ ul { list-style: none; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .hstat-sep { display: none; }
 }
+
+/* ---- NAV LOGO IMAGE ---- */
+.nav-logo-img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* ---- HERO LOGO ---- */
+.hero-logo-img {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.hero-logo-img img {
+  width: 200px;
+  height: auto;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 30px rgba(0,212,255,0.4));
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ---- PRICING SECTION ---- */
+.pricing-section { background: var(--bg-navy); }
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-bottom: 64px;
+}
+
+.pricing-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+}
+.pricing-card:hover {
+  border-color: rgba(0, 212, 255, 0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 60px rgba(0, 212, 255, 0.12);
+}
+.pricing-featured {
+  border-color: var(--cyan);
+  background: linear-gradient(135deg, rgba(0,102,255,0.15), rgba(0,212,255,0.08));
+  box-shadow: 0 0 40px rgba(0,212,255,0.15);
+  transform: scale(1.03);
+}
+.pricing-featured:hover { transform: scale(1.03) translateY(-6px); }
+
+.pricing-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  color: var(--white);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 5px 18px;
+  border-radius: 50px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.pricing-header { margin-bottom: 28px; }
+.pricing-header h3 { font-size: 1.4rem; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.pricing-header p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 20px; }
+
+.pricing-price {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+}
+.price-amount {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 800;
+  color: var(--cyan);
+  line-height: 1;
+}
+.price-currency {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding-bottom: 4px;
+}
+.price-currency small { display: block; font-size: 0.8rem; color: var(--text-dim); }
+
+.pricing-features {
+  list-style: none;
+  flex: 1;
+  margin-bottom: 28px;
+}
+.pricing-features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 0.9rem;
+  color: var(--text);
+}
+.pricing-features li.disabled { color: var(--text-dim); opacity: 0.5; }
+.check { color: var(--cyan); font-weight: 700; font-size: 0.85rem; }
+.pricing-features li.disabled span { color: #ff4d6d; }
+
+/* ---- PRICING EXTRAS ---- */
+.pricing-extras {
+  background: rgba(13, 27, 75, 0.4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px;
+}
+.pricing-extras h3 {
+  text-align: center;
+  font-size: 1.3rem;
+  color: var(--white);
+  margin-bottom: 32px;
+}
+.extras-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.extra-item {
+  text-align: center;
+  padding: 20px 16px;
+  background: rgba(6, 9, 25, 0.4);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.3s;
+}
+.extra-item:hover { border-color: var(--gold); transform: translateY(-3px); }
+.extra-icon { font-size: 2rem; display: block; margin-bottom: 10px; }
+.extra-item strong { display: block; color: var(--white); font-size: 0.9rem; margin-bottom: 6px; }
+.extra-item span { color: var(--cyan); font-size: 0.8rem; font-weight: 600; }
+
+/* ---- RESPONSIVE PRICING ---- */
+@media (max-width: 1024px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .pricing-featured { transform: scale(1); }
+  .pricing-featured:hover { transform: translateY(-6px); }
+  .extras-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .extras-grid { grid-template-columns: 1fr; }
+  .pricing-extras { padding: 24px 16px; }
+  .footer-content { grid-template-columns: 1fr; }
+}
