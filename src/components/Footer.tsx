@@ -26,8 +26,31 @@ export default function Footer() {
               Votre partenaire stratégique en Intelligence Artificielle.
               Nous transformons vos données en avantage compétitif.
             </p>
+            {/* Contact rapide */}
+            <div className="flex flex-col gap-2 mt-1">
+              <a href="tel:+237672705729"
+                className="flex items-center gap-2 text-slate-400 hover:text-blue-400 text-xs transition-colors group">
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0 group-hover:text-blue-400">
+                  <path d="M3 5a2 2 0 012-2h2.28a1 1 0 01.95.68l1 3a1 1 0 01-.23 1.05L7.5 9.24A11.04 11.04 0 0010.76 12.5l1.51-1.5a1 1 0 011.05-.23l3 1a1 1 0 01.68.95V15a2 2 0 01-2 2A14 14 0 013 5z"/>
+                </svg>
+                +237 672 705 729
+              </a>
+              <a href="mailto:contact@jengu.ai"
+                className="flex items-center gap-2 text-slate-400 hover:text-blue-400 text-xs transition-colors group">
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
+                  <path d="M2 4h16v12a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/><path d="M2 4l8 7 8-7"/>
+                </svg>
+                contact@jengu.ai
+              </a>
+              <span className="flex items-center gap-2 text-slate-500 text-xs">
+                <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
+                  <path d="M10 2C6.686 2 4 4.686 4 8c0 4.5 6 10 6 10s6-5.5 6-10c0-3.314-2.686-6-6-6z"/><circle cx="10" cy="8" r="2"/>
+                </svg>
+                Douala, Cameroun
+              </span>
+            </div>
             {/* Social links */}
-            <div className="flex gap-3 mt-2">
+            <div className="flex gap-3 mt-1">
               {[
                 { label: 'LinkedIn', icon: 'M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 6a2 2 0 100-4 2 2 0 000 4z' },
                 { label: 'Twitter/X', icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z' },

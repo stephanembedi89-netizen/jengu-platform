@@ -51,8 +51,8 @@ const contactInfo = [
       </svg>
     ),
     label: 'Téléphone',
-    value: '+33 1 00 00 00 00',
-    href: 'tel:+33100000000',
+    value: '+237 672 705 729',
+    href: 'tel:+237672705729',
   },
   {
     icon: (
@@ -61,7 +61,17 @@ const contactInfo = [
       </svg>
     ),
     label: 'Localisation',
-    value: 'Paris, France · Remote worldwide',
+    value: 'Douala, Cameroun',
+    href: 'https://maps.google.com/?q=Douala,Cameroun',
+  },
+  {
+    icon: (
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+        <circle cx="10" cy="10" r="8"/><path d="M2 10h16M10 2a14 14 0 010 16M10 2a14 14 0 000 16"/>
+      </svg>
+    ),
+    label: 'Service',
+    value: 'Remote · Afrique & International',
     href: '#',
   },
 ]
