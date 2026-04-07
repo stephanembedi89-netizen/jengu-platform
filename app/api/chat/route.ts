@@ -1,41 +1,62 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { z } from 'zod';
 import { SYSTEM_PROMPT_FR, SYSTEM_PROMPT_EN } from '@/lib/ai-prompts';
 
 // Empêcher le caching de cette route
 export const dynamic = 'force-dynamic';
 
-interface ChatMessage {
-  role: 'user' | 'assistant';
-  content: string;
-}
+// ─── Schémas de validation Zod ──────────────────────────────
 
-interface ChatRequest {
-  messages: ChatMessage[];
-  lang?: 'fr' | 'en';
-}
+const MessageSchema = z.object({
+  role: z.enum(['user', 'assistant']),
+  content: z.string().min(1).max(8000),
+});
+
+const ChatRequestSchema = z.object({
+  messages: z.array(MessageSchema).min(1).max(30),
+  lang: z.enum(['fr', 'en']).default('fr'),
+});
+
+// ─── Constantes ─────────────────────────────────────────────
+
+const MODEL = 'claude-opus-4-6';
+const MAX_TOKENS = 4096;
+
+// ─── Handler ────────────────────────────────────────────────
 
 export async function POST(req: Request) {
-  try {
-    const body: ChatRequest = await req.json();
-    const { messages, lang = 'fr' } = body;
+  let lang: 'fr' | 'en' = 'fr';
 
-    // Validation basique
-    if (!messages || !Array.isArray(messages) || messages.length === 0) {
-      return Response.json({ error: 'Messages requis' }, { status: 400 });
+  try {
+    const body = await req.json();
+    const parsed = ChatRequestSchema.safeParse(body);
+
+    if (!parsed.success) {
+      return Response.json(
+        { error: 'Requête invalide', details: parsed.error.flatten() },
+        { status: 400 }
+      );
     }
 
-    const client = new Anthropic({
-      apiKey: process.env.ANTHROPIC_API_KEY,
-    });
+    const { messages } = parsed.data;
+    lang = parsed.data.lang;
 
-    // Choisir le system prompt selon la langue
+    const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
     const systemPrompt = lang === 'en' ? SYSTEM_PROMPT_EN : SYSTEM_PROMPT_FR;
 
-    // Créer le stream
+    // Créer le stream avec claude-opus-4-6, thinking adaptatif et cache du system prompt
     const stream = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1000,
-      system: systemPrompt,
+      model: MODEL,
+      max_tokens: MAX_TOKENS,
+      thinking: { type: 'adaptive' },
+      system: [
+        {
+          type: 'text',
+          text: systemPrompt,
+          cache_control: { type: 'ephemeral' },
+        },
+      ],
       messages: messages.map((m) => ({
         role: m.role,
         content: m.content,
@@ -43,7 +64,7 @@ export async function POST(req: Request) {
       stream: true,
     });
 
-    // Créer un ReadableStream pour envoyer le texte en streaming
+    // Stream uniquement le texte (les blocs de thinking sont ignorés côté client)
     const readableStream = new ReadableStream({
       async start(controller) {
         const encoder = new TextEncoder();
@@ -73,10 +94,37 @@ export async function POST(req: Request) {
       },
     });
   } catch (error) {
-    console.error('[API Chat] Erreur:', error);
-    return Response.json(
-      { error: 'Erreur interne du serveur' },
-      { status: 500 }
-    );
+    // Erreurs typées Anthropic SDK
+    if (error instanceof Anthropic.RateLimitError) {
+      return Response.json(
+        {
+          error:
+            lang === 'en'
+              ? 'Too many requests. Please retry in a moment.'
+              : 'Trop de requêtes. Réessayez dans un moment.',
+        },
+        { status: 429, headers: { 'Retry-After': '30' } }
+      );
+    }
+    if (error instanceof Anthropic.AuthenticationError) {
+      console.error('[API Chat] Clé API invalide');
+      return Response.json({ error: 'Configuration API invalide' }, { status: 500 });
+    }
+    if (error instanceof Anthropic.BadRequestError) {
+      return Response.json(
+        { error: 'Requête mal formée', details: error.message },
+        { status: 400 }
+      );
+    }
+    if (error instanceof Anthropic.APIError) {
+      console.error(`[API Chat] Erreur API ${error.status}:`, error.message);
+      return Response.json(
+        { error: 'Service temporairement indisponible. Réessayez.' },
+        { status: 503 }
+      );
+    }
+
+    console.error('[API Chat] Erreur inattendue:', error);
+    return Response.json({ error: 'Erreur interne du serveur' }, { status: 500 });
   }
 }

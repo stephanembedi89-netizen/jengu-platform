@@ -5,12 +5,13 @@ import { motion } from 'framer-motion';
 import {
   Calculator, Calendar, MessageCircle, Scale,
   HelpCircle, ExternalLink, AlertTriangle, CheckCircle,
-  TrendingUp, Clock, Briefcase
+  TrendingUp, Clock, Briefcase, Sparkles
 } from 'lucide-react';
 import { useT } from '@/lib/i18n/useTranslation';
 import { useLangStore } from '@/lib/i18n/useTranslation';
+import { useFiscoStore } from '@/lib/store';
 import { CALENDRIER_2026 } from '@/lib/fiscal-data-2026';
-import { isUrgent, joursRestants, formatDate } from '@/lib/utils';
+import { isUrgent, joursRestants, formatDate, formatFCFA } from '@/lib/utils';
 import Card from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
@@ -31,8 +32,8 @@ const SHORTCUTS = [
 export default function DashboardPage() {
   const { t } = useT();
   const { locale } = useLangStore();
+  const { lastCalc } = useFiscoStore();
 
-  // Trouver la prochaine échéance
   const prochaine = CALENDRIER_2026.find(e => joursRestants(e.date) >= 0);
   const urgentes = CALENDRIER_2026.filter(e => isUrgent(e.date) && joursRestants(e.date) >= 0);
 
@@ -134,7 +135,7 @@ export default function DashboardPage() {
           </Card>
         </motion.div>
 
-        {/* Dernier calcul */}
+        {/* Dernier calcul — depuis le store */}
         <motion.div initial="hidden" animate="visible" custom={4} variants={fadeIn}>
           <Card padding="md" className="h-full">
             <div className="flex items-center gap-2 mb-3">
@@ -143,13 +144,29 @@ export default function DashboardPage() {
                 {t('dashboard.last_calc')}
               </span>
             </div>
-            <p className="font-display text-2xl font-bold text-text-muted">—</p>
-            <p className="text-xs text-text-muted mt-1">{t('dashboard.no_calc')}</p>
-            <Link href={`/${locale}/calculateur`}>
-              <Button variant="ghost" size="sm" className="mt-2 text-xs px-2 py-1 h-auto min-h-0">
-                {locale === 'fr' ? 'Calculer →' : 'Calculate →'}
-              </Button>
-            </Link>
+            {lastCalc ? (
+              <>
+                <p className="font-display text-xl font-bold text-blue-glow leading-tight">
+                  {formatFCFA(lastCalc.result.totalAnnuel)}
+                </p>
+                <p className="text-xs text-text-secondary mt-1">
+                  {locale === 'fr' ? 'IGS annuel estimé' : 'Estimated annual IGS'}
+                </p>
+                <p className="text-[10px] text-text-muted mt-0.5">
+                  {new Date(lastCalc.savedAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', { day: '2-digit', month: 'short' })}
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="font-display text-2xl font-bold text-text-muted">—</p>
+                <p className="text-xs text-text-muted mt-1">{t('dashboard.no_calc')}</p>
+                <Link href={`/${locale}/calculateur`}>
+                  <Button variant="ghost" size="sm" className="mt-2 text-xs px-2 py-1 h-auto min-h-0">
+                    {locale === 'fr' ? 'Calculer →' : 'Calculate →'}
+                  </Button>
+                </Link>
+              </>
+            )}
           </Card>
         </motion.div>
 
@@ -164,9 +181,7 @@ export default function DashboardPage() {
             </div>
             <Badge color="gold">{t('dashboard.compliance_check')}</Badge>
             <p className="text-xs text-text-muted mt-2">
-              {locale === 'fr'
-                ? 'Vérifiez sur impots.cm'
-                : 'Verify on impots.cm'}
+              {locale === 'fr' ? 'Vérifiez sur impots.cm' : 'Verify on impots.cm'}
             </p>
           </Card>
         </motion.div>
@@ -193,6 +208,45 @@ export default function DashboardPage() {
         </div>
       </section>
 
+      {/* Résumé dernière simulation (si disponible) */}
+      {lastCalc && (
+        <motion.div initial="hidden" animate="visible" custom={10} variants={fadeIn}>
+          <Card padding="md" glow="blue" className="border-blue-electric/20">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <Sparkles className="w-4 h-4 text-blue-electric" aria-hidden="true" />
+                  <h3 className="font-display text-base font-semibold text-text-primary">
+                    {locale === 'fr' ? 'Votre dernière simulation' : 'Your last simulation'}
+                  </h3>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+                  <div>
+                    <p className="text-text-muted text-xs">{locale === 'fr' ? 'Secteur' : 'Sector'}</p>
+                    <p className="font-semibold text-text-primary capitalize">{lastCalc.secteur}</p>
+                  </div>
+                  <div>
+                    <p className="text-text-muted text-xs">CA</p>
+                    <p className="font-semibold text-text-primary">{formatFCFA(lastCalc.ca, { short: true })}</p>
+                  </div>
+                  <div>
+                    <p className="text-text-muted text-xs">{locale === 'fr' ? 'Zone' : 'Area'}</p>
+                    <p className="font-semibold text-text-primary capitalize">{lastCalc.zone}</p>
+                  </div>
+                  <div>
+                    <p className="text-text-muted text-xs">IGS/an</p>
+                    <p className="font-display font-bold text-blue-glow">{formatFCFA(lastCalc.result.totalAnnuel, { short: true })}</p>
+                  </div>
+                </div>
+              </div>
+              <Link href={`/${locale}/calculateur`} className="flex-shrink-0">
+                <Button size="sm">{locale === 'fr' ? 'Recalculer' : 'Recalculate'}</Button>
+              </Link>
+            </div>
+          </Card>
+        </motion.div>
+      )}
+
       {/* Actualités LF 2026 */}
       <section>
         <h2 className="font-display text-xl font-semibold text-text-primary mb-4">
@@ -204,7 +258,7 @@ export default function DashboardPage() {
             { titleKey: 'dashboard.news2.title', descKey: 'dashboard.news2.desc', icon: '💡' },
             { titleKey: 'dashboard.news3.title', descKey: 'dashboard.news3.desc', icon: '👥' },
           ].map(({ titleKey, descKey, icon }, i) => (
-            <motion.div key={titleKey} initial="hidden" animate="visible" custom={i + 10} variants={fadeIn}>
+            <motion.div key={titleKey} initial="hidden" animate="visible" custom={i + 11} variants={fadeIn}>
               <Card padding="md" className="h-full">
                 <span className="text-2xl mb-3 block" aria-hidden="true">{icon}</span>
                 <h3 className="font-display text-sm font-semibold text-text-primary mb-2">{t(titleKey)}</h3>
@@ -216,7 +270,7 @@ export default function DashboardPage() {
       </section>
 
       {/* Encart CGA */}
-      <motion.div initial="hidden" animate="visible" custom={13} variants={fadeIn}>
+      <motion.div initial="hidden" animate="visible" custom={14} variants={fadeIn}>
         <Card padding="md" glow="blue" className="border-blue-electric/20">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
             <div className="flex-1">

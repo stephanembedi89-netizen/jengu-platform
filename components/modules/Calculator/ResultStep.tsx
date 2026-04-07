@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Copy, Check, Calendar, MessageCircle, RefreshCcw } from 'lucide-react';
+import { Copy, Check, Calendar, MessageCircle, RefreshCcw, TrendingDown, Sparkles } from 'lucide-react';
 import { useT } from '@/lib/i18n/useTranslation';
 import { useLangStore } from '@/lib/i18n/useTranslation';
+import { useFiscoStore } from '@/lib/store';
 import type { IGSResult, Secteur, Zone } from '@/lib/fiscal-data-2026';
 import { SECTEUR_INFO } from '@/lib/fiscal-data-2026';
-import { formatFCFA, copierDansPressesPapier, formaterResultatIGS } from '@/lib/utils';
+import { formatFCFA, copierDansPressesPapier, formaterResultatIGS, calculerIGS } from '@/lib/utils';
 import Button from '@/components/ui/Button';
 
 interface ResultStepProps {
@@ -49,7 +50,20 @@ function AnimatedAmount({ value, className = '' }: { value: number; className?: 
 export default function ResultStep({ result, secteur, zone, membreCGA, onReset }: ResultStepProps) {
   const { t, locale } = useT();
   const { locale: lang } = useLangStore();
+  const { saveCalc } = useFiscoStore();
   const [copied, setCopied] = useState(false);
+
+  // Sauvegarder le résultat dans le store (pour le dashboard)
+  useEffect(() => {
+    saveCalc({ ca: result.base / (result.taux / 100), secteur, zone, membreCGA, result, savedAt: Date.now() });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Simulation de comparaison CGA si l'utilisateur n'est pas membre
+  const cgaSimulation = !membreCGA
+    ? calculerIGS({ ca: result.base / (result.taux / 100), secteur, zone, membreCGA: true })
+    : null;
+  const cgaSavings = cgaSimulation ? result.totalAnnuel - cgaSimulation.totalAnnuel : 0;
 
   const secteurInfo = SECTEUR_INFO[secteur];
   const secteurLabel = lang === 'en' ? secteurInfo.label_en : secteurInfo.label_fr;
@@ -107,8 +121,7 @@ export default function ResultStep({ result, secteur, zone, membreCGA, onReset }
       </p>
 
       {/* Tableau de breakdown */}
-      <div className="bg-navy-mid/80 rounded-card border border-blue-electric/15 overflow-hidden mb-6">
-        {/* Lignes de détail */}
+      <div className="bg-navy-mid/80 rounded-card border border-blue-electric/15 overflow-hidden mb-5">
         <div className="divide-y divide-navy-border">
           {rows.map(({ label, detail, value, sign }) => (
             <div key={label} className="flex items-center justify-between px-5 py-3">
@@ -147,8 +160,47 @@ export default function ResultStep({ result, secteur, zone, membreCGA, onReset }
         </div>
       </div>
 
+      {/* Encart suggestion CGA (si non-membre) */}
+      {cgaSimulation && cgaSavings > 0 && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5, duration: 0.35 }}
+          className="mb-5 p-4 rounded-card border border-gold/30 bg-gold-soft"
+        >
+          <div className="flex items-start gap-3">
+            <Sparkles className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <div className="flex-1">
+              <p className="text-sm font-body font-semibold text-text-primary mb-1">
+                {lang === 'fr' ? '💡 Économie possible avec le CGA' : '💡 Potential saving with a CGA'}
+              </p>
+              <p className="text-xs text-text-secondary mb-2">
+                {lang === 'fr'
+                  ? `En adhérant à un Centre de Gestion Agréé (Art. C37 LF 2026), vous bénéficiez de -50% sur votre IGS.`
+                  : `By joining an Approved Management Centre (Art. C37 FL 2026), you get -50% on your IGS.`}
+              </p>
+              <div className="flex items-center gap-4 text-sm">
+                <div className="flex items-center gap-1.5">
+                  <TrendingDown className="w-4 h-4 text-success" aria-hidden="true" />
+                  <span className="text-success font-semibold font-display">
+                    {lang === 'fr' ? 'Vous économiseriez' : 'You would save'}{' '}
+                    <AnimatedAmount value={cgaSavings} className="font-bold" />
+                    {lang === 'fr' ? '/an' : '/year'}
+                  </span>
+                </div>
+                <span className="text-text-muted">→</span>
+                <span className="font-display font-semibold text-text-primary">
+                  {formatFCFA(cgaSimulation.totalAnnuel)}
+                  {lang === 'fr' ? '/an avec CGA' : '/year with CGA'}
+                </span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
       {/* Actions */}
-      <div className="flex flex-wrap gap-3 mb-6">
+      <div className="flex flex-wrap gap-3 mb-5">
         <Button variant="outline" size="sm" onClick={handleCopy}>
           {copied ? (
             <><Check className="w-4 h-4" aria-hidden="true" /> {t('calc.copied')}</>

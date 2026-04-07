@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useT } from '@/lib/i18n/useTranslation';
 import { calculerIGS } from '@/lib/utils';
+import { useFiscoStore } from '@/lib/store';
 import type { Secteur, Zone, IGSResult } from '@/lib/fiscal-data-2026';
 import { IGS_SEUIL_CA } from '@/lib/fiscal-data-2026';
 import Card from '@/components/ui/Card';
@@ -18,16 +19,24 @@ const TOTAL_STEPS = 4;
 
 export default function CalculateurPage() {
   const { t, locale } = useT();
+  const { draft, updateDraft, resetDraft } = useFiscoStore();
 
-  // État du formulaire
-  const [step, setStep] = useState(1);
-  const [secteur, setSecteur] = useState<Secteur | null>(null);
-  const [ca, setCA] = useState(0);
-  const [zone, setZone] = useState<Zone>('urbain');
-  const [membreCGA, setMembreCGA] = useState(false);
+  // État local initialisé depuis le draft (auto-restore)
+  const [step, setStep] = useState(draft.step > 3 ? 1 : draft.step);
+  const [secteur, setSecteur] = useState<Secteur | null>(draft.secteur);
+  const [ca, setCA] = useState(draft.ca);
+  const [zone, setZone] = useState<Zone>(draft.zone);
+  const [membreCGA, setMembreCGA] = useState(draft.membreCGA);
   const [result, setResult] = useState<IGSResult | null>(null);
 
-  // Validation par étape
+  // Synchroniser le draft à chaque changement d'étape/valeur
+  useEffect(() => {
+    if (step < 4) {
+      updateDraft({ step, secteur, ca, zone, membreCGA });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step, secteur, ca, zone, membreCGA]);
+
   function canProceed() {
     if (step === 1) return secteur !== null;
     if (step === 2) return ca > 0 && ca < IGS_SEUIL_CA;
@@ -37,7 +46,6 @@ export default function CalculateurPage() {
 
   function handleNext() {
     if (step === 3) {
-      // Calculer le résultat
       const res = calculerIGS({ ca, secteur: secteur!, zone, membreCGA });
       setResult(res);
       setStep(4);
@@ -57,11 +65,15 @@ export default function CalculateurPage() {
     setMembreCGA(false);
     setResult(null);
     setStep(1);
+    resetDraft();
+  }
+
+  function handleSectorChange(s: Secteur | null) {
+    setSecteur(s);
   }
 
   return (
     <div className="max-w-2xl mx-auto">
-      {/* En-tête */}
       <div className="mb-8">
         <h1 className="font-display text-3xl font-bold text-text-primary mb-2">
           {t('calc.title')}
@@ -70,12 +82,10 @@ export default function CalculateurPage() {
       </div>
 
       <Card padding="lg">
-        {/* Stepper */}
         <div className="mb-8">
           <StepperNav currentStep={step} totalSteps={TOTAL_STEPS} />
         </div>
 
-        {/* Contenu par étape */}
         <AnimatePresence mode="wait">
           <motion.div
             key={step}
@@ -85,17 +95,10 @@ export default function CalculateurPage() {
             transition={{ duration: 0.25 }}
           >
             {step === 1 && (
-              <SectorStep
-                selected={secteur}
-                onChange={setSecteur}
-              />
+              <SectorStep selected={secteur} onChange={handleSectorChange} />
             )}
             {step === 2 && secteur && (
-              <CAStep
-                ca={ca}
-                secteur={secteur}
-                onChange={setCA}
-              />
+              <CAStep ca={ca} secteur={secteur} onChange={setCA} />
             )}
             {step === 3 && (
               <ParamsStep
@@ -117,7 +120,6 @@ export default function CalculateurPage() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation (cachée à l'étape 4) */}
         {step < 4 && (
           <div className="flex justify-between mt-8 pt-6 border-t border-navy-border">
             <Button
@@ -134,7 +136,7 @@ export default function CalculateurPage() {
               size="md"
             >
               {step === 3
-                ? (locale === 'fr' ? 'Calculer →' : 'Calculate →')
+                ? locale === 'fr' ? 'Calculer →' : 'Calculate →'
                 : `${t('calc.next')} →`}
             </Button>
           </div>
