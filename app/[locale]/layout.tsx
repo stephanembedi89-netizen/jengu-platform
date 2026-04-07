@@ -38,7 +38,7 @@ export default async function LocaleLayout({ children, params: { locale } }: Loc
         <Sidebar />
 
         {/* Zone principale */}
-        <div className="lg:ml-64 flex flex-col min-h-screen">
+        <div className="lg:ml-60 flex flex-col min-h-screen">
           <Header />
 
           <main className="flex-1 p-4 sm:p-6 pb-20 lg:pb-6" id="main-content">

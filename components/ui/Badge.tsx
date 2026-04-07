@@ -11,13 +11,23 @@ interface BadgeProps {
 }
 
 const colorStyles: Record<BadgeColor, string> = {
-  blue: 'bg-blue-electric/12 text-blue-glow border-blue-electric/20',
-  gold: 'bg-gold-soft text-gold border-gold/25',
-  green: 'bg-success-bg text-success border-success/20',
-  red: 'bg-danger-bg text-danger border-danger/20',
-  purple: 'bg-[rgba(168,85,247,0.12)] text-[#a855f7] border-[rgba(168,85,247,0.20)]',
-  gray: 'bg-navy-border/60 text-text-secondary border-navy-border',
-  urgent: 'bg-gold-soft text-gold border-gold/30',
+  blue:   'bg-blue-dim text-blue-glow border-blue-electric/18',
+  gold:   'bg-gold-soft text-gold border-gold/22',
+  green:  'bg-success-bg text-success border-success/18',
+  red:    'bg-danger-bg text-danger border-danger/18',
+  purple: 'bg-[rgba(139,92,246,0.10)] text-[#a78bfa] border-[rgba(139,92,246,0.18)]',
+  gray:   'bg-white/[0.05] text-text-secondary border-white/[0.08]',
+  urgent: 'bg-gold-soft text-gold border-gold/28',
+};
+
+const dotColors: Record<BadgeColor, string> = {
+  blue:   'bg-blue-glow',
+  gold:   'bg-gold',
+  urgent: 'bg-gold',
+  green:  'bg-success',
+  red:    'bg-danger',
+  purple: 'bg-[#a78bfa]',
+  gray:   'bg-text-secondary',
 };
 
 export default function Badge({
@@ -30,22 +40,15 @@ export default function Badge({
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-body font-700 tracking-wider uppercase border',
+        'inline-flex items-center gap-1.5 px-2.5 py-[5px] rounded-pill',
+        'text-[11px] font-body font-600 tracking-[0.05em] uppercase border',
         colorStyles[color],
         pulse && 'badge-urgent',
         className
       )}
     >
       {dot && (
-        <span
-          className={cn(
-            'w-1.5 h-1.5 rounded-full',
-            color === 'gold' || color === 'urgent' ? 'bg-gold' : '',
-            color === 'blue' ? 'bg-blue-glow' : '',
-            color === 'green' ? 'bg-success' : '',
-            color === 'red' ? 'bg-danger' : '',
-          )}
-        />
+        <span className={cn('w-1.5 h-1.5 rounded-full flex-shrink-0', dotColors[color])} />
       )}
       {children}
     </span>

@@ -25,26 +25,26 @@ export default function Header() {
   const pageLabel = PAGE_LABELS[pageKey]?.[locale] || pageKey;
 
   return (
-    <header className="h-14 border-b border-navy-border bg-navy-mid/80 backdrop-blur-md sticky top-0 z-20 flex items-center px-6 gap-4">
-      {/* Breadcrumb */}
-      <div className="flex-1 flex items-center gap-2 text-sm font-body">
-        <span className="text-text-muted">Fisco.IA</span>
-        <span className="text-navy-border">/</span>
-        <span className="text-text-primary font-semibold">{pageLabel}</span>
+    <header className="h-14 border-b border-white/[0.07] bg-navy-mid/80 backdrop-blur-lg sticky top-0 z-20 flex items-center px-5 gap-3">
+      {/* Page title */}
+      <div className="flex-1 flex items-center gap-2 min-w-0">
+        <span className="text-[13px] font-body font-semibold text-text-primary truncate">
+          {pageLabel}
+        </span>
       </div>
 
-      {/* Badge date */}
-      <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-body font-semibold bg-blue-electric/10 text-blue-glow border border-blue-electric/15">
-        <span className="w-1.5 h-1.5 rounded-full bg-blue-electric animate-pulse" />
+      {/* Live badge */}
+      <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill text-[11px] font-body font-semibold bg-blue-electric/10 text-blue-glow border border-blue-electric/14 whitespace-nowrap">
+        <span className="w-1.5 h-1.5 rounded-full bg-blue-electric animate-pulse flex-shrink-0" />
         {t('app.date_badge')}
       </span>
 
-      {/* Lien impots.cm */}
+      {/* impots.cm */}
       <a
         href={IMPOTS_CM_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-body text-text-muted hover:text-blue-glow hover:bg-navy-border/50 transition-all border border-transparent hover:border-navy-border"
+        className="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-body text-text-muted hover:text-blue-glow hover:bg-white/[0.05] transition-all"
         aria-label="Aller sur impots.cm"
       >
         <ExternalLink className="w-3 h-3" aria-hidden="true" />
