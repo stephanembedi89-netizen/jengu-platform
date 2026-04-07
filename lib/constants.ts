@@ -40,21 +40,31 @@ export const NAV_ITEMS = [
 
 export type NavKey = (typeof NAV_ITEMS)[number]['key'];
 
-// Tarifs (FCFA/mois)
+// Tarifs (FCFA) — Van Westendorp · Avril 2026
+// annuel = 10 mois (économie 2 mois = −17%)
 export const TARIFS = {
-  starter: {
-    prix: 5_000,
-    label_fr: 'Starter',
-    label_en: 'Starter',
+  free: {
+    prix_mensuel: 0,
+    prix_annuel: 0,
+    label_fr: 'Free',
+    label_en: 'Free',
   },
-  business: {
-    prix: 15_000,
-    label_fr: 'Business',
-    label_en: 'Business',
+  solo: {
+    prix_mensuel: 4_900,
+    prix_annuel: 49_000,
+    label_fr: 'Solo',
+    label_en: 'Solo',
+  },
+  pro: {
+    prix_mensuel: 9_900,
+    prix_annuel: 99_000,
+    label_fr: 'Pro',
+    label_en: 'Pro',
     populaire: true,
   },
   cabinet: {
-    prix: 50_000,
+    prix_mensuel: 24_900,
+    prix_annuel: 249_000,
     label_fr: 'Cabinet',
     label_en: 'Cabinet',
   },

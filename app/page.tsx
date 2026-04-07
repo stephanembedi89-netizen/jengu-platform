@@ -2,10 +2,11 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import {
   Calculator, Calendar, MessageCircle, Scale,
-  ArrowRight, Check, ChevronRight, ExternalLink,
-  AlertTriangle, Shield, Zap, Star
+  ArrowRight, Check, ExternalLink,
+  AlertTriangle, Shield, Star
 } from 'lucide-react';
 import { useT } from '@/lib/i18n/useTranslation';
 import { useLangStore } from '@/lib/i18n/useTranslation';
@@ -27,6 +28,7 @@ const fadeIn = {
 export default function LandingPage() {
   const { t } = useT();
   const { locale } = useLangStore();
+  const [annual, setAnnual] = useState(false);
 
   const problems = [
     { titleKey: 'problems.p1.title', descKey: 'problems.p1.desc', icon: AlertTriangle },
@@ -49,31 +51,36 @@ export default function LandingPage() {
 
   const pricingPlans = [
     {
-      key: 'starter',
-      price: TARIFS.starter.prix,
-      featuresKey: 'pricing.starter.features' as const,
-      features: locale === 'en'
-        ? ['IGS Calculator', 'Fiscal calendar', 'Full FAQ']
-        : ['Calculateur IGS', 'Calendrier fiscal', 'FAQ complète'],
+      key: 'free',
+      priceMensuel: TARIFS.free.prix_mensuel,
+      priceAnnuel: TARIFS.free.prix_annuel,
+      features: t('pricing.free.features') as unknown as string[],
       popular: false,
+      free: true,
     },
     {
-      key: 'business',
-      price: TARIFS.business.prix,
-      featuresKey: 'pricing.business.features' as const,
-      features: locale === 'en'
-        ? ['Everything in Starter +', 'Unlimited AI Assistant', 'Filing archive', 'WhatsApp alerts']
-        : ['Tout Starter +', 'Assistant IA illimité', 'Archivage déclarations', 'Alertes WhatsApp'],
+      key: 'solo',
+      priceMensuel: TARIFS.solo.prix_mensuel,
+      priceAnnuel: TARIFS.solo.prix_annuel,
+      features: t('pricing.solo.features') as unknown as string[],
+      popular: false,
+      free: false,
+    },
+    {
+      key: 'pro',
+      priceMensuel: TARIFS.pro.prix_mensuel,
+      priceAnnuel: TARIFS.pro.prix_annuel,
+      features: t('pricing.pro.features') as unknown as string[],
       popular: true,
+      free: false,
     },
     {
       key: 'cabinet',
-      price: TARIFS.cabinet.prix,
-      featuresKey: 'pricing.cabinet.features' as const,
-      features: locale === 'en'
-        ? ['10-client license', 'Ideal for CGAs', 'Priority support', 'Multi-client dashboard']
-        : ['Licence × 10 clients', 'Idéal pour CGA', 'Support prioritaire', 'Tableau multi-clients'],
+      priceMensuel: TARIFS.cabinet.prix_mensuel,
+      priceAnnuel: TARIFS.cabinet.prix_annuel,
+      features: t('pricing.cabinet.features') as unknown as string[],
       popular: false,
+      free: false,
     },
   ];
 
@@ -261,70 +268,121 @@ export default function LandingPage() {
 
       {/* ── TARIFS ── */}
       <section className="py-20 px-6 bg-navy-mid/30">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <motion.h2
             initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
             className="font-display text-3xl font-bold text-center text-text-primary mb-2"
           >
             {t('pricing.title')}
           </motion.h2>
-          <p className="text-center text-text-secondary text-sm mb-12">{t('pricing.subtitle')}</p>
+          <p className="text-center text-text-secondary text-sm mb-8">{t('pricing.subtitle')}</p>
 
-          <div className="grid sm:grid-cols-3 gap-5">
-            {pricingPlans.map(({ key, price, features: featureList, popular }, i) => (
-              <motion.div
-                key={key}
-                initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fadeIn}
-                className="relative"
-              >
-                {popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-body font-700 bg-gold text-navy-deep">
-                      <Star className="w-3 h-3" aria-hidden="true" />
-                      {t('pricing.popular')}
-                    </span>
-                  </div>
-                )}
-                <Card
-                  padding="lg"
-                  glow={popular ? 'gold' : 'none'}
-                  className={`h-full flex flex-col ${popular ? 'border-gold/30 bg-navy-card' : ''}`}
+          {/* ── Toggle mensuel / annuel ── */}
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}
+            className="flex items-center justify-center gap-3 mb-10"
+          >
+            <span className={`text-sm font-body font-semibold transition-colors ${!annual ? 'text-text-primary' : 'text-text-muted'}`}>
+              {t('pricing.toggle_monthly')}
+            </span>
+            <button
+              onClick={() => setAnnual(v => !v)}
+              className="relative w-12 h-6 rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-electric"
+              style={{ background: annual ? 'var(--color-blue-electric, #1a7fff)' : 'var(--color-navy-border, #2a3550)' }}
+              aria-label="Toggle billing period"
+            >
+              <span
+                className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform duration-200 ${annual ? 'translate-x-6' : 'translate-x-0'}`}
+              />
+            </button>
+            <span className={`text-sm font-body font-semibold transition-colors ${annual ? 'text-text-primary' : 'text-text-muted'}`}>
+              {t('pricing.toggle_annual')}
+            </span>
+            {annual && (
+              <span className="px-2 py-0.5 rounded-full text-[11px] font-body font-bold bg-gold/20 text-gold border border-gold/30">
+                {t('pricing.annual_badge')}
+              </span>
+            )}
+          </motion.div>
+
+          {/* ── 4 cartes ── */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {pricingPlans.map(({ key, priceMensuel, priceAnnuel, features: featureList, popular, free }, i) => {
+              const displayPrice = annual ? priceAnnuel : priceMensuel;
+              const perLabel = annual ? t('pricing.per_year') : t('pricing.per_month');
+
+              return (
+                <motion.div
+                  key={key}
+                  initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i} variants={fadeIn}
+                  className="relative"
                 >
-                  <div className="mb-4">
-                    <h3 className="font-display text-xl font-bold text-text-primary capitalize">{t(`pricing.${key}.name`)}</h3>
-                    <div className="mt-3 flex items-baseline gap-1">
-                      <span className="font-display text-3xl font-bold text-text-primary">
-                        {formatFCFA(price).replace(' FCFA', '')}
-                      </span>
-                      <span className="text-sm text-text-muted font-body">
-                        FCFA{t('pricing.per_month')}
+                  {popular && (
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
+                      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-body font-bold bg-gold text-navy-deep whitespace-nowrap">
+                        <Star className="w-3 h-3" aria-hidden="true" />
+                        {t('pricing.popular')}
                       </span>
                     </div>
-                  </div>
+                  )}
+                  <Card
+                    padding="lg"
+                    glow={popular ? 'gold' : 'none'}
+                    className={`h-full flex flex-col ${popular ? 'border-gold/30' : ''}`}
+                  >
+                    {/* En-tête plan */}
+                    <div className="mb-5">
+                      <h3 className="font-display text-lg font-bold text-text-primary">{t(`pricing.${key}.name`)}</h3>
+                      <p className="text-xs text-text-muted mt-0.5 mb-3">{t(`pricing.${key}.desc`)}</p>
 
-                  <ul className="space-y-2.5 flex-1 mb-6">
-                    {featureList.map((feat) => (
-                      <li key={feat} className="flex items-center gap-2 text-sm font-body text-text-secondary">
-                        <Check className="w-4 h-4 text-success flex-shrink-0" aria-hidden="true" />
-                        {feat}
-                      </li>
-                    ))}
-                  </ul>
+                      {free ? (
+                        <div className="flex items-baseline gap-1">
+                          <span className="font-display text-3xl font-bold text-text-primary">0</span>
+                          <span className="text-sm text-text-muted font-body">FCFA</span>
+                        </div>
+                      ) : (
+                        <div>
+                          <div className="flex items-baseline gap-1">
+                            <span className="font-display text-3xl font-bold text-text-primary">
+                              {displayPrice.toLocaleString('fr-FR')}
+                            </span>
+                            <span className="text-sm text-text-muted font-body">FCFA{perLabel}</span>
+                          </div>
+                          {annual && (
+                            <p className="text-[11px] text-text-muted mt-0.5 line-through">
+                              {(priceMensuel * 12).toLocaleString('fr-FR')} FCFA/an
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </div>
 
-                  <Link href={`/${locale}/dashboard`}>
-                    <Button
-                      variant={popular ? 'primary' : 'outline'}
-                      className="w-full"
-                    >
-                      {t('pricing.cta')}
-                    </Button>
-                  </Link>
-                </Card>
-              </motion.div>
-            ))}
+                    {/* Features */}
+                    <ul className="space-y-2 flex-1 mb-6">
+                      {Array.isArray(featureList) && featureList.map((feat: string) => (
+                        <li key={feat} className="flex items-start gap-2 text-sm font-body text-text-secondary">
+                          <Check className="w-4 h-4 text-success flex-shrink-0 mt-0.5" aria-hidden="true" />
+                          {feat}
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* CTA */}
+                    <Link href={`/${locale}/dashboard`}>
+                      <Button
+                        variant={popular ? 'primary' : free ? 'ghost' : 'outline'}
+                        className="w-full"
+                      >
+                        {free ? t('pricing.cta_free') : key === 'cabinet' ? t('pricing.cta_contact') : t('pricing.cta')}
+                      </Button>
+                    </Link>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </div>
 
-          <p className="text-center text-xs text-text-muted mt-6">
+          <p className="text-center text-xs text-text-muted mt-8">
             💳 {t('pricing.payment')}
           </p>
         </div>
