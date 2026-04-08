@@ -185,7 +185,13 @@ export default function TarifsPage() {
                 </ul>
 
                 {/* CTA */}
-                <Link href={`/${locale}/dashboard`}>
+                <Link
+                  href={
+                    isFree
+                      ? `/${locale}/dashboard`
+                      : `/${locale}/checkout?plan=${key}&billing=${annual ? 'annual' : 'monthly'}`
+                  }
+                >
                   <Button
                     variant={popular ? 'primary' : isFree ? 'ghost' : 'outline'}
                     className="w-full"
@@ -194,7 +200,7 @@ export default function TarifsPage() {
                       ? (locale === 'fr' ? 'Commencer gratuitement' : 'Get started free')
                       : key === 'cabinet'
                       ? (locale === 'fr' ? 'Nous contacter' : 'Contact us')
-                      : (locale === 'fr' ? 'Choisir ce forfait' : 'Choose this plan')}
+                      : (locale === 'fr' ? 'Souscrire →' : 'Subscribe →')}
                   </Button>
                 </Link>
               </Card>
