@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard, Calculator, Calendar, MessageCircle,
-  HelpCircle, Scale, ExternalLink
+  HelpCircle, Scale, ExternalLink, CreditCard
 } from 'lucide-react';
 import { useT } from '@/lib/i18n/useTranslation';
 import { useLangStore } from '@/lib/i18n/useTranslation';
@@ -17,6 +17,7 @@ const NAV_ITEMS = [
   { key: 'calendrier',  icon: Calendar,         labelKey: 'nav.calendrier' },
   { key: 'assistant',   icon: MessageCircle,    labelKey: 'nav.assistant' },
   { key: 'faq',         icon: HelpCircle,       labelKey: 'nav.faq' },
+  { key: 'tarifs',      icon: CreditCard,       labelKey: 'nav.tarifs' },
   { key: 'legal',       icon: Scale,            labelKey: 'nav.legal' },
 ] as const;
 

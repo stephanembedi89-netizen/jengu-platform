@@ -12,6 +12,7 @@ const PAGE_LABELS: Record<string, { fr: string; en: string }> = {
   calendrier:  { fr: 'Calendrier fiscal', en: 'Fiscal Calendar' },
   assistant:   { fr: 'Assistant IA', en: 'AI Assistant' },
   faq:         { fr: 'FAQ fiscale', en: 'Tax FAQ' },
+  tarifs:      { fr: 'Forfaits & Tarifs', en: 'Plans & Pricing' },
   legal:       { fr: 'Cadre légal', en: 'Legal Framework' },
 };
 
