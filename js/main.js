@@ -24,9 +24,10 @@ navLinks.querySelectorAll('a').forEach(link => {
   });
 });
 
-// ---- CANVAS PARTICLES ----
+// ---- CANVAS PULSE RINGS ----
 const canvas = document.getElementById('particles');
 const ctx    = canvas.getContext('2d');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 function resizeCanvas() {
   canvas.width  = window.innerWidth;
@@ -35,70 +36,78 @@ function resizeCanvas() {
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
-const PARTICLE_COUNT = 120;
-const particles = [];
+// Gold color stops for rings
+const RING_COLORS = ['#C9A84C', '#EAC96A', '#A07828'];
+const rings = [];
+let lastRingTime = 0;
+const RING_INTERVAL = 1800; // ms between new rings
 
-class Particle {
-  constructor() { this.reset(); }
-  reset() {
-    this.x     = Math.random() * canvas.width;
-    this.y     = Math.random() * canvas.height;
-    this.r     = Math.random() * 1.8 + 0.3;
-    this.alpha = Math.random() * 0.6 + 0.1;
-    this.vx    = (Math.random() - 0.5) * 0.3;
-    this.vy    = (Math.random() - 0.5) * 0.3;
-    this.color = Math.random() > 0.5 ? '#00d4ff' : '#ffc107';
+class PulseRing {
+  constructor(delay = 0) {
+    this.cx    = canvas.width / 2;
+    this.cy    = canvas.height / 2;
+    this.r     = 0;
+    this.maxR  = Math.hypot(canvas.width, canvas.height) * 0.55;
+    this.speed = 1.2;
+    this.color = RING_COLORS[Math.floor(Math.random() * RING_COLORS.length)];
+    this.age   = -delay;
   }
   update() {
-    this.x += this.vx;
-    this.y += this.vy;
-    if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+    if (this.age < 0) { this.age += 1; return; }
+    this.r += this.speed;
+    this.cx = canvas.width  / 2;
+    this.cy = canvas.height / 2;
   }
   draw() {
+    if (this.age < 0 || this.r <= 0) return;
+    const progress = this.r / this.maxR;
+    const alpha    = (1 - progress) * 0.28;
     ctx.save();
-    ctx.globalAlpha = this.alpha;
-    ctx.fillStyle   = this.color;
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.arc(this.cx, this.cy, this.r, 0, Math.PI * 2);
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth   = 1.2;
+    ctx.globalAlpha = alpha;
+    ctx.stroke();
     ctx.restore();
   }
+  isDone() { return this.r > this.maxR; }
 }
 
-for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+// Seed initial rings at staggered positions
+for (let i = 0; i < 4; i++) {
+  const r = new PulseRing();
+  r.r = (i / 4) * r.maxR;
+  rings.push(r);
+}
 
-function drawConnections() {
-  ctx.save();
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      const dx   = particles[i].x - particles[j].x;
-      const dy   = particles[i].y - particles[j].y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 100) {
-        ctx.globalAlpha = (1 - dist / 100) * 0.12;
-        ctx.strokeStyle = '#00d4ff';
-        ctx.lineWidth   = 0.6;
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.stroke();
-      }
+function animatePulse(timestamp) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (!prefersReducedMotion.matches) {
+    if (timestamp - lastRingTime > RING_INTERVAL) {
+      rings.push(new PulseRing());
+      lastRingTime = timestamp;
+    }
+    for (let i = rings.length - 1; i >= 0; i--) {
+      rings[i].update();
+      rings[i].draw();
+      if (rings[i].isDone()) rings.splice(i, 1);
     }
   }
-  ctx.restore();
+  requestAnimationFrame(animatePulse);
 }
+requestAnimationFrame(animatePulse);
 
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+// ---- CURSOR GLOW ----
+const cursorGlow = document.createElement('div');
+cursorGlow.className = 'cursor-glow';
+document.body.appendChild(cursorGlow);
 
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  if (!prefersReducedMotion.matches) {
-    particles.forEach(p => { p.update(); p.draw(); });
-    drawConnections();
-  }
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
+document.addEventListener('mousemove', (e) => {
+  cursorGlow.style.left = e.clientX + 'px';
+  cursorGlow.style.top  = e.clientY + 'px';
+});
 
 // ---- SCROLL REVEAL ----
 const revealObserver = new IntersectionObserver((entries) => {
