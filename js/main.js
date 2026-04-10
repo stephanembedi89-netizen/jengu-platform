@@ -88,10 +88,14 @@ function drawConnections() {
   ctx.restore();
 }
 
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
 function animateParticles() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach(p => { p.update(); p.draw(); });
-  drawConnections();
+  if (!prefersReducedMotion.matches) {
+    particles.forEach(p => { p.update(); p.draw(); });
+    drawConnections();
+  }
   requestAnimationFrame(animateParticles);
 }
 animateParticles();
@@ -210,3 +214,35 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const styleTag = document.createElement('style');
 styleTag.textContent = `.nav-link.active { color: var(--cyan) !important; }`;
 document.head.appendChild(styleTag);
+
+// ---- BILLING TOGGLE (mensuel / annuel) ----
+const billingToggle   = document.getElementById('billingToggle');
+const labelMonthly    = document.getElementById('label-monthly');
+const labelAnnual     = document.getElementById('label-annual');
+const priceAmounts    = document.querySelectorAll('.price-amount[data-monthly]');
+const annualNoteEls   = document.querySelectorAll('.price-annual-note');
+const annualTotals    = ['960\u202f000', '1\u202f920\u202f000']; // totaux annuels par carte
+
+function updatePricing(isAnnual) {
+  billingToggle.setAttribute('aria-checked', String(isAnnual));
+  labelMonthly.classList.toggle('active', !isAnnual);
+  labelAnnual.classList.toggle('active', isAnnual);
+
+  priceAmounts.forEach(el => {
+    el.innerHTML = isAnnual ? el.dataset.annual : el.dataset.monthly;
+  });
+
+  annualNoteEls.forEach((el, i) => {
+    el.textContent = isAnnual && annualTotals[i]
+      ? `Facturé ${annualTotals[i]} FCFA/an`
+      : '';
+  });
+}
+
+if (billingToggle) {
+  billingToggle.addEventListener('click', () => {
+    const isAnnual = billingToggle.getAttribute('aria-checked') !== 'true';
+    updatePricing(isAnnual);
+  });
+  updatePricing(false);
+}

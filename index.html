@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Jengu.AI - Conseil en IA, Automatisation, Annotation de données et Formation IA pour les entreprises." />
-  <title>Jengu.AI — Intelligence Artificielle pour les Entreprises</title>
+  <meta name="description" content="AgentPulse - Conseil en IA, Automatisation, Annotation de données et Formation IA pour les entreprises africaines et mondiales." />
+  <title>AgentPulse — Intelligence Artificielle pour les Entreprises</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -13,7 +13,7 @@
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#" class="nav-logo">
-        <img src="images/logo.png" alt="Jengu.AI" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"/>
+        <img src="images/logo.png" alt="AgentPulse" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-flex'"/>
         <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:none">
           <path d="M18 2C18 2 6 14 6 22C6 28.627 11.373 34 18 34C24.627 34 30 28.627 30 22C30 14 18 2 18 2Z" fill="url(#dropGrad)"/>
           <path d="M18 10C18 10 22 15 23 19C23.5 21 22.5 23.5 20.5 24.5C19 25.3 17 25 16 24C14.5 22.5 14.5 20 15.5 18.5" stroke="#ffc107" stroke-width="1.5" stroke-linecap="round"/>
@@ -24,7 +24,7 @@
             </linearGradient>
           </defs>
         </svg>
-        <span>Jengu<span class="logo-ai">.AI</span></span>
+        <span>Agent<span class="logo-pulse">Pulse</span></span>
       </a>
 
       <ul class="nav-links" id="navLinks">
@@ -46,7 +46,7 @@
   <section class="hero" id="accueil">
     <canvas id="particles"></canvas>
     <div class="hero-logo-img reveal">
-      <img src="images/logo.png" alt="Jengu.AI Logo" onerror="this.parentElement.style.display='none'"/>
+      <img src="images/logo.png" alt="AgentPulse Logo" onerror="this.parentElement.style.display='none'"/>
     </div>
     <div class="hero-content">
       <div class="hero-badge">🤖 Intelligence Artificielle</div>
@@ -55,7 +55,7 @@
         avec l'<span class="gradient-text">Intelligence Artificielle</span>
       </h1>
       <p class="hero-sub">
-        Jengu.AI vous accompagne dans votre transformation numérique —<br/>
+        AgentPulse vous accompagne dans votre transformation numérique —<br/>
         du conseil stratégique à la mise en œuvre concrète.
       </p>
       <div class="hero-actions">
@@ -249,9 +249,9 @@
         </div>
         <div class="about-text reveal">
           <span class="section-label">Notre histoire</span>
-          <h2>À propos de <span class="gradient-text">Jengu.AI</span></h2>
+          <h2>À propos d'<span class="gradient-text">AgentPulse</span></h2>
           <p>
-            Jengu.AI est une entreprise spécialisée dans le conseil et l'intégration de solutions d'intelligence artificielle pour les entreprises africaines et mondiales.
+            AgentPulse est une entreprise spécialisée dans le conseil et l'intégration de solutions d'intelligence artificielle pour les entreprises africaines et mondiales.
           </p>
           <p>
             Notre mission est de démocratiser l'accès à l'IA en Afrique et dans le monde, en offrant des services de haute qualité adaptés aux réalités locales et aux enjeux globaux.
@@ -277,45 +277,66 @@
         <h2>Tarifs <span class="gradient-text">Transparents</span></h2>
         <p>Des formules adaptées à chaque taille d'entreprise, en Francs CFA</p>
       </div>
+
+      <!-- Toggle mensuel / annuel -->
+      <div class="pricing-toggle reveal">
+        <span class="toggle-label active" id="label-monthly">Mensuel</span>
+        <button
+          class="toggle-switch"
+          id="billingToggle"
+          role="switch"
+          aria-checked="false"
+          aria-label="Basculer vers la facturation annuelle"
+        ><span class="toggle-thumb"></span></button>
+        <span class="toggle-label" id="label-annual">Annuel</span>
+        <span class="toggle-save">Économisez&nbsp;20&nbsp;%</span>
+      </div>
+
       <div class="pricing-grid">
 
         <div class="pricing-card reveal">
           <div class="pricing-header">
             <h3>Starter</h3>
-            <p>Pour les startups & TPE</p>
+            <p>Pour les startups &amp; TPE</p>
             <div class="pricing-price">
-              <span class="price-amount">100 000</span>
+              <span class="price-amount tabular-nums"
+                    data-monthly="100&nbsp;000"
+                    data-annual="80&nbsp;000">100&nbsp;000</span>
               <span class="price-currency">FCFA<small>/mois</small></span>
             </div>
+            <span class="price-annual-note" aria-live="polite"></span>
           </div>
           <ul class="pricing-features">
-            <li><span class="check">✓</span> Audit IA initial</li>
-            <li><span class="check">✓</span> 2 consultations / mois</li>
-            <li><span class="check">✓</span> Rapport de recommandations</li>
-            <li><span class="check">✓</span> Support par email</li>
-            <li class="disabled"><span>✗</span> Automatisation de processus</li>
-            <li class="disabled"><span>✗</span> Formation équipes</li>
+            <li><span class="check" aria-hidden="true">✓</span> Audit IA initial</li>
+            <li><span class="check" aria-hidden="true">✓</span> 2&nbsp;consultations&nbsp;/ mois</li>
+            <li><span class="check" aria-hidden="true">✓</span> Rapport de recommandations</li>
+            <li><span class="check" aria-hidden="true">✓</span> Support par email</li>
+            <li class="disabled"><span aria-hidden="true">✗</span> <span class="sr-only">Non inclus&nbsp;:</span> Automatisation de processus</li>
+            <li class="disabled"><span aria-hidden="true">✗</span> <span class="sr-only">Non inclus&nbsp;:</span> Formation équipes</li>
           </ul>
           <a href="#contact" class="btn btn-outline btn-full">Choisir Starter</a>
         </div>
 
         <div class="pricing-card pricing-featured reveal">
-          <div class="pricing-badge">Populaire</div>
+          <div class="pricing-badge" aria-label="Offre la plus populaire">Populaire</div>
           <div class="pricing-header">
             <h3>Pro</h3>
             <p>Pour les PME en croissance</p>
             <div class="pricing-price">
-              <span class="price-amount">200 000</span>
+              <span class="price-amount tabular-nums"
+                    data-monthly="200&nbsp;000"
+                    data-annual="160&nbsp;000">200&nbsp;000</span>
               <span class="price-currency">FCFA<small>/mois</small></span>
             </div>
+            <span class="price-annual-note" aria-live="polite"></span>
           </div>
           <ul class="pricing-features">
-            <li><span class="check">✓</span> Tout Starter inclus</li>
-            <li><span class="check">✓</span> Automatisation de 3 processus</li>
-            <li><span class="check">✓</span> Formation équipe (5 personnes)</li>
-            <li><span class="check">✓</span> Tableau de bord IA</li>
-            <li><span class="check">✓</span> Support prioritaire</li>
-            <li><span class="check">✓</span> 5 000 items annotés/mois</li>
+            <li><span class="check" aria-hidden="true">✓</span> Tout Starter inclus</li>
+            <li><span class="check" aria-hidden="true">✓</span> Automatisation de 3&nbsp;processus</li>
+            <li><span class="check" aria-hidden="true">✓</span> Formation équipe (5&nbsp;personnes)</li>
+            <li><span class="check" aria-hidden="true">✓</span> Tableau de bord IA</li>
+            <li><span class="check" aria-hidden="true">✓</span> Support prioritaire</li>
+            <li><span class="check" aria-hidden="true">✓</span> 5&nbsp;000 items annotés/mois</li>
           </ul>
           <a href="#contact" class="btn btn-primary btn-full">Choisir Pro</a>
         </div>
@@ -325,53 +346,98 @@
             <h3>Enterprise</h3>
             <p>Pour les grandes structures</p>
             <div class="pricing-price">
-              <span class="price-amount">Sur devis</span>
-              <span class="price-currency"></span>
+              <span class="price-amount" style="font-size:1.6rem">Sur devis</span>
             </div>
+            <span class="price-annual-note" aria-live="polite"></span>
           </div>
           <ul class="pricing-features">
-            <li><span class="check">✓</span> Solutions sur mesure</li>
-            <li><span class="check">✓</span> Automatisation illimitée</li>
-            <li><span class="check">✓</span> Formation avancée complète</li>
-            <li><span class="check">✓</span> Annotation de données massive</li>
-            <li><span class="check">✓</span> Intégration système complète</li>
-            <li><span class="check">✓</span> Support 24/7 dédié</li>
+            <li><span class="check" aria-hidden="true">✓</span> Solutions sur mesure</li>
+            <li><span class="check" aria-hidden="true">✓</span> Automatisation illimitée</li>
+            <li><span class="check" aria-hidden="true">✓</span> Formation avancée complète</li>
+            <li><span class="check" aria-hidden="true">✓</span> Annotation de données massive</li>
+            <li><span class="check" aria-hidden="true">✓</span> Intégration système complète</li>
+            <li><span class="check" aria-hidden="true">✓</span> Support 24/7 dédié</li>
           </ul>
           <a href="#contact" class="btn btn-outline btn-full">Nous contacter</a>
         </div>
 
       </div>
 
+      <!-- Signaux de confiance -->
+      <div class="pricing-trust reveal">
+        <div class="trust-item">
+          <span class="trust-icon" aria-hidden="true">🔒</span>
+          <span>Sans engagement</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon" aria-hidden="true">✅</span>
+          <span>Satisfaction garantie&nbsp;30&nbsp;jours</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon" aria-hidden="true">📞</span>
+          <span>Accompagnement dédié</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon" aria-hidden="true">🔄</span>
+          <span>Changement de formule à tout moment</span>
+        </div>
+      </div>
+
+      <!-- Services à la carte -->
       <div class="pricing-extras reveal">
         <h3>Services à la carte</h3>
         <div class="extras-grid">
           <div class="extra-item">
-            <span class="extra-icon">📊</span>
+            <span class="extra-icon" aria-hidden="true">📊</span>
             <strong>Annotation de données</strong>
-            <span>100 000 FCFA / 1 000 items</span>
+            <span>100&nbsp;000&nbsp;FCFA / 1&nbsp;000 items</span>
           </div>
           <div class="extra-item">
-            <span class="extra-icon">💻</span>
+            <span class="extra-icon" aria-hidden="true">💻</span>
             <strong>Formation e-learning</strong>
-            <span>15 000 FCFA / personne</span>
+            <span>15&nbsp;000&nbsp;FCFA / personne</span>
           </div>
           <div class="extra-item">
-            <span class="extra-icon">🎓</span>
+            <span class="extra-icon" aria-hidden="true">🎓</span>
             <strong>Formation présentiel</strong>
             <span>Sur devis</span>
           </div>
           <div class="extra-item">
-            <span class="extra-icon">🧠</span>
+            <span class="extra-icon" aria-hidden="true">🧠</span>
             <strong>Conseil stratégique</strong>
             <span>Sur devis</span>
           </div>
           <div class="extra-item">
-            <span class="extra-icon">⚙️</span>
+            <span class="extra-icon" aria-hidden="true">⚙️</span>
             <strong>Automatisation projet</strong>
             <span>Sur devis</span>
           </div>
         </div>
       </div>
+
+      <!-- FAQ Tarifs -->
+      <div class="pricing-faq reveal">
+        <h3>Questions fréquentes</h3>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Puis-je changer de formule en cours de route&nbsp;?</summary>
+            <p>Oui, vous pouvez passer à une formule supérieure à tout moment sans pénalité. Le changement prend effet dès le mois suivant.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Les prix incluent-ils les taxes&nbsp;?</summary>
+            <p>Tous les tarifs sont indiqués hors taxes. La TVA applicable sera précisée sur votre facture selon votre pays d'implantation.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Qu'est-ce que la garantie satisfaction&nbsp;30&nbsp;jours&nbsp;?</summary>
+            <p>Si vous n'êtes pas satisfait de nos services dans les 30&nbsp;premiers jours, nous vous remboursons intégralement, sans question.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Comment fonctionne la facturation annuelle&nbsp;?</summary>
+            <p>En choisissant l'abonnement annuel, vous bénéficiez de 20&nbsp;% de réduction sur le tarif mensuel. Le montant total est facturé en une seule fois en début de période.</p>
+          </details>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -444,19 +510,19 @@
           <div class="form-row">
             <div class="form-group">
               <label for="name">Nom complet *</label>
-              <input type="text" id="name" name="name" placeholder="Jean Dupont" required />
+              <input type="text" id="name" name="name" placeholder="Jean Dupont" autocomplete="name" required />
               <span class="form-error" id="nameError"></span>
             </div>
             <div class="form-group">
               <label for="email">Email *</label>
-              <input type="email" id="email" name="email" placeholder="jean@entreprise.com" required />
+              <input type="email" id="email" name="email" placeholder="jean@entreprise.com" autocomplete="email" spellcheck="false" required />
               <span class="form-error" id="emailError"></span>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label for="company">Entreprise</label>
-              <input type="text" id="company" name="company" placeholder="Votre entreprise" />
+              <input type="text" id="company" name="company" placeholder="Votre entreprise" autocomplete="organization" />
             </div>
             <div class="form-group">
               <label for="service">Service souhaité</label>
@@ -506,7 +572,7 @@
               </linearGradient>
             </defs>
           </svg>
-          <span>Jengu<span class="logo-ai">.AI</span></span>
+          <span>Agent<span class="logo-pulse">Pulse</span></span>
         </a>
         <p>L'intelligence artificielle au service<br/>de votre croissance.</p>
       </div>
@@ -548,7 +614,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2025 Jengu.AI — Tous droits réservés</p>
+      <p>&copy; 2025 AgentPulse — Tous droits réservés</p>
       <p>Fait avec ❤️ pour l'Afrique et le monde</p>
     </div>
   </footer>
