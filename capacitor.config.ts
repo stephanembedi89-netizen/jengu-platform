@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
-  appId: 'ai.jengu.assur',
-  appName: 'JenguAssur',
+  appId: 'ai.jengu.agentpulse',
+  appName: 'AgentPulse',
   webDir: 'out',
   server: {
     androidScheme: 'https',

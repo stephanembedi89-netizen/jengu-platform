@@ -2,15 +2,15 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: { default: 'JenguAssur', template: '%s | JenguAssur' },
-  description: 'Plateforme SaaS de gestion commerciale pour compagnies d\'assurance à Douala',
-  keywords: ['assurance', 'Douala', 'Cameroun', 'CIMA', 'gestion sinistres', 'pipeline commercial'],
-  authors: [{ name: 'Jengu.AI' }],
+  title: { default: 'AgentPulse', template: '%s | AgentPulse' },
+  description: 'AgentPulse by JenguAI — Pipeline commercial, contrats et sinistres pour assureurs au Cameroun',
+  keywords: ['assurance', 'Douala', 'Cameroun', 'CIMA', 'gestion sinistres', 'pipeline commercial', 'AgentPulse'],
+  authors: [{ name: 'JenguAI' }],
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'JenguAssur',
+    title: 'AgentPulse',
   },
 }
 

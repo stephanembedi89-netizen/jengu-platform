@@ -51,7 +51,7 @@ const PLANS = [
       'Agents illimités',
       'Multi-agences / succursales',
       'API REST dédiée',
-      'Assistant IA (JenguAI)',
+      'Assistant IA (AgentPulse AI)',
       'Formation équipe incluse',
       'Account manager dédié',
       'SLA 99.9% garanti',
@@ -78,7 +78,7 @@ export default function HomePage() {
             <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
               <Shield className="w-4 h-4 text-white" />
             </div>
-            <span className="font-bold text-lg">Jengu<span className="text-blue-400">Assur</span></span>
+            <span className="font-bold text-lg">Agent<span className="text-blue-400">Pulse</span></span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm text-gray-400">
             <a href="#fonctionnalites" className="hover:text-white transition-colors">Fonctionnalités</a>
@@ -205,7 +205,7 @@ export default function HomePage() {
             {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-amber-400 fill-amber-400" />)}
           </div>
           <blockquote className="text-lg text-gray-300 italic mb-4">
-            "JenguAssur a transformé notre façon de suivre nos agents. On a réduit les pertes de renouvellements de 40% en 3 mois."
+            "AgentPulse a transformé notre façon de suivre nos agents. On a réduit les pertes de renouvellements de 40% en 3 mois."
           </blockquote>
           <p className="text-sm text-gray-500">Directeur commercial, Courtier en assurance — Douala, Akwa</p>
         </div>
@@ -223,9 +223,9 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
           <div className="flex items-center gap-2">
             <Shield className="w-4 h-4 text-blue-400" />
-            <span>JenguAssur by <span className="text-blue-400">Jengu.AI</span></span>
+            <span>AgentPulse by <span className="text-blue-400">JenguAI</span></span>
           </div>
-          <p>© {new Date().getFullYear()} Jengu.AI — Douala, Cameroun · Conforme CIMA</p>
+          <p>© {new Date().getFullYear()} JenguAI — Douala, Cameroun · Conforme CIMA</p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-white transition-colors">Confidentialité</a>
             <a href="#" className="hover:text-white transition-colors">CGU</a>

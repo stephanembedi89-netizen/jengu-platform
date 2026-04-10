@@ -17,7 +17,7 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // Design system JenguAssur
+        // Design system AgentPulse
         brand: {
           50:  '#eff6ff',
           100: '#dbeafe',

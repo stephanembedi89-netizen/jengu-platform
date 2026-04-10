@@ -15,7 +15,7 @@ const NAV_ITEMS = [
   { href: '/contrats',     label: 'Contrats',         icon: FileText,        roles: ['ADMIN','SUPERVISEUR','AGENT'] },
   { href: '/sinistres',    label: 'Sinistres',        icon: AlertTriangle,   roles: ['ADMIN','SUPERVISEUR','AGENT'] },
   { href: '/agents',       label: 'Agents',           icon: Users,           roles: ['ADMIN','SUPERVISEUR'] },
-  { href: '/assistant',    label: 'JenguAI',          icon: Sparkles,        roles: ['ADMIN','SUPERVISEUR','AGENT'] },
+  { href: '/assistant',    label: 'AgentPulse AI',    icon: Sparkles,        roles: ['ADMIN','SUPERVISEUR','AGENT'] },
   { href: '/parametres',   label: 'Paramètres',       icon: Settings,        roles: ['ADMIN'] },
 ]
 
@@ -47,7 +47,7 @@ export default function Sidebar({ role }: { role: string }) {
               <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center shrink-0">
                 <Shield className="w-3.5 h-3.5 text-white" />
               </div>
-              <span className="font-bold text-sm">Jengu<span className="text-blue-400">Assur</span></span>
+              <span className="font-bold text-sm">Agent<span className="text-blue-400">Pulse</span></span>
             </div>
           )}
           <button

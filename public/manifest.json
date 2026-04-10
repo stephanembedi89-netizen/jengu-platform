@@ -1,7 +1,7 @@
 {
-  "name": "JenguAssur",
-  "short_name": "JenguAssur",
-  "description": "Gestion commerciale pour assurances — Douala, Cameroun",
+  "name": "AgentPulse by JenguAI",
+  "short_name": "AgentPulse",
+  "description": "Pipeline commercial, contrats et sinistres pour assureurs — Douala, Cameroun",
   "start_url": "/dashboard",
   "display": "standalone",
   "background_color": "#0a0f1e",

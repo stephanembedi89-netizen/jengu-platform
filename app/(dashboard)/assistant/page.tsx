@@ -106,7 +106,7 @@ export default function AssistantPage() {
           <Sparkles className="w-5 h-5 text-blue-400" />
         </div>
         <div>
-          <h1 className="text-xl font-bold">JenguAI</h1>
+          <h1 className="text-xl font-bold">AgentPulse AI</h1>
           <p className="text-sm text-gray-400">Assistant IA spécialisé assurance Cameroun · Claude Opus 4.6</p>
         </div>
         {messages.length > 0 && (
@@ -123,7 +123,7 @@ export default function AssistantPage() {
             <div className="w-16 h-16 rounded-2xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center mx-auto mb-4">
               <Bot className="w-8 h-8 text-blue-400" />
             </div>
-            <h2 className="text-lg font-semibold mb-2">Bonjour ! Je suis JenguAI</h2>
+            <h2 className="text-lg font-semibold mb-2">Bonjour ! Je suis AgentPulse AI</h2>
             <p className="text-sm text-gray-400 mb-8 max-w-md mx-auto">
               Votre assistant spécialisé en assurance au Cameroun. Je peux vous aider à rédiger des devis, analyser des prospects, répondre aux questions CIMA et bien plus.
             </p>
@@ -208,7 +208,7 @@ export default function AssistantPage() {
             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
           </button>
         </div>
-        <p className="text-xs text-gray-600 mt-1.5">JenguAI est alimenté par Claude Opus 4.6 · Réponses à titre indicatif, vérifiez la réglementation CIMA en vigueur</p>
+        <p className="text-xs text-gray-600 mt-1.5">AgentPulse AI est alimenté par Claude Opus 4.6 · Réponses à titre indicatif, vérifiez la réglementation CIMA en vigueur</p>
       </div>
     </div>
   )

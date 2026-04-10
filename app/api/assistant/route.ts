@@ -7,7 +7,7 @@ const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 })
 
-const SYSTEM_PROMPT = `Tu es JenguAI, l'assistant intelligent intégré à JenguAssur — la plateforme de gestion commerciale pour compagnies d'assurance à Douala, Cameroun.
+const SYSTEM_PROMPT = `Tu es AgentPulse AI, l'assistant intelligent intégré à AgentPulse by JenguAI — la plateforme de gestion commerciale pour compagnies d'assurance à Douala, Cameroun.
 
 Tu as une expertise approfondie en :
 - Assurance IARD (Auto, Habitation, Incendie, Transport) et Vie au Cameroun
