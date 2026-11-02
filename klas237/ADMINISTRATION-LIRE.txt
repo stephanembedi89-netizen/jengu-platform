@@ -1,0 +1,25 @@
+KLAS 237 — ADMINISTRATION ET ASSISTANCE — 01/10/2026
+
+MISE EN LIGNE
+Cette archive contient le site complet, basé sur Klas237-Netlify-essai-offert.zip du 30 septembre, avec admin.html et le bouton Besoin d’aide.
+Remplacer le déploiement du site Netlify existant klas237.netlify.app par le contenu de cette archive. Conserver l’URL existante. Si une version plus récente a été déployée depuis cette archive, intégrer uniquement les ajouts admin.html, admin.css, admin.js, help-center.js, help-center.css et les changements index.html/entry.js au lieu de remplacer tout le site.
+Le service Supabase klas-support-admin et la table protégée klas_support_tickets sont déjà installés sur le projet klas-237.
+
+ACCÈS PRIVÉ
+Adresse après déploiement : https://klas237.netlify.app/admin.html
+Aucun compte administrateur n’a encore été désigné. L’adresse exacte du compte du propriétaire doit être confirmée avant attribution du droit.
+Le droit doit être défini côté serveur dans app_metadata.klas_admin = true, en conservant les autres métadonnées. Ne jamais le placer dans user_metadata ni dans du JavaScript public.
+Le mot de passe n’est jamais demandé à un tiers. La session du tableau de bord est conservée uniquement en mémoire et nécessite une nouvelle connexion après rechargement/expiration.
+
+FONCTIONS
+- Inscriptions : pages de 50 comptes, recherche sur la page affichée, dates de création, de demande de confirmation, de confirmation et de dernière connexion.
+- Assistance : création et suivi de demandes pour les utilisateurs connectés et confirmés ; accès WhatsApp pour les personnes bloquées avant connexion.
+- Administration des demandes : statuts Nouveau / En cours / Résolu, notes internes. Les notes internes ne sont pas visibles des clients et ne sont pas envoyées par e-mail.
+- Inscription : après une réponse réussie, le formulaire laisse place à un message explicite invitant à vérifier l’e-mail. Cela ne constitue pas une preuve de réception.
+- Sauvegardes : état non configuré, aucune restauration exposée.
+
+LIMITES EXPLICITES
+La date confirmation_sent_at ne prouve ni livraison ni lecture. Aucun suivi de livraison, renvoi automatique d’e-mail, sauvegarde automatique ni restauration n’a été activé.
+La correction de présentation du formulaire ne permet pas à elle seule de conclure sur la cause du problème de Julie.
+Aucun client n’a reçu de message pendant cette intervention.
+Le compte administrateur réel et le site Netlify restent à activer/déployer ; le parcours complet en production reste à valider ensuite.

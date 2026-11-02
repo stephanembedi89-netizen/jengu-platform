@@ -1,0 +1,178 @@
+/* A light visual layer: learning copy, layout, account flows and records stay intact. */
+:root {
+  --learning-sun: #f5c542;
+  --learning-sun-paper: #fff0c2;
+  --learning-mint-paper: #dff2e7;
+  --learning-sky-paper: #e2effb;
+  --learning-clay-paper: #ffe5d6;
+  --learning-green: #064530;
+  --learning-blue: #214f78;
+  --learning-clay: #873d25;
+  --learning-ease: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* A pencil-like underline and three colored chapter numbers on the welcome page. */
+.welcome-copy h1 em {
+  text-decoration: underline;
+  text-decoration-color: var(--learning-sun);
+  text-decoration-thickness: .09em;
+  text-underline-offset: .12em;
+  text-decoration-skip-ink: none;
+}
+.welcome-paths > div > b {
+  display: inline-grid;
+  place-items: center;
+  min-width: 42px;
+  min-height: 36px;
+  padding: 4px 8px;
+  border-radius: 5px 12px 5px 12px;
+  background: var(--learning-sun-paper);
+  color: #741a29;
+}
+.welcome-paths > div:nth-child(2) > b {
+  background: var(--learning-mint-paper);
+  color: var(--learning-green);
+}
+.welcome-paths > div:nth-child(3) > b {
+  background: var(--learning-sky-paper);
+  color: var(--learning-blue);
+}
+.new-world-grid .entry-world-visual { border-bottom: 6px solid var(--learning-sun); }
+.new-world-grid .primary-world .entry-world-visual { border-color: #ed9170; }
+.entry-role-card { border-color: #d8c7ad; }
+.entry-role-card {
+  grid-template-columns: 104px minmax(0, 1fr) 20px;
+  gap: 18px;
+  text-align: left;
+}
+.entry-role-card .entry-role-art {
+  display: block;
+  width: 104px;
+  height: 96px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.entry-role-card .entry-role-art img { width: 100%; height: 100%; object-fit: cover; }
+.entry-role-card .entry-role-copy { min-width: 0; align-self: center; }
+.entry-role-card .entry-role-copy strong,
+.entry-role-card .entry-role-copy span { display: block; margin-left: 0; }
+.entry-role-card .entry-role-arrow { justify-self: end; }
+@media (max-width: 700px) {
+  .entry-role-card { grid-template-columns: 76px minmax(0, 1fr) 18px; gap: 14px; }
+  .entry-role-card .entry-role-art { width: 76px; height: 76px; }
+}
+.entry-role-card:focus-visible { outline: 3px solid #741a29; outline-offset: 4px; }
+
+/* Color marks the child's invitation and next action, leaving exercises quiet. */
+.workspace-child { background: var(--learning-sun-paper); }
+.child-invite { border-top-color: #d9b955; }
+.secondary-student-simple .college-priority {
+  background: var(--learning-mint-paper);
+  border-color: #accfba;
+  border-inline-start: 5px solid #08734f;
+}
+.secondary-student-simple .workspace-role-banner { background: var(--learning-mint-paper); }
+.secondary-student-simple #college-example-body .explain-step:first-of-type {
+  background: #f0f6fc;
+  border-color: #b5cbe0;
+}
+.secondary-student-simple #college-example-body .explain-step:nth-of-type(2) {
+  background: #fff8e5;
+  border-color: #d9c78f;
+}
+.secondary-student-simple #college-feedback:not(:empty) {
+  padding: 12px 16px;
+  border-inline-start: 4px solid var(--learning-blue);
+  background: var(--learning-sky-paper);
+  color: var(--learning-blue);
+}
+
+/* The existing three steps retain their labels and aria-current state. */
+.child-play header { background: var(--learning-sun-paper); }
+.child-play .play-steps li { border-radius: 8px 8px 0 0; }
+.child-play .play-steps li:nth-child(1)[aria-current="step"] {
+  background: var(--learning-sky-paper);
+  color: var(--learning-blue);
+  border-color: var(--learning-blue);
+}
+.child-play .play-steps li:nth-child(2)[aria-current="step"] {
+  background: var(--learning-clay-paper);
+  color: var(--learning-clay);
+  border-color: var(--learning-clay);
+}
+.child-play .play-steps li:nth-child(3)[aria-current="step"] {
+  background: var(--learning-mint-paper);
+  color: var(--learning-green);
+  border-color: var(--learning-green);
+}
+.child-play .play-hint {
+  background: var(--learning-sun-paper);
+  border-inline-start: 4px solid #9e6916;
+}
+.child-play .play-task:has(#play-finish) h2::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 6px;
+  border-radius: 4px;
+  margin-top: 14px;
+  background: var(--learning-sun);
+  transform-origin: left center;
+}
+
+/* Brief feedback follows an action. Nothing loops while the child is reading. */
+@media (prefers-reduced-motion: no-preference) {
+  :is(.welcome-copy > button, .entry-role-card, .entry-world button,
+      .child-play button, .workspace-action, .college-priority button) {
+    transition: transform 140ms var(--learning-ease),
+                background-color 140ms ease, border-color 140ms ease;
+  }
+  :is(.welcome-copy > button, .entry-world button, .child-play button,
+      .workspace-action, .college-priority button):enabled:active {
+    transform: translateY(2px);
+  }
+  .child-play .play-steps [aria-current="step"] {
+    animation: learning-step-in 240ms var(--learning-ease);
+  }
+  .child-play .play-hint {
+    animation: learning-hint-in 200ms var(--learning-ease);
+  }
+  .secondary-student-simple #college-example-body .explain-step[open] > p {
+    animation: learning-hint-in 200ms var(--learning-ease);
+  }
+  .child-play .play-task:has(#play-finish) h2::after {
+    animation: learning-pencil 320ms var(--learning-ease);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .entry-role-card:hover { transform: translateY(-2px); }
+    .workspace-action > b { transition: transform 140ms var(--learning-ease); }
+    .workspace-action:hover > b { transform: translate(2px, -2px); }
+  }
+}
+@keyframes learning-step-in {
+  from { transform: translateY(3px); }
+  to { transform: translateY(0); }
+}
+@keyframes learning-hint-in {
+  from { opacity: .6; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes learning-pencil {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.new-welcome, .entry-world, .entry-role-card, .workspace-hero,
+      .workspace-role-banner, .workspace-child, .workspace-action,
+      .college-priority, .child-play),
+  :is(.new-welcome, .entry-world, .entry-role-card, .workspace-hero,
+      .workspace-role-banner, .workspace-child, .workspace-action,
+      .college-priority, .child-play) *,
+  .secondary-student-simple #college-example-body *,
+  .child-play .play-task h2::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .entry-role-card:hover { transform: none; }
+}

@@ -1,0 +1,25 @@
+
+/* Keep the student identity once and bring practical work closer on mobile. */
+:is(.secondary-student-simple,.secondary-parent-simple) #audience-context{display:none}
+.student-guide{margin:0 0 1rem}
+.student-guide>summary{padding:.75rem;cursor:pointer;font-weight:700}
+.student-guide .secondary-role-guide{margin-top:.5rem}
+@media(max-width:700px){
+ :is(.secondary-student-simple,.secondary-parent-simple) .workspace-role-banner{display:none}
+ :is(.secondary-student-simple,.secondary-parent-simple) .family-perspective{padding:.65rem;margin:.5rem 0}
+ :is(.secondary-student-simple,.secondary-parent-simple) .family-perspective>p{display:none}
+ :is(.secondary-student-simple,.secondary-parent-simple) .family-perspective button{padding:.65rem;min-height:44px}
+ :is(.secondary-student-simple,.secondary-parent-simple) .college-layout .card{padding:1rem}
+ :is(.secondary-student-simple,.secondary-parent-simple) .college-layout .formgrid{gap:1rem}
+ :is(.secondary-student-simple,.secondary-parent-simple) .college-layout label{margin:0}
+ :is(.secondary-student-simple,.secondary-parent-simple) .empty{padding:1rem}
+ :is(.secondary-student-simple,.secondary-parent-simple) .college-heading{margin:1rem 0}
+ :is(.secondary-student-simple,.secondary-parent-simple) .college-priority{padding:1rem}
+}
+
+@media(max-width:700px){.secondary-parent-simple .parent-timeline .card{padding:1rem}.secondary-parent-simple #college-check button{margin-top:.75rem;width:100%}}
+
+/* Private accounts switch only through their explicitly added spaces. */
+body[data-private-spaces] aside .switch,
+body[data-private-spaces] .role-heading,
+body[data-private-spaces] .family-perspective { display: none !important; }

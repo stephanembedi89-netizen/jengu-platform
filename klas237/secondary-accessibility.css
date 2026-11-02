@@ -1,0 +1,32 @@
+/* Shared follow-up must remain readable on small screens and at text zoom. */
+body[data-entry="workspace"] main > header {
+  margin-left: 0;
+  margin-right: 0;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+.topbar-actions { min-width: 0; max-width: 100%; flex-wrap: wrap; }
+.language-choice { min-width: 0; }
+.coord-card, .coord-role, .coord-head > div, .coach-grid > section {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.coord-steps li { font-size: .875rem; }
+.coord-card button, .coach-review button, #secondary-path-form button {
+  min-height: 44px;
+  white-space: normal;
+}
+.coord-card details { margin: 1rem 0; }
+.coord-card summary { padding: .6rem 0; cursor: pointer; }
+#coord-action input, #coord-action textarea, #coord-action select,
+#coord-new input, #coord-new textarea { max-width: 100%; box-sizing: border-box; }
+@media (max-width: 600px) {
+  .coord-card { padding: 1rem; }
+  .coord-card .item-line, .coach-report .item-line { flex-wrap: wrap; }
+  .coord-card button { width: 100%; }
+  .coord-head h1, .coach-hero h1 { font-size: 1.8rem; line-height: 1.2; }
+  .roadmap-track { overflow-x: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coord-card, .coord-head, .coach-hero { animation: none; transition: none; }
+}
