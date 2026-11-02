@@ -1,0 +1,177 @@
+/* ==========================================================================
+   Klas 237 · Système de design unifié (chargé en dernier)
+   Objectif : une seule identité de l'accueil jusqu'aux espaces de travail,
+   une lecture confortable pour tous, et des gestes clairs sur mobile.
+   ========================================================================== */
+
+@font-face{font-family:"Sora";src:url(assets/fonts/Sora-700.woff2) format("woff2");font-weight:600 700;font-display:swap}
+@font-face{font-family:"Sora";src:url(assets/fonts/Sora-800.woff2) format("woff2");font-weight:800 900;font-display:swap}
+@font-face{font-family:"Manrope";src:url(assets/fonts/Manrope-400.woff2) format("woff2");font-weight:400 500;font-display:swap}
+@font-face{font-family:"Manrope";src:url(assets/fonts/Manrope-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Manrope";src:url(assets/fonts/Manrope-700.woff2) format("woff2");font-weight:700 900;font-display:swap}
+
+:root{
+  /* Marque : vert, rouge, jaune — l'école camerounaise, sans pastiche du drapeau */
+  --k-green:#0b5d3b;
+  --k-green-deep:#064530;
+  --k-green-soft:#e6f2ec;
+  --k-red:#b51f36;
+  --k-red-deep:#8e1a2c;
+  --k-gold:#f5c542;
+  --k-gold-soft:#fff3cf;
+  --k-ink:#17221e;
+  --k-muted:#46524c;          /* contraste ≥ 7:1 sur le papier */
+  --k-paper:#fffbf2;
+  --k-card:#ffffff;
+  --k-line:#e3ddcc;
+  --k-focus:#1f5fd1;
+  --k-radius:14px;
+  --k-radius-lg:22px;
+  --k-shadow:0 1px 2px rgba(23,34,30,.06),0 8px 24px rgba(23,34,30,.07);
+  --k-font-display:"Sora","Manrope",system-ui,sans-serif;
+  --k-font-body:"Manrope",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --muted-ink:var(--k-muted);
+}
+
+/* ---------- Typographie commune à tous les écrans ---------- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body,button,input,select,textarea{font-family:var(--k-font-body)}
+body{color:var(--k-ink);line-height:1.6}
+h1,h2,h3,.brand,.entry-brand,.entry-kicker,.kx-step-num{font-family:var(--k-font-display)}
+h1{letter-spacing:-.035em}
+h2,h3{letter-spacing:-.015em}
+p,li{text-wrap:pretty}
+h1,h2{text-wrap:balance}
+
+/* ---------- Une seule signature de marque ---------- */
+.brand,.entry-brand{color:var(--k-ink)!important;font-weight:800!important;letter-spacing:-.045em!important;text-decoration:none}
+.brand span,.entry-brand span{background:none!important;color:var(--k-green)!important;padding:0!important;border:0!important;font-size:inherit!important;border-radius:0!important;margin-left:.18em}
+.brand::after{content:"";display:inline-block;width:6px;height:17px;margin-left:10px;background:var(--k-red);border-bottom:5px solid var(--k-gold);transform:rotate(30deg);vertical-align:baseline}
+.brand small{font-family:var(--k-font-body);letter-spacing:.14em;color:var(--k-muted)}
+.entry-brand i{background:var(--k-red);border-bottom-color:var(--k-gold)}
+
+/* ---------- Accessibilité : focus visible, cibles tactiles, mouvement ---------- */
+:where(a,button,input,select,textarea,summary,[tabindex]):focus-visible{outline:3px solid var(--k-focus)!important;outline-offset:3px!important;border-radius:6px}
+:where(button,.button,summary,select){min-height:44px}
+:where(input[type=checkbox],input[type=radio]){min-width:20px;min-height:20px}
+::placeholder{color:#6b746f;opacity:1}
+.kx-skip{position:absolute;left:12px;top:-60px;z-index:2000;background:var(--k-ink);color:#fff;padding:12px 16px;border-radius:10px;font-weight:700;text-decoration:none}
+.kx-skip:focus{top:12px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Texte agrandi (préférence mémorisée sur l'appareil) */
+body.kx-large{zoom:1.15}
+@supports not (zoom:1){body.kx-large{font-size:118%}}
+
+/* ---------- Boutons : un seul langage ---------- */
+.entry-content button:not(.secondary):not(.entry-link):not(.entry-role):not([data-billing-period]):not(.entry-header-offers),
+.entry-submit{background:var(--k-red);color:#fff;border-color:var(--k-red);border-radius:12px;font-weight:700}
+.entry-content button:not(.secondary):not(.entry-link):not(.entry-role):not([data-billing-period]):not(.entry-header-offers):hover,
+.entry-submit:hover{background:var(--k-red-deep);border-color:var(--k-red-deep)}
+
+/* ---------- Bouton d'aide : présent sans masquer le contenu ---------- */
+.kx-dock{position:fixed;right:16px;bottom:16px;z-index:1100;display:flex;gap:8px;align-items:center}
+.kx-dock .klas-help-trigger{position:static;background:var(--k-green-deep);border:2px solid #fff;font:700 15px/1 var(--k-font-body);padding:13px 18px;min-height:48px;box-shadow:0 6px 20px rgba(6,69,48,.28)}
+.kx-dock .klas-help-trigger:hover{background:var(--k-green)}
+.kx-textsize{min-width:48px;min-height:48px;border-radius:50%;border:2px solid #fff;background:#fff;color:var(--k-green-deep);font:800 16px/1 var(--k-font-display);box-shadow:0 6px 20px rgba(23,34,30,.18);cursor:pointer}
+.kx-textsize[aria-pressed=true]{background:var(--k-gold);color:var(--k-ink)}
+main,#entry-root{padding-bottom:88px}
+.klas-help-dialog{font-family:var(--k-font-body);color:var(--k-ink)}
+.klas-help-dialog h2,.klas-help-dialog h3{font-family:var(--k-font-display)}
+.klas-help-dialog button{background:var(--k-green-deep);min-height:44px}
+
+/* ==========================================================================
+   Accueil public
+   ========================================================================== */
+.entry-header{flex-wrap:nowrap}
+.entry-header .secondary{border-color:var(--k-line);color:var(--k-green-deep)}
+.entry-kicker{color:var(--k-red)!important;letter-spacing:.16em}
+
+.kx-hero h1 em{color:var(--k-red)}
+.kx-lead{font-size:1.125rem;line-height:1.65;color:var(--k-ink);max-width:36rem}
+.kx-lead strong{background:linear-gradient(transparent 62%,var(--k-gold-soft) 62%);font-weight:700}
+.kx-cta{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 12px}
+.kx-cta button{margin:0!important;min-height:52px;padding:14px 22px!important;font-size:1rem}
+.kx-cta .secondary,.kx-section .secondary.kx-demo{background:#fff;color:var(--k-green-deep);border:2px solid var(--k-green-deep);border-radius:12px;font-weight:700}
+.kx-cta .secondary:hover,.kx-section .secondary.kx-demo:hover{background:var(--k-green-soft)}
+.kx-trust{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:18px 0 0}
+.kx-trust li{font-size:.875rem;font-weight:600;color:var(--k-green-deep);background:var(--k-green-soft);border-radius:999px;padding:6px 12px}
+
+.kx-section{margin:0 auto;padding:clamp(40px,6vw,72px) 0 0;max-width:1040px}
+.kx-section > h2{font-size:clamp(1.6rem,3.4vw,2.4rem);line-height:1.15;margin:.3em 0 .8em;max-width:30ch;color:var(--k-ink)}
+.kx-icon{display:inline-grid;place-items:center;width:40px;height:40px;flex:none;border-radius:12px;background:var(--k-green-soft);color:var(--k-green-deep)}
+.kx-icon svg{width:22px;height:22px}
+
+/* Problèmes → réponses */
+.kx-pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.kx-pain{background:var(--k-card);border:1px solid var(--k-line);border-radius:var(--k-radius-lg);padding:22px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--k-shadow)}
+.kx-who{display:flex;align-items:center;gap:10px;margin:0;font-weight:700;color:var(--k-green-deep)}
+.kx-pain blockquote{margin:0;font-family:var(--k-font-display);font-weight:700;font-size:1.08rem;line-height:1.4;color:var(--k-ink)}
+.kx-answer{margin:auto 0 0;padding:14px;border-radius:12px;background:var(--k-gold-soft);font-size:.97rem;line-height:1.55}
+.kx-answer b{display:block;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--k-red-deep);margin-bottom:4px}
+
+/* Méthode en 3 gestes */
+.kx-method{background:var(--k-green-deep);color:#fff;border-radius:28px;padding:clamp(28px,5vw,52px)!important;margin-top:clamp(40px,6vw,72px)}
+.kx-method-head{max-width:40rem}
+.kx-method .entry-kicker{color:var(--k-gold)!important}
+.kx-method h2{color:#fff;font-size:clamp(1.6rem,3.4vw,2.4rem);margin:.3em 0 .4em}
+.kx-method-head p{color:#d6e7de;font-size:1.05rem}
+.kx-steps{list-style:none;padding:0;margin:28px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:none}
+.kx-steps li{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:20px}
+.kx-step-num{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--k-gold);color:var(--k-ink);font-weight:800;font-size:1.1rem}
+.kx-steps h3{color:#fff;margin:14px 0 6px;font-size:1.2rem}
+.kx-steps p{margin:0;color:#d6e7de}
+.kx-method .secondary.kx-demo{background:var(--k-gold);color:var(--k-ink);border-color:var(--k-gold);min-height:50px;padding:12px 20px}
+.kx-method .secondary.kx-demo:hover{background:#ffd866}
+
+/* Ancrage local */
+.kx-fit-grid{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,1fr);gap:14px 28px}
+.kx-fit-grid li{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-top:1px solid var(--k-line)}
+.kx-fit-grid h3{margin:0 0 4px;font-size:1.05rem}
+.kx-fit-grid p{margin:0;color:var(--k-muted)}
+
+/* Appel final */
+.kx-final{text-align:center;padding-bottom:16px!important}
+.kx-final h2{margin-inline:auto!important;max-width:24ch!important}
+.kx-final p{color:var(--k-muted);max-width:40rem;margin:0 auto}
+.kx-final .kx-cta{justify-content:center}
+
+/* Offres */
+.entry-offer-featured{position:relative}
+.kx-badge{display:inline-block;margin-bottom:10px;background:var(--k-gold);color:var(--k-ink);font-weight:800;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+
+@media (max-width:860px){
+  .kx-pain-grid,.kx-steps{grid-template-columns:1fr}
+  .kx-fit-grid{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .entry-header{flex-wrap:wrap}
+  .kx-cta{flex-direction:column}
+  .kx-cta button{width:100%}
+  .kx-lead{font-size:1.05rem}
+  .kx-method{border-radius:22px}
+}
+
+/* ==========================================================================
+   Espaces de travail
+   ========================================================================== */
+body[data-entry=workspace] main h1{font-weight:800}
+body[data-entry=workspace] #nav button[data-route]{font-weight:600}
+
+/* Barre d'onglets mobile : les 4 actions principales toujours à portée de pouce */
+.kx-tabbar{display:none}
+@media (max-width:700px){
+  body[data-entry=workspace] .kx-tabbar{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;position:fixed;left:0;right:0;bottom:0;z-index:1050;background:#fff;border-top:1px solid var(--k-line);box-shadow:0 -6px 20px rgba(23,34,30,.08);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+  .kx-tabbar button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:56px;padding:4px 2px;border:0;border-radius:12px;background:transparent;color:var(--k-muted);font:700 .72rem/1.15 var(--k-font-body);text-align:center}
+  .kx-tabbar svg{width:22px;height:22px}
+  .kx-tabbar button[aria-current=page]{color:var(--k-red-deep);background:var(--k-gold-soft)}
+  body[data-entry=workspace] #nav > button.kx-mirrored{display:none!important}
+  body[data-entry=workspace] #nav .workspace-nav-title{display:none}
+  body[data-entry=workspace] main{padding-bottom:150px}
+  body[data-entry=workspace] .kx-dock{bottom:calc(84px + env(safe-area-inset-bottom))}
+  .kx-dock .klas-help-trigger{padding:12px 14px;font-size:14px}
+}
+
+/* Ajustements du héros avec la police display */
+.kx-hero h1{font-size:clamp(2.4rem,4.1vw,3.7rem)!important;line-height:1.02!important}
+@media (min-width:561px){.kx-cta button{width:auto!important}}
