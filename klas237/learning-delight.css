@@ -1,11 +1,11 @@
 /* A light visual layer: learning copy, layout, account flows and records stay intact. */
 :root {
-  --learning-sun: #ffd43b;
+  --learning-sun: #fcd116;
   --learning-sun-paper: #fff0c2;
   --learning-mint-paper: #dff2e7;
   --learning-sky-paper: #e2effb;
   --learning-clay-paper: #ffe5d6;
-  --learning-green: #173a30;
+  --learning-green: #005a46;
   --learning-blue: #214f78;
   --learning-clay: #873d25;
   --learning-ease: cubic-bezier(.22, 1, .36, 1);
@@ -27,7 +27,7 @@
   padding: 4px 8px;
   border-radius: 5px 12px 5px 12px;
   background: var(--learning-sun-paper);
-  color: #15257a;
+  color: #005a46;
 }
 .welcome-paths > div:nth-child(2) > b {
   background: var(--learning-mint-paper);
@@ -61,7 +61,7 @@
   .entry-role-card { grid-template-columns: 76px minmax(0, 1fr) 18px; gap: 14px; }
   .entry-role-card .entry-role-art { width: 76px; height: 76px; }
 }
-.entry-role-card:focus-visible { outline: 3px solid #15257a; outline-offset: 4px; }
+.entry-role-card:focus-visible { outline: 3px solid #005a46; outline-offset: 4px; }
 
 /* Color marks the child's invitation and next action, leaving exercises quiet. */
 .workspace-child { background: var(--learning-sun-paper); }
