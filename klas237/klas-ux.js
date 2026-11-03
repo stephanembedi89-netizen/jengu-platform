@@ -35,6 +35,12 @@
     'tk-students':'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/>',
     'tk-evals':'<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13l2 2 4-4M9 18h6"/>',
     'tk-year':'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+    'fk-home':'<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/>',
+    'fk-homework':'<path d="M9 5h11M9 12h11M9 19h11"/><path d="m3 5 1.5 1.5L7 4M3 12l1.5 1.5L7 11M3 19l1.5 1.5L7 18"/>',
+    'fk-progress':'<path d="M3 20h18"/><path d="M6 16V11M11 16V7M16 16v-5M21 16V5"/>',
+    'fk-focus':'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>',
+    'fk-learners':'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/>',
+    'fk-payments':'<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/>',
     def:'<circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8"/>'
   };
   const bar=document.createElement('nav');bar.className='kx-tabbar';
@@ -55,7 +61,7 @@
       const active=src.classList.contains('active')||src.getAttribute('aria-current')==='page';
       if(active)b.setAttribute('aria-current','page');
       b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(icons[src.dataset.route]||icons.def)+'</svg><span></span>';
-      const full=src.textContent.trim();const short={home:L('Accueil','Home'),homework:L('Devoirs','Homework'),routine:L('10 min','10 min'),search:L('Comprendre','Explain'),'parent-summary':L('Suivi','Check-in'),college:L('Travail','Work'),block:L('Difficultés','Stuck'),revise:L('Révisions','Revision'),staff:L('Aujourd’hui','Today'),'tk-students':L('Élèves','Students'),'tk-evals':L('Notes','Marks'),'tk-year':L('Année','Year')}[src.dataset.route];b.querySelector('span').textContent=short||full;if(short)b.setAttribute('aria-label',full);
+      const full=src.textContent.trim();const short={home:L('Accueil','Home'),homework:L('Devoirs','Homework'),routine:L('10 min','10 min'),search:L('Comprendre','Explain'),'parent-summary':L('Suivi','Check-in'),college:L('Travail','Work'),block:L('Difficultés','Stuck'),revise:L('Révisions','Revision'),staff:L('Aujourd’hui','Today'),'tk-students':L('Élèves','Students'),'tk-evals':L('Notes','Marks'),'tk-year':L('Année','Year'),'fk-home':L('Ce soir','Tonight'),'fk-homework':L('Devoirs','Homework'),'fk-progress':L('Suivi','Progress'),'fk-focus':L('Réviser','Revise'),'fk-teacher':L('Écrire','Write'),'fk-learners':L('Élèves','Learners'),'fk-payments':L('Paiements','Payments'),'fk-report':L('Bilans','Reports')}[src.dataset.route];b.querySelector('span').textContent=short||full;if(short)b.setAttribute('aria-label',full);
       b.addEventListener('click',()=>{src.click();window.scrollTo({top:0,behavior:'auto'});});
       bar.append(b);
     });
