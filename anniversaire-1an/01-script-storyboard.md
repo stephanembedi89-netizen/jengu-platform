@@ -1,6 +1,6 @@
 # JenguAI — 1 an · Script, voix off et storyboard
 
-**Vidéo récap en motion design · version 1 à valider**
+**Vidéo récap en motion design · version 2 · m07 remplacé, script mis à jour**
 Durée cible : **75 s** · Formats : **9:16** (Reels, Stories, Statut WhatsApp) et **1:1 / 4:5** (fil Facebook, LinkedIn)
 Source : dossier « 1 an : parcours et archives » et visuels mensuels m00 à m10.
 
@@ -17,45 +17,50 @@ Le 6 novembre 2025, **une goutte tombe**. Chaque mois, elle fait une onde qui r�
 
 ### Règles de fidélité
 - SIN 2026 (Yaoundé) et l'événement IA de septembre à Douala : **JenguAI y a assisté en visiteur**. On dit « aller à la rencontre de l'écosystème », jamais « participer » ou « présenter ».
-  - ⚠️ Le visuel **m07** porte le texte « Retour sur notre *participation* ». **Je propose de ne pas le montrer**, ou de flouter et masquer ce mot, et de le remplacer par une carte texte animée « SIN 2026 · Yaoundé · Nous y étions pour apprendre ».
+  - ✅ Le visuel **m07** (« Retour sur notre *participation* ») est **retiré** et remplacé par une carte animée « SIN 2026 · Yaoundé · Nous y étions, pour apprendre » (plan 7).
 - Aucun chiffre (clients, revenus, utilisateurs) n'apparaît tant que tu ne l'as pas confirmé.
 - Projets non confirmés (Sentinel 237, Kids Future Lab, VoiceBiz, Relay, 11 Étoiles) : **absents de la vidéo**.
 
 ---
 
-## 2. Script voix off (≈ 170 mots · ~75 s à un rythme posé)
+## 2. Script voix off (version 2, 149 mots)
 
 > Ton : chaleureux, posé, confiant. Une respiration après chaque phrase courte. Le texte entre crochets indique l'intention, il n'est pas lu.
+> Les temps indiqués sont ceux de la vidéo finale (musique et respirations comprises).
 
-**[Murmure, intime]**
+**[0:00, murmure, intime]**
 Le 6 novembre 2025, à Douala… une goutte est tombée.
 
-**[Conviction]**
+**[0:05, conviction]**
 Une idée simple : l'intelligence artificielle doit être utile. Accessible. Concrète.
 
-**[Le chemin, rythme qui s'accélère doucement]**
-Il a d'abord fallu structurer : un modèle, des chiffres, un plan.
-Puis expliquer. Rendre l'IA lisible, pour l'artisan, l'entrepreneur, le bureau.
+**[0:11, le chemin, rythme qui s'accélère doucement]**
+D'abord, structurer : un modèle, des chiffres, un plan.
+Puis expliquer : rendre l'IA lisible pour l'artisan, l'entrepreneur, le bureau.
 Accompagner les entreprises : conseil, stratégie, feuille de route.
-Automatiser ce qui fait perdre du temps. Repenser notre propre façon de travailler.
+Automatiser ce qui fait perdre du temps. Et repenser notre propre façon de travailler.
 
+**[0:39, plus ouvert]**
 Aller à la rencontre de l'écosystème numérique… pour apprendre auprès des autres.
 Et transmettre, avec l'Académie JenguAI.
 
-**[Lumineux, montée]**
-Puis créer nos propres outils.
-Klas 237, pour accompagner nos enfants à la maison.
-Déclic, pour apprendre l'IA, à son rythme.
+**[0:47, lumineux, montée]**
+Puis, créer nos propres outils.
+Klas 237 : aux côtés des parents et des enseignants. De petits pas, de grandes réussites.
+Déclic : l'IA à la portée de tous, depuis son téléphone, à son rythme.
 Et toujours, garder le cœur au centre.
 
-**[Gratitude, ralentir]**
+**[0:59, gratitude, ralentir]**
 Merci. À notre communauté, à nos clients, à nos partenaires…
-à toutes celles et à tous ceux qui ont cru en nous.
+à toutes celles et tous ceux qui ont cru en nous.
 
-**[Final, sourire dans la voix]**
+**[1:07, final, sourire dans la voix]**
 Un an à faire émerger les idées.
 Et ce n'est que le début.
 JenguAI.
+
+**Durée : 75 secondes.** 149 mots lus sans se presser (≈ 65 s de voix), plus l'intro, les respirations et l'écran de fin en musique.
+Conseil d'enregistrement : vise 62 à 68 s de voix pure. Si tu dépasses, je resserre au montage, pas besoin de recommencer.
 
 ---
 
@@ -63,28 +68,46 @@ JenguAI.
 
 | # | Temps | Image / animation | Visuel source | Texte à l'écran | Son |
 |---|---|---|---|---|---|
-| 1 | 0:00–0:05 | Noir profond. Une goutte bleu et or tombe au ralenti, impact, onde lumineuse qui s'étend. | Logo goutte (3D ou SVG animé) | **06.11.2025** · *Douala* | Silence, puis « plic » et nappe grave |
+| 1 | 0:00–0:05 | Noir profond. Une goutte bleu et or tombe au ralenti, impact, onde lumineuse qui s'étend. | Logo goutte (animé) | **06.11.2025** · *Douala* | Silence, puis « plic » et nappe grave |
 | 2 | 0:05–0:11 | L'onde dessine trois mots qui s'allument l'un après l'autre en or. | — | **Utile. Accessible. Concrète.** | Premières percussions légères |
-| 3 | 0:11–0:16 | 1re onde : la carte « Modèle économique » glisse et se pose. Les graphiques se dessinent. Tampon « DÉC. 2025 ». | m00 | **Structurer** | Kick doux, le tempo démarre |
+| 3 | 0:11–0:16 | 1re onde : la carte « Modèle économique » glisse et se pose, les graphiques se dessinent. Tampon « DÉC. 2025 ». | m00 | **Structurer** | Kick doux, le tempo démarre |
 | 4 | 0:16–0:24 | Deux cartes en parallaxe (Bureau / Artisans), puis « Conseil & Stratégie ». Les pictos s'animent. | m01 → m02 | **JANV.–FÉV.** · **Expliquer** | Rythme afro-house léger |
 | 5 | 0:24–0:31 | Zoom à travers le titre « L'AVANTAGE » vers « CONSEILS IA ». Lignes de circuit cyan. | m03 → m04 | **MARS–AVR.** · **Accompagner** | Montée |
-| 6 | 0:31–0:39 | Les icônes d'automatisation de m05 s'enchaînent (e-mails → rapports). La pièce d'échecs de m06 tourne, et les 4 mots apparaissent autour : STRATEGY · GROWTH · TECHLAB · ACADEMY. | m05 → m06 | **MAI–JUIN** · **Automatiser** | Drop rythmique |
-| 7 | 0:39–0:47 | Carte texte « SIN 2026 · Yaoundé · Nous y étions pour apprendre », puis l'affiche du mois d'août, la tasse et le carnet « Planifier, Innover, Transformer ». | carte animée + m08 | **JUIL.–AOÛT** · **Apprendre & transmettre** | Respiration musicale |
-| 8 | 0:47–0:57 | Le collage papier déchiré prend le relais (changement de style volontaire, plus chaleureux et coloré) : Klas 237, puis le téléphone Déclic, puis le ruban d'Octobre Rose. | m09, visuel Klas 237, visuel Déclic, m10 / Octobre Rose collage | **SEPT.–OCT.** · **Créer** | Montée, chœurs légers |
-| 9 | 0:57–1:05 | Mosaïque rapide de *toutes* les créations de l'année (2 à 3 images par seconde), qui se fige en un mur. Le texte « Merci » s'écrit à la main par-dessus. | tous les visuels | **Merci ♡** | Break, piano et voix |
-| 10 | 1:05–1:12 | Les 12 ondes convergent. La goutte se redresse et se transforme en un grand **« 1 »** doré, avec des étincelles d'or. | animation | **1 AN** · *à faire émerger les idées* | Climax |
-| 11 | 1:12–1:15 | Logo JenguAI, dates, coordonnées. | logo | **06.11.2025 — 06.11.2026** · *Et ce n'est que le début.* · WhatsApp +237 672 705 729 · jengu-ai.com | Accord final, écho de la goutte |
+| 6 | 0:31–0:39 | Les icônes d'automatisation de m05 s'enchaînent. La pièce d'échecs de m06 tourne, et les 4 mots apparaissent autour : STRATEGY · GROWTH · TECHLAB · ACADEMY. | m05 → m06 | **MAI–JUIN** · **Automatiser** | Drop rythmique |
+| 7 | 0:39–0:47 | **Remplace m07.** Carte animée sur fond bleu nuit : un point lumineux se pose sur une carte du Cameroun (Douala → Yaoundé), puis le texte s'écrit : « SIN 2026 · Yaoundé · Nous y étions, pour apprendre ». Transition en onde vers l'affiche d'août (tasse et carnet « Planifier, Innover, Transformer »). | **carte créée** + m08 | **JUIL.–AOÛT** · **Apprendre & transmettre** | Respiration musicale |
+| 8a | 0:47–0:52 | Changement de style volontaire vers le collage papier crème. Carte Klas 237 (maman et fille), puis glissement vers la version enseignante. | Klas 237 parents + Klas 237 enseignants | **SEPT.** · **Créer** · *Petit à petit.* | Montée |
+| 8b | 0:52–0:56 | **Clin d'œil fort** : la mascotte goutte de Déclic *sort* de la goutte JenguAI, fait coucou, et se pose sur l'écran du téléphone Déclic. | Déclic (version nuit) | **OCT.** · *L'IA à la portée de tous* | Petit « pop » joyeux |
+| 8c | 0:56–0:59 | Le ruban rose se noue au centre de l'écran. | Octobre Rose (collage) | ♡ | Note de piano |
+| 9 | 0:59–1:07 | Mosaïque rapide de *toutes* les créations de l'année (2 à 3 images par seconde), qui se fige en un mur. « Merci » s'écrit à la main par-dessus. | tous les visuels | **Merci ♡** | Break, piano et voix |
+| 10 | 1:07–1:12 | Les 12 ondes convergent. La goutte se redresse et se transforme en un grand **« 1 »** doré. | animation | **1 AN** · *à faire émerger les idées* | Climax |
+| 11 | 1:12–1:15 | Écran de fin (voir l'astuce du site ci-dessous). | logo | **06.11.2025 — 06.11.2026** · *Et ce n'est que le début.* | Accord final, écho de la goutte |
+
+### L'astuce pour le site jengu-ai.com
+Le site n'est pas encore en ligne : **on fait de ce retard un teaser de l'année 2.** L'écran de fin devient :
+
+```
+          [ logo JenguAI ]
+   06.11.2025 — 06.11.2026
+     Et ce n'est que le début.
+
+   jengu-ai.com · bientôt en ligne ✦
+   WhatsApp +237 672 705 729
+```
+- « Bientôt en ligne » colle parfaitement avec « Et ce n'est que le début ». Le site devient la première promesse de l'an 2, et la vidéo de relance pourra l'annoncer.
+- Aucun lien cassé : le seul contact cliquable est **WhatsApp** (lien `wa.me/237672705729` dans la légende de la publication).
+- Si le site est en ligne avant la publication, il suffit de retirer « bientôt en ligne » : un seul texte à changer, rien à ré-animer.
 
 ### Direction motion
 - **Transitions** : *ripple* (onde d'eau) entre chaque mois. C'est la signature de la vidéo.
 - **Cartes** : légère rotation (±3°), ombre portée douce, entrée en *ease-out* rapide puis sortie en *ease-in*.
-- **Typographie** : sans-serif géométrique en gras (style Montserrat ou Poppins) pour les mots-clés, et une manuscrite (comme sur tes visuels collage) pour « Merci » et « Et ce n'est que le début ».
-- **Couleurs** : bleu nuit #0A1430, bleu roi #1E4FD8, cyan #22D3EE, or #F2B53A, crème #FFF6E5 (pour la séquence collage).
+- **Typographie** : sans-serif géométrique en gras (style Montserrat ou Poppins) pour les mots-clés, manuscrite pour « Merci » et « Et ce n'est que le début ».
+- **Couleurs** : bleu nuit #0A1430, bleu roi #1E4FD8, cyan #22D3EE, or #F2B53A, crème #FFF6E5 (séquence collage), jaune Déclic #FFD23F.
 - **Sous-titres incrustés** en permanence : 70 % des vues se font sans le son.
 - **Zone de sécurité 9:16** : rien d'important dans les 250 px du haut ni dans les 400 px du bas.
+- **Visuels Klas 237 et Déclic** : on les montre pour l'image, mais on évite de figer à l'écran les offres (« 14 jours », « 3 leçons »), qui diffèrent d'un visuel à l'autre. C'est un récap, pas une pub.
 
 ### Musique
-Afro-house ou amapiano instrumental, 110–118 BPM, positif sans être festif à l'excès. Prévoir une version libre de droits : piste générée avec Suno, ou bibliothèque libre (YouTube Audio Library, Pixabay Music).
+Afro-house ou amapiano instrumental, 110–118 BPM, positif sans être festif à l'excès, libre de droits (piste Suno, YouTube Audio Library ou Pixabay Music).
 
 ---
 
@@ -130,9 +153,7 @@ no gift, no people, no clutter. Vertical 4:5. Leave clean empty space at the top
 
 ## 6. À valider ou à me fournir
 
-1. ✅ / ✏️ **Le script voix off.** Tu peux l'enregistrer dès qu'il est validé (WAV, pièce calme, téléphone à 20 cm, 2 prises).
-2. ✅ / ✏️ **Masquer m07** (le mot « participation »).
-3. **Visuels HD** de Klas 237, Déclic et Octobre Rose (les fichiers originaux, si possible sans compression WhatsApp).
-4. **Logo** en PNG transparent ou SVG.
-5. **Un visuel de novembre 2025**, s'il en existe un (sinon, le plan 1 est entièrement animé).
-6. Site et liens à afficher en fin de vidéo : jengu-ai.com est-il actif ?
+1. ✅ / ✏️ **Le script v2.** Une fois validé, tu enregistres (WAV, pièce calme, téléphone à 20 cm, 2 prises).
+2. ✅ m07 remplacé · ✅ visuels Klas 237 et Déclic reçus · ✅ astuce pour le site.
+3. **Logo JenguAI** et **mascotte Déclic** en PNG transparent, si tu les as (sinon je les détoure).
+4. **Visuel Octobre Rose** en HD (celui de la série collage).
