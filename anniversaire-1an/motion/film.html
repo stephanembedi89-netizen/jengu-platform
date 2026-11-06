@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<title>JenguAI — 1 an (premier jet)</title>
+<style>
+@font-face{font-family:Sora;font-weight:700;src:url(node_modules/@fontsource/sora/files/sora-latin-700-normal.woff2)}
+@font-face{font-family:Sora;font-weight:800;src:url(node_modules/@fontsource/sora/files/sora-latin-800-normal.woff2)}
+@font-face{font-family:Manrope;font-weight:500;src:url(node_modules/@fontsource/manrope/files/manrope-latin-500-normal.woff2)}
+@font-face{font-family:Manrope;font-weight:700;src:url(node_modules/@fontsource/manrope/files/manrope-latin-700-normal.woff2)}
+@font-face{font-family:Caveat;font-weight:700;src:url(node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#050B1E}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;
+  background:radial-gradient(120% 70% at 50% 45%,#12224D 0%,#0A1430 45%,#050B1E 100%)}
+.abs{position:absolute;left:0;top:0;will-change:transform,opacity}
+.halo{position:absolute;border-radius:50%;filter:blur(90px)}
+#cream{position:absolute;inset:0;background:#FFF6E5;opacity:0}
+#cream .paper{position:absolute}
+.card{position:absolute;left:0;top:0;border-radius:24px;overflow:hidden;
+  box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.06);opacity:0}
+.card img{display:block;width:100%;height:100%;object-fit:cover}
+.card.collage{border-radius:6px;border:12px solid #fff;box-shadow:0 30px 60px rgba(10,20,48,.28)}
+.tape{position:absolute;width:150px;height:44px;background:rgba(255,226,140,.85);top:-22px;left:50%;
+  transform:translateX(-50%) rotate(-4deg);z-index:2}
+.txt{position:absolute;left:0;top:0;z-index:1000;width:1080px;text-align:center;opacity:0;padding:0 90px}
+.month{font:700 30px/1 Sora;letter-spacing:.32em;color:#F2B53A}
+.rule{display:block;margin:22px auto 0;height:4px;width:60px;background:#F2B53A;border-radius:2px}
+.h1{font:800 70px/1.1 Sora;color:#fff;letter-spacing:-.01em}
+.h1 em{font-style:normal;color:#F2B53A}
+.h1 em.pink{color:#E0407A}
+.h1.dark em{color:#1E4FD8}
+.h1.dark em.pink{color:#E0407A}
+.hand{font:700 74px/1.1 Caveat;color:#F7D27A}
+.sub{font:500 40px/1.35 Manrope;color:#C9D6F2}
+.dark .h1,.dark.h1{color:#0A1430}
+.w{display:inline-block;opacity:0}
+.gold{background:linear-gradient(175deg,#FFF2C4 0%,#F7CC63 30%,#E0A12C 55%,#9C6414 75%,#FFD979 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+#ripples,#sparks{position:absolute;inset:0;pointer-events:none}
+.tile{position:absolute;overflow:hidden;opacity:0;border-radius:10px}
+.tile img{width:100%;height:100%;object-fit:cover;display:block}
+#flash{position:absolute;inset:0;background:#fff;opacity:0}
+#vignette{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(130% 90% at 50% 50%,transparent 55%,rgba(0,0,0,.55) 100%)}
+</style></head>
+<body><div id="stage">
+  <div class="halo" id="halo1" style="width:900px;height:900px;background:#1E4FD8"></div>
+  <div class="halo" id="halo2" style="width:700px;height:700px;background:#22D3EE"></div>
+  <div id="cream">
+    <svg class="paper" id="paperA" width="1300" height="420" viewBox="0 0 1300 420"><path fill="#1E4FD8" d=""/></svg>
+    <svg class="paper" id="paperB" width="1300" height="420" viewBox="0 0 1300 420"><path fill="#FFD23F" d=""/></svg>
+    <svg class="paper" id="paperC" width="1300" height="360" viewBox="0 0 1300 360"><path fill="#F7A8C4" d=""/></svg>
+  </div>
+  <svg id="ripples" width="1080" height="1920"></svg>
+  <svg id="sparks" width="1080" height="1920"></svg>
+  <div id="layer"></div>
+  <div id="vignette"></div>
+  <div id="flash"></div>
+</div>
+<script>
+// ---------- helpers ----------
+const C=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const P=(t,a,b)=>C((t-a)/(b-a));
+const eo=x=>x>=1?1:1-Math.pow(2,-10*x);
+const ei=x=>x*x*x;
+const eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const back=x=>{const c1=1.6,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const lerp=(a,b,k)=>a+(b-a)*k;
+let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+const $=s=>document.querySelector(s);
+const layer=$('#layer');
+const A='assets/';
+function el(html){const d=document.createElement('div');d.innerHTML=html.trim();const e=d.firstChild;layer.appendChild(e);return e}
+
+// torn paper paths
+function torn(w,h,amp,seedv){seed=seedv;let d=`M0 ${amp}`;for(let x=0;x<=w;x+=26)d+=` L${x} ${amp*rnd()}`;
+  d+=` L${w} ${h-amp}`;for(let x=w;x>=0;x-=26)d+=` L${x} ${h-amp*rnd()}`;return d+' Z'}
+$('#paperA path').setAttribute('d',torn(1300,420,26,11));
+$('#paperB path').setAttribute('d',torn(1300,420,26,23));
+$('#paperC path').setAttribute('d',torn(1300,360,24,37));
+
+// ---------- cards ----------
+// a,b = in/out ; x,y center ; w,h ; rot ; push = time when pushed back
+const CARDS=[
+ {src:'m00.jpg',a:11.6,b:17.3,x:540,y:1000,w:920,h:613,rot:-2},
+ {src:'m01.jpg',a:17.6,b:24.3,x:540,y:1010,w:560,h:840,rot:-3,push:20.6},
+ {src:'m02.jpg',a:20.4,b:24.3,x:600,y:1030,w:560,h:840,rot:3},
+ {src:'m03.jpg',a:24.6,b:31.3,x:540,y:1010,w:560,h:840,rot:2,push:27.6},
+ {src:'m04.jpg',a:27.4,b:31.3,x:600,y:1030,w:560,h:840,rot:-3},
+ {src:'m05.jpg',a:31.6,b:38.3,x:540,y:1010,w:580,h:822,rot:-2,push:34.6},
+ {src:'m06.jpg',a:34.4,b:38.3,x:580,y:1010,w:720,h:720,rot:2},
+ {src:'m08.jpg',a:42.4,b:46.3,x:540,y:1010,w:590,h:836,rot:-2},
+ // collage section
+ {src:'klas_parents.jpg',a:46.8,b:51.4,x:540,y:1060,w:720,h:720,rot:-3,push:49.0,collage:1},
+ {src:'klas_ens.jpg',a:48.8,b:51.4,x:560,y:1180,w:880,h:460,rot:2.5,collage:1},
+ {src:'declic_nuit.jpg',a:51.6,b:54.9,x:520,y:1080,w:600,h:750,rot:-2,collage:1},
+ {src:'octobre.jpg',a:55.0,b:57.4,x:540,y:1060,w:470,h:836,rot:2,collage:1},
+];
+CARDS.forEach(c=>{c.el=el(`<div class="card${c.collage?' collage':''}" style="width:${c.w}px;height:${c.h}px">${c.collage?'<div class="tape"></div>':''}<img src="${A}${c.src}"></div>`)});
+function drawCard(c,t){
+  const e=c.el; if(t<c.a-.01||t>c.b+.01){e.style.opacity=0;return}
+  const i=eo(P(t,c.a,c.a+.9)), o=ei(P(t,c.b-.55,c.b));
+  let x=c.x,y=c.y+(1-i)*180-o*140, s=.9+.1*i, r=c.rot*(.4+.6*i)+(1-i)*6, br=1, blur=(1-i)*14+o*10;
+  if(c.push&&t>c.push){const k=eo(P(t,c.push,c.push+.9));x-=150*k;y-=30*k;s*=1-.14*k;r-=5*k;br=1-.5*k}
+  // gentle float
+  y+=Math.sin(t*1.3+c.a)*6; r+=Math.sin(t*.9+c.a)*.6;
+  e.style.opacity=i*(1-o);
+  e.style.transform=`translate(${x-c.w/2}px,${y-c.h/2}px) rotate(${r}deg) scale(${s})`;
+  e.style.filter=`blur(${blur.toFixed(1)}px) brightness(${br})`;
+  e.style.zIndex=Math.round(c.a*10);
+}
+
+// ---------- texts ----------
+// kind: month | h1 | hand | sub ; words = kinetic stagger
+const T=[];
+function txt(html,cls,a,b,y,opt={}){
+  const words=opt.kinetic!==false;
+  let inner=html;
+  if(words){inner=html.split(/(<em[^>]*>.*?<\/em>|\s+)/).filter(s=>s&&!/^\s+$/.test(s)).map(w=>`<span class="w">${w}</span>`).join(' ')}
+  const e=el(`<div class="txt ${cls}" style="${opt.style||''}">${inner}${opt.rule?'<span class="rule"></span>':''}</div>`);
+  T.push({e,a,b,y,words,ws:[...e.querySelectorAll('.w')],rule:e.querySelector('.rule'),dark:opt.dark});
+}
+function drawText(o,t){
+  const e=o.e; if(t<o.a-.01||t>o.b+.01){e.style.opacity=0;return}
+  const out=ei(P(t,o.b-.5,o.b));
+  e.style.opacity=1-out;
+  e.style.transform=`translateY(${o.y-out*40}px)`;
+  e.style.filter=`blur(${(out*8).toFixed(1)}px)`;
+  if(o.words){o.ws.forEach((w,k)=>{const p=eo(P(t,o.a+k*.09,o.a+k*.09+.7));
+    w.style.opacity=p;w.style.transform=`translateY(${(1-p)*36}px)`;w.style.filter=`blur(${((1-p)*10).toFixed(1)}px)`})}
+  else{const p=eo(P(t,o.a,o.a+.8));e.style.opacity=p*(1-out);e.style.transform=`translateY(${o.y+(1-p)*30-out*40}px)`}
+  if(o.rule){const p=eo(P(t,o.a+.2,o.a+1));o.rule.style.width=(60+120*p)+'px';o.rule.style.opacity=p}
+}
+// --- scenario ---
+txt('06 · 11 · 2025','month',3.0,10.6,1300,{rule:1,kinetic:false,style:'font-size:44px'});
+txt('Douala, Cameroun','sub',3.6,10.6,1400,{kinetic:false});
+txt('Au début, il y avait une <em>conviction.</em>','h1',6.2,10.6,330);
+txt('l’IA doit servir les gens.','hand',7.6,10.6,1520,{kinetic:false,style:'font-size:96px'});
+
+txt('DÉCEMBRE 2025','month',11.4,17.2,300,{rule:1,kinetic:false});
+txt('Poser les <em>fondations</em>','h1',11.8,17.2,380);
+txt('un modèle, des chiffres, un plan.','hand',12.8,17.2,1420,{kinetic:false});
+
+txt('JANVIER — FÉVRIER 2026','month',17.4,24.2,260,{rule:1,kinetic:false});
+txt('Rendre l’IA <em>simple</em>','h1',17.8,24.2,340);
+txt('pour l’artisan, l’entrepreneur, le bureau.','hand',18.8,24.2,1500,{kinetic:false,style:'font-size:64px'});
+
+txt('MARS — AVRIL 2026','month',24.4,31.2,260,{rule:1,kinetic:false});
+txt('Accompagner les <em>entreprises</em>','h1',24.8,31.2,340);
+txt('conseil, stratégie, feuille de route.','hand',25.8,31.2,1500,{kinetic:false,style:'font-size:64px'});
+
+txt('MAI — JUIN 2026','month',31.4,38.2,260,{rule:1,kinetic:false});
+txt('Automatiser. <em>Se réinventer.</em>','h1',31.8,38.2,340);
+txt('du temps gagné pour l’essentiel.','hand',32.8,38.2,1500,{kinetic:false,style:'font-size:64px'});
+
+txt('JUILLET 2026','month',38.4,42.2,300,{rule:1,kinetic:false});
+txt('SIN 2026 · Yaoundé','h1',38.8,42.2,1180,{style:'font-size:78px'});
+txt('Nous y étions, pour apprendre.','hand',39.8,42.2,1300,{kinetic:false,style:'font-size:80px'});
+
+txt('AOÛT 2026','month',42.4,46.2,260,{rule:1,kinetic:false});
+txt('Puis <em>transmettre</em>','h1',42.8,46.2,340);
+txt('avec l’Académie JenguAI.','hand',43.6,46.2,1500,{kinetic:false,style:'font-size:64px'});
+
+txt('SEPTEMBRE — OCTOBRE 2026','month',46.6,57.2,330,{rule:1,kinetic:false,style:'color:#1E4FD8'});
+txt('Créer nos <em>propres outils</em>','h1 dark',46.9,51.3,410);
+txt('Klas 237 · petit à petit.','hand',47.8,51.3,1530,{kinetic:false,style:'color:#1E4FD8;font-size:70px'});
+txt('Déclic · l’IA à la portée de tous.','h1 dark',51.7,54.8,410,{style:'font-size:56px'});
+txt('Et garder le <em class="pink">cœur</em> au centre.','h1 dark',55.1,57.3,410,{style:'font-size:60px'});
+
+txt('Merci.','hand',59.4,63.8,760,{kinetic:false,style:'font-size:230px;color:#fff'});
+txt('à vous qui avez cru en nous.','sub',60.6,63.8,1040,{kinetic:false,style:'font-size:48px;color:#fff;font-weight:700'});
+
+txt('à faire émerger les idées.','hand',68.0,69.8,1440,{kinetic:false,style:'font-size:86px'});
+
+// ---------- SIN card (remplace m07) ----------
+const sin=el(`<svg width="1080" height="1920" style="position:absolute;left:0;top:0;opacity:0">
+ <defs><radialGradient id="dg"><stop offset="0" stop-color="#FFE7A3"/><stop offset="1" stop-color="#F2B53A" stop-opacity="0"/></radialGradient></defs>
+ <path id="sinpath" d="M330 900 C 430 760, 600 700, 760 640" fill="none" stroke="#F2B53A" stroke-width="5" stroke-dasharray="12 14" stroke-linecap="round"/>
+ <circle cx="330" cy="900" r="16" fill="#22D3EE"/><text x="330" y="975" fill="#C9D6F2" font-family="Manrope" font-weight="700" font-size="34" text-anchor="middle">Douala</text>
+ <circle id="sindot" cx="760" cy="640" r="60" fill="url(#dg)"/><circle cx="760" cy="640" r="16" fill="#F2B53A"/>
+ <text x="760" y="575" fill="#fff" font-family="Manrope" font-weight="700" font-size="38" text-anchor="middle">Yaoundé</text>
+</svg>`);
+const sinPath=sin.querySelector('#sinpath'),sinLen=sinPath.getTotalLength();
+function drawSin(t){
+  if(t<38.4||t>42.3){sin.style.opacity=0;return}
+  const i=eo(P(t,38.4,39.2)),o=ei(P(t,41.8,42.3));sin.style.opacity=i*(1-o);
+  const k=eio(P(t,38.6,40.2));sinPath.style.strokeDasharray=`${sinLen*k} ${sinLen}`;
+  sin.querySelector('#sindot').setAttribute('r',40+20*Math.sin(t*4));
+}
+
+// ---------- logo drop / mascot / big 1 ----------
+const drop=el(`<img src="${A}logo_drop_clean.png" style="position:absolute;left:0;top:0;width:300px;opacity:0">`);
+const DW=300,DH=300*467/370;
+const mascot=el(`<img src="${A}mascot_clean.png" style="position:absolute;left:0;top:0;width:190px;opacity:0;z-index:900">`);
+const one=el(`<div style="position:absolute;left:0;top:0;width:1080px;text-align:center;opacity:0">
+  <div class="gold" style="font:800 760px/1 Sora;letter-spacing:-.04em">1</div>
+  <div class="gold" style="font:800 150px/1 Sora;letter-spacing:.18em;margin-top:-40px">AN</div></div>`);
+const endc=el(`<div style="position:absolute;left:0;top:0;width:1080px;text-align:center;opacity:0">
+  <div id="e1" style="font:800 120px/1 Sora;color:#fff;letter-spacing:-.01em">Jengu<span class="gold">AI</span></div>
+  <div id="e2" style="font:700 30px/1 Sora;color:#C9D6F2;letter-spacing:.28em;margin-top:26px">SOLUTIONS D’INTELLIGENCE ARTIFICIELLE</div>
+  <div id="e3" style="font:700 44px/1 Sora;color:#F2B53A;letter-spacing:.12em;margin-top:90px">06.11.2025 — 06.11.2026</div>
+  <div id="e4" class="hand" style="font-size:92px;margin-top:50px;color:#fff">Et ce n’est que le début.</div>
+  <div id="e5" style="font:700 38px/1.5 Manrope;color:#fff;margin-top:110px">jengu-ai.com <span style="color:#F2B53A">· bientôt en ligne ✦</span></div>
+  <div id="e6" style="font:700 38px/1.5 Manrope;color:#C9D6F2;margin-top:8px">WhatsApp +237 672 705 729</div></div>`);
+function place(e,x,y,s=1,r=0,op=1,w,h){e.style.opacity=op;e.style.transform=`translate(${x-w/2}px,${y-h/2}px) rotate(${r}deg) scale(${s})`}
+function drawDrop(t){
+  // intro: fall + impact + stay ; end: reappear & morph into 1 ; end card small
+  let op=0,x=540,y=860,s=1,r=0,sx=1,sy=1;
+  if(t<6.4){
+    const f=P(t,0.3,1.4); y=lerp(-400,860,f*f); s=.55; op=C(t/0.3);
+    if(t>1.4){const k=P(t,1.4,2.2);sx=1+.18*Math.sin(k*Math.PI)*(1-k);sy=1-.18*Math.sin(k*Math.PI)*(1-k);s=lerp(.55,.85,eo(P(t,1.4,3)))}
+    y-= (t>1.4? eo(P(t,1.4,3))*0:0);
+    op*=1-ei(P(t,5.8,6.4));
+  } else if(t>=64.8&&t<67.6){
+    const i=back(P(t,64.8,65.8)); s=lerp(0,1.1,i); op=C(P(t,64.8,65.2));
+    const m=eio(P(t,66.6,67.5)); s*=1+1.2*m; op*=1-m; y=860-m*60;
+  } else if(t>=70.2){
+    const i=eo(P(t,70.2,71.2)); s=.62*i+.2; op=i; y=470;
+  } else {drop.style.opacity=0;return}
+  drop.style.opacity=op;
+  drop.style.transform=`translate(${x-DW/2}px,${y-DH/2}px) scale(${s*sx},${s*sy}) rotate(${r}deg)`;
+  drop.style.filter=`drop-shadow(0 0 ${30+20*Math.sin(t*2)}px rgba(242,181,58,.35))`;
+}
+function drawMascot(t){
+  if(t<52.4||t>54.9){mascot.style.opacity=0;return}
+  const i=back(P(t,52.4,53.1)),o=ei(P(t,54.4,54.9));
+  const wave=Math.sin((t-52.4)*9)*12*(P(t,53,53.3))*(1-P(t,54.1,54.4));
+  const x=lerp(820,850,i),y=lerp(1350,740,i);
+  mascot.style.opacity=C(i)*(1-o);
+  mascot.style.transform=`translate(${x-95}px,${y-130}px) rotate(${wave}deg) scale(${.4+.6*i})`;
+}
+function drawOne(t){
+  if(t<66.8||t>70.3){one.style.opacity=0;return}
+  const i=eo(P(t,66.8,67.9)),o=ei(P(t,69.8,70.3));
+  one.style.opacity=i*(1-o);
+  one.style.transform=`translateY(${330+(1-i)*60}px) scale(${.85+.15*i+o*.1})`;
+  one.style.filter=`drop-shadow(0 0 ${40*i}px rgba(242,181,58,.45)) blur(${(1-i)*10+o*10}px)`;
+  one.querySelectorAll('.gold').forEach(g=>g.style.backgroundPosition=`0 ${(t*40)%300}%`);
+}
+function drawEnd(t){
+  if(t<70.2){endc.style.opacity=0;return}
+  endc.style.opacity=1;endc.style.transform='translateY(720px)';
+  ['e1','e2','e3','e4','e5','e6'].forEach((id,k)=>{const p=eo(P(t,70.5+k*.28,71.3+k*.28));const e=$('#'+id);
+    e.style.opacity=p;e.style.transform=`translateY(${(1-p)*30}px)`;e.style.filter=`blur(${((1-p)*8).toFixed(1)}px)`});
+}
+
+// ---------- mosaic (merci) ----------
+const MOS=['m00.jpg','m01.jpg','m02.jpg','m03.jpg','m04.jpg','m05.jpg','m06.jpg','m08.jpg','m09.jpg','m10.jpg','klas_parents.jpg','declic_nuit.jpg','octobre.jpg','novembre.jpg','apprendre.jpg','photo.jpg','tableau.jpg','devine.jpg','idees.jpg','declic_jour.jpg'];
+const tiles=[];seed=99;
+const order=MOS.map((m,i)=>i).sort(()=>rnd()-.5);
+MOS.forEach((m,i)=>{const col=i%4,row=Math.floor(i/4);
+  const e=el(`<div class="tile" style="width:262px;height:378px"><img src="${A}${m}"></div>`);
+  tiles.push({e,x:col*272+5,y:row*386+0,d:order.indexOf(i)*.09})});
+function drawMosaic(t){
+  const on=t>57.3&&t<64.9;
+  tiles.forEach(o=>{ if(!on){o.e.style.opacity=0;return}
+    const i=eo(P(t,57.4+o.d,58.2+o.d)),out=ei(P(t,64.2,64.9));
+    const dim=1-.62*eio(P(t,59.0,59.8));
+    o.e.style.opacity=i*(1-out);
+    const zoom=1+.04*P(t,57.4,64.9);
+    o.e.style.transform=`translate(${(o.x-540)*zoom+540}px,${(o.y-960)*zoom+960}px) scale(${(1.25-.25*i)*zoom})`;
+    o.e.style.filter=`brightness(${dim}) blur(${((1-i)*6+out*8).toFixed(1)}px)`;
+  });
+}
+
+// ---------- ripples ----------
+const RIP=[{t:1.4,c:'#22D3EE'},{t:11.2,c:'#F2B53A'},{t:17.4,c:'#22D3EE'},{t:24.4,c:'#F2B53A'},{t:31.4,c:'#22D3EE'},{t:38.4,c:'#F2B53A'},{t:42.4,c:'#22D3EE'},{t:46.4,c:'#1E4FD8'},{t:57.3,c:'#F2B53A'}];
+const svgR=$('#ripples');let rippleEls=[];
+RIP.forEach(r=>{for(let k=0;k<3;k++){const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('cx',540);c.setAttribute('cy',r.t<2?1020:960);c.setAttribute('fill','none');c.setAttribute('stroke',r.c);svgR.appendChild(c);rippleEls.push({c,t:r.t+k*.22})}});
+const conv=[];for(let k=0;k<12;k++){const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('cx',540);c.setAttribute('cy',860);c.setAttribute('fill','none');c.setAttribute('stroke',k%2?'#22D3EE':'#F2B53A');svgR.appendChild(c);conv.push(c)}
+function drawRipples(t){
+  rippleEls.forEach(o=>{const p=P(t,o.t,o.t+1.8);if(p<=0||p>=1){o.c.setAttribute('r',0);o.c.setAttribute('opacity',0);return}
+    o.c.setAttribute('r',20+1300*eo(p)*.9);o.c.setAttribute('stroke-width',6*(1-p)+1);
+    o.c.setAttribute('opacity',(1-p)*.8);o.c.setAttribute('transform',`translate(540 ${o.c.getAttribute('cy')}) scale(1 .42) translate(-540 -${o.c.getAttribute('cy')})`)});
+  // 12 rings = 12 months, converge 63.8 -> 66.6
+  conv.forEach((c,k)=>{const a=63.6+k*.1,p=P(t,a,a+1.6);
+    if(t<a||p>=1){c.setAttribute('opacity',0);return}
+    const appear=C(P(t,a,a+.3));c.setAttribute('r',(220+k*70)*(1-eio(p)));
+    c.setAttribute('stroke-width',3);c.setAttribute('opacity',appear*(1-p*p)*.9)});
+}
+
+// ---------- sparks ----------
+const sp=$('#sparks');const SP=[];seed=5;
+for(let k=0;k<55;k++){const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('fill',rnd()>.3?'#F7D27A':'#9FE8F7');sp.appendChild(c);
+  SP.push({c,x:rnd()*1080,y:rnd()*1920,r:1.5+rnd()*3.5,v:10+rnd()*30,ph:rnd()*6})}
+function drawSparks(t){
+  const amt=Math.max(1-P(t,8,11)*1, 0)*.9 + C(P(t,64.5,66))*(1-0)*1 + (t>11&&t<46?.35:0);
+  const inCream=t>46.4&&t<57.2;
+  SP.forEach(s=>{const y=((s.y-s.v*t)%1920+1920)%1920;s.c.setAttribute('cx',s.x+Math.sin(t*.7+s.ph)*20);s.c.setAttribute('cy',y);
+    s.c.setAttribute('r',s.r);s.c.setAttribute('opacity',inCream?0:C(amt)*(.4+.6*Math.abs(Math.sin(t*1.7+s.ph))))});
+}
+
+// ---------- background / cream ----------
+function drawBG(t){
+  const h1=$('#halo1'),h2=$('#halo2');
+  const b=.5+.5*Math.sin(t*.8);
+  h1.style.transform=`translate(${90+60*Math.sin(t*.25)}px,${300+80*Math.cos(t*.2)}px) scale(${.9+.15*b})`;h1.style.opacity=.32+.1*b;
+  h2.style.transform=`translate(${380+80*Math.cos(t*.3)}px,${1100+60*Math.sin(t*.22)}px) scale(${.85+.15*(1-b)})`;h2.style.opacity=.12+.06*(1-b);
+  const ci=eio(P(t,46.0,46.9)),co=eio(P(t,57.0,57.6));
+  $('#cream').style.opacity=ci*(1-co);
+  const pa=eo(P(t,46.3,47.3)),pb=eo(P(t,46.5,47.5)),pc=eo(P(t,46.7,47.7));
+  $('#paperA').style.transform=`translate(${lerp(-1400,-160,pa)}px,-210px) rotate(-6deg)`;
+  $('#paperB').style.transform=`translate(${lerp(1200,-60,pb)}px,1560px) rotate(5deg)`;
+  $('#paperC').style.transform=`translate(${lerp(1300,600,pc)}px,1230px) rotate(-70deg)`;
+  $('#vignette').style.opacity=1-ci*(1-co)*.8;
+  // flash at impact & at the 1
+  const f=Math.max(.35*(1-P(t,1.4,1.9))*(t>=1.4?1:0), .5*(1-P(t,66.8,67.6))*(t>=66.8?1:0));
+  $('#flash').style.opacity=f;
+}
+
+// ---------- master ----------
+window.DUR=75;
+window.render=function(t){
+  drawBG(t);drawRipples(t);drawSparks(t);drawSin(t);
+  CARDS.forEach(c=>drawCard(c,t));T.forEach(o=>drawText(o,t));
+  drawDrop(t);drawMascot(t);drawMosaic(t);drawOne(t);drawEnd(t);
+};
+window.ready=Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode().catch(()=>{}))]);
+// preview mode
+if(location.hash==='#play'){const t0=performance.now();(function loop(){render(((performance.now()-t0)/1000)%DUR);requestAnimationFrame(loop)})()}
+else render(0);
+</script></body></html>
