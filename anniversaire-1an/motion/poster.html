@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Sora;font-weight:700;src:url(node_modules/@fontsource/sora/files/sora-latin-700-normal.woff2)}
+@font-face{font-family:Sora;font-weight:800;src:url(node_modules/@fontsource/sora/files/sora-latin-800-normal.woff2)}
+@font-face{font-family:Manrope;font-weight:500;src:url(node_modules/@fontsource/manrope/files/manrope-latin-500-normal.woff2)}
+@font-face{font-family:Manrope;font-weight:700;src:url(node_modules/@fontsource/manrope/files/manrope-latin-700-normal.woff2)}
+@font-face{font-family:Caveat;font-weight:700;src:url(node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2)}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--W:1080px;--H:1350px}
+body{width:var(--W);height:var(--H);overflow:hidden;background:#050B1E}
+#p{position:relative;width:var(--W);height:var(--H);overflow:hidden;
+ background:radial-gradient(70% 55% at 50% 52%,#173070 0%,#0B1838 45%,#050B1E 100%)}
+.gold{background:linear-gradient(172deg,#FFF6D6 0%,#F9D77A 22%,#E9AE35 45%,#A86A12 66%,#F3C45A 84%,#FFF0C0 100%);
+ -webkit-background-clip:text;background-clip:text;color:transparent}
+.c{position:absolute;left:0;width:100%;text-align:center}
+#top{font:700 24px/1 Sora;letter-spacing:.42em;color:#C9D6F2}
+#top b{color:#F2B53A;font-weight:700}
+#one{font:800 var(--one)/0.82 Sora;letter-spacing:-.05em;filter:drop-shadow(0 0 60px rgba(242,181,58,.35)) drop-shadow(0 18px 30px rgba(0,0,0,.5))}
+#one.gold{background:linear-gradient(115deg,rgba(255,255,255,0) 38%,rgba(255,250,225,.85) 46%,rgba(255,255,255,0) 54%),
+ linear-gradient(90deg,#FFE9A8 0%,#F6C657 18%,#D9981F 52%,#9A5F10 80%,#E8B444 100%);-webkit-background-clip:text;background-clip:text}
+#depth{font:800 var(--one)/0.82 Sora;letter-spacing:-.05em;color:#6B420C;transform:translate(10px,8px);filter:blur(.5px)}
+#halo{position:absolute;left:50%;border-radius:50%;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(242,181,58,.28),rgba(30,79,216,.18) 55%,transparent);filter:blur(10px)}
+#refl{font:800 var(--one)/0.82 Sora;letter-spacing:-.05em;transform:scaleY(-1);opacity:.22;
+ -webkit-mask-image:linear-gradient(to top,rgba(0,0,0,.9),transparent 40%);mask-image:linear-gradient(to top,rgba(0,0,0,.9),transparent 40%);filter:blur(3px)}
+#an{font:800 var(--an)/1 Sora;letter-spacing:.38em;padding-left:.38em}
+#tag{font:700 var(--tag)/1 Caveat;color:#fff}
+#merci{font:500 26px/1.4 Manrope;color:#AFC0E6;letter-spacing:.02em}
+#brand{display:flex;align-items:center;justify-content:center;gap:16px}
+#brand img{height:var(--logo)}
+#brand .wm{font:800 var(--wm)/1 Sora;color:#fff;text-align:left}
+#brand .wm small{display:block;font:700 13px/1 Sora;letter-spacing:.28em;color:#9FB2DD;margin-top:8px}
+#water{position:absolute;left:0;width:100%;
+ background:linear-gradient(180deg,rgba(34,211,238,.10),rgba(5,11,30,0) 70%)}
+svg{position:absolute;left:0;top:0}
+#drop{position:absolute;width:var(--drop);left:50%;transform:translateX(-50%)}
+</style></head><body><div id="p">
+ <div id="water"></div>
+ <svg id="rings"></svg>
+ <svg id="sparks"></svg>
+ <div class="c" id="top">JENGUAI <b>·</b> 06.11.2025 — 06.11.2026</div>
+ <div id="halo"></div><div class="c gold" id="refl">1</div><div class="c" id="depth">1</div>
+ <div class="c gold" id="one">1</div>
+ <img id="drop" src="assets/logo_drop_clean.png">
+ <div class="c gold" id="an">AN</div>
+ <div class="c" id="tag">à faire émerger les idées.</div>
+ <div class="c" id="merci">Merci à notre communauté, à nos clients et partenaires.</div>
+ <div class="c" id="brand"><img src="assets/logo_drop_clean.png"><div class="wm">Jengu<span class="gold">AI</span><small>SOLUTIONS D’INTELLIGENCE ARTIFICIELLE</small></div></div>
+</div>
+<script>
+const F={ // layout per format
+ '4x5':{W:1080,H:1350,one:620,an:92,tag:66,logo:'64px',wm:'38px',drop:'64px',top:90,oneY:250,surface:760,anY:830,tagY:960,merciY:1110,brandY:1195,dropY:150,rx:470},
+ '9x16':{W:1080,H:1920,one:720,an:110,tag:80,logo:'76px',wm:'44px',drop:'76px',top:250,oneY:520,surface:1110,anY:1190,tagY:1350,merciY:1520,brandY:1610,dropY:360,rx:500},
+ '1x1':{W:1080,H:1080,one:500,an:76,tag:56,logo:'56px',wm:'34px',drop:'52px',top:70,oneY:200,surface:610,anY:665,tagY:770,merciY:895,brandY:960,dropY:110,rx:430},
+};
+const f=F[location.hash.slice(1)||'4x5'];const r=document.documentElement.style;
+r.setProperty('--W',f.W+'px');r.setProperty('--H',f.H+'px');r.setProperty('--one',f.one+'px');r.setProperty('--an',f.an+'px');
+r.setProperty('--tag',f.tag+'px');r.setProperty('--logo',f.logo);r.setProperty('--wm',f.wm);r.setProperty('--drop',f.drop);
+const $=s=>document.querySelector(s);
+$('#top').style.top=f.top+'px';
+const oneH=f.one*.82;$('#one').style.top=(f.surface-oneH)+'px';$('#refl').style.top=(f.surface)+'px';$('#depth').style.top=(f.surface-oneH)+'px';const hz=f.one*1.25;Object.assign($('#halo').style,{width:hz+'px',height:hz+'px',top:(f.surface-oneH/2-hz/2)+'px'});
+$('#drop').style.top=f.dropY+'px';
+$('#an').style.top=f.anY+'px';$('#tag').style.top=f.tagY+'px';$('#merci').style.top=f.merciY+'px';$('#brand').style.top=f.brandY+'px';
+$('#water').style.top=f.surface+'px';$('#water').style.height=(f.H-f.surface)+'px';
+// 12 rings = 12 mois
+const NS='http://www.w3.org/2000/svg';const rg=$('#rings');rg.setAttribute('width',f.W);rg.setAttribute('height',f.H);
+for(let k=0;k<12;k++){const e=document.createElementNS(NS,'ellipse');const rx=60+k*(f.rx-60)/11;
+ e.setAttribute('cx',f.W/2);e.setAttribute('cy',f.surface+4);e.setAttribute('rx',rx);e.setAttribute('ry',rx*.13);
+ e.setAttribute('fill','none');e.setAttribute('stroke',k%3==0?'#F2B53A':'#22D3EE');e.setAttribute('stroke-width',k<3?2.2:1.4);
+ e.setAttribute('opacity',(0.85-k*.06).toFixed(2));rg.appendChild(e)}
+// falling droplet trail between logo drop and the 1
+const ln=document.createElementNS(NS,'line');ln.setAttribute('x1',f.W/2);ln.setAttribute('x2',f.W/2);
+ln.setAttribute('y1',f.dropY+parseInt(f.drop)*1.35);ln.setAttribute('y2',f.surface-oneH-14);ln.setAttribute('stroke','url(#lg)');ln.setAttribute('stroke-width',2);
+rg.innerHTML+=`<defs><linearGradient id="lg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#F2B53A" stop-opacity=".9"/><stop offset="1" stop-color="#F2B53A" stop-opacity="0"/></linearGradient></defs>`;
+rg.appendChild(ln);
+// sparks
+const sp=$('#sparks');sp.setAttribute('width',f.W);sp.setAttribute('height',f.H);let s=11;const R=()=>{s=(s*16807)%2147483647;return s/2147483647};
+for(let k=0;k<70;k++){const c=document.createElementNS(NS,'circle');const x=R()*f.W,y=R()*f.surface;
+ const d=Math.hypot(x-f.W/2,(y-f.surface*.55)*1.2)/f.W;c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('r',.8+R()*2.4);
+ c.setAttribute('fill',R()>.35?'#F7D27A':'#9FE8F7');c.setAttribute('opacity',(Math.max(.08,.75-d)*R()).toFixed(2));sp.appendChild(c)}
+window.ready=Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode())]);
+</script></body></html>
