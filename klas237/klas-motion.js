@@ -26,7 +26,7 @@
   }
   let lastKey='';
   function enter(){
-    const T=tier();document.body.dataset.motion=T;
+    const T=tier();document.body.dataset.motion=T;document.body.dataset.kit=document.querySelector('#screen .tk')?'on':'off';
     if(reduced())return;
     const root=document.querySelector('#screen .tk');if(!root||root.dataset.entered)return;root.dataset.entered='1';
     const key=(typeof role!=='undefined'?role:'')+'|'+(typeof page!=='undefined'?page:'')+'|'+(typeof selected!=='undefined'?selected:'')+'|'+(typeof activeAudience==='function'?activeAudience():'');
@@ -55,5 +55,5 @@
   };
   if(typeof render==='function'){const prev=render;render=function(){prev();enter();};}
   document.addEventListener('DOMContentLoaded',enter);
-  new MutationObserver(()=>{const r=document.querySelector('#screen .tk');if(r&&!r.dataset.entered)enter();else document.body.dataset.motion=tier();}).observe(document.getElementById('screen')||document.body,{childList:true});
+  new MutationObserver(()=>{const r=document.querySelector('#screen .tk');if(r&&!r.dataset.entered)enter();else {document.body.dataset.motion=tier();document.body.dataset.kit=r?'on':'off';}}).observe(document.getElementById('screen')||document.body,{childList:true});
 })();

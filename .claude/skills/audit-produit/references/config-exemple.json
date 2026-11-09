@@ -1,0 +1,13 @@
+{
+  "baseUrl": "http://localhost:3000/",
+  "blockHosts": [],
+  "viewports": [ { "name": "mobile", "width": 390, "height": 844 }, { "name": "ordinateur", "width": 1440, "height": 900 } ],
+  "journeys": [
+    { "name": "visiteur", "steps": [
+      { "check": "accueil" },
+      { "click": "a[href='/tarifs']" }, { "check": "tarifs" },
+      { "fill": "#email", "value": "test@exemple.com" }, { "press": "Enter" }, { "check": "apres-formulaire" },
+      { "eval": "window.scrollTo(0, 99999)" }, { "check": "bas-de-page" }
+    ]}
+  ]
+}

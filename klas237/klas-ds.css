@@ -293,7 +293,7 @@ html body .entry-content .kx-method .kx-demo{background:var(--k-blue)!important;
   html body .entry-header label{order:0!important;width:auto!important;font-size:0!important;margin:0!important}
   html body .entry-header select{width:92px!important;max-width:92px;padding-right:22px!important;min-height:44px;font-size:.85rem!important}
   html body .entry-header .secondary{margin:0!important;padding:8px 12px!important;font-size:.9rem}
-  html body .entry-header-offers{order:5;grid-column:1/-1;justify-self:start;padding:0!important;min-height:32px!important}
+  html body .entry-header-offers{order:5;grid-column:1/-1;justify-self:start;padding:0 4px!important;min-height:44px!important}
   body[data-entry=welcome] .entry-header-offers{display:none!important}
   .brand,.entry-brand{font-size:1.55rem!important}
 }
@@ -644,3 +644,43 @@ body[data-motion=play] .fk-medal{animation:kx-bounce .8s var(--k-spring)}
 @media (max-width:860px){.fk-streak{grid-template-columns:minmax(0,1fr)}.fk-week{justify-self:stretch;max-width:none}}
 @media (max-width:560px){.fk-form2{grid-template-columns:minmax(0,1fr)!important}.fk-ritual-head{flex-direction:column}.fk-mood-row{grid-template-columns:repeat(2,minmax(0,1fr))}.fk-week i{width:30px;height:30px}}
 @media (prefers-reduced-motion:reduce){.fk-flame,.fk-ring,.tk h1::after,.fk-bar i{animation:none!important}}
+
+/* ==========================================================================
+   Bandeaux : un seul en-tête léger au-dessus de chaque écran
+   ========================================================================== */
+body[data-kit=on] #audience-context,
+body[data-kit=on] .staff-role-label,
+body[data-kit=on] .class-assessment-callout,
+body[data-kit=on] .staff-banner,
+body[data-kit=on] .entry-workspace-art{display:none!important}
+body[data-entry=workspace] #workspace-identity{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:6px 0 8px;font-size:.88rem;color:var(--k-muted)}
+body[data-entry=workspace] #workspace-identity b,body[data-entry=workspace] #workspace-identity strong{color:var(--k-ink)}
+body[data-entry=workspace] #save-status{display:inline-flex!important;align-items:center;gap:8px;width:auto!important;max-width:100%;margin:0 0 14px!important;padding:6px 12px!important;border:0!important;border-radius:999px!important;background:var(--k-mark-soft)!important;font-size:.82rem!important;line-height:1.35;box-shadow:none!important}
+body[data-entry=workspace] #save-status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--k-mark);flex:none;box-shadow:0 0 0 3px rgba(252,209,22,.3)}
+body[data-entry=workspace] .family-perspective{display:flex!important;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:8px 8px 8px 16px!important;margin:0 0 12px!important;border-radius:16px!important;background:#fff!important;border:1px solid rgba(16,35,28,.08)!important;box-shadow:var(--k-elev)!important}
+body[data-entry=workspace] .family-perspective p{margin:0;font-size:.92rem;color:var(--k-muted)}
+body[data-entry=workspace] .family-perspective button{min-height:44px!important;padding:8px 14px!important;border-radius:999px!important;font-size:.9rem!important}
+
+/* Corrections issues de l'audit */
+.entry-kicker,.eyebrow{font-size:max(.78rem,12.5px)!important}
+.entry-footer a,.legal-links a,footer nav a{display:inline-flex;align-items:center;min-height:44px}
+.entry-brand,.brand{display:inline-flex;align-items:center;min-height:44px}
+html body .entry-content .entry-world.secondary-world .entry-world-meta span,html body .entry-content .entry-world.secondary-world .entry-world-meta small{color:#fff!important}
+.fk-name{font-size:1.1rem;margin:0}
+.kx-skip-nav{position:absolute;left:0;top:0}
+@media (max-width:560px){body[data-entry=welcome] .entry-header-offers{display:inline-flex!important}}
+.tk-scroll{position:relative}
+.sr{left:0;top:0}
+.tk-eval-title{font-size:1.15rem;margin:8px 0 4px}
+html body .entry-content .entry-world.secondary-world .entry-world-meta > *{opacity:1!important}
+.entry-header-offers{min-height:44px!important}
+@media (max-width:760px){html body .entry-header label{font-size:.85rem!important}html body .entry-header .kx-lang-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
+.entry-offer-label{font-size:max(.8rem,12.5px)!important}
+.entry-world-meta span,.entry-world-meta small,.entry-world-badges b{font-size:max(.78rem,12.5px)!important}
+.brand small{font-size:12px!important}
+.language-choice,.language-choice select,#ui-language,#entry-language{font-size:max(.8rem,12.5px)!important;min-height:44px}
+.kx-tabbar button{font-size:12px!important}
+#mode,.pill{min-height:44px!important}.workspace-nav-title,.rail-nav-heading{font-size:12px!important}
+html body .entry-header .secondary,html body .entry-header button{min-height:44px!important}
+.primary-level-guide a{display:inline-flex;align-items:center;min-height:44px}
+body[data-entry=workspace] main > header{margin-bottom:4px!important;padding-bottom:12px!important}body[data-entry=workspace] #workspace-identity{margin-top:0!important;padding-top:0!important}

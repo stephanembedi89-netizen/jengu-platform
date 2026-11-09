@@ -9,7 +9,7 @@
   const skip=document.createElement('a');
   skip.className='kx-skip';skip.href='#';
   skip.addEventListener('click',e=>{e.preventDefault();const ws=document.body.dataset.entry==='workspace';const target=ws?document.querySelector('#screen h1, #screen'):document.querySelector('#entry-root h1, #entry-root');if(target){target.tabIndex=-1;target.focus();}});
-  document.body.prepend(skip);
+  const skipNav=document.createElement('nav');skipNav.className='kx-skip-nav';skipNav.setAttribute('aria-label','Accès rapide');skipNav.append(skip);document.body.prepend(skipNav);
 
   /* 2. Aide + taille du texte regroupées dans un même coin */
   const dock=document.createElement('div');dock.className='kx-dock';
