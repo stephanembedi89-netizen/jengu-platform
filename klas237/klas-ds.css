@@ -684,3 +684,101 @@ html body .entry-content .entry-world.secondary-world .entry-world-meta > *{opac
 html body .entry-header .secondary,html body .entry-header button{min-height:44px!important}
 .primary-level-guide a{display:inline-flex;align-items:center;min-height:44px}
 body[data-entry=workspace] main > header{margin-bottom:4px!important;padding-bottom:12px!important}body[data-entry=workspace] #workspace-identity{margin-top:0!important;padding-top:0!important}
+
+/* ==========================================================================
+   Assistant IA « Le relais »
+   ========================================================================== */
+.ai-spark{display:inline-block;width:16px;height:16px;flex:none;background:conic-gradient(from 45deg,var(--k-blue),var(--k-red),var(--k-mark),var(--k-blue));clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%)}
+.kx-dock .ai-fab{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:12px 18px;border-radius:999px;border:2px solid #fff;background:var(--k-ink);color:#fff;font:700 15px/1 var(--k-font-body);box-shadow:0 8px 24px rgba(20,27,46,.28);cursor:pointer}
+.kx-dock .ai-fab .ai-spark{width:18px;height:18px}
+body[data-motion=play] .kx-dock .ai-fab .ai-spark,body[data-motion=lively] .kx-dock .ai-fab .ai-spark{animation:kx-twinkle 3s ease-in-out infinite}
+.tk .ai-inline,.ai-mini{display:inline-flex;align-items:center;gap:8px;background:var(--k-ink)!important;color:#fff!important;box-shadow:none!important}
+.ai-mini{margin-top:10px;min-height:40px;padding:8px 14px;border:0;border-radius:999px;font:700 .88rem/1.2 var(--k-font-body);cursor:pointer}
+.ai-scrim{position:fixed;inset:0;z-index:2500;background:rgba(16,23,20,.42);display:flex;justify-content:flex-end;backdrop-filter:blur(2px)}
+.ai-scrim[hidden]{display:none}
+.ai-panel{width:min(560px,100%);height:100%;background:var(--k-surface,#f7f6f1);display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(0,0,0,.2);animation:ai-in .35s var(--k-ease,ease) both}
+@keyframes ai-in{from{transform:translateX(40px);opacity:0}}
+body.ai-open{overflow:hidden}
+.ai-head{display:flex;align-items:center;gap:12px;padding:16px 18px;background:#fff;border-bottom:1px solid var(--k-line);position:relative}
+.ai-head::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--k-flag)}
+.ai-head h2{margin:0;font-size:1.2rem}
+.ai-head p{margin:2px 0 0;font-size:.85rem;color:var(--k-muted)}
+.ai-logo{width:40px;height:40px;border-radius:12px;background:var(--k-ink);display:grid;place-items:center}
+.ai-logo span{width:20px;height:20px;background:conic-gradient(from 45deg,#00a37d,#ff4d5e,#fcd116,#00a37d);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%)}
+.ai-demo-tag{color:#6b5600;background:var(--k-mark-soft);padding:1px 8px;border-radius:999px}
+.ai-x{margin-left:auto;width:44px;height:44px;border-radius:50%;border:0;background:var(--k-paper);font-size:1.5rem;cursor:pointer}
+.ai-body{overflow-y:auto;padding:16px 18px 40px;display:flex;flex-direction:column;gap:16px}
+.ai-ask{background:#fff;border:1px solid var(--k-line);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--k-elev)}
+.ai-tasks{display:flex;flex-wrap:wrap;gap:6px}
+.ai-tasks button{min-height:40px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--k-line);background:#fff;font:700 .88rem/1.2 var(--k-font-body);color:var(--k-ink);cursor:pointer}
+.ai-tasks button[aria-pressed=true]{background:var(--k-blue);border-color:var(--k-blue);color:#fff}
+.ai-field{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:.92rem}
+.ai-field input,.ai-field textarea,.ai-method textarea{border:1.5px solid var(--k-line);border-radius:12px;padding:10px 12px;font:inherit;font-weight:400;background:#fff;width:100%;box-sizing:border-box}
+.ai-field textarea:focus,.ai-field input:focus{border-color:var(--k-blue)}
+.ai-tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.ai-tool{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:72px;padding:8px;border-radius:14px;border:1.5px dashed rgba(16,35,28,.2);background:var(--k-paper);font:700 .82rem/1.2 var(--k-font-body);color:var(--k-ink);cursor:pointer;text-align:center}
+.ai-tool svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ai-tool:hover{border-color:var(--k-blue);color:var(--k-blue-deep)}
+.ai-tool.is-on{border-style:solid;border-color:var(--k-red);background:var(--k-red-soft);color:var(--k-red)}
+.ai-tool.is-on svg{animation:ai-pulse 1s ease-in-out infinite}
+@keyframes ai-pulse{50%{transform:scale(1.18)}}
+.ai-thumbs{display:flex;gap:8px;flex-wrap:wrap}
+.ai-thumbs figure{position:relative;margin:0}
+.ai-thumbs img{width:96px;height:72px;object-fit:cover;border-radius:10px;border:1px solid var(--k-line)}
+.ai-thumbs button{position:absolute;top:-8px;right:-8px;width:28px;height:28px;border-radius:50%;border:0;background:var(--k-ink);color:#fff;cursor:pointer}
+.ai-method summary{cursor:pointer;font-weight:700;font-size:.9rem;color:var(--k-blue-deep);min-height:32px}
+.ai-privacy{margin:0;font-size:.82rem;color:var(--k-muted)}
+.ai-send{min-height:52px;border:0;border-radius:14px;background:var(--k-blue);color:#fff;font:800 1rem/1 var(--k-font-body);box-shadow:var(--k-ink-shadow);cursor:pointer}
+.ai-send:disabled{opacity:.7;cursor:progress}
+.ai-intro{background:#fff;border-radius:18px;padding:14px 16px;border:1px dashed var(--k-line)}
+.ai-intro ul{margin:6px 0 0;padding-left:18px;color:var(--k-muted)}
+.ai-loading{display:flex;flex-direction:column;align-items:center;gap:10px;padding:24px;color:var(--k-muted);text-align:center}
+.ai-loading span{display:inline-block;width:12px;height:12px;border-radius:50%;margin:0 4px;animation:ai-dot 1.1s ease-in-out infinite}
+.ai-loading span:nth-child(1){background:var(--k-blue)}.ai-loading span:nth-child(2){background:var(--k-red);animation-delay:.15s}.ai-loading span:nth-child(3){background:var(--k-mark);animation-delay:.3s}
+.ai-loading{flex-direction:row;flex-wrap:wrap;justify-content:center}.ai-loading p{flex-basis:100%;margin:6px 0 0}
+@keyframes ai-dot{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-8px);opacity:1}}
+.ai-result{display:flex;flex-direction:column;gap:12px}
+.ai-title{font-size:1.25rem;margin:4px 0 0}
+.ai-demo-note{margin:0;background:var(--k-mark-soft);border-radius:12px;padding:10px 12px;font-size:.88rem}
+.ai-card{background:#fff;border:1px solid var(--k-line);border-radius:18px;padding:14px 16px;box-shadow:var(--k-elev);animation:kx-fade .4s var(--k-ease,ease) both}
+.ai-card header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.ai-card h3{margin:0;font-size:1.02rem;flex:1}
+.ai-card p{margin:6px 0}
+.ai-ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--k-paper);font-size:1.1rem}
+.ai-card.core{border-left:5px solid var(--k-blue)}
+.ai-card.way.w0{border-left:5px solid var(--k-blue)}.ai-card.way.w1{border-left:5px solid var(--k-red)}.ai-card.way.w2{border-left:5px solid var(--k-mark)}
+.ai-card.read{background:var(--k-paper)}
+.ai-speak{width:40px;height:40px;border-radius:50%;border:0;background:var(--k-blue-soft);color:var(--k-blue-deep);display:grid;place-items:center;cursor:pointer}
+.ai-speak svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ai-list{margin:4px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.ai-list details summary{cursor:pointer;color:var(--k-blue-deep);font-weight:700;min-height:32px;display:flex;align-items:center}
+.ai-steps{list-style:none;margin:0;padding:0 0 0 16px;border-left:3px solid var(--k-mark);display:flex;flex-direction:column;gap:10px}
+.ai-steps time{margin-left:8px;font-size:.8rem;font-weight:800;color:var(--k-red)}
+.ai-caution{margin:0;background:var(--k-red-soft);color:#7a1020;border-radius:12px;padding:10px 12px;font-size:.9rem}
+.ai-follow{display:flex;flex-wrap:wrap;gap:8px}
+.ai-follow button,.ai-follow a{min-height:44px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--k-blue);background:#fff;color:var(--k-blue-deep);font:700 .9rem/1.2 var(--k-font-body);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+.ai-follow .ai-primary{background:var(--k-blue);color:#fff}
+.ai-follow .ai-wa{border-color:#25d366;color:#0f5132}
+.ai-foot{margin:0;font-size:.8rem;color:var(--k-muted)}
+.ai-pad{position:fixed;inset:0;z-index:2600;background:rgba(16,23,20,.6);display:grid;place-items:center;padding:16px}
+.ai-pad-box{background:#fff;border-radius:20px;padding:16px;width:min(920px,100%);display:flex;flex-direction:column;gap:10px}
+.ai-pad-box p{margin:0;font-weight:700}
+.ai-pad canvas{width:100%;height:auto;aspect-ratio:900/560;border-radius:12px;border:1.5px solid var(--k-line);touch-action:none;cursor:crosshair}
+.ai-pad-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.ai-pad-actions button{min-height:44px;padding:10px 16px;border-radius:12px;border:0;background:var(--k-blue);color:#fff;font-weight:700;cursor:pointer}
+.ai-pad-actions .secondary{background:#fff;color:var(--k-ink);border:1.5px solid var(--k-line)}
+@media (max-width:640px){
+  .ai-scrim{align-items:flex-end}
+  .ai-panel{height:92vh;width:100%;border-radius:22px 22px 0 0;animation-name:ai-up}
+  @keyframes ai-up{from{transform:translateY(60px);opacity:0}}
+  .kx-dock .ai-fab span:last-child{display:none}.kx-dock .ai-fab{padding:12px 14px}
+}
+@media (prefers-reduced-motion:reduce){.ai-panel,.ai-card,.ai-loading span,.ai-tool.is-on svg,.ai-fab .ai-spark{animation:none!important}}
+.ai-panel .ai-x{color:var(--k-ink)!important;background:var(--k-paper)!important;box-shadow:none!important;padding:0!important;min-height:44px}
+.ai-card header{border:0!important;padding:0!important;margin:0 0 6px!important;background:none!important;min-height:0!important;position:static!important;box-shadow:none!important}
+.ai-head{margin:0!important}
+.ai-tools .ai-tool{margin:0!important;height:100%;box-sizing:border-box}
+.ai-panel button{box-shadow:none}
+.ai-panel .ai-send{box-shadow:var(--k-ink-shadow)}
+.ai-card > header{display:flex!important;flex-direction:row!important;align-items:center!important;gap:10px!important;width:auto!important;max-width:none!important;grid-template-columns:none!important}.ai-card > header .ai-ic{flex:none}.ai-card > header h3{text-align:left}
+.ai-result .ai-card{display:block!important;grid-template-columns:none!important}
