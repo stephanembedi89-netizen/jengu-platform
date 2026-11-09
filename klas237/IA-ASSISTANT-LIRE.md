@@ -8,7 +8,10 @@ L'assistant aide quand quelqu'un bloque, sans faire le travail à la place de l'
 |---|---|---|
 | Parent | Comprendre la notion · Une autre façon · Plus d'exemples | L'idée en mots simples, 2 à 3 autres façons de l'expliquer (marché, FCFA, objets de la maison, pas à pas), exemples résolus, exercices à faire ensemble avec la réponse, conseils pour accompagner, question de vérification |
 | Élève (collège, lycée) | Un indice, pas la réponse | La règle utile, la première étape, un exemple différent résolu, son exercice reformulé à faire seul, comment vérifier |
-| Enseignant | Préparer un cours · Créer des exercices · Reprendre une notion · Gérer ma classe · Rédiger un message | Déroulé selon l'approche par les compétences avec durées et trace écrite, exercices progressifs avec corrigé, séance de remédiation, plan d'action pour une classe nombreuse, message prêt pour WhatsApp |
+| Enseignant · Préparer | Préparer un cours · Situation-problème · Exercices différenciés | Déroulé APC avec durées et trace écrite ; situation de vie contextualisée avec grille de critères ; exercices en 3 niveaux avec corrigé |
+| Enseignant · Évaluer | Créer une épreuve · Corriger une copie (photo) · Analyser les résultats | Épreuve avec barème, corrigé et **version B** contre la copie ; **points proposés par question** et appréciation, que l'enseignant valide ; diagnostic et **groupes de besoin** à partir des notes |
+| Enseignant · Suivre | Appréciations du bulletin · Suivre un élève · Reprendre une notion | **Appréciations de toute la classe** à partir des moyennes, évolutions, absences et observations, enregistrées dans le bulletin en un clic ; plan d'accompagnement sur 3 semaines et message à la famille ; séance de remédiation |
+| Enseignant · Gérer | Cahier de textes · rapport · Gérer ma classe · Rédiger un message | Cahier de textes de la semaine, compte rendu pour la direction ou le conseil de classe ; plan d'action pour une classe nombreuse ; message prêt pour WhatsApp |
 | Accompagnateur | Préparer une séance · Comprendre la notion · Une autre façon · Rédiger un bilan | Séance de 45 à 60 min, explications alternatives, exercices, bilan pour les parents |
 
 On peut demander de quatre façons :
@@ -35,9 +38,10 @@ Navigateur (klas-ai.js)                Supabase                        Claude AP
 ```
 
 - `klas-ai.js` + styles dans `klas-ds.css` : l'interface. Sans service actif, elle répond avec des **exemples de démonstration** signalés comme tels.
-- `supabase/functions/klas-ai/index.ts` : vérifie la session et l'e-mail confirmé, applique un quota quotidien par rôle (parent 30, élève 20, enseignant et accompagnateur 60), construit la demande et appelle Claude.
+- Les outils enseignant reçoivent les données de la classe **anonymisées** : chaque élève devient E1, E2… avant l'envoi, et les vrais prénoms ne sont remis qu'à l'écran, dans le navigateur.
+- `supabase/functions/klas-ai/index.ts` : vérifie la session et l'e-mail confirmé, applique un quota quotidien par rôle (parent 30, élève 20, enseignant 80, accompagnateur 60), construit la demande et appelle Claude.
   - Format de réponse imposé par un schéma JSON ; le cadre pédagogique est mis en cache.
-  - Repli automatique si une demande est refusée par le modèle principal.
+  - Modèle par défaut : **Claude Haiku 5.5**, le moins cher. On peut passer à un modèle plus fin (`supabase secrets set KLAS_AI_MODEL=claude-opus-5-5`) sans toucher au code ; le repli automatique en cas de refus est alors activé.
   - Effort de réflexion « medium », « high » pour une séance complète ou une remédiation.
 - `supabase/migrations/20261109_klas_ai_usage.sql` : table de comptage (utilisateur, jour, nombre). **Aucune question ni réponse n'est enregistrée.**
 
@@ -63,19 +67,15 @@ Navigateur (klas-ai.js)                Supabase                        Claude AP
 
 ## Coût indicatif
 
-Tarif Claude Opus 5.5 : 4 $ par million de jetons en entrée, 20 $ en sortie.
+Modèle par défaut : Claude Haiku 5.5, à 0,10 $ par million de jetons en entrée et 0,50 $ en sortie.
 
-Une demande typique compte environ 4 000 jetons en entrée (photo comprise) et 3 000 en sortie (réflexion comprise). Cela fait environ **0,08 $, soit à peu près 50 FCFA**. À relever sur vos propres factures.
+| Usage | Jetons (environ) | Coût |
+|---|---|---|
+| Une question de parent avec photo | 4 000 en entrée, 3 000 en sortie | ≈ 0,002 $, soit à peu près **1 à 2 FCFA** |
+| Appréciations de 60 élèves | 7 000 en entrée, 6 000 en sortie | ≈ 0,004 $, soit à peu près **2 à 3 FCFA** |
+| Un enseignant très actif (10 demandes par jour) | – | à peu près **400 à 600 FCFA par mois** |
 
-Exemple :
-- un parent qui pose 1 question par jour ouvré revient à environ 1 000 FCFA par mois, sur un abonnement Famille à 2 500 FCFA ;
-- un enseignant actif représente 3 à 5 fois plus.
-
-Leviers si la marge est trop faible :
-- **quotas** : ajustables dans `DAILY_LIMIT` ;
-- **effort « low »** pour les reformulations courtes ;
-- **modèle plus léger** (Claude Haiku 5.5) pour les demandes simples des parents : c'est un choix à faire de votre côté, à valider sur un échantillon de vraies questions avant de l'adopter ;
-- **IA en option payante** pour les enseignants.
+Ces chiffres sont à relever sur vos propres factures. Avec Claude Opus 5.5 (4 $ et 20 $ par million de jetons), compter environ 40 fois plus. Avant le lancement, comparez les deux modèles sur une trentaine de vraies demandes, surtout pour la correction de copies et la lecture d'écriture manuscrite.
 
 ## Sécurité et confiance
 
