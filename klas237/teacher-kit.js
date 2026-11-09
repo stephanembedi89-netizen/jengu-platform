@@ -90,7 +90,7 @@
   const baseGroups=routeGroups;
   routeGroups=function(a,course){
     if(a!=='teacher')return baseGroups(a,course);
-    return {main:[['staff','Ma classe aujourd’hui','My class today'],['tk-students','Mes élèves','My students'],['tk-evals','Évaluations et notes','Assessments and marks'],['tk-year','Mon année','My year'],['build-course','Préparer un cours','Plan a lesson']],
+    return {main:[['staff','Aujourd’hui','Today'],['tk-students','Mes élèves','My students'],['tk-evals','Évaluations et notes','Assessments and marks'],['tk-year','Mon année','My year'],['build-course','Préparer un cours','Plan a lesson']],
       extra:[['tk-families','Relais familles','Family relay'],['classroom','Analyse par compétence','Skills analysis'],['progress','Mes observations','Observations'],['lesson-library','Mes cours et bilans','Lessons and reviews'],['prepare','Anciennes préparations','Earlier lesson plans'],['week','Ma semaine','My week'],['messages','Écrire aux familles','Write to families']]};
   };
 

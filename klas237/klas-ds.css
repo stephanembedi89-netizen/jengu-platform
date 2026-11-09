@@ -791,3 +791,4 @@ body.ai-open{overflow:hidden}
 .ai-pupils li{display:grid;grid-template-columns:minmax(110px,auto) 1fr;gap:10px;padding:8px 0;border-top:1px solid var(--k-line)}
 .ai-pupils li:first-child{border-top:0}
 @media (max-width:560px){.ai-pupils li{grid-template-columns:1fr}}
+.arch-lead{margin:-.2em 0 1em;font-size:1.05rem;color:var(--k-muted)}

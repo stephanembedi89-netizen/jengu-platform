@@ -1,0 +1,23 @@
+{
+  "baseUrl": "http://localhost:8238/index.html",
+  "blockHosts": ["supabase\\.co"],
+  "maxEntryClicks": 4,
+  "roles": [
+    { "name": "Parent · primaire", "steps": [
+      { "click": "[data-entry-go=worlds]" },
+      { "click": "[data-world=primary]" }, { "click": "[data-entry-role=parent]" }, { "click": "[data-open-child=\"0\"]" } ] },
+    { "name": "Parent · secondaire", "steps": [
+      { "click": "[data-entry-go=worlds]" }, { "click": "[data-world=college]" },
+      { "click": "[data-entry-role=parent]" }, { "click": "[data-open-child=\"2\"]" } ] },
+    { "name": "Élève · lycée", "steps": [
+      { "click": "[data-entry-go=worlds]" }, { "click": "[data-world=college]" },
+      { "click": "[data-entry-role=student]" }, { "click": "[data-open-child=\"2\"]" } ] },
+    { "name": "Enseignant · primaire", "steps": [
+      { "click": "[data-entry-go=worlds]" }, { "click": "[data-world=primary]" }, { "click": "[data-entry-role=teacher]" },
+      { "select": "#profile-level", "value": "CE2" }, { "fill": "#entry-profile input[name=name]", "value": "CE2 A" },
+      { "click": "#entry-profile button" } ] },
+    { "name": "Accompagnateur", "steps": [
+      { "click": "[data-entry-go=worlds]" }, { "click": "[data-world=college]" },
+      { "click": "[data-entry-role=tutor]" }, { "click": "[data-open-child=\"2\"]" } ] }
+  ]
+}
