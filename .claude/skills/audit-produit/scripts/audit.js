@@ -52,7 +52,7 @@ async function pageChecks(page, ctx) {
     });
     const tiny = [];
     document.querySelectorAll('body *').forEach(el => {
-      if (!vis(el) || ![...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim().length > 2)) return;
+      if (!vis(el) || el.closest('[aria-hidden="true"]') || ![...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim().length > 2)) return;
       const fs = parseFloat(getComputedStyle(el).fontSize);
       if (fs < 12) tiny.push(label(el) + ' (' + fs + 'px)');
     });

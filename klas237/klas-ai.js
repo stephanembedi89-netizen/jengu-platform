@@ -143,6 +143,7 @@
     const w=who(),method=panel.querySelector('#ai-method')?.value||'';
     ui.subject=panel.querySelector('#ai-subject')?.value.trim()||ui.subject;ui.task=task||ui.task;ui.lastQuestion=question;
     if(question.trim().length<3&&!ui.images.length){toast(T('Écrivez, dictez ou photographiez la question.','Type, speak or photograph the question.'));return;}
+    if(!live()&&typeof cloud!=='undefined'&&cloud){toast(T('L’assistant IA arrive très bientôt dans votre espace. Merci de votre patience !','The AI assistant is coming to your space very soon. Thank you for your patience!'));return;}
     ui.busy=true;ui.answer=null;paint();
     try{
       if(live()){
@@ -172,7 +173,7 @@
   function onSubmit(e){if(e.target.id!=='ai-form')return;e.preventDefault();stopVoice();ask(ui.task,panel.querySelector('#ai-question').value);}
 
   /* ---------- Points d'entrée ---------- */
-  const dockBtn=document.createElement('button');dockBtn.type='button';dockBtn.className='ai-fab';dockBtn.innerHTML='<span class="ai-spark" aria-hidden="true"></span><span>'+T('Assistant','Assistant')+'</span>';dockBtn.addEventListener('click',()=>open());
+  const dockBtn=document.createElement('button');dockBtn.type='button';dockBtn.className='ai-fab';dockBtn.setAttribute('aria-label',T('Ouvrir l’assistant IA','Open the AI assistant'));dockBtn.innerHTML='<span class="ai-spark" aria-hidden="true"></span><span>'+T('Assistant','Assistant')+'</span>';dockBtn.addEventListener('click',()=>open());
   function placeDock(){const dock=document.querySelector('.kx-dock');const inWs=document.body.dataset.entry==='workspace';if(dock&&inWs&&dockBtn.parentNode!==dock)dock.prepend(dockBtn);if(!inWs&&dockBtn.parentNode)dockBtn.remove();dockBtn.querySelector('span:last-child').textContent=T('Assistant','Assistant');}
   const DEFAULT={parent:'expliquer',student:'indice',teacher:'preparer_cours',tutor:'seance'};
   function inject(){
