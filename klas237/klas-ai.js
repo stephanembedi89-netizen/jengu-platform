@@ -34,7 +34,7 @@
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!scrim.hidden)close();});
   }
   function open(task,question,opts){
-    if(!panel)build();opts=opts||{};ui.data=opts.data||'';ui.names=opts.names||null;ui.onApply=opts.onApply||null;ui.dataLabel=opts.dataLabel||'';if(opts.subject)ui.subject=opts.subject;if(opts.reset!==false){ui.answer=null;ui.images=[];}const w=who();ui.task=task&&TASKS[w].some(t=>t[0]===task)?task:TASKS[w][0][0];
+    if(!panel)build();opts=opts||{};ui.data=opts.data||'';ui.names=opts.names||null;ui.onApply=opts.onApply||null;ui.dataLabel=opts.dataLabel||'';if(opts.subject)ui.subject=opts.subject;else if(!ui.subject&&window.klasTeach&&role==='teacher'){const t=klasTeach.taught(data.children[selected]);if(t[0])ui.subject=t[0];}if(opts.reset!==false){ui.answer=null;ui.images=[];}const w=who();ui.task=task&&TASKS[w].some(t=>t[0]===task)?task:TASKS[w][0][0];
     ui.lastQuestion=question||'';paint();scrim.hidden=false;document.body.classList.add('ai-open');
     setTimeout(()=>panel.querySelector('#ai-question')?.focus(),60);
   }

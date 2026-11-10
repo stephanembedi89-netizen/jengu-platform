@@ -24,7 +24,7 @@
     return ex?[...base,tr('Examen blanc · ','Mock exam · ')+ex]:base;
   }
   function subjects(c){
-    try{if(secondary(c))return collegeSubjects(c.level);if(typeof primarySubjects==='function')return primarySubjects(c);}catch(e){}
+    try{if(secondary(c)){const T=window.klasTeach?klasTeach.taught(c):[];return T.length?T:collegeSubjects(c.level);}if(typeof primarySubjects==='function')return primarySubjects(c);}catch(e){}
     return ['Français','Mathématiques','Sciences','Histoire','Géographie','Anglais'];
   }
 
@@ -45,15 +45,37 @@
     s[3].status='suivre';s[3].notes.push({id:uid(),date:addDays(today(),-3),type:tr('Travail','Work'),text:tr('Ne rend pas les exercices de calcul. À voir avec la famille.','Not handing in arithmetic exercises. Check with the family.')});
     s[8].status='progres';s[8].notes.push({id:uid(),date:addDays(today(),-6),type:tr('Progrès','Progress'),text:tr('Participe davantage depuis la mise en binôme.','Participates more since working in pairs.')});
     s[11].status='suivre';s[11].notes.push({id:uid(),date:addDays(today(),-2),type:tr('Comportement','Behaviour'),text:tr('Bavardages répétés en fin de journée.','Repeated chatting at the end of the day.')});
-    const ly=window.klasLycee&&klasLycee(c.level),tert=ly&&ly.info.family==='STT';
-    const sub=tert?subjects(c)[0]:tr('Mathématiques','Mathematics');
+    const T=secondary(c)&&window.klasTeach?klasTeach.taught(c):[];
+    const sub=secondary(c)?(T[0]||(subjects(c)[0])):tr('Mathématiques','Mathematics'),sub2=secondary(c)?(T[1]||sub):tr('Français','French');
     const p=periods(c)[0];
     const marks=[14,9.5,12,6,16.5,11,13,8,15,10.5,7,12.5,17,9];
-    k.evals.push({id:uid(),type:evalTypes(c)[1],period:p,subject:sub,title:tert?tr('Le bilan','The balance sheet'):secondary(c)?tr('Équations du premier degré','First-degree equations'):tr('Additions et soustractions posées','Column addition and subtraction'),date:addDays(today(),-9),scale:20,coef:2,marks:Object.fromEntries(s.map((st,i)=>[st.id,i===5?'abs':String(marks[i])])),appreciations:{}});
-    k.evals.push({id:uid(),type:evalTypes(c)[2],period:p,subject:sub,title:tert?tr('Les amortissements','Depreciation'):secondary(c)?tr('Fonctions affines','Linear functions'):tr('La multiplication','Multiplication'),date:addDays(today(),4),scale:20,coef:3,marks:{},appreciations:{}});
-    k.evals.push({id:uid(),type:evalTypes(c)[0],period:p,subject:secondary(c)?tr('Français','French'):tr('Français','French'),title:secondary(c)?tr('Le résumé de texte','Text summary'):tr('Conjugaison : le présent','Verb tenses: present'),date:addDays(today(),-1),scale:10,coef:1,marks:{},appreciations:{}});
-    const plan=tert?[[tr('Le bilan','The balance sheet'),0,true],[tr('Le compte de résultat','The income statement'),0,true],[tr('Les amortissements','Depreciation'),0,false],[tr('La TVA','VAT'),1,false],[tr('Les provisions','Provisions'),1,false],[tr('Les travaux de fin d’exercice','Year-end entries'),2,false]]:secondary(c)?[[tr('Équations du premier degré','First-degree equations'),0,true],[tr('Inéquations','Inequalities'),0,true],[tr('Fonctions affines','Linear functions'),0,false],[tr('Statistiques','Statistics'),1,false],[tr('Théorème de Thalès','Intercept theorem'),1,false],[tr('Systèmes d’équations','Systems of equations'),2,false]]
-      :[[tr('Les nombres jusqu’à 10 000','Numbers up to 10,000'),0,true],[tr('Additions et soustractions posées','Column addition and subtraction'),0,true],[tr('La multiplication','Multiplication'),0,false],[tr('Les mesures de longueur','Length measures'),0,false],[tr('La division','Division'),1,false],[tr('Les fractions simples','Simple fractions'),2,false]];
+    const L=(fr,en)=>tr(fr,en);
+    const PLANS={
+      maths:[L('Équations du premier degré','First-degree equations'),L('Inéquations','Inequalities'),L('Fonctions affines','Linear functions'),L('Statistiques','Statistics'),L('Théorème de Thalès','Intercept theorem'),L('Systèmes d’équations','Systems of equations')],
+      pc:[L('Mélanges et corps purs','Mixtures and pure substances'),L('La masse volumique','Density'),L('Le courant électrique','Electric current'),L('La tension électrique','Voltage'),L('Atomes et ions','Atoms and ions'),L('Les réactions chimiques','Chemical reactions')],
+      svt:[L('La cellule','The cell'),L('La nutrition des végétaux','Plant nutrition'),L('La digestion','Digestion'),L('La respiration','Breathing'),L('La reproduction','Reproduction'),L('Les écosystèmes','Ecosystems')],
+      info:[L('Les algorithmes','Algorithms'),L('Les variables','Variables'),L('Les structures conditionnelles','Conditionals'),L('Les boucles','Loops'),L('Les tableaux','Arrays'),L('Les réseaux','Networks')],
+      compta:[L('Le bilan','The balance sheet'),L('Le compte de résultat','The income statement'),L('Les amortissements','Depreciation'),L('La TVA','VAT'),L('Les provisions','Provisions'),L('Les travaux de fin d’exercice','Year-end entries')],
+      eco:[L('L’activité économique','Economic activity'),L('La production','Production'),L('La consommation','Consumption'),L('La monnaie','Money'),L('Le marché','The market'),L('La croissance économique','Economic growth')],
+      droit:[L('Les sources du droit','Sources of law'),L('Les personnes juridiques','Legal persons'),L('Les biens','Property'),L('Le contrat','Contracts'),L('La responsabilité civile','Civil liability'),L('L’entreprise et le droit','Business law')],
+      commerce:[L('La mercatique','Marketing'),L('L’étude de marché','Market research'),L('Le prix de vente','Selling price'),L('La distribution','Distribution'),L('La communication commerciale','Marketing communication'),L('La relation client','Customer relations')],
+      lettres:[L('Le résumé de texte','Text summary'),L('La dissertation','The essay'),L('Le commentaire composé','Commentary'),L('L’argumentation','Argumentation'),L('La poésie','Poetry'),L('Le roman africain','The African novel')],
+      langues:['Reading comprehension','Essay writing','Tenses','Reported speech','Conditionals','Oral presentation'],
+      hg:[L('La Première Guerre mondiale','World War I'),L('La décolonisation','Decolonisation'),L('Le Cameroun sous tutelle','Cameroon under trusteeship'),L('Le relief du Cameroun','Cameroon’s landforms'),L('Les climats','Climates'),L('La population','Population')],
+      eps:[L('L’endurance','Endurance'),L('La vitesse','Speed'),L('Les sauts','Jumping'),L('Le football','Football'),L('Le handball','Handball'),L('La gymnastique','Gymnastics')],
+      primary:[L('Les nombres jusqu’à 10 000','Numbers up to 10,000'),L('Additions et soustractions posées','Column addition and subtraction'),L('La multiplication','Multiplication'),L('Les mesures de longueur','Length measures'),L('La division','Division'),L('Les fractions simples','Simple fractions')]
+    };
+    function planKey(subject){
+      const d=window.klasTeach?klasTeach.domainOf(subject):'maths';
+      if(d==='tertiaire'){const x=String(subject).toLowerCase();return /compta|gestion|fiscal|financi|administrat|bureautique|organisation/.test(x)?'compta':/(é|e)conom|sociolog/.test(x)?'eco':/droit/.test(x)?'droit':'commerce';}
+      return PLANS[d]?d:'maths';
+    }
+    const topics=secondary(c)?PLANS[planKey(sub)]:PLANS.primary,topics2=secondary(c)?PLANS[planKey(sub2)]:[tr('Conjugaison : le présent','Verb tenses: present')];
+    const t2=sub2===sub?topics2[3]:topics2[0];
+    k.evals.push({id:uid(),type:evalTypes(c)[1],period:p,subject:sub,title:secondary(c)?topics[0]:topics[1],date:addDays(today(),-9),scale:20,coef:2,marks:Object.fromEntries(s.map((st,i)=>[st.id,i===5?'abs':String(marks[i])])),appreciations:{}});
+    k.evals.push({id:uid(),type:evalTypes(c)[2],period:p,subject:sub,title:secondary(c)?topics[2]:topics[2],date:addDays(today(),4),scale:20,coef:3,marks:{},appreciations:{}});
+    k.evals.push({id:uid(),type:evalTypes(c)[0],period:p,subject:sub2,title:t2,date:addDays(today(),-1),scale:10,coef:1,marks:{},appreciations:{}});
+    const plan=topics.map((t,i)=>[t,i<4?(i<2?0:i===2?0:1):i===4?1:2,i<2]);
     k.lessons=plan.map(([t,pi,done],i)=>({id:uid(),title:t,subject:sub,period:periods(c)[pi],done,doneDate:done?addDays(today(),-14+i*4):'',homework:''}));
   }
   const studentById=(k,id)=>k.students.find(s=>s.id===id);
@@ -96,7 +118,11 @@
 
   /* ---------- Vues ---------- */
   const head=(c,kicker,title,lead,actions='')=>'<div class="tk-head"><div><p class="eyebrow">'+esc(kicker)+'</p><h1>'+esc(title)+'</h1>'+(lead?'<p class="tk-lead">'+lead+'</p>':'')+'</div>'+(actions?'<div class="tk-head-actions">'+actions+'</div>':'')+'</div>';
-  const classKicker=c=>c.name+' · '+c.level+' · '+(secondary(c)?tr('Secondaire','Secondary'):tr('Primaire','Primary'));
+  const classKicker=c=>{const T=secondary(c)&&window.klasTeach?klasTeach.taught(c):[];return c.name+' · '+c.level+' · '+(secondary(c)?(T.length?T.join(' + '):tr('Secondaire','Secondary')):tr('Primaire · toutes les matières','Primary · all subjects'));};
+  /* Matières : invitation à déclarer sa matière au secondaire */
+  const subjectBar=c=>{if(!secondary(c)||!window.klasTeach)return '';const T=klasTeach.taught(c);
+    return T.length?'<p class="tk-subjects"><span>'+(T.length>1?tr('Mes matières','My subjects'):tr('Ma matière','My subject'))+' :</span> '+T.map(x=>'<b>'+esc(x)+'</b>').join(' + ')+' <button type="button" class="tk-link" data-tk-subjects="1">'+tr('Modifier','Change')+'</button></p>'
+      :'<div class="tk-subjects is-missing" role="status"><p><b>'+tr('Quelle matière enseignez-vous dans cette classe ?','Which subject do you teach in this class?')+'</b> '+tr('Au collège et au lycée, chaque enseignant a sa spécialité. Indiquez-la : évaluations, progression et assistant s’y adaptent.','In secondary school every teacher has a specialism. Set it: assessments, scheme of work and assistant adapt to it.')+'</p><button type="button" data-tk-subjects="1">'+tr('Choisir ma matière','Choose my subject')+'</button></div>';};
   const btn=(label,attrs,cls='')=>'<button type="button" class="'+cls+'" '+attrs+'>'+label+'</button>';
 
   function cockpit(c,k){
@@ -112,7 +138,7 @@
     const ne=upcoming[0];
     const task=(ok,title,detail,action)=>'<li class="tk-task'+(ok?' is-done':'')+'"><span class="tk-check" aria-hidden="true"></span><div><b>'+title+'</b><p>'+detail+'</p></div>'+(action||'')+'</li>';
     return head(c,classKicker(c),tr('Ma classe aujourd’hui','My class today'),esc(longDate(d)).replace(/^./,m=>m.toUpperCase())+' · '+n+' '+tr('élèves','students'),
-        btn(tr('Faire l’appel','Take the register'),'data-tk-go="tk-students" data-tk-appel="1"')+btn(tr('Préparer demain','Plan tomorrow'),'data-tk-go="build-course"','secondary'))+
+        btn(tr('Faire l’appel','Take the register'),'data-tk-go="tk-students" data-tk-appel="1"')+btn(tr('Préparer demain','Plan tomorrow'),'data-tk-go="build-course"','secondary'))+subjectBar(c)+
       '<div class="tk-kpis">'+
         kpi(att?(n-att.absent.length)+'/'+n:'—',tr('présents aujourd’hui','present today'),att?(att.absent.length?att.absent.length+' '+tr('absent(s)','absent'):tr('Classe complète','Full class')):tr('Appel non fait','Register not taken'),att?'':'warn')+
         kpi(ne?(daysBetween(d,ne.date)===0?tr('Auj.','Today'):'J-'+daysBetween(d,ne.date)):'—',tr('prochaine évaluation','next assessment'),ne?esc(ne.type+' · '+ne.subject):tr('Rien de programmé','Nothing scheduled'))+
@@ -240,7 +266,16 @@
   function periodCsv(c,k){const per=ui.period||periods(c)[0];const rows=k.students.map(s=>({s,avg:studentAverage(k,s.id,per)})).filter(x=>x.avg!=null).sort((a,b)=>b.avg-a.avg);return [[tr('Rang','Rank'),tr('Élève','Student'),tr('Moyenne /20','Average /20'),tr('Absences','Absences'),tr('Appréciation','Comment')].map(csvCell).join(';'),...rows.map((x,i)=>[i+1,x.s.name,num(x.avg,2),absences(k,x.s.id),(((k.periodAppr||{})[per]||{})[x.s.id]||appreciation(x.avg,20))].map(csvCell).join(';'))].join('\n');}
   const fileName=(c,what)=>('klas237-'+c.name+'-'+what+'.csv').replace(/[^\w.-]+/g,'-');
 
+  function editSubjects(c){
+    const T=klasTeach.taught(c);
+    modal('<form method="dialog" class="ts-modal" data-ts-form="1"><h2>'+tr('Mes matières dans ','My subjects in ')+esc(c.name)+'</h2><p class="muted">'+tr('Une matière principale. Une deuxième seulement si elle est du même domaine (ex. Comptabilité et Économie, Histoire et Géographie, Physique et Chimie).','One main subject. A second only if it is in the same field (e.g. Accounting and Economics, History and Geography, Physics and Chemistry).')+'</p><div data-teach-box class="ts-box">'+klasTeach.pickerHTML(c.level,T)+'</div><div class="tk-row-actions"><button type="submit" value="ok">'+tr('Enregistrer','Save')+'</button><button type="button" class="secondary" data-ts-cancel="1">'+tr('Annuler','Cancel')+'</button></div></form>');
+    const f=$('#modalbody [data-ts-form]');klasTeach.bindPicker(f,c.level);
+    f.querySelector('[data-ts-cancel]').onclick=()=>$('#modal').close();
+    f.onsubmit=e=>{e.preventDefault();const a=f.subject1.value,b=f.subject2&&!f.subject2.disabled?f.subject2.value:'';if(!a){f.subject1.focus();return;}
+      c.teachSubjects=[a,b].filter(Boolean);c.subjects=c.teachSubjects.join(', ');$('#modal').close();toast(tr('Matières enregistrées.','Subjects saved.'));rerender();};
+  }
   function onClick(ev){
+    const subj=ev.target.closest('[data-tk-subjects]');if(subj){const c=cls();if(c)editSubjects(c);return;}
     const c=cls();if(!c||!PAGES.includes(page))return;
     const t=ev.target.closest('button,a');if(!t)return;const k=kit(c),D=t.dataset;
     if(D.tkAi){aiTool(c,k,D.tkAi);return;}

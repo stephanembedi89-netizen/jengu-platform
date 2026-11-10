@@ -792,3 +792,21 @@ body.ai-open{overflow:hidden}
 .ai-pupils li:first-child{border-top:0}
 @media (max-width:560px){.ai-pupils li{grid-template-columns:1fr}}
 .arch-lead{margin:-.2em 0 1em;font-size:1.05rem;color:var(--k-muted)}
+
+/* ---------- Matières de l'enseignant (collège, lycée) ---------- */
+.ts-box{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:6px 0 4px}
+.ts-box label{display:grid;gap:6px;font-weight:600}
+.ts-box select:disabled{opacity:.6;cursor:not-allowed}
+.ts-help{display:block;font-weight:400;font-size:.86rem;color:var(--k-muted)}
+.ts-modal{display:grid;gap:12px;min-width:0;max-width:100%}
+.ts-modal .ts-box{grid-template-columns:1fr}
+.ts-modal select{min-height:48px;height:auto;padding-block:10px;width:100%}
+#modalbody .ts-modal p{max-width:none}
+.ts-modal h2{margin:0}
+.tk-subjects{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:-4px 0 16px;color:var(--k-muted)}
+.tk-subjects b{color:var(--k-ink);background:var(--k-blue-soft);border-radius:999px;padding:3px 10px}
+.tk-link{background:none;border:0;color:var(--k-blue-deep);text-decoration:underline;padding:6px 4px;min-height:auto;box-shadow:none;font-weight:600;cursor:pointer}
+.tk-subjects.is-missing{display:flex;justify-content:space-between;gap:12px;padding:14px 16px;border-radius:14px;background:var(--k-mark-soft);border:1px solid #f1d978;color:var(--k-ink)}
+.tk-subjects.is-missing p{margin:0;flex:1 1 280px}
+#entry-profile label[hidden],.ts-box[hidden]{display:none!important}
+.tk-subjects .tk-link{flex:0 0 auto;width:auto;display:inline-block}

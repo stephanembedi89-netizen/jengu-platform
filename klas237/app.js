@@ -73,7 +73,8 @@ function normalizeChild(child) {
     // survives a cloud round-trip just like a learner profile.
     ...(child?.professional ? { professional: true } : {}),
     ...(child?.subjects ? { subjects: String(child.subjects).trim() } : {}),
-    ...(child?.professionalRole ? { professionalRole: String(child.professionalRole) } : {})
+    ...(child?.professionalRole ? { professionalRole: String(child.professionalRole) } : {}),
+    ...(Array.isArray(child?.teachSubjects) && child.teachSubjects.length ? { teachSubjects: child.teachSubjects.slice(0, 2).map(String) } : {})
   };
 }
 
