@@ -6,8 +6,9 @@ import Anthropic from "npm:@anthropic-ai/sdk";
 
 const base = Deno.env.get("SUPABASE_URL")!;
 const secret = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-const ORIGINS = (Deno.env.get("KLAS_AI_ORIGINS") || "https://klas237.netlify.app").split(",");
+const ORIGINS = (Deno.env.get("KLAS_AI_ORIGINS") || "https://klas237.netlify.app,https://klas237.jengu-ai.com").split(",");
 const DAILY_LIMIT: Record<string, number> = { parent: 30, student: 20, teacher: 80, tutor: 60 };
+const GLOBAL_DAILY = Number(Deno.env.get("KLAS_AI_GLOBAL_DAILY") || "3000");
 // Modèle : Claude Haiku 5.5 par défaut (le moins cher). Pour plus de finesse : supabase secrets set KLAS_AI_MODEL=claude-opus-5-5
 const MODEL = Deno.env.get("KLAS_AI_MODEL") || "claude-haiku-5-5";
 const HAS_FALLBACK = !MODEL.startsWith("claude-haiku"); // Haiku n'a pas de repli côté serveur
@@ -130,10 +131,12 @@ Deno.serve(async (req: Request) => {
     const clean = (v: unknown, n = 60) => (typeof v === "string" ? v.replace(/[\r\n]+/g, " ").slice(0, n) : "");
 
     // Quota quotidien (sans stocker le contenu des questions)
-    const day = new Date().toISOString().slice(0, 10);
-    const rows = await db(`/rest/v1/klas_ai_usage?user_id=eq.${actor.id}&day=eq.${day}&select=count`);
-    const used = rows?.[0]?.count ?? 0;
-    if (used >= DAILY_LIMIT[role]) return reply(origin, { error: "Limite du jour atteinte. L'assistant sera de nouveau disponible demain." }, 429);
+    // Réservation atomique : accès actif obligatoire, plafond par rôle et plafond global du jour (maîtrise des coûts).
+    const slot = await db("/rest/v1/rpc/klas_ai_take", { method: "POST", body: JSON.stringify({ p_user: actor.id, p_limit: DAILY_LIMIT[role], p_global: GLOBAL_DAILY }) });
+    if (slot === "no_access") return reply(origin, { error: "Votre accès est terminé. Renouvelez-le pour utiliser l'assistant." }, 402);
+    if (slot === "global") return reply(origin, { error: "L'assistant est très demandé aujourd'hui. Réessayez demain." }, 429);
+    if (typeof slot !== "number") return reply(origin, { error: "Limite du jour atteinte. L'assistant sera de nouveau disponible demain." }, 429);
+    const used = slot - 1;
 
     const contextLine = [
       "Rôle : " + ROLE_LABEL[role],
@@ -165,7 +168,6 @@ Deno.serve(async (req: Request) => {
     let answer: unknown;
     try { answer = JSON.parse(text); } catch { return reply(origin, { error: "Réponse illisible. Réessayez." }, 502); }
 
-    await db("/rest/v1/klas_ai_usage", { method: "POST", headers: { Prefer: "resolution=merge-duplicates,return=minimal" }, body: JSON.stringify({ user_id: actor.id, day, count: used + 1 }) }).catch(() => {});
     return reply(origin, { answer, task, remaining: DAILY_LIMIT[role] - used - 1 });
   } catch (error) {
     if (error instanceof Anthropic.RateLimitError) return reply(origin, { error: "L'assistant est très demandé. Réessayez dans une minute." }, 429);
