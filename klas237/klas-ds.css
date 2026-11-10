@@ -810,3 +810,39 @@ body.ai-open{overflow:hidden}
 .tk-subjects.is-missing p{margin:0;flex:1 1 280px}
 #entry-profile label[hidden],.ts-box[hidden]{display:none!important}
 .tk-subjects .tk-link{flex:0 0 auto;width:auto;display:inline-block}
+
+/* ---------- Compléter mon programme ---------- */
+.tk-prog-lead{color:var(--k-muted);margin:.4rem 0 1rem;max-width:72ch}
+.tk-prog-tabs{display:flex;flex-wrap:wrap;gap:6px;padding:4px;border-radius:14px;background:var(--k-chalk);margin-bottom:14px;width:max-content;max-width:100%}
+.tk-prog-tabs button{background:transparent;color:var(--k-ink);border:0;box-shadow:none;border-radius:10px;padding:10px 14px;min-height:44px;font-weight:600}
+.tk-prog-tabs button[aria-selected="true"]{background:var(--k-card);color:var(--k-blue-deep);box-shadow:0 1px 3px rgba(20,27,46,.12)}
+.tk-imp-drop{display:grid;gap:12px}
+.tk-file{display:grid;gap:6px;padding:14px 16px;border:2px dashed var(--k-line);border-radius:14px;background:var(--k-card);font-weight:600}
+.tk-file small{font-weight:400;color:var(--k-muted)}
+.tk-imp-preview ol{display:grid;gap:8px;padding-left:1.4rem;margin:10px 0}
+.tk-imp-item{display:flex;align-items:center;gap:10px}
+.tk-imp-item input[type=checkbox]{width:22px;height:22px;flex:0 0 auto}
+.tk-imp-title{flex:1;min-width:0}
+.tk-imp-preview li small{display:block;color:var(--k-muted);margin:2px 0 0 32px}
+.tk-src{display:inline-block;font-style:normal;font-size:.74rem;font-weight:700;border-radius:999px;padding:1px 8px;margin:0 0 2px 6px;vertical-align:middle}
+.tk-src-moi{background:var(--k-blue-soft);color:var(--k-blue-deep)}
+.tk-src-import{background:var(--k-mark-soft);color:#5c4a00}
+.tk-src-ia{background:var(--k-red-soft);color:#8f0b1b}
+.tk-course{margin:6px 0 2px 34px}
+.tk-course summary{cursor:pointer;color:var(--k-blue-deep);font-weight:600;min-height:32px;display:flex;align-items:center}
+.tk-course-text{white-space:pre-wrap;max-height:340px;overflow:auto;padding:12px 14px;border-radius:12px;background:var(--k-paper);border:1px solid var(--k-line);font-size:.95rem;line-height:1.55}
+.tk-course-modal textarea{min-height:240px;width:100%}
+@media (max-width:640px){.tk-prog-tabs{width:100%}.tk-prog-tabs button{flex:1 1 auto;padding:10px 8px;font-size:.9rem}.tk-course{margin-left:0}}
+/* Leçon : titre sur toute la largeur, actions en dessous (3 boutons sans écraser le titre) */
+.tk .tk-lessons li{grid-template-columns:minmax(0,1fr)}
+.tk .tk-lessons li > .tk-row-actions{justify-content:flex-start;flex-wrap:wrap;gap:6px;padding-left:34px}
+.tk .tk-lessons li > .tk-row-actions button{min-height:40px;padding:6px 12px;font-size:.88rem}
+.tk .tk-lessons li > .tk-row-actions .tk-x{margin-left:auto}
+.tk .tk-lessons .tk-homework{margin-left:34px;width:calc(100% - 34px)}
+.tk-lesson-check b{margin-right:2px}
+.tk .tk-prog-tabs button,.tk .tk-prog-tabs button:hover{box-shadow:none;border:0;transform:none}
+.tk .tk-prog-tabs button[aria-selected="true"]{box-shadow:0 1px 3px rgba(20,27,46,.14)}
+.tk .tk-lessons li > .tk-row-actions{flex-wrap:nowrap}
+.tk .tk-prog-tabs button{border:0!important;box-shadow:none!important;background:transparent}
+.tk .tk-prog-tabs button[aria-selected="true"]{background:var(--k-card)!important;box-shadow:0 1px 3px rgba(20,27,46,.14)!important}
+@media (max-width:640px){.tk .tk-prog-tabs{display:grid;grid-template-columns:1fr}}

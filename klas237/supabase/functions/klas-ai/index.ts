@@ -74,6 +74,8 @@ const TASKS: Record<string, string> = {
   // Élève
   indice: "C'est l'élève qui demande. Ne donne PAS la réponse finale de son exercice. « comprendre » : rappelle la règle ou l'idée utile. « autres_facons » : un seul indice, la première étape à faire. « exemples » : un exemple différent de son exercice, résolu. « a_essayer » : son propre exercice reformulé, avec une « reponse » vide. « verifier » : comment il peut vérifier lui-même son résultat. Encourage-le.",
   // Enseignant
+  cours_notion: "L'enseignant ajoute à sa progression une notion absente du programme proposé par l'application. Rédige le cours de cette notion pour la classe et la matière indiquées, conforme au programme officiel camerounais (MINEDUB, MINESEC) et au vocabulaire des manuels en usage. « titre » : l'intitulé exact de la leçon. « comprendre » : l'objectif observable et les prérequis. « etapes » : la trace écrite organisée en parties (I, II, III…), chaque partie avec un « contenu » complet, exact et recopiable par les élèves ; « duree » vide. « exemples » : 2 ou 3 exemples résolus, avec des situations et des montants du Cameroun (FCFA). « a_essayer » : 4 exercices progressifs avec leur réponse. « verifier » : comment vérifier la compréhension en fin de séance. « prudence » : ce que l'enseignant doit vérifier dans son manuel ou son programme officiel, en particulier si la notion n'est pas au programme de cette classe.",
+  programme: "L'enseignant fournit sa progression, le sommaire d'un manuel ou un plan de cours (photo, PDF photographié ou texte) pour l'ajouter à son application. Recopie fidèlement « lu_dans_image ». « etapes » : un élément par chapitre ou par leçon, dans l'ordre du document ; « titre » = l'intitulé exact, sans numéro ; « duree » = la période ou le nombre de séances s'ils sont indiqués, sinon une chaîne vide ; « contenu » = les notions clés du chapitre en une ou deux phrases. N'invente aucun chapitre absent du document. « comprendre » : une phrase qui résume ce qui a été lu. « prudence » : ce qui était illisible, ou les chapitres du programme officiel de cette classe qui semblent manquer.",
   preparer_cours: "L'enseignant prépare une séance. Remplis « etapes » avec un déroulé selon l'approche par les compétences : situation de vie ou situation-problème, découverte, structuration (la trace écrite), consolidation, évaluation, avec la durée de chaque étape. « comprendre » : l'objectif observable et les prérequis. « exemples » : exemples à utiliser au tableau. « a_essayer » : exercices d'application avec corrigé. « conseils » : différenciation pour les élèves en difficulté et pour les plus rapides, et gestion d'une grande classe. « verifier » : l'évaluation de fin de séance.",
   exercices: "L'enseignant veut des exercices. « a_essayer » : 6 exercices progressifs (2 faciles, 2 moyens, 2 de type examen) avec leur corrigé. « exemples » : un exemple corrigé modèle. « conseils » : comment les utiliser (travail en groupe, au tableau, à la maison).",
   remediation: "L'enseignant veut reprendre une notion mal réussie à une évaluation. « comprendre » : les erreurs fréquentes probables et leur cause. « autres_facons » : 2 façons nouvelles de réexpliquer. « etapes » : une séance de remédiation de 30 à 45 minutes. « a_essayer » : exercices ciblés avec corrigé.",
@@ -93,7 +95,7 @@ const TASKS: Record<string, string> = {
 const ROLE_TASKS: Record<string, string[]> = {
   parent: ["expliquer", "autrement", "exemples"],
   student: ["indice"],
-  teacher: ["preparer_cours", "situation", "exercices", "evaluation", "corriger", "analyse", "appreciations", "suivi_eleve", "remediation", "rapport", "gestion", "rediger", "expliquer"],
+  teacher: ["preparer_cours", "cours_notion", "programme", "situation", "exercices", "evaluation", "corriger", "analyse", "appreciations", "suivi_eleve", "remediation", "rapport", "gestion", "rediger", "expliquer"],
   tutor: ["seance", "expliquer", "autrement", "exemples", "rediger"],
 };
 
@@ -151,7 +153,7 @@ Deno.serve(async (req: Request) => {
       max_tokens: 16000,
       ...(HAS_FALLBACK ? { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" } : {}),
       thinking: { type: "adaptive" },
-      output_config: { effort: ["preparer_cours", "remediation", "evaluation", "corriger", "analyse"].includes(task) ? "high" : "medium", format: { type: "json_schema", schema: ANSWER_SCHEMA } },
+      output_config: { effort: ["preparer_cours", "cours_notion", "remediation", "evaluation", "corriger", "analyse"].includes(task) ? "high" : "medium", format: { type: "json_schema", schema: ANSWER_SCHEMA } },
       system: [{ type: "text", text: SYSTEM_BASE, cache_control: { type: "ephemeral" } }],
       messages: [{ role: "user", content }],
     };

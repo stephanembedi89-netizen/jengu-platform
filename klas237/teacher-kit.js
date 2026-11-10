@@ -76,7 +76,7 @@
     k.evals.push({id:uid(),type:evalTypes(c)[2],period:p,subject:sub,title:secondary(c)?topics[2]:topics[2],date:addDays(today(),4),scale:20,coef:3,marks:{},appreciations:{}});
     k.evals.push({id:uid(),type:evalTypes(c)[0],period:p,subject:sub2,title:t2,date:addDays(today(),-1),scale:10,coef:1,marks:{},appreciations:{}});
     const plan=topics.map((t,i)=>[t,i<4?(i<2?0:i===2?0:1):i===4?1:2,i<2]);
-    k.lessons=plan.map(([t,pi,done],i)=>({id:uid(),title:t,subject:sub,period:periods(c)[pi],done,doneDate:done?addDays(today(),-14+i*4):'',homework:''}));
+    k.lessons=plan.map(([t,pi,done],i)=>({id:uid(),source:'klas',title:t,subject:sub,period:periods(c)[pi],done,doneDate:done?addDays(today(),-14+i*4):'',homework:''}));
   }
   const studentById=(k,id)=>k.students.find(s=>s.id===id);
   function markValue(e,id){const v=e.marks[id];if(v==null||v===''||v==='abs')return null;const n=Number(String(v).replace(',','.'));return Number.isFinite(n)?n:null;}
@@ -209,13 +209,70 @@
       '<div class="tk-row-actions">'+btn(tr('Copier notes et appréciations','Copy marks and comments'),'data-tk-copy-eval="'+e.id+'"')+btn(tr('Télécharger (CSV)','Download (CSV)'),'data-tk-csv-eval="'+e.id+'"','secondary')+btn(tr('Préparer la remédiation','Plan remediation'),'data-tk-remed="'+e.id+'"','secondary')+'<button type="button" class="ai-inline-sm" data-tk-ai="analyse:'+e.id+'"><span class="ai-spark" aria-hidden="true"></span>'+tr('Analyser avec l’IA · groupes de besoin','Analyse with AI · needs groups')+'</button>'+'</div></div>';
   }
 
+  /* ---------- Compléter mon programme : écrire, importer un cours, ou faire rédiger une notion par l'IA ---------- */
+  const SRC={moi:['Ajouté par moi','Added by me','moi'],import:['Mon cours importé','My imported course','import'],ia:['Rédigé avec l’IA · à relire','Written with AI · review it','ia']};
+  const srcTag=l=>{const x=SRC[l.source];return x?'<em class="tk-src tk-src-'+x[2]+'">'+tr(x[0],x[1])+'</em>':'';};
+  function progFields(c,pre){
+    const ps=periods(c),T=subjects(c),fixed=secondary(c)&&window.klasTeach&&klasTeach.taught(c).length;
+    return '<label>'+tr('Matière','Subject')+(fixed?'<select name="subject" id="'+pre+'-subject">'+T.map(x=>'<option'+(x===ui.progSubject?' selected':'')+'>'+esc(x)+'</option>').join('')+'</select>':'<input name="subject" id="'+pre+'-subject" list="tk-subjects-y" required maxlength="80" value="'+esc(ui.progSubject||'')+'"><datalist id="tk-subjects-y">'+T.map(x=>'<option value="'+esc(x)+'"></option>').join('')+'</datalist>')+'</label>'+
+      '<label>'+tr('Période','Period')+'<select name="period" id="'+pre+'-period">'+ps.map(x=>'<option'+(x===ui.progPeriod?' selected':'')+'>'+esc(x)+'</option>').join('')+'</select></label>';
+  }
+  function progPanel(c,k){
+    const tab=ui.prog||'import',open=ui.progOpen||!k.lessons.length;
+    const tabs=[['import',tr('Importer mon cours','Import my course')],['ia',tr('Notion manquante · IA','Missing topic · AI')],['write',tr('Écrire mes chapitres','Type my chapters')]];
+    let body='';
+    if(tab==='write')body='<form id="tk-lesson-form" class="tk-form">'+progFields(c,'tk-w')+'<label class="tk-wide">'+tr('Leçons ou chapitres (un par ligne)','Lessons or chapters (one per line)')+'<textarea name="titles" rows="4" required placeholder="'+tr('Ex. La proportionnalité\nLes pourcentages','e.g. Proportionality\nPercentages')+'"></textarea></label><button type="submit">'+tr('Ajouter à ma progression','Add to my scheme of work')+'</button></form>';
+    else if(tab==='import'){
+      const d=ui.importDraft;
+      body='<div class="tk-form">'+progFields(c,'tk-i')+'</div>'+
+        (d&&d.length?'<div class="tk-imp-preview"><p><b>'+d.length+' '+tr('chapitre(s) trouvé(s).','chapter(s) found.')+'</b> '+tr('Décochez ce qui ne doit pas entrer dans votre progression, corrigez un titre si besoin.','Untick what should not go in, fix a title if needed.')+'</p><ol>'+d.map((x,i)=>'<li><label class="tk-imp-item"><input type="checkbox" data-tk-imp-keep="'+i+'" '+(x.skip?'':'checked')+' aria-label="'+tr('Garder le chapitre ','Keep chapter ')+(i+1)+'"><input type="text" class="tk-imp-title" data-tk-imp-title="'+i+'" value="'+esc(x.title)+'" maxlength="120" aria-label="'+tr('Titre du chapitre ','Chapter title ')+(i+1)+'"></label>'+(x.content?'<small>'+tr('Avec son cours','With its notes')+' · '+x.content.length+' '+tr('caractères','characters')+'</small>':'')+'</li>').join('')+'</ol><div class="tk-row-actions"><button type="button" data-tk-imp-add="1">'+tr('Ajouter à ma progression','Add to my scheme of work')+'</button>'+btn(tr('Recommencer','Start again'),'data-tk-imp-reset="1"','secondary')+'</div></div>'
+        :'<div class="tk-imp-drop"><label class="tk-file"><span>'+tr('Choisir un fichier','Choose a file')+'</span><input type="file" id="tk-imp-file" accept=".txt,.md,.docx,.html,.htm,text/plain"><small>'+tr('Word (.docx), texte ou page web. Seul le texte est gardé.','Word (.docx), text or web page. Only the text is kept.')+'</small></label>'+
+          '<label class="tk-wide">'+tr('Ou collez votre cours, votre sommaire ou votre progression','Or paste your course, contents page or scheme of work')+'<textarea id="tk-imp-text" rows="6" placeholder="'+tr('Chapitre 1 : Le bilan\n(texte du cours…)\nChapitre 2 : Le compte de résultat\n…','Chapter 1: The balance sheet\n(course text…)\nChapter 2: …')+'"></textarea></label>'+
+          '<div class="tk-row-actions"><button type="button" data-tk-imp-parse="1">'+tr('Découper en chapitres','Split into chapters')+'</button><button type="button" class="ai-inline-sm" data-tk-ai="programme"><span class="ai-spark" aria-hidden="true"></span>'+tr('Photo du cahier, du manuel ou PDF : lire avec l’IA','Photo of a book or PDF: read with AI')+'</button></div></div>');
+    }else body='<div class="tk-form">'+progFields(c,'tk-n')+'<label class="tk-wide">'+tr('Notion ou chapitre à ajouter','Topic or chapter to add')+'<input id="tk-notion" maxlength="120" placeholder="'+tr('Ex. Les effets de commerce','e.g. Bills of exchange')+'"></label></div><p class="muted">'+tr('L’IA rédige le cours de cette notion pour votre classe : objectif, trace écrite, exemples et exercices corrigés. Vous le relisez, puis il rejoint votre progression comme les autres leçons.','AI writes the course for this topic for your class: objective, notes, examples and worked exercises. You review it, then it joins your scheme of work like the other lessons.')+'</p><div class="tk-row-actions"><button type="button" class="ai-inline-sm" data-tk-notion-ai="1"><span class="ai-spark" aria-hidden="true"></span>'+tr('Rédiger le cours avec l’IA','Write the course with AI')+'</button>'+btn(tr('Ajouter sans le cours','Add without notes'),'data-tk-notion-add="1"','secondary')+'</div>';
+    return '<details class="card tk-card tk-add tk-prog" data-tk-prog-box '+(open?'open':'')+'><summary>'+tr('Compléter mon programme','Complete my programme')+'</summary>'+
+      '<p class="tk-prog-lead">'+tr('La progression proposée par Klas 237 est un point de départ. Un chapitre manque, votre établissement suit un autre ordre, ou vous avez déjà vos cours ? Ajoutez-les ici : ils se gèrent ensuite comme les autres leçons (cocher, préparer, cahier de textes).','The Klas 237 scheme is a starting point. A chapter missing, a different order at your school, or you already have your notes? Add them here: they are then managed like any other lesson (tick, plan, record book).')+'</p>'+
+      '<div class="tk-prog-tabs" role="tablist" aria-label="'+tr('Façon d’ajouter','How to add')+'">'+tabs.map(([id,l])=>'<button type="button" role="tab" aria-selected="'+(id===tab)+'" data-tk-prog="'+id+'">'+l+'</button>').join('')+'</div><div class="tk-prog-body" role="tabpanel">'+body+'</div></details>';
+  }
+  function importError(err){const m=err&&err.message;return m==='ai'?tr('Photo, PDF ou ancien Word : utilisez « Lire avec l’IA », ou copiez-collez le texte.','Photo, PDF or old Word file: use “Read with AI”, or copy and paste the text.'):m==='browser'?tr('Ce navigateur ne lit pas les fichiers Word : copiez-collez le texte.','This browser cannot read Word files: copy and paste the text.'):tr('Fichier illisible : copiez-collez le texte.','Unreadable file: copy and paste the text.');}
+  function editCourse(c,k,l){
+    modal('<form class="ts-modal tk-course-modal" data-tk-course-form="'+l.id+'"><h2>'+esc(l.title)+'</h2><p class="muted">'+esc(l.subject+' · '+l.period)+'</p><label>'+tr('Mon cours : trace écrite, notes, exercices','My notes: written summary, exercises')+'<textarea name="content" rows="12" maxlength="20000">'+esc(l.content||'')+'</textarea></label><label class="tk-file"><span>'+tr('Prendre le texte d’un fichier','Take the text from a file')+'</span><input type="file" data-tk-course-file accept=".txt,.md,.docx,.html,.htm,text/plain"></label><div class="tk-row-actions"><button type="submit">'+tr('Enregistrer','Save')+'</button><button type="button" class="ai-inline-sm" data-tk-course-ai="1"><span class="ai-spark" aria-hidden="true"></span>'+tr('Rédiger avec l’IA','Write with AI')+'</button><button type="button" class="secondary" data-tk-course-cancel="1">'+tr('Fermer','Close')+'</button></div></form>');
+    const f=$('#modalbody [data-tk-course-form]');
+    f.querySelector('[data-tk-course-cancel]').onclick=()=>$('#modal').close();
+    f.querySelector('[data-tk-course-file]').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{f.content.value=(await klasImport.readFile(file)).slice(0,20000);}catch(err){toast(importError(err));}};
+    f.querySelector('[data-tk-course-ai]').onclick=()=>{$('#modal').close();notionAI(c,k,l.title,l.subject,l.period,l);};
+    f.onsubmit=e=>{e.preventDefault();l.content=f.content.value.trim().slice(0,20000);if(l.content&&!l.source)l.source='moi';$('#modal').close();rerender();toast(tr('Cours enregistré.','Notes saved.'));};
+  }
+  function courseText(a){
+    const parts=[a.comprendre,...(a.etapes||[]).map(x=>x.titre+(x.duree?' ('+x.duree+')':'')+'\n'+x.contenu),(a.exemples||[]).length?tr('Exemples','Examples')+'\n'+a.exemples.map(x=>'• '+x.enonce+(x.solution?' → '+x.solution:'')).join('\n'):'',(a.a_essayer||[]).length?tr('Exercices','Exercises')+'\n'+a.a_essayer.map((x,i)=>(i+1)+'. '+x.consigne+(x.reponse?' ('+tr('réponse','answer')+' : '+x.reponse+')':'')).join('\n'):'',a.verifier];
+    return parts.filter(Boolean).join('\n\n').slice(0,20000);
+  }
+  function notionAI(c,k,notion,subject,period,existing){
+    if(!window.klasAI){toast(tr('Assistant indisponible.','Assistant unavailable.'));return;}
+    const q=tr('Notion à ajouter à ma progression : « ','Topic to add to my scheme of work: “')+notion+tr(' ». Classe : ','”. Class: ')+c.level+' · '+subject+tr('. Rédige le cours conforme au programme officiel camerounais : objectif, trace écrite, exemples et exercices corrigés.','. Write the course in line with the official Cameroonian curriculum: objective, written summary, examples and worked exercises.');
+    window.klasAI.open('cours_notion',q,{subject,applyLabel:existing?tr('Enregistrer comme mon cours','Save as my notes'):tr('Ajouter à ma progression','Add to my scheme of work'),onApplyAnswer:a=>{
+      const ex=(a.exemples||[])[0],tr1=(a.a_essayer||[])[0];
+      const parts={goal:(a.comprendre||'').slice(0,250),example:ex?((ex.enonce||'')+(ex.solution?' → '+ex.solution:'')).slice(0,1800):'',practice:(tr1?.consigne||'').slice(0,1800),answer:(tr1?.reponse||'').slice(0,1800)};
+      const l=existing||{id:uid(),title:notion.slice(0,120),subject,period,done:false,doneDate:'',homework:''};
+      Object.assign(l,{content:courseText(a),parts,source:'ia'});if(!existing)k.lessons.push(l);ui.progOpen=false;rerender();
+      toast(tr('Cours ajouté à votre progression. Relisez-le avant la séance.','Course added to your scheme of work. Review it before class.'));}});
+  }
+  function readProgramme(c,k){
+    if(!window.klasAI){toast(tr('Assistant indisponible.','Assistant unavailable.'));return;}
+    const subj=$('#tk-i-subject')?.value||subjects(c)[0]||'';
+    window.klasAI.open('programme',tr('Voici ma progression (ou le sommaire de mon manuel) en ','Here is my scheme of work (or my textbook contents) for ')+subj+' · '+c.level+tr('. Ajoutez la photo, puis listez les chapitres dans l’ordre.','. Add the photo, then list the chapters in order.'),{subject:subj,applyLabel:tr('Vérifier et ajouter ces chapitres','Check and add these chapters'),onApplyAnswer:a=>{
+      const items=(a.etapes||[]).map(x=>({title:String(x.titre||'').slice(0,120),content:String(x.contenu||'')})).filter(x=>x.title);
+      if(!items.length){toast(tr('Aucun chapitre lu. Essayez une photo plus nette.','No chapter found. Try a sharper photo.'));return;}
+      ui.importDraft=items;ui.importSource='ia';ui.prog='import';ui.progOpen=true;if(page!=='tk-year')go('tk-year');else render();
+      setTimeout(()=>document.querySelector('.tk-imp-preview')?.scrollIntoView({block:'center'}),80);}});
+  }
   function yearView(c,k){
     const ps=periods(c);
     const total=k.lessons.length,done=k.lessons.filter(l=>l.done).length;
-    const block=p=>{const ls=k.lessons.filter(l=>l.period===p),dn=ls.filter(l=>l.done).length;return '<section class="card tk-card tk-period"><div class="tk-period-head"><h2>'+esc(p)+'</h2><span>'+dn+'/'+ls.length+'</span></div><div class="tk-progress" role="progressbar" aria-valuemin="0" aria-valuemax="'+ls.length+'" aria-valuenow="'+dn+'" aria-label="'+esc(p)+'"><span style="width:'+(ls.length?Math.round(dn/ls.length*100):0)+'%"></span></div>'+(ls.length?'<ul class="tk-lessons">'+ls.map(l=>'<li class="'+(l.done?'is-done':'')+'"><label class="tk-lesson-check"><input type="checkbox" data-tk-lesson="'+l.id+'" '+(l.done?'checked':'')+'><span><b>'+esc(l.title)+'</b><small>'+esc(l.subject)+(l.done&&l.doneDate?' · '+tr('faite le ','done on ')+esc(shortDate(l.doneDate)):'')+'</small></span></label><span class="tk-row-actions">'+btn(tr('Préparer','Plan'),'data-tk-prep="'+l.id+'"','secondary')+btn('×','data-tk-del-lesson="'+l.id+'" aria-label="'+tr('Retirer ','Remove ')+esc(l.title)+'"','tk-danger tk-x')+'</span>'+(l.done?'<input class="tk-homework" data-tk-homework="'+l.id+'" value="'+esc(l.homework||'')+'" placeholder="'+tr('Devoir donné (facultatif)','Homework set (optional)')+'" aria-label="'+tr('Devoir donné pour ','Homework for ')+esc(l.title)+'">':'')+'</li>').join('')+'</ul>':'<p class="muted">'+tr('Aucune leçon prévue.','No lessons planned.')+'</p>')+'</section>';};
+    const block=p=>{const ls=k.lessons.filter(l=>l.period===p),dn=ls.filter(l=>l.done).length;return '<section class="card tk-card tk-period"><div class="tk-period-head"><h2>'+esc(p)+'</h2><span>'+dn+'/'+ls.length+'</span></div><div class="tk-progress" role="progressbar" aria-valuemin="0" aria-valuemax="'+ls.length+'" aria-valuenow="'+dn+'" aria-label="'+esc(p)+'"><span style="width:'+(ls.length?Math.round(dn/ls.length*100):0)+'%"></span></div>'+(ls.length?'<ul class="tk-lessons">'+ls.map(l=>'<li class="'+(l.done?'is-done':'')+'"><label class="tk-lesson-check"><input type="checkbox" data-tk-lesson="'+l.id+'" '+(l.done?'checked':'')+'><span><b>'+esc(l.title)+'</b>'+srcTag(l)+'<small>'+esc(l.subject)+(l.done&&l.doneDate?' · '+tr('faite le ','done on ')+esc(shortDate(l.doneDate)):'')+'</small></span></label><span class="tk-row-actions">'+btn(l.content?tr('Mon cours','My notes'):tr('+ Cours','+ Notes'),'data-tk-course="'+l.id+'" aria-label="'+(l.content?tr('Mon cours : ','My notes: '):tr('Joindre mon cours à ','Attach my notes to '))+esc(l.title)+'"','secondary tk-course-btn')+btn(tr('Préparer','Plan'),'data-tk-prep="'+l.id+'"','secondary')+btn('×','data-tk-del-lesson="'+l.id+'" aria-label="'+tr('Retirer ','Remove ')+esc(l.title)+'"','tk-danger tk-x')+'</span>'+(l.done?'<input class="tk-homework" data-tk-homework="'+l.id+'" value="'+esc(l.homework||'')+'" placeholder="'+tr('Devoir donné (facultatif)','Homework set (optional)')+'" aria-label="'+tr('Devoir donné pour ','Homework for ')+esc(l.title)+'">':'')+(l.content?'<details class="tk-course"><summary>'+tr('Lire mon cours','Read my notes')+'</summary><div class="tk-course-text">'+esc(l.content)+'</div></details>':'')+'</li>').join('')+'</ul>':'<p class="muted">'+tr('Aucune leçon prévue.','No lessons planned.')+'</p>')+'</section>';};
     return head(c,classKicker(c),tr('Mon année','My year'),tr('Votre progression, période par période. Cochez une leçon faite : elle s’inscrit dans votre cahier de textes avec sa date.','Your scheme of work, period by period. Tick a lesson when done: it goes into your record book with its date.'),'<button type="button" class="ai-inline-sm" data-tk-ai="rapport"><span class="ai-spark" aria-hidden="true"></span>'+tr('Cahier de textes de la semaine (IA)','This week’s record book (AI)')+'</button>')+
       '<div class="tk-kpis"><div class="tk-kpi"><strong>'+(total?Math.round(done/total*100):0)+' %</strong><span>'+tr('du programme couvert','of the programme covered')+'</span><small>'+done+'/'+total+' '+tr('leçons','lessons')+'</small></div><div class="tk-kpi"><strong>'+k.evals.length+'</strong><span>'+tr('évaluations','assessments')+'</span><small>'+k.evals.filter(graded).length+' '+tr('notées','marked')+'</small></div></div>'+
-      '<details class="card tk-card tk-add" '+(total?'':'open')+'><summary>'+tr('Ajouter des leçons à ma progression','Add lessons to my scheme of work')+'</summary><form id="tk-lesson-form" class="tk-form"><label>'+tr('Matière','Subject')+'<input name="subject" list="tk-subjects-y" required maxlength="80"></label><datalist id="tk-subjects-y">'+subjects(c).map(s=>'<option value="'+esc(s)+'"></option>').join('')+'</datalist><label>'+tr('Période','Period')+'<select name="period">'+ps.map(p=>'<option>'+esc(p)+'</option>').join('')+'</select></label><label class="tk-wide">'+tr('Leçons ou chapitres (un par ligne)','Lessons or chapters (one per line)')+'<textarea name="titles" rows="4" required placeholder="'+tr('Ex. La proportionnalité\nLes pourcentages','e.g. Proportionality\nPercentages')+'"></textarea></label><button type="submit">'+tr('Ajouter','Add')+'</button></form></details>'+
+      progPanel(c,k)+
       '<div class="tk-periods">'+ps.map(block).join('')+'</div>';
   }
 
@@ -277,8 +334,26 @@
   function onClick(ev){
     const subj=ev.target.closest('[data-tk-subjects]');if(subj){const c=cls();if(c)editSubjects(c);return;}
     const c=cls();if(!c||!PAGES.includes(page))return;
+    const sum=ev.target.closest('[data-tk-prog-box] > summary');if(sum){ui.progOpen=!sum.parentElement.open;return;}
     const t=ev.target.closest('button,a');if(!t)return;const k=kit(c),D=t.dataset;
+    if(D.tkAi==='programme'){readProgramme(c,k);return;}
     if(D.tkAi){aiTool(c,k,D.tkAi);return;}
+    if(D.tkProg){ui.prog=D.tkProg;ui.progOpen=true;render();document.querySelector('[data-tk-prog="'+D.tkProg+'"]')?.focus();return;}
+    if(D.tkCourse){const l=k.lessons.find(x=>x.id===D.tkCourse);if(l)editCourse(c,k,l);return;}
+    if(D.tkImpParse){const txt=$('#tk-imp-text')?.value||'';const items=klasImport.parse(txt);if(!items.length){toast(tr('Collez d’abord le texte de votre cours ou de votre sommaire.','Paste the text of your course or contents first.'));$('#tk-imp-text')?.focus();return;}ui.importDraft=items;ui.importSource='import';render();return;}
+    if(D.tkImpReset){ui.importDraft=null;render();return;}
+    if(D.tkImpAdd){
+      const d=ui.importDraft||[],subject=($('#tk-i-subject')?.value||'').trim(),period=$('#tk-i-period')?.value||periods(c)[0];
+      if(!subject){toast(tr('Indiquez la matière.','Enter the subject.'));$('#tk-i-subject')?.focus();return;}
+      let n=0;d.forEach((x,i)=>{const keep=document.querySelector('[data-tk-imp-keep="'+i+'"]');if(keep&&!keep.checked)return;const ti=(document.querySelector('[data-tk-imp-title="'+i+'"]')?.value||x.title).trim();if(!ti)return;
+        k.lessons.push({id:uid(),source:ui.importSource==='ia'?'ia':'import',title:ti.slice(0,120),subject,period,done:false,doneDate:'',homework:'',...(x.content?{content:x.content.slice(0,20000)}:{})});n++;});
+      ui.importDraft=null;ui.progOpen=false;rerender();toast(n+' '+tr('chapitre(s) ajouté(s) à ','chapter(s) added to ')+period+'.');return;}
+    if(D.tkNotionAi||D.tkNotionAdd){
+      const notion=($('#tk-notion')?.value||'').trim(),subject=($('#tk-n-subject')?.value||'').trim(),period=$('#tk-n-period')?.value||periods(c)[0];
+      if(!notion){toast(tr('Écrivez la notion à ajouter.','Type the topic to add.'));$('#tk-notion')?.focus();return;}
+      if(!subject){toast(tr('Indiquez la matière.','Enter the subject.'));$('#tk-n-subject')?.focus();return;}
+      if(D.tkNotionAdd){k.lessons.push({id:uid(),source:'moi',title:notion.slice(0,120),subject,period,done:false,doneDate:'',homework:''});ui.progOpen=false;rerender();toast(tr('Notion ajoutée à ','Topic added to ')+period+'.');return;}
+      notionAI(c,k,notion,subject,period,null);return;}
     if(D.tkGo){if(D.tkAppel){ui.appel=true;ui.appelDraft=null;ui.appelDate=today();}go(D.tkGo);return;}
     if(D.tkAppelOpen){ui.appel=true;ui.appelDraft=null;ui.appelDate=today();render();return;}
     if(D.tkAppelClose){ui.appel=false;ui.appelDraft=null;render();return;}
@@ -300,7 +375,7 @@
     if(D.tkCopyPeriod){copy(periodCsv(c,k).replace(/;/g,'\t').replace(/"/g,''),tr('Copié : collez dans Excel ou votre bulletin.','Copied: paste into Excel or your report.'));return;}
     if(D.tkCsvPeriod){download(fileName(c,(ui.period||periods(c)[0])),periodCsv(c,k));return;}
     if(D.tkRemed){const e=k.evals.find(x=>x.id===D.tkRemed),st=stats(k,e);lessonDraft={level:c.level,group:c.name+(st&&st.low.length?' · '+tr('groupe de reprise (','review group (')+st.low.length+')':''),subject:e.subject,topic:e.title,goal:tr('Reprendre les erreurs fréquentes de l’évaluation du ','Go back over common mistakes from the assessment of ')+shortDate(e.date),duration:'45'};go('build-course');return;}
-    if(D.tkPrep){const l=k.lessons.find(x=>x.id===D.tkPrep);lessonDraft={level:c.level,group:c.name,subject:l.subject,topic:l.title,duration:secondary(c)?'55':'45'};go('build-course');return;}
+    if(D.tkPrep){const l=k.lessons.find(x=>x.id===D.tkPrep);lessonDraft={level:c.level,group:c.name,subject:l.subject,topic:l.title,duration:secondary(c)?'55':'45',...(l.parts||{}),...(l.content&&!l.parts?{simple:l.content.slice(0,1800)}:{})};go('build-course');return;}
     if(D.tkLessonDone){const l=k.lessons.find(x=>x.id===D.tkLessonDone);l.done=true;l.doneDate=today();rerender();toast(tr('Leçon inscrite au cahier de textes.','Lesson added to the record book.'));return;}
     if(D.tkDelLesson){k.lessons=k.lessons.filter(l=>l.id!==D.tkDelLesson);rerender();return;}
     if(D.tkFtype){ui.family={type:D.tkFtype,student:'',eval:''};render();return;}
@@ -330,6 +405,9 @@
   }
   function onChange(ev){
     const c=cls();if(!c||!PAGES.includes(page))return;const k=kit(c),t=ev.target,D=t.dataset;
+    if(/^tk-[iwn]-period$/.test(t.id)){ui.progPeriod=t.value;return;}
+    if(/^tk-[iwn]-subject$/.test(t.id)){ui.progSubject=t.value;return;}
+    if(t.id==='tk-imp-file'){const file=t.files[0];if(!file)return;klasImport.readFile(file).then(txt=>{const items=klasImport.parse(txt);if(!items.length){toast(tr('Aucun texte trouvé dans ce fichier.','No text found in this file.'));return;}ui.importDraft=items;ui.importSource='import';render();toast(items.length+' '+tr('chapitre(s) trouvé(s) dans ','chapter(s) found in ')+file.name);}).catch(err=>toast(importError(err)));return;}
     if(D.tkStatus){studentById(k,D.tkStatus).status=t.value;ui.openStudent=D.tkStatus;rerender();return;}
     if(D.tkLesson){const l=k.lessons.find(x=>x.id===D.tkLesson);l.done=t.checked;l.doneDate=t.checked?today():'';rerender();return;}
     if(D.tkHomework){k.lessons.find(x=>x.id===D.tkHomework).homework=t.value.slice(0,200);save();return;}
@@ -349,7 +427,7 @@
   function onSubmit(ev){
     const c=cls();if(!c||!PAGES.includes(page))return;const k=kit(c),f=ev.target;
     if(f.id==='tk-eval-form'){ev.preventDefault();const v=Object.fromEntries(new FormData(f));k.evals.push({id:uid(),type:v.type,period:v.period,subject:v.subject.trim(),title:v.title.trim(),date:v.date,scale:+v.scale||20,coef:+v.coef||1,marks:{},appreciations:{}});rerender();toast(tr('Évaluation programmée.','Assessment scheduled.'));return;}
-    if(f.id==='tk-lesson-form'){ev.preventDefault();const v=Object.fromEntries(new FormData(f));const titles=v.titles.split(/\n+/).map(x=>x.trim()).filter(Boolean).slice(0,60);titles.forEach(ti=>k.lessons.push({id:uid(),title:ti.slice(0,120),subject:v.subject.trim(),period:v.period,done:false,doneDate:'',homework:''}));rerender();toast(titles.length+' '+tr('leçon(s) ajoutée(s).','lesson(s) added.'));return;}
+    if(f.id==='tk-lesson-form'){ev.preventDefault();const v=Object.fromEntries(new FormData(f));const titles=v.titles.split(/\n+/).map(x=>x.trim()).filter(Boolean).slice(0,60);titles.forEach(ti=>k.lessons.push({id:uid(),source:'moi',title:ti.slice(0,120),subject:v.subject.trim(),period:v.period,done:false,doneDate:'',homework:''}));rerender();toast(titles.length+' '+tr('leçon(s) ajoutée(s).','lesson(s) added.'));return;}
     if(f.dataset.tkGradeForm){ev.preventDefault();const e=k.evals.find(x=>x.id===f.dataset.tkGradeForm);let bad=0;for(const s of k.students){let v=(f.elements[s.id]?.value||'').trim().toLowerCase();if(v==='abs'){e.marks[s.id]='abs';continue;}if(v===''){delete e.marks[s.id];continue;}const n=Number(v.replace(',','.'));if(!Number.isFinite(n)||n<0||n>e.scale){bad++;continue;}e.marks[s.id]=String(n);}
       if(bad){toast(bad+' '+tr('note(s) hors barème ignorée(s).','mark(s) outside the scale ignored.'));}
       ui.openEval=null;ui.resultsEval=e.id;rerender();if(!bad)toast(tr('Notes enregistrées.','Marks saved.'));return;}
