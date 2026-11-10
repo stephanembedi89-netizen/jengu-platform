@@ -836,7 +836,7 @@ body.ai-open{overflow:hidden}
 /* Leçon : titre sur toute la largeur, actions en dessous (3 boutons sans écraser le titre) */
 .tk .tk-lessons li{grid-template-columns:minmax(0,1fr)}
 .tk .tk-lessons li > .tk-row-actions{justify-content:flex-start;flex-wrap:wrap;gap:6px;padding-left:34px}
-.tk .tk-lessons li > .tk-row-actions button{min-height:40px;padding:6px 12px;font-size:.88rem}
+.tk .tk-lessons li > .tk-row-actions button{min-height:44px;padding:6px 12px;font-size:.88rem}
 .tk .tk-lessons li > .tk-row-actions .tk-x{margin-left:auto}
 .tk .tk-lessons .tk-homework{margin-left:34px;width:calc(100% - 34px)}
 .tk-lesson-check b{margin-right:2px}
