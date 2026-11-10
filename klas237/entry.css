@@ -287,3 +287,22 @@ body[data-entry]:not([data-entry="workspace"]) > main { display: none; }
 
 /* Trial access and legal information preserve the existing visual language. */
 .trial-caption{font-size:.95rem!important;line-height:1.6;max-width:36rem}.entry-footer nav,.legal-links{display:flex;flex-wrap:wrap;gap:12px 22px;margin-top:16px}.entry-footer a,.legal-links a{color:inherit;text-underline-offset:4px;font-size:.9rem}.legal-accept{display:flex!important;align-items:flex-start;gap:12px;margin:20px 0;font-weight:400!important;line-height:1.6}.legal-accept input{width:20px!important;min-width:20px;height:20px;margin-top:4px}.legal-accept a{color:inherit;text-decoration:underline}.new-welcome figcaption{max-width:100%;font-size:clamp(1.2rem,3vw,2rem)}
+
+/* ---------- Paiement Fapshi (Orange Money, MTN MoMo) ---------- */
+.entry-billing fieldset{border:0;padding:0;margin:20px 0 0}
+.entry-billing legend{font-weight:700;margin-bottom:8px}
+.pay-plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pay-plan,.pay-period{position:relative;display:flex;align-items:center;gap:10px;padding:14px 16px;border:2px solid #e3e1d6;border-radius:14px;background:#fff;cursor:pointer;min-height:56px}
+.pay-plan span{display:grid}
+.pay-plan small{color:#4a5166}
+.pay-plan.is-on,.pay-period.is-on{border-color:#007a5e;background:#e6f4ee}
+.pay-plan input,.pay-period input{width:20px;height:20px;accent-color:#007a5e;flex:0 0 auto}
+.pay-plan:focus-within,.pay-period:focus-within{outline:3px solid #ce1126;outline-offset:2px}
+.pay-periods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pay-period em{display:block;font-style:normal;font-size:.8rem;color:#005a46;font-weight:700}
+.pay-kids{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding:12px 16px;border-radius:14px;background:#fbfaf5;border:1px solid #e3e1d6}
+.pay-total strong{font-size:1.8rem!important}
+.entry-billing #entry-start-payment{width:100%;margin-bottom:12px}
+.entry-offer-cta{width:100%;margin-top:16px}
+.pay-return{margin-bottom:16px}
+@media(max-width:520px){.pay-plans{grid-template-columns:1fr}.pay-periods{grid-template-columns:1fr}}
