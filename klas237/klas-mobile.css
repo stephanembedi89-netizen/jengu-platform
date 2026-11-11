@@ -139,3 +139,7 @@ h1[tabindex="-1"]:focus,h1[tabindex="-1"]:focus-visible,h2[tabindex="-1"]:focus{
   html body[data-entry=workspace]>aside:has(#nav>details[open]) #nav>details{display:flex;flex-direction:column}
   html body[data-entry=workspace]>aside:has(#nav>details[open]) #nav>details>summary{align-self:flex-end;margin:-52px 0 8px auto!important}
 }
+/* Visite guidée : la bulle ne dépasse jamais de l'écran du téléphone */
+.kt-tip{box-sizing:border-box!important;overflow-wrap:anywhere}
+.kt-tip .kt-actions,.kt-tip>div:last-child{flex-wrap:wrap;gap:8px}
+.kt-center .kt-tip{width:var(--kt-w,min(420px,calc(100vw - 32px)))!important;max-width:var(--kt-w,calc(100vw - 32px))!important}

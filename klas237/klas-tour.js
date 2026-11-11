@@ -54,27 +54,30 @@
     }
     requestAnimationFrame(()=>requestAnimationFrame(place));
   }
+  /* Largeur réellement visible à l'écran (certaines applications affichent la page dans un cadre plus large que l'écran) */
+  function visibleW(){const v=[innerWidth,document.documentElement.clientWidth];if(window.visualViewport)v.push(visualViewport.width);if(window.screen&&screen.width)v.push(screen.width);return Math.floor(Math.min(...v.filter(x=>x>0)));}
   function place(){
     if(!layer)return;const st=list[idx];const el=st.target?pick(st.target):null;
     const spot=layer.querySelector('.kt-spot'),tip=layer.querySelector('.kt-tip');
     if(el){
       const r=el.getBoundingClientRect(),pad=6;
-      Object.assign(spot.style,{display:'block',left:Math.max(4,r.left-pad)+'px',top:Math.max(4,r.top-pad)+'px',width:Math.min(innerWidth-8,r.width+pad*2)+'px',height:(r.height+pad*2)+'px'});
+      Object.assign(spot.style,{display:'block',left:Math.max(4,r.left-pad)+'px',top:Math.max(4,r.top-pad)+'px',width:Math.min(visibleW()-8-Math.max(4,r.left-pad),r.width+pad*2)+'px',height:(r.height+pad*2)+'px'});
       layer.classList.remove('kt-center');
       if(innerWidth<760){
         // Téléphone : la bulle se pose en haut ou en bas de l'écran, à l'opposé de l'élément présenté.
         const tb=tabbarH(),targetLow=(r.top+r.bottom)/2>innerHeight/2;
         layer.classList.toggle('kt-dock-top',targetLow);layer.classList.toggle('kt-dock-bottom',!targetLow);
-        Object.assign(tip.style,{left:'12px',width:'calc(100vw - 24px)',top:targetLow?'12px':'',bottom:targetLow?'':(Math.max(12,tb+12))+'px'});
+        const vw=visibleW(),ox=(window.visualViewport&&visualViewport.offsetLeft)||0;
+        Object.assign(tip.style,{left:(ox+12)+'px',right:'auto',width:(vw-24)+'px',maxWidth:(vw-24)+'px',top:targetLow?'12px':'',bottom:targetLow?'':(Math.max(12,tb+12))+'px'});
       }else{
         layer.classList.remove('kt-dock-top','kt-dock-bottom');
-        const tw=Math.min(340,innerWidth-24),th=tip.offsetHeight||160;
+        const tw=Math.min(340,visibleW()-24),th=tip.offsetHeight||160;
         let left=Math.min(Math.max(12,r.left),innerWidth-tw-12),top=r.bottom+14;
         if(top+th>innerHeight-12)top=Math.max(12,r.top-th-14);
         if(r.height>innerHeight*.6){top=Math.min(innerHeight-th-12,Math.max(12,r.top+24));left=r.right+14+tw<innerWidth?r.right+14:Math.max(12,innerWidth-tw-12);}
         Object.assign(tip.style,{left:left+'px',top:top+'px',bottom:'',width:tw+'px'});
       }
-    }else{spot.style.display='none';layer.classList.remove('kt-dock-top','kt-dock-bottom');layer.classList.add('kt-center');Object.assign(tip.style,{left:'',top:'',bottom:'',width:''});}
+    }else{spot.style.display='none';layer.classList.remove('kt-dock-top','kt-dock-bottom');layer.classList.add('kt-center');const cw=Math.min(420,visibleW()-32);Object.assign(tip.style,{left:'',right:'',top:'',bottom:'',width:'',maxWidth:''});tip.style.setProperty('--kt-w',cw+'px');}
   }
   function show(){
     // Sauter les étapes dont l'élément n'est pas à l'écran
