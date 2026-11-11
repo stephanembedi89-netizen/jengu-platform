@@ -24,7 +24,15 @@
     return 'autre';
   }
   function domainLabel(id){const d=DOMAINS.find(x=>x[0]===id);return d?tr(d[1],d[2]):tr('Autres matières','Other subjects');}
-  function teachable(level){try{return collegeSubjects(level).filter(s=>!/option de mon (é|e)tablissement/i.test(s));}catch(e){return [];}}
+  /* level = une classe (ex. « 4e », « Tle CG »), ou « * » pour toutes les matières du secondaire (profil de l'enseignant) */
+  function allSecondaryLevels(){try{return classEntries('college','fr');}catch(e){return [];}}
+  function teachable(level){
+    const clean=l=>{try{return collegeSubjects(l).filter(s=>!/option de mon (é|e)tablissement/i.test(s));}catch(e){return [];}};
+    if(level!=='*')return clean(level);
+    const seen=new Set(),out=[];allSecondaryLevels().forEach(l=>clean(l).forEach(s=>{if(!seen.has(s)){seen.add(s);out.push(s);}}));return out;
+  }
+  /* Classes du secondaire où la matière est enseignée (pour ne proposer que les bons niveaux) */
+  function levelsFor(subject){return allSecondaryLevels().filter(l=>teachable(l).includes(subject));}
   function compatible(first,level){const dom=domainOf(first);return teachable(level).filter(s=>s!==first&&domainOf(s)===dom);}
   function taught(c){
     if(!c)return [];
@@ -47,5 +55,5 @@
     const s1=root.querySelector('[data-teach="1"]');if(!s1)return;
     s1.onchange=()=>{const box=s1.closest('[data-teach-box]');box.innerHTML=pickerHTML(level,[s1.value,'']);bindPicker(box,level,onChange);onChange&&onChange();};
   }
-  window.klasTeach={domainOf,domainLabel,teachable,compatible,taught,pickerHTML,bindPicker};
+  window.klasTeach={domainOf,domainLabel,teachable,compatible,taught,pickerHTML,bindPicker,levelsFor};
 })();

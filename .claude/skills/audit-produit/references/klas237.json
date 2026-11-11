@@ -166,6 +166,13 @@
           "click": "[data-entry-role=teacher]"
         },
         {
+          "fill": "#entry-teacher-profile input[name=callName]",
+          "value": "Mme Ekambi"
+        },
+        {
+          "click": "#entry-teacher-profile > button"
+        },
+        {
           "check": "creer-classe"
         },
         {

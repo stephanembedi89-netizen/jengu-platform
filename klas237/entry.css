@@ -306,3 +306,16 @@ body[data-entry]:not([data-entry="workspace"]) > main { display: none; }
 .entry-offer-cta{width:100%;margin-top:16px}
 .pay-return{margin-bottom:16px}
 @media(max-width:520px){.pay-plans{grid-template-columns:1fr}.pay-periods{grid-template-columns:1fr}}
+
+/* ---------- Profil enseignant : fiche 1 (profil) puis fiche 2 (première classe) ---------- */
+.tp-steps{display:flex;gap:8px;margin:4px 0 14px;flex-wrap:wrap}
+.tp-steps span{padding:6px 12px;border-radius:999px;background:#f1efe6;color:#4a5166;font-weight:700;font-size:.85rem}
+.tp-steps span.is-on{background:#007a5e;color:#fff}
+.tp-cycle{border:0;padding:0;margin:8px 0 4px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tp-cycle legend{font-weight:700;margin-bottom:8px}
+.tp-form .ts-box{margin-top:12px}
+.tp-summary{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:12px 16px;border-radius:14px;background:#e6f4ee;color:#141b2e;font-weight:600;margin-bottom:14px}
+@media(max-width:560px){.tp-cycle{grid-template-columns:1fr}}
+.tp-form .tp-cycle label.pay-plan{display:flex!important;flex-direction:row;align-items:center;gap:12px;min-height:64px;padding:12px 16px;margin:0}
+.tp-form .tp-cycle label.pay-plan input{margin:0}
+.tp-form .tp-cycle label.pay-plan span{display:grid;gap:2px}
