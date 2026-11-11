@@ -12,7 +12,7 @@ const GLOBAL_DAILY = Number(Deno.env.get("KLAS_AI_GLOBAL_DAILY") || "3000");
 // Modèle : Claude Haiku 5.5 par défaut (le moins cher). Pour plus de finesse : supabase secrets set KLAS_AI_MODEL=claude-opus-5-5
 const MODEL = Deno.env.get("KLAS_AI_MODEL") || "claude-haiku-5-5";
 const HAS_FALLBACK = !MODEL.startsWith("claude-haiku"); // Haiku n'a pas de repli côté serveur
-const client = new Anthropic(); // lit ANTHROPIC_API_KEY
+const client = Deno.env.get("ANTHROPIC_API_KEY") ? new Anthropic() : null; // lit ANTHROPIC_API_KEY
 
 function cors(origin: string | null) {
   const allow = origin && ORIGINS.includes(origin) ? origin : ORIGINS[0];
@@ -130,6 +130,7 @@ Deno.serve(async (req: Request) => {
     const ctx = input.context || {};
     const clean = (v: unknown, n = 60) => (typeof v === "string" ? v.replace(/[\r\n]+/g, " ").slice(0, n) : "");
 
+    if (!client) return reply(origin, { error: "L'assistant IA sera bientôt disponible." }, 503);
     // Quota quotidien (sans stocker le contenu des questions)
     // Réservation atomique : accès actif obligatoire, plafond par rôle et plafond global du jour (maîtrise des coûts).
     const slot = await db("/rest/v1/rpc/klas_ai_take", { method: "POST", body: JSON.stringify({ p_user: actor.id, p_limit: DAILY_LIMIT[role], p_global: GLOBAL_DAILY }) });

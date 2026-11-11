@@ -130,7 +130,7 @@ Deno.serve(async (req: Request) => {
 
     // Au retour de la page Fapshi (ou depuis « Vérifier un paiement ») : revérifie les commandes en attente de ce compte.
     if (input.action === "verify" || input.action === "status") {
-      const filter = typeof input.orderId === "string" && /^[a-f0-9-]{36}$/.test(input.orderId) ? "&id=eq." + input.orderId : "&status=in.(CREATED,PENDING,SUCCESSFUL)";
+      const filter = typeof input.orderId === "string" && /^[a-f0-9-]{36}$/.test(input.orderId) ? "&id=eq." + input.orderId : "&status=in.(CREATED,PENDING,SUCCESSFUL)&created_at=gte." + encodeURIComponent(new Date(Date.now() - 2 * 86400000).toISOString());
       const rows = await db(`klas_payment_orders?owner_id=eq.${user.id}&environment=eq.${MODE}${filter}&order=created_at.desc&limit=3&select=*`);
       if (!rows.length) return respond(req, { status: "NONE", mode: MODE });
       let best = rows[0];
