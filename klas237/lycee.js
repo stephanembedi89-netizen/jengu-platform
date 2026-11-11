@@ -68,6 +68,8 @@
 
   // 5. Profil de démonstration lycée
   if(!cloud&&Array.isArray(data.children)&&!data.children.some(c=>/^(2nde|1re|Tle) /.test(c.level||''))&&data.children.some(c=>c.name==='Sam'))data.children.push({name:'Inès',track:'college',subsystem:'fr',level:'Tle CG'});
+  // Démonstration : un enfant du primaire anglophone, pour découvrir ce sous-système.
+  if(!cloud&&Array.isArray(data.children)&&data.children.some(c=>c.name==='Sam')&&!data.children.some(c=>!c.professional&&c.subsystem==='en'))data.children.push({name:'Mary',track:'primary',subsystem:'en',level:'Class 4'});
 
   // 6. Liste des classes groupée (collège, lycée général, lycée technique tertiaire)
   window.klasClassOptions=function(track,sys,list){

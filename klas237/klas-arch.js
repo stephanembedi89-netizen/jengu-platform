@@ -8,7 +8,7 @@
   'use strict';
   // Écrans hérités remplacés par les nouveaux espaces (ils restent accessibles s'ils sont appelés directement)
   const HIDE={
-    parent:['home','homework','routine','progress','parent-summary','college','revise','resources'],
+    parent:['home','homework','routine','progress','parent-summary','college','revise','resources','messages'],
     student:['college','revise','parent-summary','resources'],
     teacher:['progress','messages','resources','prepare'],
     tutor:['messages','monthly','progress','resources','prepare']

@@ -319,3 +319,6 @@ body[data-entry]:not([data-entry="workspace"]) > main { display: none; }
 .tp-form .tp-cycle label.pay-plan{display:flex!important;flex-direction:row;align-items:center;gap:12px;min-height:64px;padding:12px 16px;margin:0}
 .tp-form .tp-cycle label.pay-plan input{margin:0}
 .tp-form .tp-cycle label.pay-plan span{display:grid;gap:2px}
+.tp-cycle-note,.tp-context{display:inline-block;margin:4px 0 10px;padding:6px 12px;border-radius:999px;background:#e6f4ee;color:#005a46;font-weight:700;font-size:.9rem}
+.tp-twin{display:grid;gap:8px;margin:4px 0 8px}
+.tp-students{display:grid;gap:10px}

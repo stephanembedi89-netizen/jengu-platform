@@ -75,14 +75,15 @@ function normalizeChild(child) {
     ...(child?.subjects ? { subjects: String(child.subjects).trim() } : {}),
     ...(child?.professionalRole ? { professionalRole: String(child.professionalRole) } : {}),
     ...(Array.isArray(child?.teachSubjects) && child.teachSubjects.length ? { teachSubjects: child.teachSubjects.slice(0, 2).map(String) } : {}),
-    ...(child?.school ? { school: String(child.school).slice(0, 80) } : {})
+    ...(child?.school ? { school: String(child.school).slice(0, 80) } : {}),
+    ...(child?.twinLevel ? { twinLevel: String(child.twinLevel).slice(0, 20) } : {})
   };
 }
 
 function normalizeData(raw) {
   const base = fresh();
   const value = raw && typeof raw === 'object' ? raw : {};
-  return {
+  const known = {
     entrySpaces: Array.isArray(value.entrySpaces) ? value.entrySpaces.filter(s=>s && ['parent','teacher','tutor','student'].includes(s.audience) && ['primary','college'].includes(s.course) && ['fr','en'].includes(s.system) && !(s.course==='college'&&s.system==='en') && !(s.audience==='student'&&s.course!=='college')).map(s=>({audience:s.audience,course:s.course,system:s.system})) : [],
     children: Array.isArray(value.children) ? value.children.map(normalizeChild) : base.children,
     tasks: Array.isArray(value.tasks) ? value.tasks : base.tasks,
@@ -91,6 +92,15 @@ function normalizeData(raw) {
     plans: Array.isArray(value.plans) ? value.plans : []
     ,support: value.support || {}, sessions: Array.isArray(value.sessions) ? value.sessions : [], monthly: value.monthly || [], classroom: value.classroom || [], classAssessments: Array.isArray(value.classAssessments) ? value.classAssessments : [], daily: Array.isArray(value.daily) ? value.daily : [], teaching: Array.isArray(value.teaching) ? value.teaching : [], college: value.college || {work:[],blocks:[],revisions:[],checks:[]}, roadmap: value.roadmap && typeof value.roadmap==='object' ? value.roadmap : {}
   };
+  // Conserver tout le reste de l'espace (kits enseignant, famille, accompagnateur, profils, rôle du compte, visite vue…) :
+  // une donnée enregistrée ne doit jamais disparaître à la reconnexion.
+  for (const key of Object.keys(value)) {
+    if (key in known || key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
+    const v = value[key];
+    if (v === null || ['object', 'string', 'number', 'boolean'].includes(typeof v)) known[key] = v;
+  }
+  if (known.accountRole && !['parent', 'teacher', 'tutor', 'student'].includes(known.accountRole)) delete known.accountRole;
+  return known;
 }
 
 function currentCourse(){return data.children[selected]?.track||'primary'}

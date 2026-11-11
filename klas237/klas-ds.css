@@ -861,3 +861,5 @@ body.ai-open{overflow:hidden}
 .kt-skip{background:transparent!important;color:var(--k-muted)!important;border:0!important;box-shadow:none!important;text-decoration:underline}
 .kt-next{background:var(--k-blue)!important;color:#fff!important;border:0!important}
 @media (prefers-reduced-motion:reduce){.kt-spot{transition:none}}
+.tk-file-inline{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-width:1px}
+.tk-file-inline input{max-width:220px}
