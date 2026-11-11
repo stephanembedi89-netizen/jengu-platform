@@ -71,7 +71,7 @@
     const names=fr()?['L','M','M','J','V','S','D']:['M','T','W','T','F','S','S'];
     return '<ol class="fk-week" aria-label="'+tr('Soirs de travail cette semaine','Study evenings this week')+'">'+names.map((n,i)=>{const day=addDays(monday,i),on=!!k.evenings[day],isT=day===d;return '<li class="'+(on?'on':'')+(isT?' today':'')+'" title="'+esc(longDate(day))+'"><span>'+n+'</span><i aria-hidden="true"></i><b class="sr">'+(on?tr('fait','done'):tr('pas encore','not yet'))+'</b></li>';}).join('')+'</ol>';
   }
-  const examName=c=>c.track==='primary'?(c.level==='CM2'||c.level==='Class 6'?'CEP':''):(window.klasExam?klasExam(c.level):'')||(c.level==='3e'?'BEPC':'');
+  const examName=c=>c.track==='primary'?(c.level==='CM2'?'CEP':c.level==='Class 6'?'FSLC':''):(window.klasExam?klasExam(c.level):'')||(c.level==='3e'?'BEPC':'');
 
   /* ---------- Le rituel du soir ---------- */
   function ritualSteps(c,w){
@@ -120,6 +120,14 @@
   }
 
   /* ---------- Vues Parent / Élève ---------- */
+  /* Où en est l'année ? Repère commun aux familles et aux élèves (calendrier scolaire national indicatif) */
+  function yearMarker(c){
+    const n=Date.parse(today()+'T12:00:00Z'),dt=new Date(n),y=dt.getUTCMonth()>=7?dt.getUTCFullYear():dt.getUTCFullYear()-1,D=(Y,m,d)=>Date.UTC(Y,m-1,d,12),sec=c.track!=='primary';
+    const R=sec?[[D(y,9,7),D(y,10,16)],[D(y,10,19),D(y,12,18)],[D(y+1,1,4),D(y+1,2,12)],[D(y+1,2,15),D(y+1,3,26)],[D(y+1,4,12),D(y+1,5,14)],[D(y+1,5,17),D(y+1,6,11)]]:[[D(y,9,7),D(y,12,18)],[D(y+1,1,4),D(y+1,3,26)],[D(y+1,4,12),D(y+1,6,11)]];
+    const i=R.findIndex(([a,b])=>n>=a&&n<=b);if(i<0)return n<R[0][0]?tr('Rentrée scolaire début septembre','School starts early September'):n>R[R.length-1][1]?tr('Vacances scolaires','School holidays'):tr('Congés scolaires','School break');
+    const ev=new Date(R[i][1]-4*86400000),evs=ev.toLocaleDateString(uiLanguage==='en'?'en-GB':'fr-FR',{day:'numeric',month:'long'});
+    return (sec?tr('Séquence ','Sequence ')+(i+1)+tr(' · évaluations vers le ',' · assessments around '):tr('Trimestre ','Term ')+(i+1)+tr(' · compositions vers le ',' · term exams around '))+evs;
+  }
   function homeView(c,k,w){
     const d=today(),todo=k.homework.filter(h=>!h.done).sort((a,b)=>a.due.localeCompare(b.due)),late=todo.filter(h=>h.due<d),tomorrow=todo.filter(h=>h.due<=addDays(d,1));
     const test=k.tests.filter(t=>t.date>=d).sort((a,b)=>a.date.localeCompare(b.date))[0];
@@ -127,7 +135,7 @@
     const ex=examName(c),exDays=k.examDate&&k.examDate>=d?diff(d,k.examDate):null;
     const title=w==='student'?tr('Ma journée','My day'):tr('Ce soir avec ','Tonight with ')+esc(c.name);
     const kick=c.name+' · '+c.level+' · '+(c.track==='primary'?tr('Primaire','Primary'):cycle(c)==='lycee'?tr('Lycée','Upper secondary'):tr('Collège','Lower secondary'));
-    return head(kick,title,esc(longDate(d)).replace(/^./,m=>m.toUpperCase()),
+    return head(kick,title,esc(longDate(d)).replace(/^./,m=>m.toUpperCase())+' · <span class="fk-year-marker">'+esc(yearMarker(c))+'</span>',
         (w==='parent'?btn(tr('Écrire à l’enseignant','Write to the teacher'),'data-fk-go="fk-teacher"','secondary'):btn(tr('Réviser maintenant','Revise now'),'data-fk-go="fk-focus"','secondary'))+btn(tr('Ajouter un devoir','Add homework'),'data-fk-go="fk-homework"'))+
       '<section class="fk-streak card tk-card"><div class="fk-streak-n"><span class="fk-flame" aria-hidden="true"></span><div><strong class="fk-big">'+st+'</strong><span>'+(st>1?tr('soirs de suite','evenings in a row'):tr('soir de suite','evening in a row'))+'</span></div></div>'+weekStrip(k)+'<p class="muted">'+(st>=3?tr('Belle régularité. On garde le rythme !','Great consistency. Keep the rhythm!'):tr('Un petit moment chaque soir vaut mieux qu’une longue soirée la veille du contrôle.','A short moment every evening beats a long night before the test.'))+'</p></section>'+
       '<div class="tk-kpis">'+

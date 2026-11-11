@@ -893,3 +893,15 @@ body[data-kt="on"] .ai-fab,body[data-kt="on"] .klas-help-trigger,body[data-kt="o
 .tk-starter li.is-done b{text-decoration:line-through;text-decoration-color:var(--k-blue)}
 .tk-starter li small{font-weight:700;color:var(--k-blue-deep)}
 @media(max-width:560px){.tk-starter li{grid-template-columns:auto 1fr}.tk-starter li>button,.tk-starter li>small{grid-column:2}}
+.fk-year-marker{font-weight:700;color:var(--k-blue-deep)}
+/* Noms de matières longs (lycée technique) : sur deux lignes plutôt que coupés */
+.fk-bars span{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.25}
+.tk-subjects .tk-link{min-height:44px;padding:10px 8px}
+/* Mon année : une période ouverte (la période en cours), les autres repliées */
+details.tk-period>summary{list-style:none;cursor:pointer;min-height:44px}
+details.tk-period>summary::-webkit-details-marker{display:none}
+details.tk-period>summary h2::before{content:'▸';display:inline-block;margin-right:8px;transition:transform .2s;color:var(--k-muted)}
+details.tk-period[open]>summary h2::before{transform:rotate(90deg)}
+details.tk-period:not([open]) .tk-progress{display:none}
+.tk-now{font-size:.75rem;font-weight:800;background:var(--k-blue-soft);color:var(--k-blue-deep);padding:2px 8px;border-radius:999px;vertical-align:middle;margin-left:6px}
+.tk-periods{align-items:start}

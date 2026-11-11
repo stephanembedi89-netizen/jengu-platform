@@ -104,6 +104,42 @@
           "click": "[data-open-child=\"2\"]"
         }
       ]
+    },
+    {
+      "name": "Enseignant · secondaire",
+      "steps": [
+        {
+          "click": "[data-entry-go=worlds]"
+        },
+        {
+          "click": "[data-world=college]"
+        },
+        {
+          "click": "[data-entry-role=teacher]"
+        },
+        {
+          "fill": "#entry-teacher-profile input[name=callName]",
+          "value": "M. Ngono"
+        },
+        {
+          "select": "#entry-teacher-profile select[name=subject1]",
+          "value": "Mathématiques"
+        },
+        {
+          "click": "#entry-teacher-profile > button"
+        },
+        {
+          "select": "#profile-level",
+          "value": "4e"
+        },
+        {
+          "fill": "#entry-profile input[name=name]",
+          "value": "4e B"
+        },
+        {
+          "click": "#entry-profile > button"
+        }
+      ]
     }
   ],
   "localStorage": {

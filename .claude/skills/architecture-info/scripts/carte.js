@@ -52,7 +52,7 @@ function labelMatch(label, title) { const a = words(label), b = words(title); if
       try { await page.evaluate(S.go.replace('{route}', it.route)); } catch (e) { errors.push('Destination impossible : ' + it.route); continue; }
       await page.waitForTimeout(450);
       const info = await page.evaluate(S => {
-        const sc = document.querySelector(S.screen); const vis = el => el.offsetParent !== null;
+        const sc = document.querySelector(S.screen); const vis = el => { if (el.offsetParent === null) return false; const d = el.closest('details'); return !d || d.open || !!el.closest('summary'); }; // le contenu d'un volet replié ne compte pas
         const h1s = [...document.querySelectorAll(S.title)].filter(vis).map(h => h.textContent.trim().replace(/\s+/g, ' '));
         const btns = sc ? [...sc.querySelectorAll('button, a[href]')].filter(vis) : [];
         const active = document.querySelector('#nav [aria-current=page], #nav .active');

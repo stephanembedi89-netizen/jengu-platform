@@ -32,7 +32,8 @@
 
   const parse=level=>{const m=/^(2nde|1re|Tle) ([A-Z]+)$/.exec(level||'');return m?{year:m[1],serie:m[2],info:SERIES[m[2]]}:null;};
   window.klasLycee=parse;
-  window.klasExam=level=>{if(level==='3e')return 'BEPC';const p=parse(level);if(!p)return '';if(p.year==='Tle')return p.info.family==='STT'?'Baccalauréat technique':'Baccalauréat';return 'Probatoire';};
+  // Examens officiels : BEPC (3e), Probatoire (1re), Baccalauréat (Tle) ; versions techniques pour les séries tertiaires. Pas d'examen national en 2nde.
+  window.klasExam=level=>{if(level==='3e')return 'BEPC';const p=parse(level);if(!p||p.year==='2nde')return '';const tech=p.info&&p.info.family==='STT';if(p.year==='Tle')return tech?'Baccalauréat technique':'Baccalauréat';return tech?'Probatoire technique':'Probatoire';};
 
   // 1. Classes disponibles : le collège puis le lycée, dans le même cursus « secondaire »
   const classes=TRACKS.college.systems.fr.classes;

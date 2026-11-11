@@ -222,6 +222,75 @@
       ]
     },
     {
+      "name": "enseignant-secondaire",
+      "steps": [
+        {
+          "click": "[data-entry-go=worlds]"
+        },
+        {
+          "click": "[data-world=college]"
+        },
+        {
+          "click": "[data-entry-role=teacher]"
+        },
+        {
+          "check": "profil-enseignant"
+        },
+        {
+          "fill": "#entry-teacher-profile input[name=callName]",
+          "value": "M. Ngono"
+        },
+        {
+          "select": "#entry-teacher-profile select[name=subject1]",
+          "value": "Mathématiques"
+        },
+        {
+          "click": "#entry-teacher-profile > button"
+        },
+        {
+          "check": "creer-classe"
+        },
+        {
+          "select": "#profile-level",
+          "value": "4e"
+        },
+        {
+          "fill": "#entry-profile input[name=name]",
+          "value": "4e B"
+        },
+        {
+          "click": "#entry-profile > button"
+        },
+        {
+          "check": "classe-aujourdhui"
+        },
+        {
+          "eval": "openRoute('tk-students')"
+        },
+        {
+          "check": "eleves"
+        },
+        {
+          "eval": "openRoute('tk-evals')"
+        },
+        {
+          "check": "evaluations"
+        },
+        {
+          "eval": "openRoute('tk-year')"
+        },
+        {
+          "check": "annee"
+        },
+        {
+          "eval": "openRoute('tk-families')"
+        },
+        {
+          "check": "relais-familles"
+        }
+      ]
+    },
+    {
       "name": "accompagnateur",
       "steps": [
         {
