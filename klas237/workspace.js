@@ -18,7 +18,7 @@
   if(caption)caption.textContent=tr('Le carnet qui relie la maison et l’école.','Connecting home and school.');
   const footer=document.querySelector('main > footer');
   if(footer)footer.innerHTML=tr('Klas 237 · Une création JenguAI <span>Conçu pour le quotidien des familles et des enseignants.</span>','Klas 237 · By JenguAI <span>For the everyday needs of families and teachers.</span>');
-  if(!cloud)document.getElementById('save-status').textContent=tr('Démo : utilisez des profils fictifs. Les modifications ne sont pas sauvegardées après fermeture.','Demo: use fictional profiles. Changes are not saved after closing.');
+  if(!cloud)document.getElementById('save-status').textContent=tr('Démonstration : les élèves, notes et pourcentages affichés sont des exemples. Avec votre compte, l’espace démarre vide et se remplit avec vos propres données.','Demo: the students, marks and percentages shown are examples. With your account, the space starts empty and fills with your own data.');
   const s=document.getElementById('screen');
   if(role==='parent'&&course==='primary'&&page==='home')dashboard(c);
   if(page==='resources'){

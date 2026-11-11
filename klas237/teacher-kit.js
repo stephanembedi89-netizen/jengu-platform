@@ -41,6 +41,74 @@
     if(!cloud&&!k.seeded){seed(c,k);}
     return k;
   }
+  /* ---------- Progressions types et calendrier scolaire (repères indicatifs) ---------- */
+  const L=(fr,en)=>tr(fr,en);
+  function planBank(){return {
+    maths:[L('Équations du premier degré','First-degree equations'),L('Inéquations','Inequalities'),L('Fonctions affines','Linear functions'),L('Statistiques','Statistics'),L('Théorème de Thalès','Intercept theorem'),L('Systèmes d’équations','Systems of equations')],
+    pc:[L('Mélanges et corps purs','Mixtures and pure substances'),L('La masse volumique','Density'),L('Le courant électrique','Electric current'),L('La tension électrique','Voltage'),L('Atomes et ions','Atoms and ions'),L('Les réactions chimiques','Chemical reactions')],
+    svt:[L('La cellule','The cell'),L('La nutrition des végétaux','Plant nutrition'),L('La digestion','Digestion'),L('La respiration','Breathing'),L('La reproduction','Reproduction'),L('Les écosystèmes','Ecosystems')],
+    info:[L('Les algorithmes','Algorithms'),L('Les variables','Variables'),L('Les structures conditionnelles','Conditionals'),L('Les boucles','Loops'),L('Les tableaux','Arrays'),L('Les réseaux','Networks')],
+    compta:[L('Le bilan','The balance sheet'),L('Le compte de résultat','The income statement'),L('Les amortissements','Depreciation'),L('La TVA','VAT'),L('Les provisions','Provisions'),L('Les travaux de fin d’exercice','Year-end entries')],
+    eco:[L('L’activité économique','Economic activity'),L('La production','Production'),L('La consommation','Consumption'),L('La monnaie','Money'),L('Le marché','The market'),L('La croissance économique','Economic growth')],
+    droit:[L('Les sources du droit','Sources of law'),L('Les personnes juridiques','Legal persons'),L('Les biens','Property'),L('Le contrat','Contracts'),L('La responsabilité civile','Civil liability'),L('L’entreprise et le droit','Business law')],
+    commerce:[L('La mercatique','Marketing'),L('L’étude de marché','Market research'),L('Le prix de vente','Selling price'),L('La distribution','Distribution'),L('La communication commerciale','Marketing communication'),L('La relation client','Customer relations')],
+    lettres:[L('Le résumé de texte','Text summary'),L('La dissertation','The essay'),L('Le commentaire composé','Commentary'),L('L’argumentation','Argumentation'),L('La poésie','Poetry'),L('Le roman africain','The African novel')],
+    langues:['Reading comprehension','Essay writing','Tenses','Reported speech','Conditionals','Oral presentation'],
+    hg:[L('La Première Guerre mondiale','World War I'),L('La décolonisation','Decolonisation'),L('Le Cameroun sous tutelle','Cameroon under trusteeship'),L('Le relief du Cameroun','Cameroon’s landforms'),L('Les climats','Climates'),L('La population','Population')],
+    eps:[L('L’endurance','Endurance'),L('La vitesse','Speed'),L('Les sauts','Jumping'),L('Le football','Football'),L('Le handball','Handball'),L('La gymnastique','Gymnastics')]
+  };}
+  function planKey(subject){
+    const d=window.klasTeach?klasTeach.domainOf(subject):'maths',B=planBank();
+    if(d==='tertiaire'){const x=String(subject).toLowerCase();return /compta|gestion|fiscal|financi|administrat|bureautique|organisation/.test(x)?'compta':/(é|e)conom|sociolog/.test(x)?'eco':/droit/.test(x)?'droit':'commerce';}
+    return B[d]?d:'maths';
+  }
+  /* Primaire : progression type par niveau, toutes matières (2 leçons par matière et par trimestre) */
+  function primaryBank(c){
+    const lv=String(c.level||''),band=/^(SIL|CP|Class [12])$/.test(lv)?'sil':/^(CE1|CE2|Class [34])$/.test(lv)?'ce':'cm',en=c.subsystem==='en',ex=en?'FSLC':'CEP';
+    const S=en?[L('Anglais (English language)','English language'),L('Mathématiques','Mathematics'),L('Sciences','Science'),L('Études sociales et civisme','Social studies and citizenship')]:[L('Français','French'),L('Mathématiques','Mathematics'),L('Sciences','Science'),L('Histoire-géographie et éducation civique','History, geography and civics')];
+    const B={
+      sil:[[L('Les voyelles et les sons simples','Vowels and simple sounds'),L('Lire des syllabes','Reading syllables'),L('Les sons complexes (ou, on, an)','Complex sounds'),L('Lire une phrase courte','Reading a short sentence'),L('Écrire des mots simples','Writing simple words'),L('Raconter une image','Telling a picture story')],
+        [L('Les nombres de 0 à 20','Numbers 0 to 20'),L('Comparer des quantités','Comparing quantities'),L('Les nombres jusqu’à 100','Numbers up to 100'),L('L’addition','Addition'),L('La soustraction','Subtraction'),L('Les formes géométriques','Shapes')],
+        [L('Mon corps','My body'),L('L’hygiène corporelle','Personal hygiene'),L('Les animaux de chez nous','Animals around us'),L('Les plantes','Plants'),L('L’eau','Water'),L('Les saisons au Cameroun','Seasons in Cameroon')],
+        [L('Ma famille','My family'),L('Mon école','My school'),L('Le respect des autres','Respecting others'),L('Les règles de la classe','Class rules'),L('Le drapeau du Cameroun','The flag of Cameroon'),L('La politesse','Good manners')]],
+      ce:[[L('La phrase et la ponctuation','Sentences and punctuation'),L('Le nom et le déterminant','Nouns and determiners'),L('Le verbe au présent','Verbs: present tense'),L('Le futur','The future tense'),L('Le passé composé','The past tense'),L('Rédiger un court récit','Writing a short story')],
+        [L('Les nombres jusqu’à 10 000','Numbers up to 10,000'),L('Additions et soustractions posées','Column addition and subtraction'),L('La multiplication','Multiplication'),L('Les mesures de longueur','Length measures'),L('La division','Division'),L('Les fractions simples','Simple fractions')],
+        [L('Le corps humain et la santé','The human body and health'),L('L’alimentation équilibrée','A balanced diet'),L('Se protéger du paludisme','Preventing malaria'),L('Les états de l’eau','States of water'),L('Animaux domestiques et sauvages','Domestic and wild animals'),L('L’environnement et les déchets','Environment and waste')],
+        [L('Ma région','My region'),L('Les points cardinaux','Cardinal points'),L('Les régions du Cameroun','The regions of Cameroon'),L('Les symboles de l’État','State symbols'),L('Les droits et devoirs de l’enfant','Children’s rights and duties'),L('Les fêtes nationales','National holidays')]],
+      cm:[[L('L’accord du participe passé','Past participle agreement'),L('Les propositions','Clauses'),L('L’imparfait et le passé simple','Past tenses'),L('Le résumé de texte','Summary writing'),L('La lettre','Letter writing'),L('La rédaction · préparation au ','Composition · preparing for the ')+ex],
+        [L('Les grands nombres','Large numbers'),L('Les nombres décimaux','Decimals'),L('Les fractions','Fractions'),L('Proportionnalité et pourcentages','Proportion and percentages'),L('Périmètres et aires','Perimeter and area'),L('Problèmes de type ','Problems in the style of the ')+ex],
+        [L('Respiration et circulation','Breathing and circulation'),L('La reproduction des plantes','Plant reproduction'),L('Maladies et vaccination','Diseases and vaccination'),L('L’électricité simple','Simple electricity'),L('Le sol et l’agriculture','Soil and farming'),L('Protéger l’environnement','Protecting the environment')],
+        [L('Le Cameroun : relief et climat','Cameroon: landforms and climate'),L('Les ressources du Cameroun','Cameroon’s resources'),L('De la colonisation à l’indépendance','From colonisation to independence'),L('La réunification','Reunification'),L('Les institutions de la République','The institutions of the Republic'),L('Citoyenneté et vote','Citizenship and voting')]]
+    }[band];
+    return S.map((subj,i)=>({subject:subj,topics:B[i]}));
+  }
+  /* Progression type de la classe : chaque leçon reçoit sa période (trimestre ou séquence) */
+  function typicalPlan(c){
+    const ps=periods(c),out=[];
+    if(secondary(c)){
+      const T=window.klasTeach?klasTeach.taught(c):[],subs=(T.length?T:[subjects(c)[0]]).filter(Boolean).slice(0,2),B=planBank();
+      subs.forEach(sub=>B[planKey(sub)].forEach((t,i)=>out.push({title:t,subject:sub,pi:Math.min(ps.length-1,i)})));
+      out.sort((a,b)=>a.pi-b.pi);
+    }else primaryBank(c).forEach(({subject,topics})=>topics.forEach((t,i)=>out.push({title:t,subject,pi:Math.min(ps.length-1,Math.floor(i/2))})));
+    return out.sort((a,b)=>a.pi-b.pi).map(x=>({id:uid(),source:'klas',title:x.title,subject:x.subject,period:ps[x.pi],done:false,doneDate:'',homework:''}));
+  }
+  /* Calendrier scolaire camerounais indicatif : rentrée début septembre, 3 trimestres (6 séquences au secondaire) */
+  function periodRanges(c){
+    const n=new Date(today()+'T12:00:00Z'),y=n.getUTCMonth()>=7?n.getUTCFullYear():n.getUTCFullYear()-1,D=(yy,m,d)=>Date.UTC(yy,m-1,d,12);
+    return secondary(c)?[[D(y,9,7),D(y,10,16)],[D(y,10,19),D(y,12,18)],[D(y+1,1,4),D(y+1,2,12)],[D(y+1,2,15),D(y+1,3,26)],[D(y+1,4,12),D(y+1,5,14)],[D(y+1,5,17),D(y+1,6,11)]]
+      :[[D(y,9,7),D(y,12,18)],[D(y+1,1,4),D(y+1,3,26)],[D(y+1,4,12),D(y+1,6,11)]];
+  }
+  function pace(c,k){
+    const now=Date.parse(today()+'T12:00:00Z'),ps=periods(c),R=periodRanges(c),W=7*86400000;
+    if(!k.lessons.length)return null;
+    let expected=0,elapsed=0,total=0;
+    ps.forEach((p,i)=>{const [a,b]=R[i]||R[R.length-1],n=k.lessons.filter(l=>l.period===p).length,f=Math.min(1,Math.max(0,(now-a)/(b-a)));expected+=n*f;elapsed+=Math.max(0,Math.min(now,b)-a);total+=b-a;});
+    const order=ps.flatMap(p=>k.lessons.filter(l=>l.period===p)),exp=Math.round(expected),done=k.lessons.filter(l=>l.done).length;
+    const pi=R.findIndex(([a,b])=>now>=a&&now<=b);
+    // Semaines de classe comptées sur les trois trimestres, au primaire comme au secondaire
+    const nn=Date.parse(today()+'T12:00:00Z'),yy=new Date(nn).getUTCMonth()>=7?new Date(nn).getUTCFullYear():new Date(nn).getUTCFullYear()-1,DD=(Y,m,d)=>Date.UTC(Y,m-1,d,12),TR=[[DD(yy,9,7),DD(yy,12,18)],[DD(yy+1,1,4),DD(yy+1,3,26)],[DD(yy+1,4,12),DD(yy+1,6,11)]];elapsed=0;total=0;TR.forEach(([a,b])=>{elapsed+=Math.max(0,Math.min(nn,b)-a);total+=b-a;});
+    return {exp,done,diff:done-exp,total:order.length,target:order[Math.min(order.length-1,exp)],week:Math.max(1,Math.ceil(elapsed/W)),weeks:Math.round(total/W),holiday:pi<0&&now>R[0][0]&&now<R[R.length-1][1],period:pi>=0?ps[pi]:'',order};
+  }
   function seed(c,k){
     k.seeded=true;
     const names=['Aïcha N.','Brice T.','Carine M.','Daniel E.','Estelle K.','Franck O.','Grâce B.','Hervé D.','Inès F.','Joël A.','Kevin S.','Laure E.','Mireille T.','Nathan B.'];
@@ -53,34 +121,15 @@
     const sub=secondary(c)?(T[0]||(subjects(c)[0])):tr('Mathématiques','Mathematics'),sub2=secondary(c)?(T[1]||sub):tr('Français','French');
     const p=periods(c)[0];
     const marks=[14,9.5,12,6,16.5,11,13,8,15,10.5,7,12.5,17,9];
-    const L=(fr,en)=>tr(fr,en);
-    const PLANS={
-      maths:[L('Équations du premier degré','First-degree equations'),L('Inéquations','Inequalities'),L('Fonctions affines','Linear functions'),L('Statistiques','Statistics'),L('Théorème de Thalès','Intercept theorem'),L('Systèmes d’équations','Systems of equations')],
-      pc:[L('Mélanges et corps purs','Mixtures and pure substances'),L('La masse volumique','Density'),L('Le courant électrique','Electric current'),L('La tension électrique','Voltage'),L('Atomes et ions','Atoms and ions'),L('Les réactions chimiques','Chemical reactions')],
-      svt:[L('La cellule','The cell'),L('La nutrition des végétaux','Plant nutrition'),L('La digestion','Digestion'),L('La respiration','Breathing'),L('La reproduction','Reproduction'),L('Les écosystèmes','Ecosystems')],
-      info:[L('Les algorithmes','Algorithms'),L('Les variables','Variables'),L('Les structures conditionnelles','Conditionals'),L('Les boucles','Loops'),L('Les tableaux','Arrays'),L('Les réseaux','Networks')],
-      compta:[L('Le bilan','The balance sheet'),L('Le compte de résultat','The income statement'),L('Les amortissements','Depreciation'),L('La TVA','VAT'),L('Les provisions','Provisions'),L('Les travaux de fin d’exercice','Year-end entries')],
-      eco:[L('L’activité économique','Economic activity'),L('La production','Production'),L('La consommation','Consumption'),L('La monnaie','Money'),L('Le marché','The market'),L('La croissance économique','Economic growth')],
-      droit:[L('Les sources du droit','Sources of law'),L('Les personnes juridiques','Legal persons'),L('Les biens','Property'),L('Le contrat','Contracts'),L('La responsabilité civile','Civil liability'),L('L’entreprise et le droit','Business law')],
-      commerce:[L('La mercatique','Marketing'),L('L’étude de marché','Market research'),L('Le prix de vente','Selling price'),L('La distribution','Distribution'),L('La communication commerciale','Marketing communication'),L('La relation client','Customer relations')],
-      lettres:[L('Le résumé de texte','Text summary'),L('La dissertation','The essay'),L('Le commentaire composé','Commentary'),L('L’argumentation','Argumentation'),L('La poésie','Poetry'),L('Le roman africain','The African novel')],
-      langues:['Reading comprehension','Essay writing','Tenses','Reported speech','Conditionals','Oral presentation'],
-      hg:[L('La Première Guerre mondiale','World War I'),L('La décolonisation','Decolonisation'),L('Le Cameroun sous tutelle','Cameroon under trusteeship'),L('Le relief du Cameroun','Cameroon’s landforms'),L('Les climats','Climates'),L('La population','Population')],
-      eps:[L('L’endurance','Endurance'),L('La vitesse','Speed'),L('Les sauts','Jumping'),L('Le football','Football'),L('Le handball','Handball'),L('La gymnastique','Gymnastics')],
-      primary:[L('Les nombres jusqu’à 10 000','Numbers up to 10,000'),L('Additions et soustractions posées','Column addition and subtraction'),L('La multiplication','Multiplication'),L('Les mesures de longueur','Length measures'),L('La division','Division'),L('Les fractions simples','Simple fractions')]
-    };
-    function planKey(subject){
-      const d=window.klasTeach?klasTeach.domainOf(subject):'maths';
-      if(d==='tertiaire'){const x=String(subject).toLowerCase();return /compta|gestion|fiscal|financi|administrat|bureautique|organisation/.test(x)?'compta':/(é|e)conom|sociolog/.test(x)?'eco':/droit/.test(x)?'droit':'commerce';}
-      return PLANS[d]?d:'maths';
-    }
+    const PLANS=Object.assign(planBank(),{primary:[L('Les nombres jusqu’à 10 000','Numbers up to 10,000'),L('Additions et soustractions posées','Column addition and subtraction'),L('La multiplication','Multiplication'),L('Les mesures de longueur','Length measures'),L('La division','Division'),L('Les fractions simples','Simple fractions')]});
     const topics=secondary(c)?PLANS[planKey(sub)]:PLANS.primary,topics2=secondary(c)?PLANS[planKey(sub2)]:[tr('Conjugaison : le présent','Verb tenses: present')];
     const t2=sub2===sub?topics2[3]:topics2[0];
     k.evals.push({id:uid(),type:evalTypes(c)[1],period:p,subject:sub,title:secondary(c)?topics[0]:topics[1],date:addDays(today(),-9),scale:20,coef:2,marks:Object.fromEntries(s.map((st,i)=>[st.id,i===5?'abs':String(marks[i])])),appreciations:{}});
     k.evals.push({id:uid(),type:evalTypes(c)[2],period:p,subject:sub,title:secondary(c)?topics[2]:topics[2],date:addDays(today(),4),scale:20,coef:3,marks:{},appreciations:{}});
     k.evals.push({id:uid(),type:evalTypes(c)[0],period:p,subject:sub2,title:t2,date:addDays(today(),-1),scale:10,coef:1,marks:{},appreciations:{}});
-    const plan=topics.map((t,i)=>[t,i<4?(i<2?0:i===2?0:1):i===4?1:2,i<2]);
-    k.lessons=plan.map(([t,pi,done],i)=>({id:uid(),source:'klas',title:t,subject:sub,period:periods(c)[pi],done,doneDate:done?addDays(today(),-14+i*4):'',homework:''}));
+    // Démonstration : progression type de la classe, cochée jusqu'un peu avant le repère du jour (pour montrer l'écart)
+    k.lessons=typicalPlan(c);const pc=pace(c,k),upto=Math.max(1,(pc?pc.exp:2)-1);
+    (pc?pc.order:k.lessons).slice(0,upto).forEach((l,i)=>{l.done=true;l.doneDate=addDays(today(),-7*(upto-i));});
   }
   const studentById=(k,id)=>k.students.find(s=>s.id===id);
   function markValue(e,id){const v=e.marks[id];if(v==null||v===''||v==='abs')return null;const n=Number(String(v).replace(',','.'));return Number.isFinite(n)?n:null;}
@@ -131,6 +180,14 @@
       :'<div class="tk-subjects is-missing" role="status"><p><b>'+tr('Quelle matière enseignez-vous dans cette classe ?','Which subject do you teach in this class?')+'</b> '+tr('Au collège et au lycée, chaque enseignant a sa spécialité. Indiquez-la : évaluations, progression et assistant s’y adaptent.','In secondary school every teacher has a specialism. Set it: assessments, scheme of work and assistant adapt to it.')+'</p><button type="button" data-tk-subjects="1">'+tr('Choisir ma matière','Choose my subject')+'</button></div>';};
   const btn=(label,attrs,cls='')=>'<button type="button" class="'+cls+'" '+attrs+'>'+label+'</button>';
 
+  /* Démarrage d'une vraie classe : trois étapes, visibles tant qu'elles ne sont pas faites */
+  function starter(c,k){
+    const steps=[[k.students.length>0,tr('Ajoutez vos élèves','Add your students'),tr('Collez la liste ou importez un fichier Excel.','Paste the list or import an Excel file.'),'data-tk-go="tk-students" data-tk-open-add="1"',tr('Ajouter','Add')],
+      [k.lessons.length>0,secondary(c)?tr('Chargez votre progression','Load your scheme of work'):tr('Chargez la progression de la classe','Load the class scheme of work'),tr('La progression type, votre document ou une photo : Klas 237 vous dit où vous devriez en être.','The typical scheme, your document or a photo: Klas 237 tells you where you should be.'),'data-tk-go="tk-year"',tr('Ma progression','My scheme')],
+      [k.evals.length>0,tr('Programmez une première évaluation','Schedule a first assessment'),tr('Les notes, moyennes et appréciations se calculent ensuite toutes seules.','Marks, averages and comments are then calculated for you.'),'data-tk-go="tk-evals"',tr('Programmer','Schedule')]];
+    if(steps.every(x=>x[0]))return '';
+    return '<section class="card tk-card tk-starter"><h2>'+tr('Bien démarrer, en 3 étapes','Get started in 3 steps')+'</h2><ol>'+steps.map(([ok,t,d,attrs,l])=>'<li class="'+(ok?'is-done':'')+'"><span class="tk-check" aria-hidden="true"></span><div><b>'+t+'</b><p>'+d+'</p></div>'+(ok?'<small>'+tr('Fait','Done')+'</small>':btn(l,attrs,'secondary'))+'</li>').join('')+'</ol></section>';
+  }
   function cockpit(c,k){
     const d=today(),att=k.attendance[d],n=k.students.length;
     const upcoming=k.evals.filter(e=>e.date>=d).sort((a,b)=>a.date.localeCompare(b.date));
@@ -144,12 +201,12 @@
     const ne=upcoming[0];
     const task=(ok,title,detail,action)=>'<li class="tk-task'+(ok?' is-done':'')+'"><span class="tk-check" aria-hidden="true"></span><div><b>'+title+'</b><p>'+detail+'</p></div>'+(action||'')+'</li>';
     return head(c,classKicker(c),tr('Ma classe aujourd’hui','My class today'),esc(longDate(d)).replace(/^./,m=>m.toUpperCase())+' · '+n+' '+tr('élèves','students'),
-        btn(tr('Faire l’appel','Take the register'),'data-tk-go="tk-students" data-tk-appel="1"')+btn(tr('Préparer demain','Plan tomorrow'),'data-tk-go="build-course"','secondary'))+subjectBar(c)+
+        btn(tr('Faire l’appel','Take the register'),'data-tk-go="tk-students" data-tk-appel="1"')+btn(tr('Préparer demain','Plan tomorrow'),'data-tk-go="build-course"','secondary'))+subjectBar(c)+starter(c,k)+
       '<div class="tk-kpis">'+
         kpi(att?(n-att.absent.length)+'/'+n:'—',tr('présents aujourd’hui','present today'),att?(att.absent.length?att.absent.length+' '+tr('absent(s)','absent'):tr('Classe complète','Full class')):tr('Appel non fait','Register not taken'),att?'':'warn')+
         kpi(ne?(daysBetween(d,ne.date)===0?tr('Auj.','Today'):'J-'+daysBetween(d,ne.date)):'—',tr('prochaine évaluation','next assessment'),ne?esc(ne.type+' · '+ne.subject):tr('Rien de programmé','Nothing scheduled'))+
         kpi(toGrade.length,tr('paquet(s) de copies','set(s) of papers'),toGrade.length?tr('Notes à saisir','Marks to enter'):tr('Tout est à jour','All up to date'),toGrade.length?'warn':'')+
-        kpi(pct+' %',tr('du programme couvert','of the programme covered'),done+'/'+total+' '+tr('leçons','lessons'))+
+        (()=>{const pc=pace(c,k);const sub=done+'/'+total+' '+tr('leçons','lessons')+(pc?' · '+tr('repère : ','guide: ')+Math.min(pc.total,pc.exp):'');return kpi(pct+' %',tr('du programme couvert','of the programme covered'),sub,pc&&pc.diff<=-2?'warn':'');})()+
       '</div><div class="tk-grid">'+
       '<section class="card tk-card"><h2>'+tr('Aujourd’hui, dans l’ordre','Today, in order')+'</h2><ol class="tk-tasks">'+
         task(!!att,tr('Faire l’appel','Take the register'),att?tr('Fait. ','Done. ')+(att.absent.length?att.absent.map(id=>esc(studentById(k,id)?.name||'')).join(', '):tr('Aucun absent.','Nobody absent.')):tr('Touchez seulement les absents : 30 secondes, même avec une grande classe.','Tap only the absent students: 30 seconds, even with a large class.'),att?'':btn(tr('Appel','Register'),'data-tk-go="tk-students" data-tk-appel="1"','secondary'))+
@@ -272,13 +329,26 @@
       ui.importDraft=items;ui.importSource='ia';ui.prog='import';ui.progOpen=true;if(page!=='tk-year')go('tk-year');else render();
       setTimeout(()=>document.querySelector('.tk-imp-preview')?.scrollIntoView({block:'center'}),80);}});
   }
+  /* Repère « où devrais-je en être ? » : visible par l'enseignant seul, une carte, trois cas */
+  function paceCard(c,k){
+    const note='<p class="tk-pace-note">'+tr('Repère indicatif, calé sur le calendrier scolaire national (rentrée début septembre, ','Indicative guide, based on the national school calendar (school starts early September, ')+(secondary(c)?tr('6 séquences','6 sequences'):tr('3 trimestres','3 terms'))+tr(') et sur votre progression. Votre établissement peut avoir un autre rythme.',') and on your scheme of work. Your school may follow a different pace.')+'</p>';
+    if(!k.lessons.length)return '<section class="card tk-card tk-pace"><h2>'+tr('Où devrais-je en être ?','Where should I be?')+'</h2><p>'+tr('Ajoutez votre progression pour situer votre avancement à la date du jour. Pour démarrer vite, chargez la progression type de votre classe, puis ajustez-la.','Add your scheme of work to see where you stand today. To start quickly, load the typical scheme for your class, then adjust it.')+'</p><div class="tk-row-actions">'+(secondary(c)?'<button type="button" class="ai-inline-sm" data-tk-ai="programme"><span class="ai-spark" aria-hidden="true"></span>'+tr('Photographier ma progression officielle (IA)','Photograph my official scheme (AI)')+'</button>'+btn(tr('Charger 6 grands chapitres de départ','Load 6 starter chapters'),'data-tk-pace-load="1"','secondary'):btn(tr('Charger la progression type de ma classe','Load the typical scheme for my class'),'data-tk-pace-load="1"'))+'</div>'+note+'</section>';
+    const pc=pace(c,k);if(!pc)return '';
+    const d=pc.diff,st=d<=-2?['late',tr('En retard de ','Behind by ')+(-d)+' '+tr('leçons','lessons')]:d>=2?['ahead',tr('En avance de ','Ahead by ')+d+' '+tr('leçons','lessons')]:['ok',tr('Dans les temps','On track')];
+    const when=pc.holiday?tr('pendant les congés','during the holidays'):tr('semaine ','week ')+pc.week+tr(' sur ',' of ')+pc.weeks+(pc.period?' · '+esc(pc.period):'');
+    let body='<p class="tk-pace-line">'+tr('À cette date, la classe devrait en être autour de ','By now, the class should be around ')+'<b>'+(pc.target?esc(pc.target.title)+' <small>('+esc(pc.target.subject)+')</small>':'—')+'</b> · '+tr('leçon ','lesson ')+Math.min(pc.total,pc.exp+1)+'/'+pc.total+'. '+tr('Vous en avez fait ','You have done ')+'<b>'+pc.done+'</b>.</p>';
+    if(pc.done===0&&pc.exp>0)body+='<div class="tk-pace-box"><p><b>'+tr('Vous commencez en cours d’année ?','Starting mid-year?')+'</b> '+tr('Cochez en une fois les leçons déjà faites avant Klas 237 : votre repère sera juste dès aujourd’hui.','Tick in one go the lessons already done before Klas 237: your guide will be right from today.')+'</p>'+btn(pc.exp===1?tr('Marquer la première leçon comme faite','Mark the first lesson as done'):tr('Marquer les ','Mark the first ')+pc.exp+tr(' premières leçons comme faites',' lessons as done'),'data-tk-pace-before="'+pc.exp+'"')+'</div>';
+    else if(d<=-2)body+='<div class="tk-pace-box"><p><b>'+tr('Pour rattraper sans courir :','To catch up calmly:')+'</b></p><ul><li>'+tr('Regroupez deux leçons proches en une séance (découverte commune, exercices séparés).','Group two related lessons in one session (shared discovery, separate exercises).')+'</li><li>'+tr('Gardez la classe pour comprendre ; donnez l’entraînement à la maison, avec un mot aux familles.','Use class time for understanding; give practice as homework, with a note to families.')+'</li><li>'+tr('Prenez une partie des séances de révision prévues en fin de période.','Use part of the revision sessions planned at the end of the period.')+'</li></ul><div class="tk-row-actions"><button type="button" class="ai-inline-sm" data-tk-ai="rattrapage"><span class="ai-spark" aria-hidden="true"></span>'+tr('Plan de rattrapage semaine par semaine (IA)','Week-by-week catch-up plan (AI)')+'</button></div></div>';
+    else if(d>=2)body+='<p class="tk-pace-tip">'+tr('Belle avance : profitez-en pour consolider avec ceux qui ont besoin de plus de temps, ou pour une évaluation de mi-parcours.','Good pace: use it to consolidate with those who need more time, or for a mid-point assessment.')+'</p>';
+    return '<section class="card tk-card tk-pace tk-pace-'+st[0]+'"><div class="tk-pace-head"><h2>'+tr('Où devrais-je en être ?','Where should I be?')+'</h2><span class="tk-pace-chip">'+st[1]+'</span></div><p class="muted">'+longDate(today()).replace(/^./,m=>m.toUpperCase())+' · '+when+'</p>'+body+note+'</section>';
+  }
   function yearView(c,k){
     const ps=periods(c);
     const total=k.lessons.length,done=k.lessons.filter(l=>l.done).length;
     const block=p=>{const ls=k.lessons.filter(l=>l.period===p),dn=ls.filter(l=>l.done).length;return '<section class="card tk-card tk-period"><div class="tk-period-head"><h2>'+esc(p)+'</h2><span>'+dn+'/'+ls.length+'</span></div><div class="tk-progress" role="progressbar" aria-valuemin="0" aria-valuemax="'+ls.length+'" aria-valuenow="'+dn+'" aria-label="'+esc(p)+'"><span style="width:'+(ls.length?Math.round(dn/ls.length*100):0)+'%"></span></div>'+(ls.length?'<ul class="tk-lessons">'+ls.map(l=>'<li class="'+(l.done?'is-done':'')+'"><label class="tk-lesson-check"><input type="checkbox" data-tk-lesson="'+l.id+'" '+(l.done?'checked':'')+'><span><b>'+esc(l.title)+'</b>'+srcTag(l)+'<small>'+esc(l.subject)+(l.done&&l.doneDate?' · '+tr('faite le ','done on ')+esc(shortDate(l.doneDate)):'')+'</small></span></label><span class="tk-row-actions">'+btn(l.content?tr('Mon cours','My notes'):tr('+ Cours','+ Notes'),'data-tk-course="'+l.id+'" aria-label="'+(l.content?tr('Mon cours : ','My notes: '):tr('Joindre mon cours à ','Attach my notes to '))+esc(l.title)+'"','secondary tk-course-btn')+btn(tr('Préparer','Plan'),'data-tk-prep="'+l.id+'"','secondary')+btn('×','data-tk-del-lesson="'+l.id+'" aria-label="'+tr('Retirer ','Remove ')+esc(l.title)+'"','tk-danger tk-x')+'</span>'+(l.done?'<input class="tk-homework" data-tk-homework="'+l.id+'" value="'+esc(l.homework||'')+'" placeholder="'+tr('Devoir donné (facultatif)','Homework set (optional)')+'" aria-label="'+tr('Devoir donné pour ','Homework for ')+esc(l.title)+'">':'')+(l.content?'<details class="tk-course"><summary>'+tr('Lire mon cours','Read my notes')+'</summary><div class="tk-course-text">'+esc(l.content)+'</div></details>':'')+'</li>').join('')+'</ul>':'<p class="muted">'+tr('Aucune leçon prévue.','No lessons planned.')+'</p>')+'</section>';};
     return head(c,classKicker(c),tr('Mon année','My year'),(secondary(c)?tr('Votre progression, séquence par séquence. Cochez une leçon faite : elle s’inscrit dans votre cahier de textes avec sa date.','Your scheme of work, sequence by sequence. Tick a lesson when done: it goes into your record book with its date.'):tr('Votre progression, trimestre par trimestre, toutes matières. Cochez une leçon faite : elle s’inscrit dans votre cahier journal avec sa date.','Your scheme of work, term by term, all subjects. Tick a lesson when done: it goes into your daily plan book with its date.')),'<button type="button" class="ai-inline-sm" data-tk-ai="rapport"><span class="ai-spark" aria-hidden="true"></span>'+(secondary(c)?tr('Cahier de textes de la semaine (IA)','This week’s record book (AI)'):tr('Cahier journal de la semaine (IA)','This week’s daily plan book (AI)'))+'</button>')+
       '<div class="tk-kpis"><div class="tk-kpi"><strong>'+(total?Math.round(done/total*100):0)+' %</strong><span>'+tr('du programme couvert','of the programme covered')+'</span><small>'+done+'/'+total+' '+tr('leçons','lessons')+'</small></div><div class="tk-kpi"><strong>'+k.evals.length+'</strong><span>'+tr('évaluations','assessments')+'</span><small>'+k.evals.filter(graded).length+' '+tr('notées','marked')+'</small></div></div>'+
-      progPanel(c,k)+
+      paceCard(c,k)+progPanel(c,k)+
       '<div class="tk-periods">'+ps.map(block).join('')+'</div>';
   }
 
@@ -344,6 +414,8 @@
     const t=ev.target.closest('button,a');if(!t)return;const k=kit(c),D=t.dataset;
     if(D.tkAi==='programme'){readProgramme(c,k);return;}
     if(D.tkAi){aiTool(c,k,D.tkAi);return;}
+    if(D.tkPaceLoad){k.lessons=typicalPlan(c);rerender();toast(tr('Progression type chargée : ajustez-la dans « Compléter mon programme ».','Typical scheme loaded: adjust it in “Complete my programme”.'));return;}
+    if(D.tkPaceBefore){const pc=pace(c,k);const n=Math.min(+D.tkPaceBefore||0,pc?pc.order.length:0);(pc?pc.order:[]).slice(0,n).forEach(l=>{l.done=true;l.doneDate='';l.before=true;});rerender();toast(n+' '+tr('leçons marquées comme faites avant Klas 237.','lessons marked as done before Klas 237.'));return;}
     if(D.tkProg){ui.prog=D.tkProg;ui.progOpen=true;render();document.querySelector('[data-tk-prog="'+D.tkProg+'"]')?.focus();return;}
     if(D.tkCourse){const l=k.lessons.find(x=>x.id===D.tkCourse);if(l)editCourse(c,k,l);return;}
     if(D.tkImpParse){const txt=$('#tk-imp-text')?.value||'';const items=klasImport.parse(txt);if(!items.length){toast(tr('Collez d’abord le texte de votre cours ou de votre sommaire.','Paste the text of your course or contents first.'));$('#tk-imp-text')?.focus();return;}ui.importDraft=items;ui.importSource='import';render();return;}
@@ -360,7 +432,7 @@
       if(!subject){toast(tr('Indiquez la matière.','Enter the subject.'));$('#tk-n-subject')?.focus();return;}
       if(D.tkNotionAdd){k.lessons.push({id:uid(),source:'moi',title:notion.slice(0,120),subject,period,done:false,doneDate:'',homework:''});ui.progOpen=false;rerender();toast(tr('Notion ajoutée à ','Topic added to ')+period+'.');return;}
       notionAI(c,k,notion,subject,period,null);return;}
-    if(D.tkGo){if(D.tkAppel){ui.appel=true;ui.appelDraft=null;ui.appelDate=today();}go(D.tkGo);return;}
+    if(D.tkGo){if(D.tkAppel){ui.appel=true;ui.appelDraft=null;ui.appelDate=today();}const openAdd=!!D.tkOpenAdd;go(D.tkGo);if(openAdd)setTimeout(()=>{const ta=document.getElementById('tk-new-students');if(ta){ta.closest('details').open=true;ta.scrollIntoView({block:'center'});ta.focus();}},80);return;}
     if(D.tkAppelOpen){ui.appel=true;ui.appelDraft=null;ui.appelDate=today();render();return;}
     if(D.tkAppelClose){ui.appel=false;ui.appelDraft=null;render();return;}
     if(D.tkAbsent){const d=ui.appelDate||today();ui.appelDraft||=[...(k.attendance[d]?.absent||[])];const i=ui.appelDraft.indexOf(D.tkAbsent);i<0?ui.appelDraft.push(D.tkAbsent):ui.appelDraft.splice(i,1);render();const b=document.querySelector('[data-tk-absent="'+D.tkAbsent+'"]');b&&b.focus();return;}
@@ -393,6 +465,12 @@
   function aiTool(c,k,spec){
     if(!window.klasAI){toast(tr('Assistant indisponible.','Assistant unavailable.'));return;}
     const [kind,id]=spec.split(':'),{map,names}=codes(k),per=ui.period||periods(c)[0];
+    if(kind==='rattrapage'){
+      const pc=pace(c,k);if(!pc)return;
+      const left=pc.order.filter(l=>!l.done).slice(0,12).map(l=>'- '+l.subject+' · '+l.title+' ('+l.period+')').join('\n');
+      const ranges=periodRanges(c),end=new Date((ranges[ranges.findIndex(r=>Date.parse(today()+'T12:00:00Z')<=r[1])]||ranges[ranges.length-1])[1]).toISOString().slice(0,10);
+      window.klasAI.open('gestion',tr('Plan de rattrapage : ma classe a ','Catch-up plan: my class is ')+(-pc.diff)+tr(' leçons de retard sur la progression. Propose un plan semaine par semaine jusqu’au ',' lessons behind. Suggest a week-by-week plan until ')+longDate(end)+tr(', réaliste pour une classe nombreuse, sans sacrifier la compréhension.',', realistic for a large class, without sacrificing understanding.'),{data:tr('Classe : ','Class: ')+c.level+(c.twinLevel?' + '+c.twinLevel:'')+'\n'+tr('Leçons restantes, dans l’ordre :','Remaining lessons, in order:')+'\n'+left,dataLabel:tr('Leçons restantes de votre progression','Remaining lessons of your scheme')});
+      return;}
     if(kind==='appreciations'){
       const prev=p=>{const ps=periods(c),i=ps.indexOf(p);return i>0?ps[i-1]:null;},pp=prev(per);
       const lines=k.students.map(s=>{const a=studentAverage(k,s.id,per);if(a==null)return null;const b=pp?studentAverage(k,s.id,pp):null;const obs=s.notes.slice(-2).map(n=>n.type+' : '+n.text).join(' ; ');return map[s.id]+' · moyenne '+num(a,2)+'/20'+(b!=null?' · évolution '+(a-b>=0?'+':'')+num(a-b,1):'')+' · '+absences(k,s.id)+' absence(s) · statut '+statusLabel(s.status)+(obs?' · observations : '+obs:'');}).filter(Boolean);
