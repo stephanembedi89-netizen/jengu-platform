@@ -51,7 +51,8 @@
     const nav=document.getElementById('nav');if(!nav)return;
     bar.setAttribute('aria-label',L('Actions principales','Main actions'));
     const items=[...nav.querySelectorAll(':scope > button[data-route]')].slice(0,4);
-    const sig=items.map(b=>b.dataset.route+'|'+b.textContent.trim()+'|'+(b.classList.contains('active')||b.getAttribute('aria-current')==='page')).join(';');
+    const hasAI=!!document.querySelector('.ai-fab');
+    const sig=items.map(b=>b.dataset.route+'|'+b.textContent.trim()+'|'+(b.classList.contains('active')||b.getAttribute('aria-current')==='page')).join(';')+'|ai:'+hasAI+'|'+fr();
     if(sig===last)return;last=sig;
     nav.querySelectorAll('.kx-mirrored').forEach(b=>b.classList.remove('kx-mirrored'));
     bar.innerHTML='';
@@ -65,6 +66,10 @@
       b.addEventListener('click',()=>{src.click();window.scrollTo({top:0,behavior:'auto'});});
       bar.append(b);
     });
+    // Sur téléphone, l'assistant est un onglet comme les autres (plus de bouton flottant au-dessus du contenu)
+    if(hasAI){const a=document.createElement('button');a.type='button';a.className='kx-tab-ai';
+      a.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg><span>'+L('Assistant','Assistant')+'</span>';
+      a.addEventListener('click',()=>{const f=document.querySelector('.ai-fab');if(f)f.click();});bar.append(a);}
   }
   function labelUi(){
     const s=L('Aller au contenu','Skip to content'),z=L('Agrandir le texte','Larger text');
