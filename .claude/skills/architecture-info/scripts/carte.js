@@ -24,6 +24,7 @@ function labelMatch(label, title) { const a = words(label), b = words(title); if
   const roles = [];
   for (const r of cfg.roles) {
     const page = await browser.newPage({ viewport: { width: cfg.width || 1440, height: 900 } });
+    if (cfg.localStorage) await page.addInitScript(o => { try { for (const k in o) localStorage.setItem(k, o[k]); } catch (e) {} }, cfg.localStorage);
     for (const h of cfg.blockHosts || []) await page.route(new RegExp(h), x => x.abort());
     const errors = [];
     page.on('pageerror', e => errors.push(e.message));

@@ -73,6 +73,7 @@ async function pageChecks(page, ctx) {
 
 async function measureLoad(browser, url, vp, throttle) {
   const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height } });
+  if (cfg.localStorage) await ctx.addInitScript(o => { try { for (const k in o) localStorage.setItem(k, o[k]); } catch (e) {} }, cfg.localStorage);
   const page = await ctx.newPage();
   for (const h of cfg.blockHosts || []) await page.route(new RegExp(h), r => r.abort());
   const cdp = await ctx.newCDPSession(page);
@@ -103,6 +104,7 @@ async function runStep(page, s) {
   for (const vp of viewports) {
     for (const journey of cfg.journeys || [{ name: 'accueil', steps: [{ check: 'accueil' }] }]) {
       const context = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, reducedMotion: cfg.reducedMotion ? 'reduce' : 'no-preference' });
+      if (cfg.localStorage) await context.addInitScript(o => { try { for (const k in o) localStorage.setItem(k, o[k]); } catch (e) {} }, cfg.localStorage);
       const page = await context.newPage();
       const errors = [];
       page.on('pageerror', e => errors.push('Erreur JS : ' + e.message));

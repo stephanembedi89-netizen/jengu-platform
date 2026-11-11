@@ -370,7 +370,7 @@ async function signIn(email, password) {
     setAuthSession(await api('/auth/v1/token?grant_type=password', {method:'POST',body:JSON.stringify({email,password})}));
     const access = await api('/rest/v1/ndab_access?select=expires_at');
     if (!access?.length) {
-      const expired=Error(tr('Votre accès pilote est terminé. Retrouvez les informations de renouvellement ci-dessous.','Your pilot access has ended. See renewal information below.'));
+      const expired=Error(tr('Votre accès est terminé. Choisissez une offre pour rouvrir votre espace.','Your access has ended. Choose a plan to reopen your space.'));
       expired.code='ACCESS_EXPIRED';
       throw expired;
     }
