@@ -379,7 +379,8 @@ async function signIn(email, password) {
   if(cloud)throw Error(tr('Déconnectez-vous avant de changer de compte.','Sign out before switching accounts.'));
   try {
     setAuthSession(await api('/auth/v1/token?grant_type=password', {method:'POST',body:JSON.stringify({email,password})}));
-    const access = await api('/rest/v1/ndab_access?select=expires_at');
+    const access = await api('/rest/v1/ndab_access?select=expires_at,plan_code');
+    window.klasAccess = access?.length ? {expiresAt: access[0].expires_at, plan: access[0].plan_code || ''} : null;
     if (!access?.length) {
       const expired=Error(tr('Votre accès est terminé. Choisissez une offre pour rouvrir votre espace.','Your access has ended. Choose a plan to reopen your space.'));
       expired.code='ACCESS_EXPIRED';
