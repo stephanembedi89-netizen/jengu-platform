@@ -322,3 +322,4 @@ body[data-entry]:not([data-entry="workspace"]) > main { display: none; }
 .tp-cycle-note,.tp-context{display:inline-block;margin:4px 0 10px;padding:6px 12px;border-radius:999px;background:#e6f4ee;color:#005a46;font-weight:700;font-size:.9rem}
 .tp-twin{display:grid;gap:8px;margin:4px 0 8px}
 .tp-students{display:grid;gap:10px}
+.entry-cgv{font-size:.88rem;color:var(--k-ink-2,#4a5163);margin:4px 0 10px}.entry-cgv a{color:inherit;font-weight:700}
