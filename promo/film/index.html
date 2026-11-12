@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="fr" data-om-signature="off" data-composition-variables='[
+  {"id":"url","type":"string","label":"Adresse du site","default":"klas237.jengu-ai.com"},
+  {"id":"whatsapp","type":"string","label":"WhatsApp","default":"+237 672 705 729"},
+  {"id":"trial","type":"string","label":"Essai gratuit","default":"7 jours gratuits"},
+  {"id":"price","type":"string","label":"Prix d appel","default":"Dès 2 000 FCFA par mois"},
+  {"id":"green","type":"color","label":"Vert","default":"#007a5e"},
+  {"id":"red","type":"color","label":"Rouge","default":"#ce1126"},
+  {"id":"gold","type":"color","label":"Or","default":"#fcd116"},
+  {"id":"endHold","type":"number","label":"Fin (secondes)","default":0.5,"min":0,"max":10,"step":0.1,"group":"Rythme"}
+]'>
+<head>
+<meta charset="utf-8">
+<title>Klas 237 · film de lancement</title>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/om.js"></script>
+<style id="om-fonts">
+@font-face{font-family:"Bricolage";src:url("assets/fonts/Bricolage-var.woff2") format("woff2");font-weight:200 800;font-style:normal}
+@font-face{font-family:"Manrope";src:url("assets/fonts/Manrope-400.woff2") format("woff2");font-weight:400}
+@font-face{font-family:"Manrope";src:url("assets/fonts/Manrope-600.woff2") format("woff2");font-weight:600}
+@font-face{font-family:"Manrope";src:url("assets/fonts/Manrope-700.woff2") format("woff2");font-weight:700}
+@font-face{font-family:"Caveat";src:url("assets/fonts/Caveat-700.woff2") format("woff2");font-weight:700}
+</style>
+<style>
+:root{--green:#007a5e;--green-deep:#005a46;--red:#ce1126;--gold:#fcd116;--ink:#141b2e;--paper:#f6f4ee;--card:#ffffff;--soft:#e6f4ee}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}
+#film{position:relative;width:1920px;height:1080px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:"Manrope",system-ui,sans-serif;font-weight:600}
+.sc{position:absolute;inset:0;visibility:hidden;overflow:hidden}
+#s1{visibility:visible}
+.bg-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(20,27,46,.07) 2px,transparent 2.5px);background-size:44px 44px}
+.stripe{position:absolute;left:0;right:0;top:0;height:10px;z-index:50;background:linear-gradient(90deg,var(--green) 0 33.3%,var(--red) 33.3% 66.6%,var(--gold) 66.6% 100%)}
+h1,h2,.d{font-family:"Bricolage",sans-serif;font-weight:760;letter-spacing:-.025em;line-height:1.02;margin:0}
+.kick{position:absolute;font:700 30px/1 "Manrope";letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
+.mask{display:block;overflow:hidden;padding:.08em .04em .22em;margin:-.08em -.04em -.22em}
+.mask>span{display:block}
+.abs{position:absolute}
+
+/* Téléphone */
+.ph{position:absolute;width:416px;height:900px;border-radius:64px;background:#0d1220;padding:10px;box-sizing:border-box;box-shadow:0 60px 120px -40px rgba(20,27,46,.55),0 0 0 2px #2a3146 inset;transform-origin:50% 50%}
+.ph .scr{position:relative;width:396px;height:880px;border-radius:54px;overflow:hidden;background:#fff}
+.ph .scr img{position:absolute;left:0;top:0;width:396px;height:auto;display:block}
+
+.ph .scr .t{position:absolute;left:0;top:0;width:396px;height:auto}
+.ph .scr .bar{position:absolute;left:0;top:0;width:396px;height:71px;overflow:hidden;z-index:3;background:#fff}
+.ph .scr .bar img{position:absolute;left:0;top:0;width:396px;height:auto}
+.ph .scr .tabs{position:absolute;left:0;bottom:12px;width:396px;height:82px;overflow:hidden;z-index:3}
+.ph .scr .tabs img{position:absolute;left:0;top:-775px;width:396px;height:auto}
+.ph .scr{background:#f6f4ee}
+/* Cartes et pastilles */
+.chip{position:absolute;display:inline-flex;align-items:center;gap:14px;padding:16px 28px;border-radius:999px;font:700 34px/1 "Manrope";white-space:nowrap}
+.chip.w{background:#fff;color:var(--ink);box-shadow:0 18px 40px -20px rgba(20,27,46,.45)}
+.chip.o{border:3px solid rgba(255,255,255,.7);color:#fff}
+.dot{width:20px;height:20px;border-radius:50%;background:var(--green)}
+.ico{width:78px;height:78px;border-radius:24px;display:grid;place-items:center;background:var(--soft);color:var(--green)}
+.ico svg{width:42px;height:42px}
+.feat{position:absolute;left:150px;width:960px}
+.feat h2{font-size:104px;margin:0 0 24px}
+.feat p{margin:0;font:600 44px/1.35 "Manrope";color:#4a5163}
+.dark .feat p,.dark p{color:#c9d1e6}
+.lines li{list-style:none;display:flex;gap:22px;align-items:center;font:700 42px/1.2 "Manrope";margin:0 0 30px}
+.lines{margin:0;padding:0}
+.lines .tick{flex:0 0 58px;width:58px;height:58px;border-radius:50%;background:var(--green);display:grid;place-items:center}
+.lines .tick svg{width:30px;height:30px;color:#fff}
+.mono{font-variant-numeric:tabular-nums}
+.logo{position:absolute}
+.wipe{position:absolute;top:-10%;bottom:-10%;width:130%;left:-140%;z-index:40;transform:skewX(-12deg)}
+</style>
+</head>
+<body>
+<div id="film" data-composition-id="film" data-width="1920" data-height="1080">
+  <audio id="om-sound" src="assets/sound.wav" data-start="0" data-duration="60.6" data-track-index="8" data-volume="1"></audio>
+<div class="stripe"></div>
+
+<!-- 1 · Accroche -->
+<section class="sc" id="s1"><div class="bg-dots"></div>
+  <div class="abs" data-om-id="hook-1" style="left:140px;top:150px;width:1000px">
+    <h1 style="font-size:170px"><span class="mask"><span class="l1">20 h.</span></span></h1>
+    <h1 style="font-size:118px;margin-top:26px"><span class="mask"><span class="l2">Le cahier est ouvert.</span></span></h1>
+    <h1 style="font-size:118px;margin-top:12px;color:var(--red)"><span class="mask"><span class="l3">Personne ne comprend.</span></span></h1>
+    <svg class="abs" id="scribble" style="left:0;top:560px" width="900" height="40" viewBox="0 0 900 40" fill="none"><path d="M4 26 C 120 6, 220 38, 340 20 S 560 8, 700 24 S 840 14, 896 22" stroke="#ce1126" stroke-width="9" stroke-linecap="round" stroke-dasharray="1000" stroke-dashoffset="1000"/></svg>
+  </div>
+  <div class="d abs" id="s1-q" style="left:140px;top:700px;font-size:128px;opacity:0"><span style="color:var(--green)">Et si ça changeait ?</span></div>
+  <div class="ph" id="ph1" data-om-id="phone-hook" style="left:1280px;top:90px"><div class="scr" data-build="ph1"></div></div>
+</section>
+
+<!-- 2 · Promesse -->
+<section class="sc" id="s2" style="background:var(--green)"><div class="bg-dots" style="opacity:.35;filter:invert(1)"></div>
+  <div class="abs" id="s2-disc" style="left:560px;top:-240px;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#12a37e,#007a5e 60%,#005a46);"></div>
+  <div class="abs" id="s2-card" data-om-id="logo-card" style="left:460px;top:150px;width:1000px;height:430px;border-radius:64px;background:#fffdf8;box-shadow:0 50px 110px -40px rgba(0,0,0,.55);display:grid;place-items:center"><img src="assets/logo-klas237.png" style="width:760px;height:auto"></div>
+  <h1 class="abs" style="left:0;right:0;top:640px;text-align:center;color:#fff;font-size:98px"><span class="mask"><span class="t1">Le relais entre l’école</span></span><span class="mask"><span class="t2">et la maison.</span></span></h1>
+  <div id="s2-chips"></div>
+</section>
+
+<!-- 3 · Parents -->
+<section class="sc" id="s3"><div class="bg-dots"></div>
+  <div class="abs" id="s3-ring" style="left:1180px;top:150px;width:640px;height:640px;border-radius:50%;border:34px solid var(--soft)"></div>
+  <div class="kick" id="s3-k" style="left:150px;top:130px">Pour les parents</div>
+  <div id="s3-f1" class="feat" style="top:250px"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></div><h2 style="margin-top:34px">Ce soir, on sait quoi faire.</h2><p>Devoirs, rituel de 10 minutes, contrôle à venir : tout est là, sans chercher.</p></div>
+  <div id="s3-f2" class="feat" style="top:250px"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h2 style="margin-top:34px">10 minutes. On essaie ensemble.</h2><p>Ce qu’il a vu, où ça bloque, un petit exercice. Sans diplôme de pédagogue.</p></div>
+  <div id="s3-f3" class="feat" style="top:250px"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h2 style="margin-top:34px">Des progrès qu’on voit.</h2><p>Notes, soirs de suite, objectif de la semaine, matière par matière.</p></div>
+  <div class="ph" id="ph3" data-om-id="phone-parents" style="left:1240px;top:120px"><div class="scr" data-build="ph3"></div></div>
+  <div class="chip w" id="s3-c1" style="left:1010px;top:700px;font-size:32px"><span class="dot" style="background:var(--red)"></span>Écrire à l’enseignant</div>
+</section>
+
+<!-- 4 · Assistant IA -->
+<section class="sc dark" id="s4" style="background:var(--ink);color:#fff">
+  <div class="abs" id="s4-glow" style="left:-200px;top:200px;width:1000px;height:1000px;border-radius:50%;background:radial-gradient(circle,rgba(252,209,22,.28),rgba(252,209,22,0) 62%)"></div>
+  <div class="kick" id="s4-k" style="left:880px;top:130px;color:var(--gold)">L’assistant IA</div>
+  <div class="ph" id="ph4" data-om-id="phone-ai" style="left:240px;top:90px;background:#000"><div class="scr"><img class="a" src="assets/shots/v3-assistant-reponse.png"><img class="b" src="assets/shots/v3-assistant-reponse-2.png"></div></div>
+  <h2 class="abs" id="s4-h1" style="left:880px;top:220px;width:900px;font-size:104px;color:#fff"><span class="mask"><span>Bloqué sur</span></span><span class="mask"><span>une leçon ?</span></span></h2>
+  <h2 class="abs" id="s4-h2" style="left:880px;top:220px;width:900px;font-size:96px;color:var(--gold)"><span class="mask"><span>Il explique</span></span><span class="mask"><span>autrement.</span></span></h2>
+  <p class="abs" id="s4-p" style="left:880px;top:500px;width:860px;margin:0;font:600 40px/1.4 Manrope;color:#c9d1e6">Avec des exemples d’ici : le marché, les FCFA, le football. Jamais la réponse toute faite à la place de l’enfant.</p>
+  <div class="chip w" id="s4-c1" style="left:880px;top:760px">Écrire</div>
+  <div class="chip w" id="s4-c2" style="left:1070px;top:760px">Dicter</div>
+  <div class="chip w" id="s4-c3" style="left:1260px;top:760px">Photographier le cahier</div>
+  <div class="chip o" id="s4-c4" style="left:880px;top:870px">Français · English</div>
+</section>
+
+<!-- 5 · Enseignants -->
+<section class="sc" id="s5"><div class="bg-dots"></div>
+  <div class="abs" id="s5-ring" style="left:760px;top:-260px;width:700px;height:700px;border-radius:50%;background:var(--soft)"></div>
+  <div class="kick" id="s5-k" style="left:150px;top:130px">Pour les enseignants</div>
+  <h2 class="abs" id="s5-h" style="left:150px;top:200px;width:880px;font-size:100px"><span class="mask"><span>La classe</span></span><span class="mask"><span>sous contrôle.</span></span></h2>
+  <ul class="lines abs" id="s5-list" style="left:150px;top:520px">
+    <li class="r1"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>L’appel en 30 secondes</li>
+    <li class="r2"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Notes, bulletins, appréciations</li>
+    <li class="r3"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Où en suis-je dans le programme ?</li>
+    <li class="r4"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Liste de classe importée d’Excel</li>
+  </ul>
+  <div class="ph" id="ph5a" data-om-id="phone-teacher-1" style="left:1010px;top:150px"><div class="scr" data-build="ph5a"></div></div>
+  <div class="ph" id="ph5b" data-om-id="phone-teacher-2" style="left:1390px;top:260px"><div class="scr" data-build="ph5b"></div></div>
+</section>
+
+<!-- 6 · Élèves -->
+<section class="sc" id="s6" style="background:var(--gold)"><div class="bg-dots" style="opacity:.6"></div>
+  <div class="abs" id="s6-disc" style="left:1090px;top:200px;width:780px;height:780px;border-radius:50%;background:#fff;opacity:.55"></div>
+  <div class="kick" id="s6-k" style="left:150px;top:150px;color:var(--ink)">Pour les élèves</div>
+  <h2 class="abs" style="left:150px;top:250px;width:1000px;font-size:130px;color:var(--ink)"><span class="mask"><span class="a1">Des indices,</span></span><span class="mask"><span class="a2">pas des</span></span><span class="mask"><span class="a3" style="color:var(--red)">réponses.</span></span></h2>
+  <p class="abs" id="s6-p" style="left:150px;top:760px;width:880px;margin:0;font:700 42px/1.35 Manrope;color:#3b3a1d">Un petit coup de pouce pour trouver tout seul, à son rythme.</p>
+  <div class="ph" id="ph6" data-om-id="phone-student" style="left:1280px;top:120px"><div class="scr" data-build="ph6"></div></div>
+</section>
+
+<!-- 7 · Simple -->
+<section class="sc" id="s7"><div class="bg-dots"></div>
+  <div class="kick" id="s7-k" style="left:150px;top:120px">Simple comme bonjour</div>
+  <div class="abs" id="s7-st1" style="left:150px;top:210px;width:900px;display:flex;gap:30px;align-items:center"><div class="d" style="width:112px;height:112px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:62px">1</div><div class="d" style="font-size:66px">Créez votre compte</div></div>
+  <div class="abs" id="s7-st2" style="left:150px;top:370px;width:900px;display:flex;gap:30px;align-items:center"><div class="d" style="width:112px;height:112px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-size:62px">2</div><div class="d" style="font-size:66px">Confirmez votre e-mail</div></div>
+  <div class="abs" id="s7-st3" style="left:150px;top:530px;width:900px;display:flex;gap:30px;align-items:center"><div class="d" style="width:112px;height:112px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;font-size:62px">3</div><div class="d" style="font-size:66px">Votre espace s’ouvre</div></div>
+  <div class="abs d" id="s7-badge" data-om-id="badge-trial" style="left:150px;top:720px;padding:26px 44px;border-radius:30px;background:var(--gold);font-size:76px;transform-origin:0 50%;box-shadow:0 30px 60px -30px rgba(120,100,0,.7)"><span data-var-text="trial">7 jours gratuits</span></div>
+  <div class="chip w" id="s7-pr" style="left:150px;top:910px;font-size:40px"><span data-var-text="price">Dès 2 000 FCFA par mois</span></div>
+  <div class="chip w" id="s7-om" style="left:810px;top:900px;font-size:38px"><span class="dot" style="background:#ff7900"></span>Orange Money</div>
+  <div class="chip w" id="s7-mtn" style="left:1170px;top:900px;font-size:38px"><span class="dot" style="background:#ffcb05;box-shadow:0 0 0 3px var(--ink) inset"></span>MTN MoMo</div>
+  <div class="d abs" id="s7-no" style="left:150px;top:830px;width:1000px;font-size:46px;color:var(--green);text-align:left;opacity:0">Sans prélèvement automatique.</div>
+  <div class="ph" id="ph7" data-om-id="phone-offers" style="left:1280px;top:100px;transform:rotate(4deg)"><div class="scr"><img class="a" src="assets/shots/04-offres.png"><img class="b" src="assets/shots/05-offres-2.png"></div></div>
+</section>
+
+<!-- 8 · Final -->
+<section class="sc" id="s8" style="background:var(--green)"><div class="bg-dots" style="opacity:.35;filter:invert(1)"></div>
+  <div class="abs" id="s8-card" data-om-id="end-logo" style="left:610px;top:96px;width:700px;height:300px;border-radius:52px;background:#fffdf8;display:grid;place-items:center;box-shadow:0 50px 110px -40px rgba(0,0,0,.55)"><img src="assets/logo-klas237.png" style="width:540px;height:auto"></div>
+  <h1 class="abs" style="left:0;right:0;top:450px;text-align:center;color:#fff;font-size:128px"><span class="mask"><span class="e1">Essayez <span style="color:var(--gold)" data-var-text="trial">7 jours gratuits</span></span></span></h1>
+  <div class="abs" id="s8-url" data-om-id="end-url" style="left:0;right:0;top:650px;text-align:center"><span class="d" style="display:inline-block;background:#fff;color:var(--ink);font-size:84px;padding:22px 56px;border-radius:999px;box-shadow:0 30px 70px -30px rgba(0,0,0,.6)" data-var-text="url">klas237.jengu-ai.com</span></div>
+  <div class="abs" id="s8-wa" style="left:0;right:0;top:820px;text-align:center;font:700 44px/1 Manrope;color:#d6f1e8">WhatsApp <span data-var-text="whatsapp">+237 672 705 729</span></div>
+  <div class="abs" id="s8-by" style="left:0;right:0;top:940px;text-align:center"><div style="width:360px;height:4px;margin:0 auto 22px;background:linear-gradient(90deg,transparent,#0A7CF2 20%,#0A7CF2 48%,#EEA90C 52%,#EEA90C 80%,transparent)"></div><div class="d" style="font-size:40px;color:#fff;font-weight:600;letter-spacing:.02em">Une création <b style="font-weight:800">JenguAI</b> · Douala, Cameroun</div></div>
+</section>
+
+<div class="wipe" id="wipe" style="background:var(--green)"></div>
+</div>
+
+<script type="text/vnd.abc" id="om-score-off"></script>
+<script>
+const V = OM.vars();
+const BUILD = {
+  ph1:  { tall: ['t-parent-ce-soir'], bar: 'v3-parent-ce-soir', tabs: ['v3-parent-ce-soir'] },
+  ph3:  { tall: ['t-parent-ce-soir', 't-parent-progres'], bar: 'v3-parent-ce-soir', tabs: ['v3-parent-ce-soir', 'v3-parent-progres'] },
+  ph5a: { tall: ['t-prof-aujourdhui'], bar: 'v3-prof-aujourdhui', tabs: ['v3-prof-aujourdhui'] },
+  ph5b: { tall: ['t-prof-annee'], bar: 'v3-prof-annee', tabs: ['v3-prof-annee'] },
+  ph6:  { tall: ['t-eleve'], bar: 'v3-eleve', tabs: ['v3-eleve'] }
+};
+Object.entries(BUILD).forEach(([id, c]) => {
+  const el = document.querySelector(`#${id} .scr`);
+  el.innerHTML = c.tall.map((t, i) => `<img class="t t${i + 1}" src="assets/shots/${t}.png">`).join('')
+    + `<div class="bar"><img src="assets/shots/${c.bar}.png"></div>`
+    + `<div class="tabs">${c.tabs.map((t, i) => `<img class="tab${i + 1}" src="assets/shots/${t}.png">`).join('')}</div>`;
+});
+
+const tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
+const EXPO = 'expo.out', IN = 'power3.in';
+const W = 1920;
+
+// niveaux (scène 2)
+const levels = ['SIL','CP','CE1','CE2','CM1','CM2','6e','5e','4e','3e','2nde','1re','Tle'];
+document.getElementById('s2-chips').innerHTML = levels.map((l,i)=>`<span class="chip o lv" style="left:${150+i*128 - (i>=6?0:0)}px;top:900px;padding:14px 0;width:108px;justify-content:center;font-size:32px">${l}</span>`).join('');
+
+const show = (id, a, b) => { tl.set(id, { autoAlpha: 1 }, a); tl.set(id, { autoAlpha: 0 }, b); };
+// transition : un bandeau diagonal balaie l'écran, la scène change quand il couvre tout
+function wipe(at, color) {
+  tl.set('#wipe', { background: color, x: 0 }, at - 0.05)
+    .fromTo('#wipe', { xPercent: 0 }, { xPercent: 230, duration: 0.62, ease: 'power2.inOut' }, at - 0.05);
+  OM.sfx('whoosh', at - 0.1, { gain: 0.8 });
+}
+const rise = (sel, at, dur = 0.8, stag = 0) => tl.fromTo(sel, { yPercent: 135 }, { yPercent: 0, duration: dur, ease: EXPO, stagger: stag }, at);
+const pop = (sel, at, dur = 0.6, from = {}) => tl.fromTo(sel, { opacity: 0, y: 40, scale: 0.92, ...from }, { opacity: 1, y: 0, scale: 1, duration: dur, ease: 'back.out(1.5)' }, at);
+
+/* ===== 1 · Accroche 0 – 4 s ===== */
+tl.addLabel('scene:hook', 0); show('#s1', 0, 4.05);
+tl.fromTo('#ph1', { y: 30, rotate: -2 }, { y: 0, rotate: 0, duration: 1.2, ease: EXPO }, 0)
+  .fromTo('.l1', { scale: 1.12, transformOrigin: '0 50%' }, { scale: 1, duration: .9, ease: EXPO }, 0)
+  .fromTo('.l2', { yPercent: 135 }, { yPercent: 0, duration: .75, ease: EXPO }, .3)
+  .fromTo('.l3', { yPercent: 135 }, { yPercent: 0, duration: .75, ease: EXPO }, .9)
+  .to('#scribble path', { strokeDashoffset: 0, duration: .55, ease: 'power2.inOut' }, 1.6)
+  .to('#ph1 .t1', { y: -330, duration: 3.6, ease: 'power1.inOut' }, 0.3)
+  .fromTo('#ph1', { scale: 1 }, { scale: 1.05, duration: 4, ease: 'none' }, 0)
+  .to('#s1 .abs[data-om-id=hook-1]', { opacity: 0, y: -50, duration: .35, ease: IN }, 2.55)
+  .fromTo('#s1-q', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .5 }, 2.75);
+OM.sfx('thud', 0.05, { gain: 0.7 }); OM.sfx('pop', 0.55); OM.sfx('pop', 1.15); OM.sfx('draw', 1.6, { dur: .5 }); OM.sfx('riser', 2.2, { dur: 1.6 });
+
+/* ===== 2 · Promesse 4 – 10 s ===== */
+wipe(4, 'var(--green)');
+tl.addLabel('scene:promise', 4.15); show('#s2', 4.15, 10.05);
+tl.fromTo('#s2-disc', { scale: 0.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.4, ease: EXPO }, 4.2)
+  .fromTo('#s2-card', { scale: 0.55, rotate: -4, opacity: 0 }, { scale: 1, rotate: 0, opacity: 1, duration: .9, ease: 'back.out(1.7)' }, 4.3)
+  .fromTo('.t1', { yPercent: 135 }, { yPercent: 0, duration: .8, ease: EXPO }, 5.2)
+  .fromTo('.t2', { yPercent: 135 }, { yPercent: 0, duration: .8, ease: EXPO }, 5.4)
+  .fromTo('.lv', { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: .5, stagger: .1, ease: 'back.out(1.6)' }, 6.6)
+  .to('#s2-card', { y: -12, duration: 2.6, ease: 'sine.inOut' }, 5.3);
+OM.sfx('impact', 4.3, { gain: 0.8 }); OM.sfx('chime', 5.3); OM.sfx('pop', 6.6); OM.sfx('pop', 6.9); OM.sfx('pop', 7.2); OM.sfx('pop', 7.5); OM.sfx('pop', 7.8);
+
+/* ===== 3 · Parents 10 – 22 s ===== */
+wipe(10, 'var(--gold)');
+tl.addLabel('scene:parents', 10.15); show('#s3', 10.15, 22.05);
+tl.set('#ph3 .t2,#ph3 .tab2', { opacity: 0 }, 0)
+  .fromTo('#s3-ring', { scale: .2, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.2, ease: EXPO }, 10.2)
+  .fromTo('#s3-k', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .5 }, 10.3)
+  .fromTo('#ph3', { y: 160, rotate: 6, opacity: 0 }, { y: 0, rotate: 0, opacity: 1, duration: 1, ease: EXPO }, 10.25)
+  .fromTo('#ph3', { scale: 1 }, { scale: 1.06, duration: 11.5, ease: 'none' }, 10.5)
+  // le contenu défile : le soir, puis le rituel de 10 minutes, puis les progrès
+  .to('#ph3 .t1', { y: -420, duration: 3.2, ease: 'power2.inOut' }, 10.6)
+  .to('#ph3 .t1', { y: -940, duration: 3.4, ease: 'power2.inOut' }, 14.2)
+  .to('#ph3 .t1,#ph3 .tab1', { opacity: 0, duration: .5 }, 17.9)
+  .fromTo('#ph3 .t2,#ph3 .tab2', { opacity: 0 }, { opacity: 1, duration: .5 }, 17.9)
+  .to('#ph3 .t2', { y: -330, duration: 3.4, ease: 'power2.inOut' }, 18.4)
+  .fromTo('#s3-f1', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: .7 }, 10.5)
+  .to('#s3-f1', { opacity: 0, x: -60, duration: .4, ease: IN }, 13.7)
+  .fromTo('#s3-f2', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: .7 }, 14.1)
+  .to('#s3-f2', { opacity: 0, x: -60, duration: .4, ease: IN }, 17.7)
+  .fromTo('#s3-f3', { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: .7 }, 18.1)
+  .fromTo('#s3-c1', { opacity: 0, y: 40, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .6, ease: 'back.out(1.6)' }, 19.6)
+  .to('#s3-f3', { opacity: 0, duration: .3, ease: IN }, 21.7).to('#s3-c1', { opacity: 0, duration: .3 }, 21.7);
+OM.sfx('thud', 10.3); OM.sfx('pop', 10.6); OM.sfx('click', 14.0); OM.sfx('pop', 14.2); OM.sfx('click', 18.0); OM.sfx('pop', 18.2); OM.sfx('ding', 19.7);
+
+/* ===== 4 · Assistant IA 22 – 32 s ===== */
+wipe(22, 'var(--ink)');
+tl.addLabel('scene:ai', 22.15); show('#s4', 22.15, 32.05);
+tl.set('#ph4 .b', { opacity: 0 }, 0).set('#s4-h2,#s4-p,#s4-c1,#s4-c2,#s4-c3,#s4-c4', { opacity: 0 }, 0)
+  .fromTo('#s4-glow', { scale: .3, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.4, ease: EXPO }, 22.2)
+  .fromTo('#ph4', { x: -140, rotate: -8, opacity: 0 }, { x: 0, rotate: 0, opacity: 1, duration: 1, ease: EXPO }, 22.25)
+  .fromTo('#s4-k', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .5 }, 22.4)
+  .fromTo('#s4-h1 span span', { yPercent: 135 }, { yPercent: 0, duration: .8, ease: EXPO, stagger: .12 }, 22.55)
+  .to('#s4-h1', { opacity: 0, y: -40, duration: .35, ease: IN }, 25.1)
+  .set('#s4-h2', { opacity: 1 }, 25.45)
+  .fromTo('#s4-h2 span span', { yPercent: 135 }, { yPercent: 0, duration: .8, ease: EXPO, stagger: .12 }, 25.45)
+  .fromTo('#ph4 .b', { opacity: 0 }, { opacity: 1, duration: .6 }, 26.2)
+  .fromTo('#s4-p', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .6 }, 26.6)
+  .fromTo('#s4-c1', { opacity: 0, y: 40, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .5, ease: 'back.out(1.6)' }, 28.2)
+  .fromTo('#s4-c2', { opacity: 0, y: 40, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .5, ease: 'back.out(1.6)' }, 28.5)
+  .fromTo('#s4-c3', { opacity: 0, y: 40, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .5, ease: 'back.out(1.6)' }, 28.8)
+  .fromTo('#s4-c4', { opacity: 0, y: 40, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .5, ease: 'back.out(1.6)' }, 29.3)
+  .fromTo('#ph4', { scale: 1 }, { scale: 1.07, duration: 9.5, ease: 'none' }, 22.4);
+OM.sfx('impact', 22.3, { gain: .7 }); OM.sfx('sparkle', 22.9); OM.sfx('sparkle', 25.6); OM.sfx('type', 26.3, { dur: .8 }); OM.sfx('pop', 28.2); OM.sfx('pop', 28.5); OM.sfx('pop', 28.8); OM.sfx('pop', 29.3); OM.sfx('chime', 30.2);
+
+/* ===== 5 · Enseignants 32 – 42 s ===== */
+wipe(32, 'var(--red)');
+tl.addLabel('scene:teachers', 32.15); show('#s5', 32.15, 42.05);
+tl.fromTo('#s5-ring', { scale: .3, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.2, ease: EXPO }, 32.2)
+  .fromTo('#s5-k', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .5 }, 32.3)
+  .fromTo('#s5-h span span', { yPercent: 135 }, { yPercent: 0, duration: .8, ease: EXPO, stagger: .12 }, 32.4)
+  .fromTo('#ph5a', { y: 200, rotate: -5, opacity: 0 }, { y: 0, rotate: -2, opacity: 1, duration: 1, ease: EXPO }, 32.35)
+  .fromTo('#ph5b', { y: 260, rotate: 5, opacity: 0 }, { y: 0, rotate: 3, opacity: 1, duration: 1, ease: EXPO }, 32.7)
+  .to('#ph5a .t1', { y: -1250, duration: 8.6, ease: 'power1.inOut' }, 33.2)
+  .to('#ph5b .t1', { y: -980, duration: 8.2, ease: 'power1.inOut' }, 33.6)
+  .fromTo('#ph5a', { scale: 1 }, { scale: 1.05, duration: 9.5, ease: 'none' }, 32.4)
+  .fromTo('#ph5b', { scale: 1 }, { scale: 1.05, duration: 9.5, ease: 'none' }, 32.7)
+  .fromTo('#s5-list .r1', { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: .55 }, 33.4)
+  .fromTo('#s5-list .r2', { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: .55 }, 34.9)
+  .fromTo('#s5-list .r3', { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: .55 }, 36.5)
+  .fromTo('#s5-list .r4', { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: .55 }, 38.4);
+OM.sfx('thud', 32.35); OM.sfx('thud', 32.7, { gain: .6 }); OM.sfx('ding', 33.5); OM.sfx('ding', 35.0, { note: 2 }); OM.sfx('ding', 36.6, { note: 4 }); OM.sfx('ding', 38.5, { note: 5 }); OM.sfx('chime', 40.2);
+
+/* ===== 6 · Élèves 42 – 48 s ===== */
+wipe(42, 'var(--ink)');
+tl.addLabel('scene:students', 42.15); show('#s6', 42.15, 48.05);
+tl.set('#s6-p', { opacity: 0 }, 0)
+  .fromTo('#s6-disc', { scale: .2, opacity: 0 }, { scale: 1, opacity: .55, duration: 1.2, ease: EXPO }, 42.2)
+  .fromTo('#s6-k', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .5 }, 42.3)
+  .fromTo('#s6 .a1,#s6 .a2,#s6 .a3', { yPercent: 135 }, { yPercent: 0, duration: .75, ease: EXPO, stagger: .18 }, 42.4)
+  .fromTo('#ph6', { y: 200, rotate: 7, opacity: 0 }, { y: 0, rotate: 0, opacity: 1, duration: 1, ease: EXPO }, 42.35)
+  .fromTo('#s6-p', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .6 }, 44.2)
+  .to('#ph6 .t1', { y: -1150, duration: 5, ease: 'power1.inOut' }, 42.8)
+  .fromTo('#ph6', { scale: 1 }, { scale: 1.06, duration: 5.6, ease: 'none' }, 42.4);
+OM.sfx('boing', 42.4); OM.sfx('pop', 42.6); OM.sfx('pop', 42.8); OM.sfx('pop', 43.0); OM.sfx('chime', 44.3);
+
+/* ===== 7 · Simple 48 – 54 s ===== */
+wipe(48, 'var(--gold)');
+tl.addLabel('scene:price', 48.15); show('#s7', 48.15, 54.05);
+tl.set('#ph7 .b,#s7-no', { opacity: 0 }, 0)
+  .fromTo('#s7-k', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: .5 }, 48.25)
+  .fromTo('#ph7', { y: -300, rotate: 12, opacity: 0 }, { y: 0, rotate: 4, opacity: 1, duration: 1, ease: EXPO }, 48.2)
+  .fromTo('#s7-st1', { opacity: 0, x: -80 }, { opacity: 1, x: 0, duration: .6 }, 48.5)
+  .fromTo('#s7-st2', { opacity: 0, x: -80 }, { opacity: 1, x: 0, duration: .6 }, 49.1)
+  .fromTo('#s7-st3', { opacity: 0, x: -80 }, { opacity: 1, x: 0, duration: .6 }, 49.7)
+  .fromTo('#s7-badge', { scale: 0, rotate: -8 }, { scale: 1, rotate: -2, duration: .7, ease: 'back.out(2)' }, 50.5)
+  .fromTo('#s7-pr', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .5, ease: 'back.out(1.6)' }, 51.3)
+  .fromTo('#s7-om', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .5, ease: 'back.out(1.6)' }, 51.7)
+  .fromTo('#s7-mtn', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .5, ease: 'back.out(1.6)' }, 52.0)
+  .fromTo('#s7-no', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .6 }, 52.6)
+  .fromTo('#ph7 .b', { opacity: 0 }, { opacity: 1, duration: .5 }, 51.2)
+  .fromTo('#ph7', { scale: 1 }, { scale: 1.06, duration: 5.6, ease: 'none' }, 48.3);
+OM.sfx('thud', 48.25); OM.sfx('pop', 48.6); OM.sfx('pop', 49.2); OM.sfx('pop', 49.8); OM.sfx('stamp', 50.6, { gain: .9 }); OM.sfx('ding', 51.4); OM.sfx('ding', 51.8, { note: 3 }); OM.sfx('ding', 52.1, { note: 5 });
+
+/* ===== 8 · Final 54 – 60 s ===== */
+wipe(54, 'var(--green)');
+tl.addLabel('scene:end', 54.15); tl.set('#s8', { autoAlpha: 1 }, 54.15);
+tl.fromTo('#s8-card', { scale: .5, rotate: 5, opacity: 0 }, { scale: 1, rotate: 0, opacity: 1, duration: .9, ease: 'back.out(1.7)' }, 54.25)
+  .fromTo('.e1', { yPercent: 135 }, { yPercent: 0, duration: .85, ease: EXPO }, 54.9)
+  .fromTo('#s8-url', { opacity: 0, y: 50, scale: .9 }, { opacity: 1, y: 0, scale: 1, duration: .7, ease: 'back.out(1.6)' }, 55.8)
+  .fromTo('#s8-wa', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .6 }, 56.6)
+  .fromTo('#s8-by', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: .7 }, 57.4)
+  .to('#s8-card', { y: -10, duration: 3, ease: 'sine.inOut' }, 55.2)
+  .to({}, { duration: V.endHold }, 59.8);
+OM.sfx('impact', 54.3, { gain: .8 }); OM.sfx('chime', 55.0); OM.sfx('pop', 55.8); OM.sfx('pop', 56.6); OM.sfx('chime', 57.5);
+
+
+/* ===== Mouvement continu (ambiance) ===== */
+(function () {
+  const r = OM.random(237);
+  const star = (c) => `<svg viewBox="0 0 24 24" width="100%" height="100%" fill="${c}"><path d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z"/></svg>`;
+  // scène 4 : étincelles dorées qui montent
+  const s4 = document.getElementById('s4');
+  for (let i = 0; i < 14; i++) {
+    const el = document.createElement('div');
+    const sz = 22 + Math.floor(r() * 34);
+    el.className = 'spk'; el.style.cssText = `position:absolute;left:${60 + Math.floor(r() * 1800)}px;top:${700 + Math.floor(r() * 420)}px;width:${sz}px;height:${sz}px;opacity:0;pointer-events:none`;
+    el.innerHTML = star(i % 3 === 0 ? '#fcd116' : '#ffffff');
+    s4.appendChild(el);
+  }
+  // scène 2 : points flottants
+  const s2 = document.getElementById('s2');
+  for (let i = 0; i < 10; i++) {
+    const el = document.createElement('div');
+    const sz = 14 + Math.floor(r() * 26);
+    el.className = 'bub'; el.style.cssText = `position:absolute;left:${40 + Math.floor(r() * 1840)}px;top:${100 + Math.floor(r() * 880)}px;width:${sz}px;height:${sz}px;border-radius:50%;background:${i % 2 ? '#fcd116' : '#ffffff'};opacity:0;pointer-events:none`;
+    s2.appendChild(el);
+  }
+})();
+tl.fromTo('.spk', { y: 60, opacity: 0, rotate: 0 }, { y: -420, opacity: 0.9, rotate: 120, duration: 3.2, ease: 'sine.inOut', stagger: { each: 0.55, repeat: 0 } }, 22.9)
+  .to('.spk', { opacity: 0, duration: 0.6, stagger: 0.12 }, 29.8)
+  .fromTo('.bub', { y: 40, opacity: 0, scale: .4 }, { y: -140, opacity: 0.7, scale: 1, duration: 3.4, ease: 'sine.inOut', stagger: 0.28 }, 5.4)
+  .to('.bub', { opacity: 0, duration: .5, stagger: .06 }, 9.2)
+  .fromTo('#s2-card', { rotate: 0 }, { rotate: 1.6, duration: 3.6, ease: 'sine.inOut', yoyo: true, repeat: 1 }, 5.9)
+  .fromTo('#s2', { scale: 1 }, { scale: 1.05, duration: 6, ease: 'none' }, 4.15)
+  .fromTo('#s8', { scale: 1 }, { scale: 1.045, duration: 6.4, ease: 'none' }, 54.2)
+  .fromTo('#s8-url', { scale: 1 }, { scale: 1.05, duration: 0.9, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 56.6)
+  .fromTo('#s7-badge', { rotate: -2 }, { rotate: 1.5, duration: 0.8, ease: 'sine.inOut', yoyo: true, repeat: 3 }, 51.2)
+  .fromTo('#s4-glow', { scale: 1 }, { scale: 1.25, duration: 4, ease: 'sine.inOut', yoyo: true, repeat: 1 }, 23.4);
+
+OM.music({ product: 'consumer', bpm: 120 });
+window.__timelines = window.__timelines || {};
+window.__timelines['film'] = tl;
+</script>
+</body>
+</html>

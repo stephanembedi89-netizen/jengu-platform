@@ -1,0 +1,34 @@
+const {chromium}=require('/opt/node-tools/node_modules/playwright');
+const OUT=__dirname+'/shots/';const BASE='http://localhost:8238/index.html';
+const clickSel=async(p,s)=>{await p.waitForSelector(s,{state:'attached',timeout:8000});await p.waitForTimeout(250);await p.evaluate(s=>document.querySelector(s).click(),s);};
+const clean=p=>p.evaluate(()=>{const t=document.getElementById('toast');if(t)t.style.display='none';document.querySelectorAll('main *').forEach(e=>{if(e.children.length<4&&/^Démonstration ?:/.test((e.textContent||'').trim()))e.style.display='none';});const m=document.getElementById('mode');if(m)m.style.display='none';});
+(async()=>{const b=await chromium.launch();
+const mk=async()=>{const ctx=await b.newContext({viewport:{width:390,height:844},deviceScaleFactor:2,isMobile:true,hasTouch:true});await ctx.route(/supabase\.co/,r=>r.abort());
+await ctx.addInitScript(()=>{['parent','student','teacher','tutor'].forEach(r=>localStorage.setItem('klas-tour-'+r,'1'))});return ctx.newPage();};
+const shot=async(p,n)=>{await p.waitForTimeout(600);await clean(p);await p.screenshot({path:OUT+n+'.png'});console.log('ok',n);};
+let p=await mk();await p.goto(BASE);
+for(const s of ['[data-entry-go=worlds]','[data-world=primary]','[data-entry-role=parent]','[data-open-child="0"]'])await clickSel(p,s);
+await p.waitForTimeout(700);await shot(p,'v2-parent-ce-soir');
+await p.evaluate(()=>window.scrollTo(0,640));await shot(p,'v2-parent-ce-soir-2');
+await p.evaluate(()=>openRoute('fk-progress'));await p.evaluate(()=>window.scrollTo(0,0));await shot(p,'v2-parent-progres');
+await p.evaluate(()=>openRoute('fk-home'));await p.evaluate(()=>window.scrollTo(0,0));await p.waitForTimeout(300);
+await p.evaluate(()=>document.querySelector('.ai-fab').click());await p.waitForTimeout(500);
+try{await p.getByText('Comprendre la notion').first().click();await p.waitForTimeout(200);
+const ta=p.locator('.ai-panel textarea, [class*=ai] textarea').first();await ta.fill('Mon fils ne comprend pas les fractions. Comment le lui expliquer ?');
+await p.getByRole('button',{name:/^Demander/}).last().click();await p.waitForTimeout(2200);}catch(e){console.log('ia',e.message.slice(0,100));}
+await shot(p,'v2-assistant-reponse');
+await p.evaluate(()=>{const s=document.querySelector('.ai-answer,.ai-card,#ai-out');if(s)s.scrollIntoView({block:'start'});});await shot(p,'v2-assistant-reponse-2');
+await p.close();
+p=await mk();await p.goto(BASE);
+for(const s of ['[data-entry-go=worlds]','[data-world=college]','[data-entry-role=teacher]'])await clickSel(p,s);
+await p.fill('[name=callName]','M. Ngono');await p.selectOption('#entry-teacher-profile [name=subject1]',{label:'Mathématiques'});await p.click('#entry-teacher-profile > button');await p.waitForTimeout(300);
+await p.selectOption('#profile-level','4e');await p.fill('#entry-profile [name=name]','4e B');await p.click('#entry-profile > button');await p.waitForTimeout(900);
+await shot(p,'v2-prof-aujourdhui');await p.evaluate(()=>window.scrollTo(0,620));await shot(p,'v2-prof-aujourdhui-2');
+await p.evaluate(()=>openRoute('tk-year'));await p.evaluate(()=>window.scrollTo(0,0));await shot(p,'v2-prof-annee');
+await p.evaluate(()=>openRoute('tk-evals'));await p.evaluate(()=>window.scrollTo(0,0));await shot(p,'v2-prof-notes');
+await p.close();
+p=await mk();await p.goto(BASE);
+for(const s of ['[data-entry-go=worlds]','[data-world=college]','[data-entry-role=student]'])await clickSel(p,s);
+await p.waitForTimeout(500);try{await p.getByRole('button',{name:/Ouvrir/}).first().click();await p.waitForTimeout(900);}catch(e){console.log('élève',e.message.slice(0,80));}
+await shot(p,'v2-eleve');await p.evaluate(()=>window.scrollTo(0,600));await shot(p,'v2-eleve-2');
+await b.close();})();
