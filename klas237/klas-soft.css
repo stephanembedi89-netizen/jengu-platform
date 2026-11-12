@@ -1,0 +1,48 @@
+/* Klas 237 · Direction « douce et premium », appliquée à tout le site.
+   Couche purement visuelle : graisses, espacements de lettres, arrondis, bordures, ombres, fonds de champs.
+   Aucune règle de mise en page (ni display, ni grille, ni largeur) : rien ne bouge de place. */
+
+/* 1. Titres : moins massifs, plus fins */
+h1{font-weight:650!important;letter-spacing:-.018em!important}
+h2,h3{font-weight:620!important;letter-spacing:-.008em!important}
+.nx-hero h1{font-weight:700!important;letter-spacing:-.03em!important}
+.entry-content h1{line-height:1.12!important}
+.entry-panel h1,.entry-narrow h1,.entry-content>section>h1{font-size:clamp(2rem,3.6vw,2.9rem)!important}
+body[data-entry=workspace] main h1{font-weight:650!important}
+.brand,.entry-brand{font-weight:750!important;letter-spacing:-.03em!important}
+
+/* 2. Surtitres rouges et petits libellés : plus discrets */
+.entry-kicker,.eyebrow{font-weight:700!important;letter-spacing:.12em!important;font-size:.76rem!important}
+.entry-lead,.entry-content>section>p{color:#5b6273}
+
+/* 3. Champs de saisie : arrondis, bordure douce, halo vert au focus */
+html body input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]):not([type=color]):not([type=submit]):not([type=button]),
+html body select,
+html body textarea{border-radius:14px!important;border-color:#e2dfd4!important;background-color:#fbfaf7!important;transition:border-color .15s,box-shadow .15s,background-color .15s}
+html body input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]):not([type=color]):not([type=submit]):not([type=button]):focus,
+html body select:focus,
+html body textarea:focus{border-color:var(--k-blue)!important;background-color:#fff!important;box-shadow:0 0 0 4px rgba(0,122,94,.12)!important}
+html body input::placeholder,html body textarea::placeholder{color:#a3a7b0}
+html body input[type=checkbox],html body input[type=radio]{accent-color:var(--k-blue)}
+.entry-content form label,.tk label,.tk-field>span{font-weight:600}
+
+/* 4. Pages d'accueil : boutons en pastille, cartes plus rondes, ombres légères */
+html body .entry-content button.entry-submit,
+html body .entry-content .entry-offer-cta,
+html body .entry-content .entry-offer-actions button{border-radius:999px!important}
+html body .entry-content button.secondary,html body .kx-cta .secondary{border-radius:999px!important;border-width:1.5px!important}
+html body .entry-content button.entry-submit{box-shadow:0 12px 26px -12px rgba(0,122,94,.7)!important}
+.entry-form-block,.entry-offer-card,.entry-role-card,.entry-world,.entry-space-card,.entry-profile-card,.tp-context,.entry-pay-total{border-radius:24px!important;border-color:#ece9df!important}
+.entry-form-block,.entry-offer-card{box-shadow:0 30px 70px -40px rgba(20,27,46,.35),0 2px 6px rgba(20,27,46,.04)!important}
+.entry-note,.entry-offer-notice,.role-lock{border-radius:14px!important}
+.entry-family-art,.entry-content img[class*=art]{border-radius:24px!important}
+
+/* 5. Espaces de travail : cartes aux bordures et ombres adoucies (les arrondis par niveau sont conservés) */
+.tk-card,.tk-eval,.tk-kpi,.tk-student,.fk-card,.fk-learner,.ai-card,.ai-ask{border-color:#ece9df!important;box-shadow:0 1px 2px rgba(20,27,46,.03),0 22px 50px -32px rgba(20,27,46,.3)!important}
+body[data-entry=workspace] #screen .card,body[data-entry=workspace] #screen section.card{border-color:#ece9df!important;box-shadow:0 1px 2px rgba(20,27,46,.03),0 22px 50px -32px rgba(20,27,46,.3)}
+.tk-name,.tk-avg,.tk-date,.fk-due{font-weight:700}
+
+/* 6. Fenêtres et bulles : mêmes arrondis doux */
+dialog{border-radius:24px!important;box-shadow:0 40px 90px -40px rgba(20,27,46,.5)!important}
+#toast{border-radius:14px!important}
+.kt-tip{border-radius:20px!important}
