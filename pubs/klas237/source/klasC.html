@@ -261,7 +261,7 @@ window.render=function(t){
  show(tomC,t,35.0,40.3,960,-1);{const sp=eio(P(t,37.0,37.8));TM.forEach((d,k)=>{const i=back(P(t,35.5+k*.1,35.9+k*.1));const right=k>=4;const x=70+k*98+(right?sp*50:-sp*10),y=120+(right?sp*26:0);d.style.transform=`translate(${x}px,${y+(1-i)*-60}px) scale(${i>0?(.4+.6*i):0})`;d.style.opacity=right?1-sp*.72:1});
   tomC.querySelector('#p2').style.opacity=eo(P(t,37.6,38.2));tomC.querySelector('#p1').style.opacity=1-P(t,37.4,37.7)}
  {const on=t>=38.4&&t<=40.4;const k=back(P(t,38.4,39.0)),o=ei(P(t,40.0,40.4));if(on){expr(papaPop,t<38.9?'panique':'sourire');putA(papaPop,900,lerp(2200,1475,k)+o*700,{r:-4+Math.sin(t*6)*2,s:.8})}else papaPop.style.opacity=0;
-  const bk=back(P(t,38.9,39.4));bulb.style.opacity=on?C(P(t,38.9,39.1))*(1-o):0;bulb.style.transform=`translate(${760}px,${1215-bk*20+Math.sin(t*4)*6}px) scale(${.4+.6*bk}) rotate(10deg)`}
+  const bk=back(P(t,38.9,39.4));bulb.style.opacity=on?C(P(t,38.9,39.1))*(1-o):0;bulb.style.transform=`translate(${690}px,${1130-bk*20+Math.sin(t*4)*6}px) scale(${.4+.6*bk}) rotate(10deg)`}
 
  // ---------- ENSEIGNANT 40.5–51 ----------
  if(sc(S5,t,40.5,43.6,.04)){expr(prof,blinkE(t,t>42?'joie':'sourire'));putA(prof,300,1420,{r:Math.sin(t*1.2)*.8})}
