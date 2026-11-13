@@ -34,12 +34,12 @@ Les voix 1 à 3 et 5 font partie du catalogue Gemini, mais je n'ai pas pu vérif
 | 0:10,5 – 0:15 | 4,5 s | Parents : dix minutes chaque soir. On ouvre le cahier, on voit où ça bloque, on essaie ensemble. | Amical, posé | Écran « Ce soir avec Alex », minuteur |
 | 0:15 – 0:22 | 7 s | Et si la méthode a changé, l'assistant explique autrement. Comme au marché, avec les tomates. | Souriant, malicieux sur « les tomates » | Assistant, carte « 8 tomates à 400 FCFA » |
 | 0:22 – 0:31 | 9 s | Élèves : pas la réponse, un indice. Des révisions chronométrées, et le compte à rebours jusqu'à l'examen. | Encourageant, dynamique | Indice, chrono, CEP · BEPC · Probatoire · Bac |
-| 0:31 – 0:40 | 9 s | Enseignants : l'appel en trente secondes, les moyennes calculées, les appréciations du bulletin déjà rédigées. | Respectueux, soulagé | Grille d'appel 16/18, étiquettes |
+| 0:31 – 0:40 | 9 s | Enseignants : vos cours et vos épreuves préparés plus vite, les copies corrigées en photo, et le mot aux parents prêt pour WhatsApp. | Respectueux, soulagé | Assistant de l'enseignant, copies en photo, message WhatsApp aux parents |
 | 0:40 – 0:47 | 7 s | Répétiteurs : le journal des séances, les progrès mesurés, et le bilan aux parents écrit pour vous. | Clair, valorisant | Écran accompagnateur |
 | 0:47 – 0:53 | 6 s | Un appui, pas une réponse à copier. Même sans réseau. | Ferme et doux, convaincu | Maman et fille, série des soirs |
 | 0:53 – 1:00 | 7 s | Essayez sept jours gratuitement, sans carte bancaire. Klas 237 : de petits pas, de grandes réussites. | Chaleureux, invitant, sourire final | Logo, bouton jaune, adresse du site |
 
-Environ 135 mots. Vise **entre 55 et 60 secondes**. Si la voix est un peu plus longue ou plus courte, je recale l'image dessus.
+Environ 140 mots. Vise **entre 55 et 60 secondes**. Si la voix est un peu plus longue ou plus courte, je recale l'image dessus.
 
 ---
 
@@ -64,7 +64,7 @@ Friendly, clear and encouraging, warm and soothing, like a kind teacher explaini
 ```
 **Texte :**
 ```
-Parents : dix minutes chaque soir. <short pause> On ouvre le cahier, on voit où ça bloque, on essaie ensemble. <short pause> Et si la méthode a changé, l'assistant explique autrement. <short pause> Comme au marché, avec les tomates. <long pause> Élèves : pas la réponse, un indice. <short pause> Des révisions chronométrées, et le compte à rebours jusqu'à l'examen. <long pause> Enseignants : l'appel en trente secondes, les moyennes calculées, les appréciations du bulletin déjà rédigées. <long pause> Répétiteurs : le journal des séances, les progrès mesurés, et le bilan aux parents écrit pour vous. <long pause>
+Parents : dix minutes chaque soir. <short pause> On ouvre le cahier, on voit où ça bloque, on essaie ensemble. <short pause> Et si la méthode a changé, l'assistant explique autrement. <short pause> Comme au marché, avec les tomates. <long pause> Élèves : pas la réponse, un indice. <short pause> Des révisions chronométrées, et le compte à rebours jusqu'à l'examen. <long pause> Enseignants : vos cours et vos épreuves préparés plus vite, les copies corrigées en photo, et le mot aux parents prêt pour WhatsApp. <long pause> Répétiteurs : le journal des séances, les progrès mesurés, et le bilan aux parents écrit pour vous. <long pause>
 ```
 
 ### BLOC 3 · La méthode et l'invitation (0:47 → 1:00)

@@ -78,7 +78,7 @@ const HY=335;
 tx('<em>10 minutes,</em><br>chaque soir.','h dk',10.7,15.2,HY,{style:'font-size:76px'});
 tx('Il explique<br><em>autrement.</em>','h dk',15.3,21.9,HY,{style:'font-size:76px'});
 tx('Un indice,<br><em>pas la réponse.</em>','h dk',22.2,30.9,HY,{style:'font-size:76px'});
-tx('L’appel en<br><em>30 secondes.</em>','h dk',31.2,39.9,HY,{style:'font-size:76px'});
+tx('Vos cours,<br><em>mieux préparés.</em>','h dk',31.2,39.9,HY,{style:'font-size:76px'});
 tx('Les progrès,<br><em>mesurés.</em>','h dk',40.2,46.9,HY,{style:'font-size:76px'});
 tx('Un appui,<br><em class="r">pas une réponse à copier.</em>','h dk',47.2,52.9,HY,{style:'font-size:66px'});
 tx('Essayez <em>7 jours</em><br>gratuitement.','h',53.5,60,560,{style:'font-size:96px'});
@@ -111,9 +111,10 @@ const rv=rev.querySelector('#rv');
 const exams=['CEP','BEPC','Probatoire','Bac'].map(s=>mk(s,'#FFD23F'));
 const cdn=mk('📅 Compte à rebours jusqu’à l’examen');
 // enseignant
-const att=el(`<div class="card" style="width:820px;padding:38px 46px;background:#fff;color:#0B1B33"><div style="font:800 42px/1 Sora;margin-bottom:26px">Le cartable de l’enseignant</div><div id="ag" style="display:grid;grid-template-columns:repeat(9,1fr);gap:12px"></div><div id="ac" style="font:700 36px/1.3 Manrope;margin-top:24px">0/18 présents</div></div>`);
-const AG=att.querySelector('#ag'),AC=att.querySelector('#ac');const CELLS=[...Array(18)].map((_,k)=>{const d=document.createElement('div');d.style.cssText='height:66px;border-radius:16px;background:#E8EEF0';AG.appendChild(d);return d});
-const tch=['📊 Moyennes calculées','📝 Appréciations du bulletin rédigées','📷 Copies corrigées en photo'].map(s=>mk(s));
+const att=el(`<div class="card" style="width:820px;padding:38px 46px;background:#fff;color:#0B1B33"><div style="font:700 26px/1 Sora;letter-spacing:.14em;color:#0E8A5F;margin-bottom:22px">✦ L’ASSISTANT DE L’ENSEIGNANT</div><div id="pl"></div></div>`);
+const PL=['Préparation de cours','Situations-problèmes','Épreuves prêtes à imprimer'].map(x=>{const d=document.createElement('div');d.style.cssText='display:flex;align-items:center;gap:20px;font:700 44px/1.2 Manrope;padding:14px 0';d.innerHTML=`<span style="display:inline-flex;width:56px;height:56px;border-radius:16px;background:#E8EEF0;align-items:center;justify-content:center;color:#fff;font:800 36px Sora">✓</span>${x}`;att.querySelector('#pl').appendChild(d);return d});
+const tch=['📷 Copies corrigées en photo','📝 Appréciations du bulletin rédigées'].map(s=>mk(s));
+const waT=el(`<div class="card" style="width:820px;padding:30px 40px;background:#DCF8C6;color:#0B1B33;font:700 38px/1.3 Manrope;border-bottom-right-radius:8px"><div style="font:700 24px/1 Sora;letter-spacing:.14em;color:#0E8A5F;margin-bottom:12px">💬 LE MOT AUX PARENTS · WHATSAPP</div>Bonjour chers parents, devoir pour demain : exercices 3 et 4 page 42. 10 minutes ce soir suffisent ✓</div>`);
 // accompagnateur
 const acc=['📒 Journal de séances','💬 Bilan aux parents écrit pour vous','💰 Paiements suivis'].map(s=>mk(s));
 // méthode
@@ -134,7 +135,7 @@ const VO=[[0.3,2.9,'Vingt heures. Compo demain.'],[3.0,7.0,'À la maison, tout l
 [10.7,15.2,'Parents : dix minutes chaque soir.|On ouvre le cahier, on voit où ça bloque, on essaie ensemble.'],
 [15.4,21.9,'Et si la méthode a changé,|l’assistant explique autrement.|Comme au marché, avec les tomates.'],
 [22.2,30.9,'Élèves : pas la réponse, un indice.|Des révisions chronométrées,|et le compte à rebours jusqu’à l’examen.'],
-[31.2,39.9,'Enseignants : l’appel en trente secondes,|les moyennes calculées,|les appréciations du bulletin déjà rédigées.'],
+[31.2,39.9,'Enseignants : vos cours et vos épreuves préparés plus vite,|les copies corrigées en photo,|et le mot aux parents prêt pour WhatsApp.'],
 [40.2,46.9,'Répétiteurs : le journal des séances, les progrès mesurés,|et le bilan aux parents écrit pour vous.'],
 [47.2,52.9,'Un appui, pas une réponse à copier.|Même sans réseau.'],
 [53.3,59.6,'Essayez sept jours gratuitement, sans carte bancaire.|Klas 237 : de petits pas, de grandes réussites.']];
@@ -174,8 +175,8 @@ window.render=function(t){
  {const q=P(t,24.8,30.6);const sec=Math.round(1500-q*8*60/8*1);rv.textContent=`${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`}
  pop(cdn,t,26.6,30.9,540,1210,-1);exams.forEach((e,k)=>pop(e,t,27.4+k*.25,30.9,[190,400,660,900][k],1330,k%2?2:-2));
  // enseignants
- pop(att,t,31.7,39.9,540,760,-1);{let n=0;CELLS.forEach((d,k)=>{const abs=(k===6||k===13);const p=P(t,32.3+k*.11,32.5+k*.11);d.style.background=p>0?(abs?'#E0393E':'#0E8A5F'):'#E8EEF0';d.style.transform=`scale(${p>0&&p<1?.8+.2*p:1})`;if(p>0&&!abs)n++});AC.textContent=n>=16?'16/18 présents · appel fait en 30 s':`${n}/18 présents`}
- tch.forEach((e,k)=>pop(e,t,34.8+k*.9,39.9,540,1060+k*110,k%2?1.5:-1.5));
+ pop(att,t,31.7,39.9,540,720,-1);PL.forEach((d,k)=>{const p=back(P(t,32.4+k*.6,32.8+k*.6));const b=d.firstChild;b.style.background=p>0?'#0E8A5F':'#E8EEF0';b.style.transform=`scale(${p>0?(.6+.4*p):1})`;d.style.opacity=.45+.55*C(P(t,32.3+k*.6,32.6+k*.6))});
+ tch.forEach((e,k)=>pop(e,t,34.8+k*.8,39.9,540,975+k*105,k%2?1.5:-1.5));pop(waT,t,36.6,39.9,540,1280,1);
  // répétiteurs
  acc.forEach((e,k)=>pop(e,t,41.4+k*.8,46.9,790-(k==1?80:0),640+k*130,k%2?-2:2));
  // méthode
