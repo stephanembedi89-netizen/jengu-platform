@@ -1,46 +1,32 @@
 KLAS 237 · VOIX OFF · VIDÉO MOTION DESIGN VERTICALE (≈ 60 secondes)
 =====================================================================
 
-A. LE TEXTE À FAIRE LIRE (écrit pour l'oreille : phrases courtes, chiffres en lettres)
-Les « … » créent une petite pause, les retours à la ligne une respiration.
-Les numéros renvoient aux captures de la planche « Klas237-captures-numerotees.png ».
+A. LE DÉROULÉ (même format que Déclic : moment · phrase · à l'image)
+Les numéros renvoient à la planche « Klas237-captures-numerotees.png ».
+Entre les phrases, la musique joue seule une seconde environ : c'est voulu, ça garde du rythme.
 
-[0-6 s · capture 01]
-Vingt heures. Le cahier est ouvert sur la table…
-Et à la maison, personne ne comprend la leçon.
+| Moment | Phrase (à générer, un fichier par ligne) | À l'image |
+|---|---|---|
+| 0–5,8 s | 1. « Vingt heures. Le cahier est ouvert… et à la maison, personne ne comprend. » | Capture 01 (la maman et sa fille), assombrie ; « 20 h. » en très grand, puis « Personne ne comprend. » en rouge |
+| 6,3–12,5 s | 2. « Avec Klas deux-trois-sept, l'école et la maison avancent ensemble… du SIL à la Terminale. » | Le logo claque, l'accueil du site (02), puis le primaire (03) et le secondaire (04) qui glissent, pastilles SIL → Tle |
+| 13,5–21 s | 3. « Parents : chaque soir, dix minutes et un petit exercice… et des progrès que vous voyez enfin. » | « Ce soir avec Alex » (05), zoom sur le minuteur 10:00 (06), puis « Ses progrès » et les barres par matière (07) |
+| 21–25 s | (musique seule) | Les barres de progrès se remplissent, « 2 soirs de suite » s'allume |
+| 25–32,5 s | 4. « Une leçon bloque ? L'assistant l'explique autrement, avec des exemples d'ici : le marché, les francs CFA. » | Fond sombre ; gros plan sur la réponse « Au marché : 8 tomates à 400 FCFA » (08), puis les boutons Dicter / Photo du cahier (09) |
+| 33,5–40,5 s | 5. « Enseignants : l'appel en trente secondes, les notes, et le programme toujours à jour. » | L'enseignante et sa classe (10), puis « Ma classe aujourd'hui » (11), « Évaluations et notes » (12), « Où devrais-je en être ? » (13) |
+| 41,5–46,5 s | 6. « Élèves : des séances de révision… et des indices, pas des réponses. » | Fond or ; le minuteur 15:00 « Réviser » (14), puis « Ma journée » et le bouton « Un indice » (15) |
+| 47,5–54,5 s | 7. « Sept jours gratuits, puis dès deux mille francs CFA par mois, par Orange Money ou MTN MoMo. » | Badge « 7 jours gratuits », la page des offres (16, 17), pastilles Orange Money et MTN MoMo |
+| 55–60 s | 8. « Klas deux-trois-sept. De petits pas… de grandes réussites. » | Logo (18), klas237.jengu-ai.com, WhatsApp +237 672 705 729, « Une création JenguAI » |
 
-[6-12 s · captures 02, 03 et 04]
-Avec Klas deux-trois-sept, l'école et la maison avancent enfin ensemble.
-Du SIL… à la Terminale.
+Le texte à coller dans Flow, un bloc par génération (sans le numéro ni les guillemets) :
 
-[12-22 s · captures 05 à 07]
-Parents : chaque soir, vous savez quoi faire.
-Dix minutes, un petit exercice avec votre enfant…
-Et des progrès que vous voyez, matière par matière.
-
-[22-32 s · captures 08 et 09]
-Une leçon bloque ? L'assistant l'explique autrement…
-avec des exemples d'ici : le marché, les tomates, les francs CFA.
-Vous pouvez même dicter votre question… ou photographier le cahier.
-
-[32-41 s · captures 10 à 13]
-Enseignants : l'appel en trente secondes, les notes, les bulletins…
-Et vous savez toujours où vous en êtes dans le programme.
-
-[41-48 s · captures 14 et 15]
-Élèves : des séances de révision chronométrées…
-Et des indices… jamais la réponse toute faite.
-
-[48-55 s · captures 16 et 17]
-Sept jours gratuits pour essayer.
-Ensuite, dès deux mille francs CFA par mois, par Orange Money ou MTN Mobile Money.
-
-[55-60 s · capture 18, le logo]
-Klas deux-trois-sept, par JenguAI.
-De petits pas… de grandes réussites.
-
-(Pour l'écran final, j'écris l'adresse à l'image : klas237.jengu-ai.com, et le WhatsApp +237 672 705 729.
- La voix ne la lit pas, pour ne pas dépasser la minute.)
+1. Vingt heures. Le cahier est ouvert… et à la maison, personne ne comprend.
+2. Avec Klas deux-trois-sept, l'école et la maison avancent ensemble… du SIL à la Terminale.
+3. Parents : chaque soir, dix minutes et un petit exercice… et des progrès que vous voyez enfin.
+4. Une leçon bloque ? L'assistant l'explique autrement, avec des exemples d'ici : le marché, les francs CFA.
+5. Enseignants : l'appel en trente secondes, les notes, et le programme toujours à jour.
+6. Élèves : des séances de révision… et des indices, pas des réponses.
+7. Sept jours gratuits, puis dès deux mille francs CFA par mois, par Orange Money ou MTN MoMo.
+8. Klas deux-trois-sept. De petits pas… de grandes réussites.
 
 
 B. GÉNÉRER LA VOIX DANS FLOW
@@ -52,8 +38,7 @@ B. GÉNÉRER LA VOIX DANS FLOW
    « Voix d'une maman ou d'une grande sœur camerounaise, chaleureuse et rassurante, qui parle à des parents fatigués le soir.
      Débit posé, sourire dans la voix, une vraie pause sur chaque « … ». Le premier bloc est un peu grave, les suivants plus lumineux. »
 4. Vitesse : légèrement en dessous de la normale (0,95 si le réglage existe).
-5. Générez BLOC PAR BLOC (les 8 blocs entre crochets ci-dessus), pas tout d'un coup :
-   - ne collez que les phrases, sans la ligne « [0-6 s · capture 01] » ;
+5. Générez BLOC PAR BLOC (les 8 phrases ci-dessus), pas tout d'un coup :
    - générez 2 ou 3 versions de chaque bloc et gardez la meilleure ;
    - nommez les fichiers 1.mp3, 2.mp3 … 8.mp3 (ou .wav), dans l'ordre des blocs.
 6. Envoyez-moi les 8 fichiers ici. Un seul fichier avec tout le texte marche aussi.
