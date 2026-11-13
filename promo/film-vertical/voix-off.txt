@@ -7,8 +7,8 @@ Entre les phrases, la musique joue seule une seconde environ : c'est voulu, ça 
 
 | Moment | Phrase (à générer, un fichier par ligne) | À l'image |
 |---|---|---|
-| 0–5,8 s | 1. « Vingt heures. Le cahier est ouvert… et à la maison, personne ne comprend. » | Capture 01 (la maman et sa fille), assombrie ; « 20 h. » en très grand, puis « Personne ne comprend. » en rouge |
-| 6,3–12,5 s | 2. « Avec Klas deux-trois-sept, l'école et la maison avancent ensemble… du SIL à la Terminale. » | Le logo claque, l'accueil du site (02), puis le primaire (03) et le secondaire (04) qui glissent, pastilles SIL → Tle |
+| 0–6,3 s | 1. « Vingt heures. Le petit tend son cahier : “Papa, aide-moi.” Papa regarde… regarde encore… “Euh… va demander à ta mère.” » | « 20 h. » en très grand sur la capture 01 assombrie ; une bulle « Papa, aide-moi. », puis la réponse « Euh… va demander à ta mère. » |
+| 6,8–12,8 s | 2. « Avec Klas deux-trois-sept, l'école et la maison avancent ensemble… du SIL à la Terminale. » | Le logo claque, l'accueil du site (02), puis le primaire (03) et le secondaire (04) qui glissent, pastilles SIL → Tle |
 | 13,5–21 s | 3. « Parents : chaque soir, dix minutes et un petit exercice… et des progrès que vous voyez enfin. » | « Ce soir avec Alex » (05), zoom sur le minuteur 10:00 (06), puis « Ses progrès » et les barres par matière (07) |
 | 21–25 s | (musique seule) | Les barres de progrès se remplissent, « 2 soirs de suite » s'allume |
 | 25–32,5 s | 4. « Une leçon bloque ? L'assistant l'explique autrement, avec des exemples d'ici : le marché, les francs CFA. » | Fond sombre ; gros plan sur la réponse « Au marché : 8 tomates à 400 FCFA » (08), puis les boutons Dicter / Photo du cahier (09) |
@@ -19,7 +19,7 @@ Entre les phrases, la musique joue seule une seconde environ : c'est voulu, ça 
 
 Le texte à coller dans Flow, un bloc par génération (sans le numéro ni les guillemets) :
 
-1. Vingt heures. Le cahier est ouvert… et à la maison, personne ne comprend.
+1. Vingt heures. Le petit tend son cahier : « Papa, aide-moi. » Papa regarde… regarde encore… « Euh… va demander à ta mère. »
 2. Avec Klas deux-trois-sept, l'école et la maison avancent ensemble… du SIL à la Terminale.
 3. Parents : chaque soir, dix minutes et un petit exercice… et des progrès que vous voyez enfin.
 4. Une leçon bloque ? L'assistant l'explique autrement, avec des exemples d'ici : le marché, les francs CFA.
@@ -35,7 +35,7 @@ B. GÉNÉRER LA VOIX DANS FLOW
    Si Flow propose un accent d'Afrique francophone, prenez-le : il sonnera plus proche des parents camerounais.
    Écoutez 4 ou 5 voix avec la première phrase du texte et gardez la plus chaleureuse.
 3. Si Flow accepte une consigne de style (un champ « instructions », « style » ou « prompt »), collez celle-ci :
-   « Voix d'une maman ou d'une grande sœur camerounaise, chaleureuse et rassurante, qui parle à des parents fatigués le soir.
+   « Voix d'une maman ou d'une grande sœur camerounaise (sur la phrase 1, ton complice et amusé : on joue la scène du papa qui hésite), chaleureuse et rassurante, qui parle à des parents fatigués le soir.
      Débit posé, sourire dans la voix, une vraie pause sur chaque « … ». Le premier bloc est un peu grave, les suivants plus lumineux. »
 4. Vitesse : légèrement en dessous de la normale (0,95 si le réglage existe).
 5. Générez BLOC PAR BLOC (les 8 phrases ci-dessus), pas tout d'un coup :
