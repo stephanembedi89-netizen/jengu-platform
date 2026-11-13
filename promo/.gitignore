@@ -9,3 +9,7 @@ film-vertical/.om/
 film-vertical/index-*.png
 film-vertical/assets/sound.wav
 shots2/
+film-bd/out/
+film-bd/.om/
+film-bd/index-*.png
+film-bd/assets/sound.wav

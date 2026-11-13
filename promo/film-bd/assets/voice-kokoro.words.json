@@ -1,0 +1,890 @@
+{
+ "source": "tts:kokoro:ff_siwis",
+ "precision": "tts",
+ "offset": 0,
+ "duration": 50.984,
+ "sentences": [
+  {
+   "text": "Vingt heures.",
+   "start": 0,
+   "end": 0.737
+  },
+  {
+   "text": "La petite tend son cahier : « Papa, aide-moi.",
+   "start": 1.337,
+   "end": 3.507
+  },
+  {
+   "text": "» Papa regarde… regarde encore… « Euh… va demander à ta mère.",
+   "start": 4.107,
+   "end": 7.358
+  },
+  {
+   "text": "Maman sourit… et ouvre Klasse deux-trois-sept.",
+   "start": 7.958,
+   "end": 10.214
+  },
+  {
+   "text": "Du SIL à la Terminale, l'école et la maison avancent ensemble.",
+   "start": 10.815,
+   "end": 14.575
+  },
+  {
+   "text": "Ce soir, dix minutes, un petit exercice, on fait ça ensemble… et les progrès se voient, matière par matière.",
+   "start": 15.175,
+   "end": 21.398
+  },
+  {
+   "text": "La leçon bloque encore ?",
+   "start": 21.998,
+   "end": 23.338
+  },
+  {
+   "text": "L'assistant l'explique autrement : au marché, huit tomates, quatre cents francs… Même papa a compris !",
+   "start": 23.937,
+   "end": 28.997
+  },
+  {
+   "text": "À l'école, l'enseignant suit tout : l'appel en trente secondes, les notes, et le programme toujours à jour.",
+   "start": 29.597,
+   "end": 34.872
+  },
+  {
+   "text": "Et le grand frère, au lycée, révise seul : des indices… pas les réponses.",
+   "start": 35.472,
+   "end": 39.417
+  },
+  {
+   "text": "Sept jours gratuits, puis dès deux mille francs CFA par mois, par Orange Money ou MTN MoMo.",
+   "start": 40.018,
+   "end": 45.103
+  },
+  {
+   "text": "Klasse deux-trois-sept : maintenant, c'est papa qui explique.",
+   "start": 45.702,
+   "end": 48.595
+  },
+  {
+   "text": "De petits pas… de grandes réussites.",
+   "start": 49.195,
+   "end": 50.984
+  }
+ ],
+ "words": [
+  {
+   "word": "Vingt",
+   "start": 0,
+   "end": 0.246
+  },
+  {
+   "word": "heures",
+   "start": 0.246,
+   "end": 0.737
+  },
+  {
+   "word": "La",
+   "start": 1.337,
+   "end": 1.49
+  },
+  {
+   "word": "petite",
+   "start": 1.49,
+   "end": 1.948
+  },
+  {
+   "word": "tend",
+   "start": 1.948,
+   "end": 2.1
+  },
+  {
+   "word": "son",
+   "start": 2.1,
+   "end": 2.253
+  },
+  {
+   "word": "cahier",
+   "start": 2.253,
+   "end": 2.558
+  },
+  {
+   "word": "Papa",
+   "start": 2.558,
+   "end": 3.04
+  },
+  {
+   "word": "aide-moi",
+   "start": 3.04,
+   "end": 3.507
+  },
+  {
+   "word": "Papa",
+   "start": 4.107,
+   "end": 4.407
+  },
+  {
+   "word": "regarde",
+   "start": 4.407,
+   "end": 4.857
+  },
+  {
+   "word": "regarde",
+   "start": 4.857,
+   "end": 5.297
+  },
+  {
+   "word": "encore",
+   "start": 5.297,
+   "end": 5.737
+  },
+  {
+   "word": "Euh",
+   "start": 5.737,
+   "end": 5.91
+  },
+  {
+   "word": "va",
+   "start": 5.91,
+   "end": 6.192
+  },
+  {
+   "word": "demander",
+   "start": 6.192,
+   "end": 6.629
+  },
+  {
+   "word": "à",
+   "start": 6.629,
+   "end": 6.775
+  },
+  {
+   "word": "ta",
+   "start": 6.775,
+   "end": 6.921
+  },
+  {
+   "word": "m",
+   "start": 6.921,
+   "end": 7.066
+  },
+  {
+   "word": "è",
+   "start": 7.066,
+   "end": 7.212
+  },
+  {
+   "word": "re",
+   "start": 7.212,
+   "end": 7.358
+  },
+  {
+   "word": "Maman",
+   "start": 7.958,
+   "end": 8.331
+  },
+  {
+   "word": "sourit",
+   "start": 8.331,
+   "end": 8.704
+  },
+  {
+   "word": "et",
+   "start": 8.723,
+   "end": 8.909
+  },
+  {
+   "word": "ouvre",
+   "start": 8.909,
+   "end": 9.282
+  },
+  {
+   "word": "Klasse",
+   "start": 9.282,
+   "end": 9.655
+  },
+  {
+   "word": "deux-trois-sept",
+   "start": 9.655,
+   "end": 10.214
+  },
+  {
+   "word": "Du",
+   "start": 10.815,
+   "end": 10.99
+  },
+  {
+   "word": "SIL",
+   "start": 10.99,
+   "end": 11.166
+  },
+  {
+   "word": "à",
+   "start": 11.166,
+   "end": 11.341
+  },
+  {
+   "word": "la",
+   "start": 11.341,
+   "end": 11.517
+  },
+  {
+   "word": "Terminale",
+   "start": 11.517,
+   "end": 12.219
+  },
+  {
+   "word": "l",
+   "start": 12.434,
+   "end": 12.574
+  },
+  {
+   "word": "é",
+   "start": 12.588,
+   "end": 12.728
+  },
+  {
+   "word": "cole",
+   "start": 12.728,
+   "end": 13.171
+  },
+  {
+   "word": "et",
+   "start": 13.171,
+   "end": 13.311
+  },
+  {
+   "word": "la",
+   "start": 13.311,
+   "end": 13.452
+  },
+  {
+   "word": "maison",
+   "start": 13.452,
+   "end": 13.733
+  },
+  {
+   "word": "avancent",
+   "start": 13.733,
+   "end": 14.154
+  },
+  {
+   "word": "ensemble",
+   "start": 14.154,
+   "end": 14.575
+  },
+  {
+   "word": "Ce",
+   "start": 15.175,
+   "end": 15.343
+  },
+  {
+   "word": "soir",
+   "start": 15.343,
+   "end": 15.511
+  },
+  {
+   "word": "dix",
+   "start": 15.511,
+   "end": 15.675
+  },
+  {
+   "word": "minutes",
+   "start": 15.675,
+   "end": 16.166
+  },
+  {
+   "word": "un",
+   "start": 16.166,
+   "end": 16.328
+  },
+  {
+   "word": "petit",
+   "start": 16.328,
+   "end": 16.794
+  },
+  {
+   "word": "exercice",
+   "start": 16.794,
+   "end": 17.442
+  },
+  {
+   "word": "on",
+   "start": 17.442,
+   "end": 17.605
+  },
+  {
+   "word": "fait",
+   "start": 17.605,
+   "end": 17.767
+  },
+  {
+   "word": "ç",
+   "start": 17.767,
+   "end": 18.159
+  },
+  {
+   "word": "a",
+   "start": 18.159,
+   "end": 18.321
+  },
+  {
+   "word": "ensemble",
+   "start": 18.321,
+   "end": 18.808
+  },
+  {
+   "word": "et",
+   "start": 18.808,
+   "end": 18.97
+  },
+  {
+   "word": "les",
+   "start": 18.97,
+   "end": 19.132
+  },
+  {
+   "word": "progr",
+   "start": 19.132,
+   "end": 19.294
+  },
+  {
+   "word": "è",
+   "start": 19.294,
+   "end": 19.456
+  },
+  {
+   "word": "s",
+   "start": 19.456,
+   "end": 19.619
+  },
+  {
+   "word": "se",
+   "start": 19.619,
+   "end": 19.781
+  },
+  {
+   "word": "voient",
+   "start": 19.781,
+   "end": 19.943
+  },
+  {
+   "word": "mati",
+   "start": 19.943,
+   "end": 20.266
+  },
+  {
+   "word": "è",
+   "start": 20.266,
+   "end": 20.428
+  },
+  {
+   "word": "re",
+   "start": 20.428,
+   "end": 20.59
+  },
+  {
+   "word": "par",
+   "start": 20.59,
+   "end": 20.751
+  },
+  {
+   "word": "mati",
+   "start": 20.751,
+   "end": 21.075
+  },
+  {
+   "word": "è",
+   "start": 21.075,
+   "end": 21.236
+  },
+  {
+   "word": "re",
+   "start": 21.236,
+   "end": 21.398
+  },
+  {
+   "word": "La",
+   "start": 21.998,
+   "end": 22.147
+  },
+  {
+   "word": "le",
+   "start": 22.147,
+   "end": 22.296
+  },
+  {
+   "word": "ç",
+   "start": 22.296,
+   "end": 22.444
+  },
+  {
+   "word": "on",
+   "start": 22.444,
+   "end": 22.593
+  },
+  {
+   "word": "bloque",
+   "start": 22.593,
+   "end": 22.891
+  },
+  {
+   "word": "encore",
+   "start": 22.891,
+   "end": 23.338
+  },
+  {
+   "word": "L'assistant",
+   "start": 23.937,
+   "end": 24.566
+  },
+  {
+   "word": "l'explique",
+   "start": 24.566,
+   "end": 25.195
+  },
+  {
+   "word": "autrement",
+   "start": 25.195,
+   "end": 25.833
+  },
+  {
+   "word": "au",
+   "start": 25.833,
+   "end": 25.994
+  },
+  {
+   "word": "march",
+   "start": 25.994,
+   "end": 26.155
+  },
+  {
+   "word": "é",
+   "start": 26.155,
+   "end": 26.316
+  },
+  {
+   "word": "huit",
+   "start": 26.316,
+   "end": 26.617
+  },
+  {
+   "word": "tomates",
+   "start": 26.617,
+   "end": 27.096
+  },
+  {
+   "word": "quatre",
+   "start": 27.096,
+   "end": 27.416
+  },
+  {
+   "word": "cents",
+   "start": 27.416,
+   "end": 27.575
+  },
+  {
+   "word": "francs",
+   "start": 27.575,
+   "end": 27.735
+  },
+  {
+   "word": "M",
+   "start": 27.735,
+   "end": 27.893
+  },
+  {
+   "word": "ê",
+   "start": 27.893,
+   "end": 28.051
+  },
+  {
+   "word": "me",
+   "start": 28.051,
+   "end": 28.208
+  },
+  {
+   "word": "papa",
+   "start": 28.208,
+   "end": 28.524
+  },
+  {
+   "word": "a",
+   "start": 28.524,
+   "end": 28.682
+  },
+  {
+   "word": "compris",
+   "start": 28.682,
+   "end": 28.997
+  },
+  {
+   "word": "À",
+   "start": 29.597,
+   "end": 29.75
+  },
+  {
+   "word": "l",
+   "start": 29.75,
+   "end": 29.903
+  },
+  {
+   "word": "é",
+   "start": 29.918,
+   "end": 30.071
+  },
+  {
+   "word": "cole",
+   "start": 30.071,
+   "end": 30.376
+  },
+  {
+   "word": "l'enseignant",
+   "start": 30.376,
+   "end": 30.986
+  },
+  {
+   "word": "suit",
+   "start": 30.986,
+   "end": 31.139
+  },
+  {
+   "word": "tout",
+   "start": 31.139,
+   "end": 31.516
+  },
+  {
+   "word": "l'appel",
+   "start": 31.516,
+   "end": 31.971
+  },
+  {
+   "word": "en",
+   "start": 31.971,
+   "end": 32.122
+  },
+  {
+   "word": "trente",
+   "start": 32.122,
+   "end": 32.425
+  },
+  {
+   "word": "secondes",
+   "start": 32.425,
+   "end": 32.88
+  },
+  {
+   "word": "les",
+   "start": 32.88,
+   "end": 33.035
+  },
+  {
+   "word": "notes",
+   "start": 33.035,
+   "end": 33.508
+  },
+  {
+   "word": "et",
+   "start": 33.508,
+   "end": 33.659
+  },
+  {
+   "word": "le",
+   "start": 33.659,
+   "end": 33.811
+  },
+  {
+   "word": "programme",
+   "start": 33.811,
+   "end": 34.266
+  },
+  {
+   "word": "toujours",
+   "start": 34.266,
+   "end": 34.569
+  },
+  {
+   "word": "à",
+   "start": 34.569,
+   "end": 34.72
+  },
+  {
+   "word": "jour",
+   "start": 34.72,
+   "end": 34.872
+  },
+  {
+   "word": "Et",
+   "start": 35.472,
+   "end": 35.622
+  },
+  {
+   "word": "le",
+   "start": 35.622,
+   "end": 35.772
+  },
+  {
+   "word": "grand",
+   "start": 35.772,
+   "end": 35.921
+  },
+  {
+   "word": "fr",
+   "start": 35.921,
+   "end": 36.071
+  },
+  {
+   "word": "è",
+   "start": 36.071,
+   "end": 36.221
+  },
+  {
+   "word": "re",
+   "start": 36.221,
+   "end": 36.37
+  },
+  {
+   "word": "au",
+   "start": 36.37,
+   "end": 36.521
+  },
+  {
+   "word": "lyc",
+   "start": 36.521,
+   "end": 36.672
+  },
+  {
+   "word": "é",
+   "start": 36.672,
+   "end": 36.823
+  },
+  {
+   "word": "e",
+   "start": 36.823,
+   "end": 36.974
+  },
+  {
+   "word": "r",
+   "start": 36.974,
+   "end": 37.124
+  },
+  {
+   "word": "é",
+   "start": 37.124,
+   "end": 37.274
+  },
+  {
+   "word": "vise",
+   "start": 37.274,
+   "end": 37.575
+  },
+  {
+   "word": "seul",
+   "start": 37.575,
+   "end": 37.725
+  },
+  {
+   "word": "des",
+   "start": 37.725,
+   "end": 38.067
+  },
+  {
+   "word": "indices",
+   "start": 38.067,
+   "end": 38.519
+  },
+  {
+   "word": "pas",
+   "start": 38.519,
+   "end": 38.669
+  },
+  {
+   "word": "les",
+   "start": 38.669,
+   "end": 38.819
+  },
+  {
+   "word": "r",
+   "start": 38.819,
+   "end": 38.968
+  },
+  {
+   "word": "é",
+   "start": 38.968,
+   "end": 39.118
+  },
+  {
+   "word": "ponses",
+   "start": 39.118,
+   "end": 39.417
+  },
+  {
+   "word": "Sept",
+   "start": 40.018,
+   "end": 40.271
+  },
+  {
+   "word": "jours",
+   "start": 40.271,
+   "end": 40.524
+  },
+  {
+   "word": "gratuits",
+   "start": 40.524,
+   "end": 41.03
+  },
+  {
+   "word": "puis",
+   "start": 41.227,
+   "end": 41.395
+  },
+  {
+   "word": "d",
+   "start": 41.395,
+   "end": 41.563
+  },
+  {
+   "word": "è",
+   "start": 41.563,
+   "end": 41.732
+  },
+  {
+   "word": "s",
+   "start": 41.732,
+   "end": 41.9
+  },
+  {
+   "word": "deux",
+   "start": 41.9,
+   "end": 42.068
+  },
+  {
+   "word": "mille",
+   "start": 42.068,
+   "end": 42.405
+  },
+  {
+   "word": "francs",
+   "start": 42.405,
+   "end": 42.573
+  },
+  {
+   "word": "CFA",
+   "start": 42.573,
+   "end": 42.742
+  },
+  {
+   "word": "par",
+   "start": 42.742,
+   "end": 42.91
+  },
+  {
+   "word": "mois",
+   "start": 42.91,
+   "end": 43.079
+  },
+  {
+   "word": "par",
+   "start": 43.313,
+   "end": 43.492
+  },
+  {
+   "word": "Orange",
+   "start": 43.492,
+   "end": 44.029
+  },
+  {
+   "word": "Money",
+   "start": 44.029,
+   "end": 44.387
+  },
+  {
+   "word": "ou",
+   "start": 44.387,
+   "end": 44.566
+  },
+  {
+   "word": "MTN",
+   "start": 44.566,
+   "end": 44.745
+  },
+  {
+   "word": "MoMo",
+   "start": 44.745,
+   "end": 45.103
+  },
+  {
+   "word": "Klasse",
+   "start": 45.702,
+   "end": 46.046
+  },
+  {
+   "word": "deux-trois-sept",
+   "start": 46.046,
+   "end": 46.561
+  },
+  {
+   "word": "maintenant",
+   "start": 46.561,
+   "end": 47.231
+  },
+  {
+   "word": "c'est",
+   "start": 47.231,
+   "end": 47.572
+  },
+  {
+   "word": "papa",
+   "start": 47.572,
+   "end": 47.913
+  },
+  {
+   "word": "qui",
+   "start": 47.913,
+   "end": 48.084
+  },
+  {
+   "word": "explique",
+   "start": 48.084,
+   "end": 48.595
+  },
+  {
+   "word": "De",
+   "start": 49.195,
+   "end": 49.343
+  },
+  {
+   "word": "petits",
+   "start": 49.343,
+   "end": 49.639
+  },
+  {
+   "word": "pas",
+   "start": 49.639,
+   "end": 49.787
+  },
+  {
+   "word": "de",
+   "start": 49.801,
+   "end": 49.949
+  },
+  {
+   "word": "grandes",
+   "start": 49.949,
+   "end": 50.245
+  },
+  {
+   "word": "r",
+   "start": 50.245,
+   "end": 50.393
+  },
+  {
+   "word": "é",
+   "start": 50.393,
+   "end": 50.541
+  },
+  {
+   "word": "ussites",
+   "start": 50.541,
+   "end": 50.984
+  }
+ ]
+}

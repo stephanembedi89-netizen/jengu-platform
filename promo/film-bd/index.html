@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="fr" data-om-signature="off" data-composition-variables='[
+  {"id":"url","type":"string","label":"Adresse du site","default":"klas237.jengu-ai.com"},
+  {"id":"whatsapp","type":"string","label":"WhatsApp","default":"+237 672 705 729"}
+]'>
+<head>
+<meta charset="utf-8">
+<title>Klas 237 · « Va demander à ta mère » · 60 s</title>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/om.js"></script>
+<style id="om-fonts">
+@font-face{font-family:"Bricolage";src:url("assets/fonts/Bricolage-var.woff2") format("woff2");font-weight:200 800}
+@font-face{font-family:"Manrope";src:url("assets/fonts/Manrope-600.woff2") format("woff2");font-weight:600}
+@font-face{font-family:"Manrope";src:url("assets/fonts/Manrope-700.woff2") format("woff2");font-weight:700}
+@font-face{font-family:"Caveat";src:url("assets/fonts/Caveat-700.woff2") format("woff2");font-weight:700}
+</style>
+<style>
+:root{--green:#007a5e;--red:#ce1126;--gold:#fcd116;--ink:#141b2e;--paper:#f6f1e4;--soft:#e6f4ee}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}
+#film{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:"Manrope",sans-serif;font-weight:600}
+.sc{position:absolute;inset:0;visibility:hidden;overflow:hidden}
+#s1{visibility:visible}
+.abs{position:absolute}
+.d{font-family:"Bricolage",sans-serif;font-weight:780;letter-spacing:-.025em;line-height:1}
+/* papier de BD : trame de points + grain */
+.page{position:absolute;inset:-60px;background-color:var(--paper);background-image:radial-gradient(rgba(20,27,46,.10) 2.4px,transparent 2.9px);background-size:26px 26px}
+.page.dark{background-color:#141b2e;background-image:radial-gradient(rgba(255,255,255,.07) 2.4px,transparent 2.9px)}
+.page.gold{background-color:#fcd116;background-image:radial-gradient(rgba(20,27,46,.12) 2.4px,transparent 2.9px)}
+.page.green{background-color:#007a5e;background-image:radial-gradient(rgba(255,255,255,.10) 2.4px,transparent 2.9px)}
+.stripe{position:absolute;left:0;right:0;top:0;height:14px;z-index:70;background:linear-gradient(90deg,var(--green) 0 33.3%,var(--red) 33.3% 66.6%,var(--gold) 66.6% 100%)}
+/* case de BD */
+.panel{position:absolute;border:10px solid var(--ink);border-radius:22px;overflow:hidden;background:#fff;box-shadow:16px 16px 0 var(--ink)}
+.panel .art{position:absolute;inset:0;background-repeat:no-repeat}
+.panel .tone{position:absolute;inset:0;background-image:radial-gradient(rgba(20,27,46,.18) 1.6px,transparent 2px);background-size:9px 9px;mix-blend-mode:multiply;opacity:.55;pointer-events:none}
+.panel .warm{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,rgba(255,180,80,0) 50%,rgba(40,20,0,.38));pointer-events:none}
+.cap{position:absolute;z-index:5;padding:16px 26px;background:var(--gold);border:7px solid var(--ink);border-radius:10px;font:780 64px/1 "Bricolage";letter-spacing:-.02em;box-shadow:8px 8px 0 var(--ink);white-space:nowrap}
+/* bulle */
+.bub{position:absolute;padding:26px 36px;background:#fff;border:7px solid var(--ink);border-radius:60px;font:760 56px/1.1 "Bricolage";letter-spacing:-.02em;color:var(--ink);box-shadow:8px 8px 0 rgba(20,27,46,.9)}
+.bub::after{content:"";position:absolute;width:44px;height:44px;background:#fff;border-right:7px solid var(--ink);border-bottom:7px solid var(--ink);transform:rotate(45deg)}
+.bub.down::after{left:90px;bottom:-29px}
+.bub.up::after{left:120px;top:-29px;transform:rotate(225deg)}
+.bub.downr::after{right:110px;bottom:-29px}
+.sfx{position:absolute;font:800 150px/1 "Bricolage";color:var(--gold);-webkit-text-stroke:7px var(--ink);paint-order:stroke fill;letter-spacing:-.03em}
+/* téléphone : écran = capture 780×1688 */
+.ph{position:absolute;border-radius:70px;background:#0d1220;padding:12px;box-sizing:border-box;box-shadow:0 60px 110px -40px rgba(20,27,46,.7),0 0 0 3px #2a3146 inset,14px 14px 0 var(--ink)}
+.ph .scr{position:relative;width:100%;height:100%;border-radius:58px;overflow:hidden;background:#f6f4ee}
+.ph .scr img{position:absolute;left:0;top:0;width:100%;height:auto;display:block}
+.chip{position:absolute;display:inline-flex;align-items:center;gap:16px;padding:20px 32px;border-radius:999px;border:6px solid var(--ink);background:#fff;font:760 46px/1 "Bricolage";letter-spacing:-.015em;white-space:nowrap;box-shadow:7px 7px 0 var(--ink)}
+.dot{width:26px;height:26px;border-radius:50%;background:var(--green);flex:none}
+/* sous-titres permanents (zone sûre) */
+#subs{position:absolute;left:60px;right:60px;top:1360px;height:150px;z-index:65;display:flex;align-items:center;justify-content:center;text-align:center}
+#subs span{display:inline-block;padding:16px 28px;border-radius:22px;background:rgba(20,27,46,.92);color:#fff;font:700 44px/1.25 "Manrope";max-width:940px}
+#subs b{color:var(--gold);font-weight:700}
+.wipe{position:absolute;left:-30%;right:-30%;height:200%;top:-200%;z-index:60;transform:skewY(-9deg)}
+.bar{position:absolute;left:0;height:56px;border-radius:999px;border:6px solid var(--ink);box-sizing:border-box;transform-origin:0 50%}
+</style>
+</head>
+<body>
+<div id="film" data-composition-id="film" data-width="1080" data-height="1920">
+  <audio id="om-sound" src="assets/sound.wav" data-start="0" data-duration="60" data-track-index="8" data-volume="1"></audio>
+<div class="stripe"></div>
+
+<!-- 1 · 20 h, papa ne sait pas -->
+<section class="sc" id="s1"><div class="page"></div>
+  <div class="cap" id="s1-cap" style="left:70px;top:270px;transform:rotate(-3deg)">20 h.</div>
+  <div class="panel" id="s1-pa" data-om-id="panel-papa" style="left:70px;top:400px;width:940px;height:780px">
+    <div class="art" id="s1-art" style="background-image:url(assets/ill/coach.jpg);background-size:2700px auto;background-position:-1230px -120px"></div><div class="warm"></div><div class="tone"></div>
+  </div>
+  <svg class="abs" id="s1-sweat" style="left:640px;top:520px" width="70" height="100" viewBox="0 0 70 100"><path d="M35 4 C 50 34 64 52 64 68 A29 29 0 0 1 6 68 C 6 52 20 34 35 4Z" fill="#7fd3ff" stroke="#141b2e" stroke-width="6"/><path d="M22 66 a12 12 0 0 0 10 14" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round"/></svg>
+  <div class="sfx q" style="left:180px;top:430px;transform:rotate(-14deg)">?</div>
+  <div class="sfx q" style="left:860px;top:450px;transform:rotate(12deg);font-size:120px">?</div>
+  <div class="sfx q" style="left:770px;top:330px;transform:rotate(4deg);font-size:96px">?</div>
+  <div class="bub down" id="s1-b1" style="left:90px;top:1050px">Papa, aide-moi.</div>
+  <div class="bub downr" id="s1-b2" style="right:70px;top:1030px;max-width:760px">Euh… va demander<br>à ta mère.</div>
+</section>
+
+<!-- 2 · Maman a la solution -->
+<section class="sc" id="s2"><div class="page"></div>
+  <div class="panel" id="s2-pa" data-om-id="panel-maman" style="left:70px;top:300px;width:940px;height:640px">
+    <div class="art" style="background-image:url(assets/ill/family.jpg);background-size:1280px auto;background-position:-40px -50px"></div><div class="warm" style="opacity:.6"></div><div class="tone"></div>
+  </div>
+  <div class="cap" id="s2-cap" style="left:70px;top:255px;transform:rotate(-2deg);font-size:54px">Maman, elle, a la solution.</div>
+  <div class="ph" id="ph2" data-om-id="phone-accueil" style="left:560px;top:600px;width:440px;height:952px"><div class="scr"><img src="assets/cap/02-accueil-site.png"></div></div>
+  <div class="abs" id="s2-glow" style="left:480px;top:520px;width:600px;height:1100px;border-radius:50%;background:radial-gradient(closest-side,rgba(252,209,22,.55),rgba(252,209,22,0))"></div>
+  <div class="panel" id="s2-p1" style="left:70px;top:1000px;width:440px;height:300px"><div class="art" style="background-image:url(assets/ill/primary.jpg);background-size:460px auto;background-position:-10px -30px"></div><div class="tone"></div></div>
+  <div class="chip" id="s2-c1" style="left:90px;top:1190px;font-size:38px;padding:14px 24px"><span class="dot" style="background:var(--gold)"></span>SIL → CM2</div>
+</section>
+
+<!-- 3 · Ce soir, 10 minutes ensemble -->
+<section class="sc" id="s3"><div class="page"></div>
+  <div class="panel" id="s3-bg" style="left:-40px;top:220px;width:1160px;height:1180px;border:0;border-radius:0;box-shadow:none;filter:blur(10px) brightness(.85)">
+    <div class="art" style="background-image:url(assets/ill/family.jpg);background-size:auto 1180px;background-position:-300px 0"></div>
+  </div>
+  
+  <div id="s3-cam" class="abs" style="left:0;top:0;width:1080px;height:1920px;transform-origin:540px 860px">
+    <div class="ph" id="ph3" data-om-id="phone-parent" style="left:320px;top:400px;width:440px;height:952px;overflow:hidden"><div class="scr">
+      <img class="a" src="assets/cap/05-parent-ce-soir.png"><img class="b" src="assets/cap/06-parent-10-minutes.png"><img class="c" src="assets/cap/07-parent-progres.png">
+    </div></div>
+  </div>
+  <div class="chip" id="s3-c1" style="left:70px;top:980px"><span class="dot" style="background:var(--red)"></span>10 minutes</div>
+  <div class="chip" id="s3-c2" style="left:640px;top:1150px"><span class="dot" style="background:#e8590c"></span>2 soirs de suite</div>
+  <!-- respiration musicale : les progrès -->
+  <div class="abs" id="s3-prog" style="left:0;top:0;width:1080px;height:1920px">
+    <div class="page"></div>
+    <div class="cap" style="left:70px;top:290px;transform:rotate(-2deg)">Les progrès se voient</div>
+    <div class="abs d" style="left:90px;top:520px;font-size:58px">Mathématiques</div><div class="bar" id="bar1" style="left:90px;top:600px;width:820px;background:var(--green)"></div><div class="abs d" style="left:930px;top:595px;font-size:56px">15,5</div>
+    <div class="abs d" style="left:90px;top:740px;font-size:58px">Français</div><div class="bar" id="bar2" style="left:90px;top:820px;width:780px;background:var(--green)"></div><div class="abs d" style="left:930px;top:815px;font-size:56px">14,5</div>
+    <div class="abs d" style="left:90px;top:960px;font-size:58px">Sciences</div><div class="bar" id="bar3" style="left:90px;top:1040px;width:640px;background:var(--gold)"></div><div class="abs d" style="left:930px;top:1035px;font-size:56px">12</div>
+    <div class="sfx" id="s3-yes" style="left:560px;top:1150px;transform:rotate(-8deg);font-size:130px;color:var(--green)">Bravo !</div>
+  </div>
+</section>
+
+<!-- 4 · L'assistant · même papa a compris -->
+<section class="sc" id="s4"><div class="page dark"></div>
+  <div class="cap" id="s4-cap" style="left:70px;top:270px;transform:rotate(-2deg);z-index:5">La leçon bloque ?</div>
+  <div id="s4-cam" class="abs" style="left:0;top:0;width:1080px;height:1920px;transform-origin:540px 980px">
+    <div class="ph" id="ph4" data-om-id="phone-ai" style="left:320px;top:400px;width:440px;height:952px"><div class="scr"><img src="assets/cap/08-assistant-au-marche.png"></div></div>
+    <div class="abs" id="s4-hl" style="left:343px;top:886px;width:394px;height:190px;border:9px solid var(--red);border-radius:34px"></div>
+  </div>
+  <div id="tomatoes"></div>
+  
+  <div class="abs" id="s4-burst" style="left:40px;top:330px;width:1000px;height:1000px">
+    <svg class="abs" style="left:0;top:0" width="1000" height="1000" viewBox="0 0 100 100"><polygon fill="#fcd116" stroke="#141b2e" stroke-width="1.4" points="50,2 58,30 84,12 70,38 98,44 72,56 92,80 64,68 62,98 50,74 38,98 36,68 8,80 28,56 2,44 30,38 16,12 42,30"/></svg>
+    <div class="panel" style="left:230px;top:230px;width:540px;height:540px;border-radius:50%"><div class="art" style="background-image:url(assets/ill/coach.jpg);background-size:1800px auto;background-position:-840px -90px"></div><div class="tone"></div></div>
+  </div>
+  <div class="bub up" id="s4-b" style="left:150px;top:1180px">Même papa a compris !</div>
+</section>
+
+<!-- 5 · L'enseignant -->
+<section class="sc" id="s5"><div class="page"></div>
+  <div class="panel" id="s5-pa" data-om-id="panel-enseignante" style="left:70px;top:300px;width:940px;height:540px"><div class="art" style="background-image:url(assets/ill/teacher.jpg);background-size:940px auto;background-position:0 0"></div><div class="tone"></div></div>
+  <div class="cap" id="s5-cap" style="left:70px;top:255px;transform:rotate(-2deg)">À l’école</div>
+  <div class="ph" id="ph5" data-om-id="phone-prof" style="left:540px;top:640px;width:460px;height:996px;transform:rotate(3deg)"><div class="scr"><img class="a" src="assets/cap/11-prof-aujourdhui.png"><img class="b" src="assets/cap/12-prof-notes.png"><img class="c" src="assets/cap/13-prof-programme.png"></div></div>
+  <div class="chip" id="s5-c1" style="left:70px;top:900px"><span class="dot"></span>L’appel en 30 s</div>
+  <div class="chip" id="s5-c2" style="left:70px;top:1040px"><span class="dot" style="background:var(--red)"></span>Les notes</div>
+  <div class="chip" id="s5-c3" style="left:70px;top:1180px"><span class="dot" style="background:var(--gold)"></span>Programme à jour</div>
+</section>
+
+<!-- 6 · Le grand frère -->
+<section class="sc" id="s6"><div class="page gold"></div>
+  <div class="panel" id="s6-pa" style="left:70px;top:290px;width:560px;height:420px;transform:rotate(-2deg)"><div class="art" style="background-image:url(assets/ill/secondary.jpg);background-size:700px auto;background-position:-40px -30px"></div><div class="tone"></div></div>
+  <div class="cap" id="s6-cap" style="left:90px;top:255px;transform:rotate(-3deg);background:#fff">Au lycée</div>
+  <div class="ph" id="ph6" data-om-id="phone-eleve" style="left:590px;top:420px;width:420px;height:910px;transform:rotate(4deg)"><div class="scr"><img src="assets/cap/14-eleve-revision.png"></div></div>
+  <div class="d abs" style="left:70px;top:790px;width:520px;font-size:104px"><span class="w1" style="display:block">Des</span><span class="w2" style="display:block">indices,</span><span class="w3" style="display:block">pas les</span><span class="w4" style="display:block;color:var(--red)">réponses.</span></div>
+</section>
+
+<!-- 7 · L'offre -->
+<section class="sc" id="s7"><div class="page"></div>
+  <div class="d abs" id="s7-badge" data-om-id="badge" style="left:70px;top:280px;padding:30px 46px;border-radius:30px;background:var(--gold);border:8px solid var(--ink);font-size:96px;box-shadow:12px 12px 0 var(--ink);transform-origin:0 50%">7 jours gratuits</div>
+  <div class="d abs" id="s7-pr" style="left:76px;top:500px;font-size:76px">puis dès <span style="color:var(--green)">2 000 FCFA</span> / mois</div>
+  <div class="chip" id="s7-mm" style="left:76px;top:620px"><span class="dot" style="background:#ff7900"></span>Paiement Mobile Money</div>
+  <div class="ph" id="ph7" data-om-id="phone-offres" style="left:300px;top:770px;width:480px;height:1038px;transform:rotate(-3deg)"><div class="scr"><img class="a" src="assets/cap/16-offres.png"><img class="b" src="assets/cap/17-offre-famille.png"></div></div>
+</section>
+
+<!-- 8 · Maintenant, c'est papa qui explique -->
+<section class="sc" id="s8"><div class="page green"></div>
+  <div class="panel" id="s8-pa" data-om-id="panel-final" style="left:40px;top:300px;width:1000px;height:640px"><div class="art" id="s8-art" style="background-image:url(assets/ill/coach.jpg);background-size:1140px auto;background-position:-110px -10px"></div><div class="warm" style="opacity:.5"></div><div class="tone"></div></div>
+  <div class="bub up" id="s8-b" style="left:300px;top:850px;font-size:50px">Regarde : on coupe en 4…</div>
+  <div class="d abs" id="s8-t" style="left:60px;right:60px;top:1000px;text-align:center;color:#fff;font-size:72px;line-height:1.05">Maintenant,<br><span style="color:var(--gold)">c’est papa qui explique.</span></div>
+  <div class="abs" id="s8-end" style="left:0;top:0;width:1080px;height:1920px">
+    <div class="page green"></div>
+    <div class="abs" id="s8-logo" style="left:140px;top:340px;width:800px;height:340px;border-radius:60px;background:#fffdf8;border:8px solid var(--ink);display:grid;place-items:center;box-shadow:14px 14px 0 var(--ink)"><img src="assets/logo-klas237.png" style="width:610px;height:auto"></div>
+    <div class="d abs" style="left:60px;right:60px;top:760px;text-align:center;color:#fff;font-size:92px;line-height:1.05"><span class="e1" style="display:block">De petits pas.</span><span class="e2" style="display:block;color:var(--gold)">De grandes réussites.</span></div>
+    <div class="abs" id="s8-url" style="left:0;right:0;top:1010px;text-align:center"><span class="d" style="display:inline-block;background:#fff;color:var(--ink);font-size:62px;padding:24px 50px;border-radius:999px;border:7px solid var(--ink)" data-var-text="url">klas237.jengu-ai.com</span></div>
+    <div class="abs" id="s8-wa" style="left:0;right:0;top:1170px;text-align:center;font:700 48px/1 Manrope;color:#fff">WhatsApp <span data-var-text="whatsapp">+237 672 705 729</span></div>
+    <div class="abs" id="s8-by" style="left:0;right:0;top:1265px;text-align:center;font:700 40px/1 Manrope;color:#d6f1e8">Une création <b style="color:#fff">JenguAI</b> · Douala</div>
+  </div>
+</section>
+
+<div class="wipe" id="wipe"></div>
+<div id="subs"><span id="subs-t"></span></div>
+</div>
+
+<audio id="om-voice" src="assets/voice.wav" data-start="0" data-duration="60" data-track-index="9" data-volume="1"></audio>
+<script type="application/json" id="om-cues">{"words": [{"word": "Vingt", "start": 0.3, "end": 0.546, "block": 1}, {"word": "heures", "start": 0.546, "end": 1.037, "block": 1}, {"word": "La", "start": 1.637, "end": 1.79, "block": 1}, {"word": "petite", "start": 1.79, "end": 2.248, "block": 1}, {"word": "tend", "start": 2.248, "end": 2.4, "block": 1}, {"word": "son", "start": 2.4, "end": 2.553, "block": 1}, {"word": "cahier", "start": 2.553, "end": 2.858, "block": 1}, {"word": "Papa", "start": 2.858, "end": 3.34, "block": 1}, {"word": "aide-moi", "start": 3.34, "end": 3.807, "block": 1}, {"word": "Papa", "start": 4.407, "end": 4.707, "block": 1}, {"word": "regarde", "start": 4.707, "end": 5.157, "block": 1}, {"word": "regarde", "start": 5.157, "end": 5.597, "block": 1}, {"word": "encore", "start": 5.597, "end": 6.037, "block": 1}, {"word": "Euh", "start": 6.037, "end": 6.21, "block": 1}, {"word": "va", "start": 6.21, "end": 6.492, "block": 1}, {"word": "demander", "start": 6.492, "end": 6.929, "block": 1}, {"word": "à", "start": 6.929, "end": 7.075, "block": 1}, {"word": "ta", "start": 7.075, "end": 7.221, "block": 1}, {"word": "m", "start": 7.221, "end": 7.366, "block": 1}, {"word": "è", "start": 7.366, "end": 7.512, "block": 1}, {"word": "re", "start": 7.512, "end": 7.658, "block": 1}, {"word": "Maman", "start": 8.3, "end": 8.673, "block": 2}, {"word": "sourit", "start": 8.673, "end": 9.046, "block": 2}, {"word": "et", "start": 9.065, "end": 9.251, "block": 2}, {"word": "ouvre", "start": 9.251, "end": 9.624, "block": 2}, {"word": "Klasse", "start": 9.624, "end": 9.997, "block": 2}, {"word": "deux-trois-sept", "start": 9.997, "end": 10.556, "block": 2}, {"word": "Du", "start": 11.157, "end": 11.332, "block": 2}, {"word": "SIL", "start": 11.332, "end": 11.508, "block": 2}, {"word": "à", "start": 11.508, "end": 11.683, "block": 2}, {"word": "la", "start": 11.683, "end": 11.859, "block": 2}, {"word": "Terminale", "start": 11.859, "end": 12.561, "block": 2}, {"word": "l", "start": 12.776, "end": 12.916, "block": 2}, {"word": "é", "start": 12.93, "end": 13.07, "block": 2}, {"word": "cole", "start": 13.07, "end": 13.513, "block": 2}, {"word": "et", "start": 13.513, "end": 13.653, "block": 2}, {"word": "la", "start": 13.653, "end": 13.794, "block": 2}, {"word": "maison", "start": 13.794, "end": 14.075, "block": 2}, {"word": "avancent", "start": 14.075, "end": 14.496, "block": 2}, {"word": "ensemble", "start": 14.496, "end": 14.917, "block": 2}, {"word": "Ce", "start": 15.6, "end": 15.768, "block": 3}, {"word": "soir", "start": 15.768, "end": 15.936, "block": 3}, {"word": "dix", "start": 15.936, "end": 16.1, "block": 3}, {"word": "minutes", "start": 16.1, "end": 16.591, "block": 3}, {"word": "un", "start": 16.591, "end": 16.753, "block": 3}, {"word": "petit", "start": 16.753, "end": 17.219, "block": 3}, {"word": "exercice", "start": 17.219, "end": 17.867, "block": 3}, {"word": "on", "start": 17.867, "end": 18.03, "block": 3}, {"word": "fait", "start": 18.03, "end": 18.192, "block": 3}, {"word": "ç", "start": 18.192, "end": 18.584, "block": 3}, {"word": "a", "start": 18.584, "end": 18.746, "block": 3}, {"word": "ensemble", "start": 18.746, "end": 19.233, "block": 3}, {"word": "et", "start": 19.233, "end": 19.395, "block": 3}, {"word": "les", "start": 19.395, "end": 19.557, "block": 3}, {"word": "progr", "start": 19.557, "end": 19.719, "block": 3}, {"word": "è", "start": 19.719, "end": 19.881, "block": 3}, {"word": "s", "start": 19.881, "end": 20.044, "block": 3}, {"word": "se", "start": 20.044, "end": 20.206, "block": 3}, {"word": "voient", "start": 20.206, "end": 20.368, "block": 3}, {"word": "mati", "start": 20.368, "end": 20.691, "block": 3}, {"word": "è", "start": 20.691, "end": 20.853, "block": 3}, {"word": "re", "start": 20.853, "end": 21.015, "block": 3}, {"word": "par", "start": 21.015, "end": 21.176, "block": 3}, {"word": "mati", "start": 21.176, "end": 21.5, "block": 3}, {"word": "è", "start": 21.5, "end": 21.661, "block": 3}, {"word": "re", "start": 21.661, "end": 21.823, "block": 3}, {"word": "La", "start": 25.0, "end": 25.149, "block": 4}, {"word": "le", "start": 25.149, "end": 25.298, "block": 4}, {"word": "ç", "start": 25.298, "end": 25.446, "block": 4}, {"word": "on", "start": 25.446, "end": 25.595, "block": 4}, {"word": "bloque", "start": 25.595, "end": 25.893, "block": 4}, {"word": "encore", "start": 25.893, "end": 26.34, "block": 4}, {"word": "L'assistant", "start": 26.939, "end": 27.568, "block": 4}, {"word": "l'explique", "start": 27.568, "end": 28.197, "block": 4}, {"word": "autrement", "start": 28.197, "end": 28.835, "block": 4}, {"word": "au", "start": 28.835, "end": 28.996, "block": 4}, {"word": "march", "start": 28.996, "end": 29.157, "block": 4}, {"word": "é", "start": 29.157, "end": 29.318, "block": 4}, {"word": "huit", "start": 29.318, "end": 29.619, "block": 4}, {"word": "tomates", "start": 29.619, "end": 30.098, "block": 4}, {"word": "quatre", "start": 30.098, "end": 30.418, "block": 4}, {"word": "cents", "start": 30.418, "end": 30.577, "block": 4}, {"word": "francs", "start": 30.577, "end": 30.737, "block": 4}, {"word": "M", "start": 30.737, "end": 30.895, "block": 4}, {"word": "ê", "start": 30.895, "end": 31.053, "block": 4}, {"word": "me", "start": 31.053, "end": 31.21, "block": 4}, {"word": "papa", "start": 31.21, "end": 31.526, "block": 4}, {"word": "a", "start": 31.526, "end": 31.684, "block": 4}, {"word": "compris", "start": 31.684, "end": 31.999, "block": 4}, {"word": "À", "start": 33.0, "end": 33.153, "block": 5}, {"word": "l", "start": 33.153, "end": 33.306, "block": 5}, {"word": "é", "start": 33.321, "end": 33.474, "block": 5}, {"word": "cole", "start": 33.474, "end": 33.779, "block": 5}, {"word": "l'enseignant", "start": 33.779, "end": 34.389, "block": 5}, {"word": "suit", "start": 34.389, "end": 34.542, "block": 5}, {"word": "tout", "start": 34.542, "end": 34.919, "block": 5}, {"word": "l'appel", "start": 34.919, "end": 35.374, "block": 5}, {"word": "en", "start": 35.374, "end": 35.525, "block": 5}, {"word": "trente", "start": 35.525, "end": 35.828, "block": 5}, {"word": "secondes", "start": 35.828, "end": 36.283, "block": 5}, {"word": "les", "start": 36.283, "end": 36.438, "block": 5}, {"word": "notes", "start": 36.438, "end": 36.911, "block": 5}, {"word": "et", "start": 36.911, "end": 37.062, "block": 5}, {"word": "le", "start": 37.062, "end": 37.214, "block": 5}, {"word": "programme", "start": 37.214, "end": 37.669, "block": 5}, {"word": "toujours", "start": 37.669, "end": 37.972, "block": 5}, {"word": "à", "start": 37.972, "end": 38.123, "block": 5}, {"word": "jour", "start": 38.123, "end": 38.275, "block": 5}, {"word": "Et", "start": 39.3, "end": 39.45, "block": 6}, {"word": "le", "start": 39.45, "end": 39.6, "block": 6}, {"word": "grand", "start": 39.6, "end": 39.749, "block": 6}, {"word": "fr", "start": 39.749, "end": 39.899, "block": 6}, {"word": "è", "start": 39.899, "end": 40.049, "block": 6}, {"word": "re", "start": 40.049, "end": 40.198, "block": 6}, {"word": "au", "start": 40.198, "end": 40.349, "block": 6}, {"word": "lyc", "start": 40.349, "end": 40.5, "block": 6}, {"word": "é", "start": 40.5, "end": 40.651, "block": 6}, {"word": "e", "start": 40.651, "end": 40.802, "block": 6}, {"word": "r", "start": 40.802, "end": 40.952, "block": 6}, {"word": "é", "start": 40.952, "end": 41.102, "block": 6}, {"word": "vise", "start": 41.102, "end": 41.403, "block": 6}, {"word": "seul", "start": 41.403, "end": 41.553, "block": 6}, {"word": "des", "start": 41.553, "end": 41.895, "block": 6}, {"word": "indices", "start": 41.895, "end": 42.347, "block": 6}, {"word": "pas", "start": 42.347, "end": 42.497, "block": 6}, {"word": "les", "start": 42.497, "end": 42.647, "block": 6}, {"word": "r", "start": 42.647, "end": 42.796, "block": 6}, {"word": "é", "start": 42.796, "end": 42.946, "block": 6}, {"word": "ponses", "start": 42.946, "end": 43.245, "block": 6}, {"word": "Sept", "start": 44.3, "end": 44.553, "block": 7}, {"word": "jours", "start": 44.553, "end": 44.806, "block": 7}, {"word": "gratuits", "start": 44.806, "end": 45.312, "block": 7}, {"word": "puis", "start": 45.509, "end": 45.677, "block": 7}, {"word": "d", "start": 45.677, "end": 45.845, "block": 7}, {"word": "è", "start": 45.845, "end": 46.014, "block": 7}, {"word": "s", "start": 46.014, "end": 46.182, "block": 7}, {"word": "deux", "start": 46.182, "end": 46.35, "block": 7}, {"word": "mille", "start": 46.35, "end": 46.687, "block": 7}, {"word": "francs", "start": 46.687, "end": 46.855, "block": 7}, {"word": "CFA", "start": 46.855, "end": 47.024, "block": 7}, {"word": "par", "start": 47.024, "end": 47.192, "block": 7}, {"word": "mois", "start": 47.192, "end": 47.361, "block": 7}, {"word": "par", "start": 47.595, "end": 47.774, "block": 7}, {"word": "Orange", "start": 47.774, "end": 48.311, "block": 7}, {"word": "Money", "start": 48.311, "end": 48.669, "block": 7}, {"word": "ou", "start": 48.669, "end": 48.848, "block": 7}, {"word": "MTN", "start": 48.848, "end": 49.027, "block": 7}, {"word": "MoMo", "start": 49.027, "end": 49.385, "block": 7}, {"word": "Klasse", "start": 50.6, "end": 50.944, "block": 8}, {"word": "deux-trois-sept", "start": 50.944, "end": 51.459, "block": 8}, {"word": "maintenant", "start": 51.459, "end": 52.129, "block": 8}, {"word": "c'est", "start": 52.129, "end": 52.47, "block": 8}, {"word": "papa", "start": 52.47, "end": 52.811, "block": 8}, {"word": "qui", "start": 52.811, "end": 52.982, "block": 8}, {"word": "explique", "start": 52.982, "end": 53.493, "block": 8}, {"word": "De", "start": 54.093, "end": 54.241, "block": 8}, {"word": "petits", "start": 54.241, "end": 54.537, "block": 8}, {"word": "pas", "start": 54.537, "end": 54.685, "block": 8}, {"word": "de", "start": 54.699, "end": 54.847, "block": 8}, {"word": "grandes", "start": 54.847, "end": 55.143, "block": 8}, {"word": "r", "start": 55.143, "end": 55.291, "block": 8}, {"word": "é", "start": 55.291, "end": 55.439, "block": 8}, {"word": "ussites", "start": 55.439, "end": 55.882, "block": 8}]}</script>
+<script>
+const V = OM.vars();
+const tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
+const EXPO = 'expo.out', IN = 'power3.in', BACK = 'back.out(1.8)';
+const WORDS = OM.words();
+const nz = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9'’-]/g, '');
+function W(word, nth = 1, blk) { const ex = word[0] === '='; const t = nz(ex ? word.slice(1) : word); let n = 0; for (const w of WORDS) if ((blk == null || w.block === blk) && (nz(w.word) === t || (!ex && nz(w.word).startsWith(t)))) { if (++n === nth) return w.start; } throw new Error('mot introuvable : ' + word + ' #' + nth); }
+const B = n => WORDS.find(w => w.block === n).start;          // début d'un bloc de voix
+const END = 60;
+
+// Scènes : coupées sur le début de chaque bloc
+const T2 = B(2) - 0.3, T3 = B(3) - 0.3, T4 = B(4) - 0.3, T5 = B(5) - 0.3, T6 = B(6) - 0.3, T7 = B(7) - 0.3, T8 = B(8) - 0.3;
+const show = (id, a, b) => { tl.set(id, { autoAlpha: 1 }, a); if (b != null) tl.set(id, { autoAlpha: 0 }, b); };
+function wipe(at, color) { tl.set('#wipe', { background: color }, at - 0.36).fromTo('#wipe', { yPercent: 0 }, { yPercent: 150, duration: 0.7, ease: 'power2.inOut', immediateRender: false }, at - 0.35); OM.sfx('whoosh', at - 0.08, { gain: 0.6 }); }
+const pop = (sel, at, from = {}) => tl.fromTo(sel, { opacity: 0, y: 50, scale: 0.8, ...from }, { opacity: 1, y: 0, scale: 1, rotate: from.rotateTo ?? undefined, duration: 0.5, ease: BACK }, at);
+const slam = (sel, at, r = 0) => tl.fromTo(sel, { opacity: 0, scale: 1.5, rotate: r - 8 }, { opacity: 1, scale: 1, rotate: r, duration: 0.45, ease: 'back.out(2.2)' }, at);
+const out = (sel, at) => tl.to(sel, { opacity: 0, y: -30, scale: 0.95, duration: 0.25, ease: IN }, at);
+
+/* Sous-titres : un morceau de phrase à la fois, posé sur le mot qui le commence */
+const SUBS = [
+  ['vingt', 1, 'Vingt heures.', 1], ['=la', 1, 'La petite tend son cahier : « Papa, aide-moi. »', 1], ['papa', 2, 'Papa regarde… regarde encore…', 1], ['euh', 1, '« Euh… va demander à ta mère. »', 1],
+  ['maman', 1, 'Maman sourit… et ouvre <b>Klas 237</b>.', 2], ['=du', 1, 'Du SIL à la Terminale, l’école et la maison avancent ensemble.', 2],
+  ['=ce', 1, 'Ce soir, dix minutes, un petit exercice, on fait ça ensemble…', 3], ['=et', 1, '… et les progrès se voient, matière par matière.', 3],
+  ['=la', 1, 'La leçon bloque encore ?', 4], ["l'assistant", 1, 'L’assistant l’explique autrement :', 4], ['=au', 1, 'au marché, huit tomates, quatre cents francs…', 4], ['=m', 1, 'Même papa a compris !', 4],
+  ['=a', 1, 'À l’école, l’enseignant suit tout :', 5], ["l'appel", 1, 'l’appel en trente secondes, les notes, et le programme toujours à jour.', 5],
+  ['=et', 1, 'Et le grand frère, au lycée, révise seul :', 6], ['=des', 1, 'des indices… pas les réponses.', 6],
+  ['sept', 1, 'Sept jours gratuits, puis dès 2 000 FCFA par mois,', 7], ['=par', 2, 'par Orange Money ou MTN MoMo.', 7],
+  ['klasse', 1, '<b>Klas 237</b> : maintenant, c’est papa qui explique.', 8], ['=de', 1, 'De petits pas… de grandes réussites.', 8]
+];
+(function () {
+  const el = document.getElementById('subs-t'); let last = null;
+  const times = SUBS.map(([w, n, txt, b]) => { let t; try { t = W(w, n, b); } catch (e) { t = null; } return [t, txt]; }).filter(x => x[0] != null).sort((a, b) => a[0] - b[0]);
+  times.forEach(([t, txt], i) => {
+    tl.call(() => { el.innerHTML = txt; }, null, t - 0.05);
+    tl.fromTo('#subs', { opacity: 0.4, y: 12 }, { opacity: 1, y: 0, duration: 0.2, ease: 'power2.out', immediateRender: false }, t - 0.05);
+  });
+  tl.set('#subs', { autoAlpha: 0 }, T8 + 4.6);
+})();
+
+/* 1 · 20 h, papa ne sait pas — 0 → T2 */
+tl.addLabel('scene:hook', 0); show('#s1', 0, T2);
+tl.set('.q,#s1-sweat,#s1-b1,#s1-b2', { opacity: 0 }, 0);
+tl.fromTo('#s1-pa', { scale: 1.7, rotate: -7, y: 260 }, { scale: 1, rotate: 0, y: 0, duration: 0.9, ease: EXPO }, 0)
+  .fromTo('#s1-art', { backgroundPosition: '-1000px -40px' }, { backgroundPosition: '-1320px -170px', duration: T2, ease: 'sine.inOut' }, 0);
+slam('#s1-cap', 0.1, -3);
+pop('#s1-b1', W('papa', 1) - 0.25);
+tl.to('#s1-b1', { opacity: 0, duration: 0.25 }, W('papa', 2) - 0.3);
+tl.fromTo('.q', { opacity: 0, scale: 0.3, y: 40 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'back.out(2.4)', stagger: 0.18 }, W('regarde', 1))
+  .to('.q', { rotate: '+=10', duration: 0.5, ease: 'sine.inOut', yoyo: true, repeat: 3 }, W('regarde', 1) + 0.6)
+  .fromTo('#s1-sweat', { opacity: 0, y: -30 }, { opacity: 1, y: 60, duration: 1.4, ease: 'power1.in' }, W('regarde', 2));
+pop('#s1-b2', W('euh') - 0.1);
+tl.to('#s1-pa', { x: -14, duration: 0.08, yoyo: true, repeat: 5, ease: 'none' }, W('euh'));
+OM.sfx('thud', 0.1, { gain: 0.7 }); OM.sfx('pop', W('papa', 1) - 0.2); OM.sfx('boing', W('regarde', 1)); OM.sfx('pop', W('regarde', 1) + 0.18, { note: 2 }); OM.sfx('pop', W('regarde', 1) + 0.36, { note: 4 }); OM.sfx('slide', W('regarde', 2), { dur: 0.9 }); OM.sfx('pop', W('euh') - 0.05, { note: 5 });
+
+/* 2 · Maman a la solution — T2 → T3 */
+wipe(T2, 'var(--gold)');
+tl.addLabel('scene:maman', T2); show('#s2', T2, T3);
+tl.set('#ph2,#s2-glow,#s2-p1,#s2-c1', { opacity: 0 }, 0);
+tl.fromTo('#s2-pa', { x: 300, rotate: 4, opacity: 0 }, { x: 0, rotate: 0, opacity: 1, duration: 0.8, ease: EXPO }, T2 + 0.05);
+slam('#s2-cap', W('maman') + 0.2, -2);
+tl.fromTo('#s2-pa', { scale: 1 }, { scale: 1.05, duration: 3, ease: 'none' }, T2 + 0.8)
+  .to('#s2-pa', { y: -40, scale: 0.92, opacity: 0.0, duration: 0.6, ease: IN }, W('=du', 1, 2) - 0.4)
+  .fromTo('#s2-glow', { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.8, ease: EXPO }, W('ouvre', 1, 2) - 0.2)
+  .fromTo('#ph2', { opacity: 0, y: 700, rotate: 10 }, { opacity: 1, y: -280, rotate: -2, duration: 1, ease: EXPO }, W('ouvre', 1, 2))
+  .to('#ph2 img', { y: -260, duration: 3, ease: 'sine.inOut' }, W('ouvre', 1, 2) + 1)
+  .fromTo('#s2-p1', { opacity: 0, x: -200, rotate: -6 }, { opacity: 1, x: 0, rotate: -2, duration: 0.6, ease: EXPO }, W('sil') - 0.2)
+  .to('#s2-p1', { y: -640, duration: 0.6, ease: 'power3.inOut' }, W('sil') + 0.6);
+pop('#s2-c1', W('sil') - 0.1);
+tl.to('#s2-c1', { y: -640, duration: 0.6, ease: 'power3.inOut' }, W('sil') + 0.6)
+  .to('#s2-c1 span', { backgroundColor: '#007a5e', duration: 0.2 }, W('terminale'))
+  .call(() => { const c = document.querySelector('#s2-c1'); c.lastChild.textContent = 'SIL → Terminale'; }, null, W('terminale'))
+  .call(() => { const c = document.querySelector('#s2-c1'); c.lastChild.textContent = 'SIL → CM2'; }, null, W('terminale') - 0.02);
+OM.sfx('chime', W('ouvre', 1, 2)); OM.sfx('impact', W('ouvre', 1, 2) + 0.2, { gain: 0.6 }); OM.sfx('pop', W('sil') - 0.1); OM.sfx('ding', W('terminale'), { note: 5 });
+
+/* 3 · Ce soir, ensemble — T3 → T4 (avec la respiration musicale) */
+wipe(T3, 'var(--green)');
+tl.addLabel('scene:soir', T3); show('#s3', T3, T4);
+tl.set('#ph3 .b,#ph3 .c,#s3-c1,#s3-c2,#s3-prog,#s3-yes', { opacity: 0 }, 0);
+const tDix = W('dix'), tProg = W('progr'), tBreak = WORDS.filter(w => w.block === 3).at(-1).end + 0.3;
+tl.fromTo('#ph3', { y: 700, rotate: 8 }, { y: 0, rotate: 0, duration: 0.9, ease: EXPO }, T3 + 0.05)
+  .fromTo('#s3-bg', { scale: 1.1 }, { scale: 1, duration: tBreak - T3, ease: 'none' }, T3)
+  .to('#s3-cam', { scale: 1.32, y: -120, duration: 0.9, ease: 'power3.inOut' }, tDix - 0.2)
+  .set('#ph3 .b', { opacity: 1 }, tDix + 0.2).set('#ph3 .a', { opacity: 0 }, tDix + 0.2)
+  .to('#s3-cam', { scale: 1, y: 0, duration: 0.8, ease: 'power3.inOut' }, tProg - 0.5)
+  .set('#ph3 .c', { opacity: 1 }, tProg).set('#ph3 .b', { opacity: 0 }, tProg)
+  .to('#ph3 .c', { y: -280, duration: 2, ease: 'sine.inOut' }, tProg + 0.3);
+pop('#s3-c1', tDix); out('#s3-c1', tProg - 0.4);
+pop('#s3-c2', tProg + 0.4);
+// respiration : les barres se remplissent
+tl.set('#s3-prog', { opacity: 1 }, tBreak).fromTo('#s3-prog', { clipPath: 'circle(0% at 540px 860px)' }, { clipPath: 'circle(120% at 540px 860px)', duration: 0.7, ease: 'power3.inOut' }, tBreak)
+  .fromTo('#bar1,#bar2,#bar3', { scaleX: 0 }, { scaleX: 1, duration: 1.1, ease: 'power3.out', stagger: 0.35 }, tBreak + 0.4);
+slam('#s3-yes', tBreak + 1.8, -8);
+OM.sfx('pop', tDix); OM.sfx('whip', tDix - 0.2); OM.sfx('ding', tProg, { note: 3 }); OM.sfx('whoosh', tBreak, { gain: 0.5 });
+OM.sfx('tick', tBreak + 0.4); OM.sfx('tick', tBreak + 0.75); OM.sfx('tick', tBreak + 1.1); OM.sfx('stamp', tBreak + 1.8, { gain: 0.7 }); OM.sfx('sparkle', tBreak + 2);
+
+/* 4 · L'assistant · « Même papa a compris ! » — T4 → T5 */
+wipe(T4, 'var(--ink)');
+tl.addLabel('scene:assistant', T4); show('#s4', T4, T5);
+tl.set('#s4-hl,#s4-burst,#s4-b', { opacity: 0 }, 0);
+slam('#s4-cap', T4 + 0.1, -2);
+tl.fromTo('#ph4', { y: 700, rotate: -9 }, { y: 0, rotate: 0, duration: 0.9, ease: EXPO }, T4 + 0.05)
+  .call(() => { document.getElementById('s4-cap').textContent = 'L’assistant explique'; }, null, W("l'assistant") - 0.1)
+  .call(() => { document.getElementById('s4-cap').textContent = 'La leçon bloque ?'; }, null, W("l'assistant") - 0.12)
+  .to('#s4-cam', { scale: 1.22, y: -60, duration: 0.9, ease: 'power3.inOut' }, W('=au', 1, 4) - 0.4)
+  .fromTo('#s4-hl', { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(2)' }, W('march'));
+tl.call(() => { document.getElementById('s4-cap').textContent = '8 tomates = 400 FCFA'; }, null, W('quatre') - 0.1).call(() => { document.getElementById('s4-cap').textContent = 'L’assistant explique'; }, null, W('quatre') - 0.12);
+OM.sfx('pop', W('quatre') - 0.1, { note: 5 });
+// tomates dessinées qui tombent
+(function () {
+  const box = document.getElementById('tomatoes');
+  const tom = '<svg viewBox="0 0 60 60" width="100%" height="100%"><circle cx="30" cy="34" r="24" fill="#e23b2e" stroke="#141b2e" stroke-width="4"/><path d="M30 12 l-8 -6 M30 12 l8 -7 M30 12 l0 -9 M30 12 l-12 2 M30 12 l12 2" stroke="#1f8a3a" stroke-width="5" stroke-linecap="round"/><ellipse cx="21" cy="28" rx="6" ry="4" fill="#fff" opacity=".55"/></svg>';
+  for (let i = 0; i < 8; i++) { const d = document.createElement('div'); d.className = 'tom'; d.style.cssText = `position:absolute;left:${i < 4 ? 70 + (i % 2) * 110 : 800 + (i % 2) * 110}px;top:${1120 - Math.floor((i % 4) / 2) * 100}px;width:96px;height:96px;opacity:0`; d.innerHTML = tom; box.appendChild(d); }
+})();
+tl.set('.tom', { opacity: 0 }, 0).fromTo('.tom', { y: -900, opacity: 1, rotate: -40 }, { y: 0, rotate: 0, duration: 0.55, ease: 'bounce.out', stagger: 0.07, immediateRender: false }, W('huit') - 0.2)
+  .to('.tom', { opacity: 0, y: 60, duration: 0.3, stagger: 0.03 }, W('=m', 1, 4) - 0.4)
+  .to('#ph4,#s4-hl', { opacity: 0.15, duration: 0.3 }, W('=m', 1, 4) - 0.3)
+  .fromTo('#s4-burst', { opacity: 0, scale: 0.2, rotate: -30 }, { opacity: 1, scale: 1, rotate: 0, duration: 0.5, ease: 'back.out(1.8)' }, W('=m', 1, 4) - 0.25)
+  .to('#s4-burst svg', { rotate: 12, duration: 1.6, ease: 'sine.inOut', transformOrigin: '50% 50%' }, W('=m', 1, 4) + 0.2);
+pop('#s4-b', W('=m', 1, 4));
+OM.sfx('impact', T4 + 0.1, { gain: 0.6 }); OM.sfx('sparkle', W("l'assistant")); OM.sfx('whip', W('=au', 1, 4) - 0.4); OM.sfx('stamp', W('march'), { gain: 0.5 });
+for (let i = 0; i < 8; i += 2) OM.sfx('pop', W('huit') - 0.2 + i * 0.07 + 0.5, { note: i / 2 + 1 });
+OM.sfx('hit', W('=m', 1, 4) - 0.2, { gain: 0.8 }); OM.sfx('chime', W('compris'));
+
+/* 5 · À l'école — T5 → T6 */
+wipe(T5, 'var(--red)');
+tl.addLabel('scene:ecole', T5); show('#s5', T5, T6);
+tl.set('#ph5 .b,#ph5 .c', { opacity: 0 }, 0);
+tl.fromTo('#s5-pa', { x: -300, rotate: -4, opacity: 0 }, { x: 0, rotate: 0, opacity: 1, duration: 0.8, ease: EXPO }, T5 + 0.05)
+  .fromTo('#s5-pa .art', { backgroundPosition: '0px 0px' }, { backgroundPosition: '0px -40px', duration: T6 - T5, ease: 'none' }, T5);
+slam('#s5-cap', T5 + 0.15, -2);
+tl.fromTo('#ph5', { y: 900, rotate: 12 }, { y: 0, rotate: 3, duration: 0.9, ease: EXPO }, W("l'enseignant") - 0.2)
+  .set('#ph5 .b', { opacity: 1 }, W('notes') - 0.1).set('#ph5 .c', { opacity: 1 }, W('programme') - 0.1);
+pop('#s5-c1', W("l'appel") - 0.1); pop('#s5-c2', W('notes') - 0.1); pop('#s5-c3', W('programme') - 0.1);
+OM.sfx('thud', T5 + 0.1); OM.sfx('whoosh', W("l'enseignant") - 0.2, { gain: 0.5 }); OM.sfx('ding', W("l'appel"), { note: 1 }); OM.sfx('ding', W('notes'), { note: 3 }); OM.sfx('ding', W('programme'), { note: 5 });
+
+/* 6 · Le grand frère — T6 → T7 */
+wipe(T6, 'var(--ink)');
+tl.addLabel('scene:lycee', T6); show('#s6', T6, T7);
+tl.fromTo('#s6-pa', { y: -300, rotate: -8, opacity: 0 }, { y: 0, rotate: -2, opacity: 1, duration: 0.8, ease: EXPO }, T6 + 0.05)
+  .fromTo('#ph6', { y: 900, rotate: 14 }, { y: 0, rotate: 4, duration: 0.9, ease: EXPO }, T6 + 0.3);
+slam('#s6-cap', T6 + 0.2, -3);
+tl.fromTo('#s6 .w1,#s6 .w2', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.45, ease: BACK, stagger: 0.12 }, W('=des', 1, 6) - 0.2)
+  .fromTo('#s6 .w3', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.45, ease: BACK }, W('=pas', 1, 6) - 0.15)
+  .fromTo('#s6 .w4', { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(2.4)', transformOrigin: '0 50%' }, W('ponses') - 0.25);
+OM.sfx('boing', T6 + 0.2); OM.sfx('pop', W('=des', 1, 6) - 0.1); OM.sfx('pop', W('=pas', 1, 6) - 0.1, { note: 3 }); OM.sfx('stamp', W('ponses') - 0.2, { gain: 0.8 });
+
+/* 7 · L'offre — T7 → T8 */
+wipe(T7, 'var(--gold)');
+tl.addLabel('scene:offre', T7); show('#s7', T7, T8);
+tl.set('#ph7 .b', { opacity: 0 }, 0);
+tl.fromTo('#s7-badge', { scale: 0, rotate: -12 }, { scale: 1, rotate: -2, duration: 0.6, ease: 'back.out(2.2)' }, W('sept') - 0.1)
+  .fromTo('#ph7', { y: 900, rotate: -14 }, { y: 0, rotate: -3, duration: 0.9, ease: EXPO }, T7 + 0.3)
+  .set('#ph7 .b', { opacity: 1 }, W('=deux', 1, 7) + 0.2)
+  .to('#ph7 .b', { y: -200, duration: 2.6, ease: 'sine.inOut' }, W('=deux', 1, 7) + 0.6)
+  .fromTo('#s7-badge', { rotate: -2 }, { rotate: 1.5, duration: 1.4, ease: 'sine.inOut', yoyo: true, repeat: 2, immediateRender: false }, W('sept') + 0.7);
+pop('#s7-pr', W('=deux', 1, 7) - 0.2); pop('#s7-mm', W('orange') - 0.15);
+OM.sfx('stamp', W('sept'), { gain: 0.9 }); OM.sfx('count', W('=deux', 1, 7) - 0.2, { dur: 0.6 }); OM.sfx('ding', W('orange'), { note: 3 }); OM.sfx('ding', W('mtn'), { note: 5 });
+
+/* 8 · Maintenant, c'est papa qui explique — T8 → fin */
+wipe(T8, 'var(--green)');
+tl.addLabel('scene:fin', T8); show('#s8', T8);
+tl.set('#s8-b,#s8-t,#s8-end', { opacity: 0 }, 0);
+tl.fromTo('#s8-pa', { scale: 1.15, rotate: 2, opacity: 0 }, { scale: 1, rotate: 0, opacity: 1, duration: 0.9, ease: EXPO }, T8 + 0.05)
+  .fromTo('#s8-art', { backgroundPosition: '-180px -40px' }, { backgroundPosition: '-60px -10px', duration: 4, ease: 'sine.inOut' }, T8);
+pop('#s8-b', W('maintenant') - 0.1);
+tl.fromTo('#s8-t', { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.6, ease: BACK }, W('maintenant'));
+const tEnd = W('=de', 1, 8) - 0.35;
+tl.set('#s8-end', { opacity: 1 }, tEnd).fromTo('#s8-end', { clipPath: 'circle(0% at 540px 520px)' }, { clipPath: 'circle(130% at 540px 520px)', duration: 0.8, ease: 'power3.inOut' }, tEnd)
+  .fromTo('#s8-logo', { scale: 0.4, rotate: 8 }, { scale: 1, rotate: 0, duration: 0.8, ease: 'back.out(1.8)' }, tEnd + 0.1)
+  .fromTo('#s8 .e1', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5, ease: BACK }, W('petits') - 0.2)
+  .fromTo('#s8 .e2', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5, ease: BACK }, W('grandes') - 0.2);
+pop('#s8-url', W('grandes') + 1.2); pop('#s8-wa', W('grandes') + 1.7);
+tl.fromTo('#s8-by', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5 }, W('grandes') + 2.2)
+  .fromTo('#s8-logo', { y: 0 }, { y: -12, duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: 1, immediateRender: false }, tEnd + 1.2);
+OM.sfx('impact', T8 + 0.1, { gain: 0.6 }); OM.sfx('pop', W('maintenant')); OM.sfx('chime', tEnd + 0.1); OM.sfx('pop', W('grandes') + 1.2); OM.sfx('pop', W('grandes') + 1.7);
+
+/* Rien ne reste figé : chaque téléphone et chaque case avance doucement */
+[['#ph2', W('ouvre', 1, 2) + 1, T3, 1.1], ['#ph4', T4 + 1, W('=au', 1, 4) - 0.4, 1.1], ['#ph5', W("l'enseignant") + 0.7, T6, 1.06], ['#ph6', T6 + 1.2, T7, 1.07], ['#ph7', T7 + 1.2, T8, 1.06], ['#s8-pa', T8 + 0.9, W('=de', 1, 8), 1.06], ['#s5-pa', T5 + 0.8, T6, 1.05]]
+  .forEach(([s, a, b, k]) => tl.fromTo(s, { scale: 1 }, { scale: k, duration: Math.max(0.5, b - a), ease: 'none', immediateRender: false }, a));
+tl.to('#ph5 .scr img', { y: -160, duration: 2.2, ease: 'sine.inOut' }, W('programme') + 0.1)
+  .to('#ph6 .scr img', { y: -180, duration: T7 - T6 - 1.5, ease: 'sine.inOut' }, T6 + 1.2)
+  .to('#ph4 .scr img', { y: -60, duration: W('=au', 1, 4) - T4 - 1.4, ease: 'sine.inOut' }, T4 + 1)
+  .fromTo('#s3-cam', { rotate: 0 }, { rotate: 1.5, duration: W('progr') - W('dix') - 0.8, ease: 'sine.inOut', immediateRender: false }, W('dix') + 0.7)
+  .to('#ph3 .b', { y: -150, duration: W('progr') - W('dix') - 0.8, ease: 'sine.inOut' }, W('dix') + 0.4)
+  .to('#ph2', { rotate: 2, duration: 2, ease: 'sine.inOut' }, W('=du', 1, 2) + 0.5)
+  .fromTo('.q', { y: 0 }, { y: -18, duration: 0.7, ease: 'sine.inOut', yoyo: true, repeat: 3, immediateRender: false }, W('euh') + 0.2)
+  .fromTo('#s1-b2', { rotate: 0 }, { rotate: -2, duration: 0.6, ease: 'sine.inOut', yoyo: true, repeat: 1, immediateRender: false }, W('euh') + 0.5)
+  .fromTo('#s8-end .page', { scale: 1 }, { scale: 1.06, duration: 6, ease: 'none', immediateRender: false }, W('=de', 1, 8) - 0.4)
+  .fromTo('#s8-url', { scale: 1 }, { scale: 1.05, duration: 0.8, ease: 'sine.inOut', yoyo: true, repeat: 2, immediateRender: false }, W('grandes') + 1.8);
+
+/* Respiration continue : la trame du papier glisse */
+tl.fromTo('.page', { x: 0, y: 0 }, { x: -26, y: -130, duration: END, ease: 'none' }, 0);
+tl.to({}, { duration: 0.01 }, END - 0.01);
+
+OM.music({ style: 'mallet', bpm: 108, drop: 'maman', ending: 'button', brand: 'Klas 237', energy: { hook: 0.3, maman: 0.75, soir: 0.7, assistant: 1, ecole: 0.8, lycee: 0.85, offre: 0.8, fin: 0.7 } });
+window.__timelines = { film: tl };
+</script>
+</body>
+</html>
