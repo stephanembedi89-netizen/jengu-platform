@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="fr" data-om-signature="off" data-composition-variables='[
+  {"id":"url","type":"string","label":"Adresse du site","default":"klas237.jengu-ai.com"},
+  {"id":"whatsapp","type":"string","label":"WhatsApp","default":"+237 672 705 729"},
+  {"id":"trial","type":"string","label":"Essai gratuit","default":"7 jours gratuits"},
+  {"id":"price","type":"string","label":"Prix d appel","default":"dès 2 000 FCFA / mois"},
+  {"id":"endHold","type":"number","label":"Fin (secondes)","default":2.6,"min":0,"max":10,"step":0.1,"group":"Rythme"}
+]'>
+<head>
+<meta charset="utf-8">
+<title>Klas 237 · film vertical</title>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/om.js"></script>
+<style id="om-fonts">
+@font-face{font-family:"Bricolage";src:url("assets/fonts/Bricolage-var.woff2") format("woff2");font-weight:200 800;font-style:normal}
+@font-face{font-family:"Manrope";src:url("assets/fonts/Manrope-600.woff2") format("woff2");font-weight:600}
+@font-face{font-family:"Manrope";src:url("assets/fonts/Manrope-700.woff2") format("woff2");font-weight:700}
+</style>
+<style>
+:root{--green:#007a5e;--red:#ce1126;--gold:#fcd116;--ink:#141b2e;--paper:#f6f4ee;--soft:#e6f4ee}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}
+#film{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:"Manrope",sans-serif;font-weight:600}
+.sc{position:absolute;inset:0;visibility:hidden;overflow:hidden}
+#s1{visibility:visible}
+.dots{position:absolute;inset:-40px;background-image:radial-gradient(rgba(20,27,46,.08) 2.5px,transparent 3px);background-size:52px 52px}
+.dots.w{background-image:radial-gradient(rgba(255,255,255,.14) 2.5px,transparent 3px)}
+.stripe{position:absolute;left:0;right:0;top:0;height:14px;z-index:60;background:linear-gradient(90deg,var(--green) 0 33.3%,var(--red) 33.3% 66.6%,var(--gold) 66.6% 100%)}
+.d{font-family:"Bricolage",sans-serif;font-weight:780;letter-spacing:-.03em;line-height:.98;margin:0}
+.abs{position:absolute}
+.band{left:0;right:0;top:0;height:560px}
+.m{display:block;overflow:hidden;padding:.06em .04em .2em;margin:-.06em -.04em -.2em}
+.m>span{display:block}
+.kick{position:absolute;left:84px;font:700 34px/1 "Manrope";letter-spacing:.2em;text-transform:uppercase;color:var(--red)}
+/* téléphone : écran 620 × 1342 (captures 780 × 1688) */
+.ph{position:absolute;width:640px;height:1362px;border-radius:84px;background:#0d1220;padding:10px;box-sizing:border-box;box-shadow:0 80px 140px -50px rgba(20,27,46,.6),0 0 0 2px #2a3146 inset}
+.ph .scr{position:relative;width:620px;height:1342px;border-radius:74px;overflow:hidden;background:#f6f4ee}
+.ph .scr img{position:absolute;left:0;top:0;width:620px;height:auto;display:block}
+.ph .scr .bar{position:absolute;left:0;top:0;width:620px;height:112px;overflow:hidden;z-index:3}
+.ph .scr .tabs{position:absolute;left:0;bottom:16px;width:620px;height:128px;overflow:hidden;z-index:3}
+.ph .scr .tabs img{top:-1210px}
+.chip{position:absolute;display:inline-flex;align-items:center;gap:16px;padding:22px 36px;border-radius:999px;font:700 44px/1 "Manrope";white-space:nowrap;background:#fff;color:var(--ink);box-shadow:0 24px 50px -24px rgba(20,27,46,.55)}
+.dot{width:24px;height:24px;border-radius:50%;background:var(--green)}
+.hl{position:absolute;border:8px solid var(--red);border-radius:40px;pointer-events:none}
+.wipe{position:absolute;left:-30%;right:-30%;height:200%;top:-200%;z-index:50;transform:skewY(-10deg)}
+.lv{position:absolute;width:150px;padding:18px 0;text-align:center;border-radius:999px;border:4px solid rgba(255,255,255,.75);color:#fff;font:700 40px/1 "Manrope"}
+</style>
+<script type="application/json" id="om-cues">{"source":"tts:kokoro:ff_siwis","precision":"tts","offset":0,"duration":38.571,"words":[
+{"word":"Vingt","start":0,"end":0.246},
+{"word":"heures","start":0.246,"end":0.737},
+{"word":"Le","start":0.987,"end":1.156},
+{"word":"cahier","start":1.156,"end":1.494},
+{"word":"est","start":1.494,"end":1.663},
+{"word":"ouvert","start":1.663,"end":2.001},
+{"word":"et","start":2.018,"end":2.186},
+{"word":"personne","start":2.186,"end":2.693},
+{"word":"ne","start":2.693,"end":2.862},
+{"word":"comprend","start":2.862,"end":3.2},
+{"word":"Avec","start":3.45,"end":3.929},
+{"word":"Klas","start":3.929,"end":4.169},
+{"word":"deux-trois-sept","start":4.169,"end":4.888},
+{"word":"l","start":5.058,"end":5.195},
+{"word":"é","start":5.209,"end":5.346},
+{"word":"cole","start":5.346,"end":5.621},
+{"word":"et","start":5.621,"end":5.758},
+{"word":"la","start":5.758,"end":5.895},
+{"word":"maison","start":5.895,"end":6.17},
+{"word":"avancent","start":6.17,"end":6.581},
+{"word":"ensemble","start":6.581,"end":6.993},
+{"word":"du","start":7.199,"end":7.371},
+{"word":"SIL","start":7.371,"end":7.542},
+{"word":"à","start":7.542,"end":7.714},
+{"word":"la","start":7.714,"end":7.886},
+{"word":"Terminale","start":7.886,"end":8.572},
+{"word":"Parents","start":8.822,"end":9.184},
+{"word":"vous","start":9.202,"end":9.384},
+{"word":"savez","start":9.384,"end":9.746},
+{"word":"quoi","start":9.746,"end":9.927},
+{"word":"faire","start":9.927,"end":10.29},
+{"word":"ce","start":10.29,"end":10.471},
+{"word":"soir","start":10.471,"end":10.652},
+{"word":"Dix","start":10.902,"end":11.063},
+{"word":"minutes","start":11.063,"end":11.546},
+{"word":"un","start":11.546,"end":11.705},
+{"word":"petit","start":11.705,"end":12.024},
+{"word":"exercice","start":12.024,"end":12.661},
+{"word":"et","start":12.661,"end":12.82},
+{"word":"des","start":12.82,"end":13.184},
+{"word":"progr","start":13.184,"end":13.342},
+{"word":"è","start":13.342,"end":13.501},
+{"word":"s","start":13.501,"end":13.66},
+{"word":"qu'on","start":13.66,"end":13.977},
+{"word":"voit","start":13.977,"end":14.136},
+{"word":"enfin","start":14.136,"end":14.453},
+{"word":"Une","start":14.703,"end":15.023},
+{"word":"le","start":15.023,"end":15.183},
+{"word":"ç","start":15.183,"end":15.343},
+{"word":"on","start":15.343,"end":15.503},
+{"word":"bloque","start":15.503,"end":15.823},
+{"word":"L'assistant","start":16.073,"end":16.859},
+{"word":"l'explique","start":16.859,"end":17.644},
+{"word":"autrement","start":17.644,"end":18.423},
+{"word":"avec","start":18.423,"end":18.817},
+{"word":"des","start":18.817,"end":19.014},
+{"word":"exemples","start":19.014,"end":19.803},
+{"word":"d'ici","start":19.803,"end":20.393},
+{"word":"le","start":20.393,"end":20.594},
+{"word":"march","start":20.594,"end":20.795},
+{"word":"é","start":20.795,"end":20.996},
+{"word":"les","start":20.996,"end":21.198},
+{"word":"francs","start":21.198,"end":21.399},
+{"word":"CFA","start":21.399,"end":21.6},
+{"word":"le","start":21.6,"end":21.801},
+{"word":"football","start":21.801,"end":22.203},
+{"word":"Enseignants","start":22.453,"end":22.953},
+{"word":"l'appel","start":22.953,"end":23.442},
+{"word":"en","start":23.442,"end":23.605},
+{"word":"trente","start":23.605,"end":23.931},
+{"word":"secondes","start":23.931,"end":24.42},
+{"word":"les","start":24.42,"end":24.586},
+{"word":"notes","start":24.586,"end":24.919},
+{"word":"les","start":24.919,"end":25.085},
+{"word":"bulletins","start":25.085,"end":25.58},
+{"word":"et","start":25.58,"end":25.983},
+{"word":"le","start":25.983,"end":26.146},
+{"word":"programme","start":26.146,"end":26.634},
+{"word":"toujours","start":26.634,"end":26.96},
+{"word":"sous","start":26.96,"end":27.123},
+{"word":"les","start":27.123,"end":27.285},
+{"word":"yeux","start":27.285,"end":27.448},
+{"word":"É","start":27.698,"end":27.833},
+{"word":"l","start":27.833,"end":27.967},
+{"word":"è","start":27.967,"end":28.102},
+{"word":"ves","start":28.102,"end":28.237},
+{"word":"des","start":28.25,"end":28.385},
+{"word":"indices","start":28.385,"end":28.789},
+{"word":"pas","start":28.803,"end":28.937},
+{"word":"des","start":28.937,"end":29.072},
+{"word":"r","start":29.072,"end":29.207},
+{"word":"é","start":29.207,"end":29.341},
+{"word":"ponses","start":29.341,"end":29.611},
+{"word":"Sept","start":29.86,"end":30.112},
+{"word":"jours","start":30.112,"end":30.363},
+{"word":"gratuits","start":30.363,"end":30.865},
+{"word":"puis","start":31.07,"end":31.241},
+{"word":"d","start":31.241,"end":31.411},
+{"word":"è","start":31.411,"end":31.582},
+{"word":"s","start":31.582,"end":31.752},
+{"word":"deux","start":31.752,"end":31.923},
+{"word":"mille","start":31.923,"end":32.264},
+{"word":"francs","start":32.264,"end":32.434},
+{"word":"CFA","start":32.434,"end":32.604},
+{"word":"par","start":32.604,"end":32.775},
+{"word":"mois","start":32.775,"end":32.945},
+{"word":"avec","start":33.199,"end":33.549},
+{"word":"Orange","start":33.549,"end":34.073},
+{"word":"Money","start":34.073,"end":34.423},
+{"word":"ou","start":34.423,"end":34.598},
+{"word":"MTN","start":34.598,"end":34.773},
+{"word":"MoMo","start":34.773,"end":35.122},
+{"word":"Klas","start":35.372,"end":35.656},
+{"word":"deux-trois-sept","start":35.656,"end":36.506},
+{"word":"De","start":36.756,"end":36.906},
+{"word":"petits","start":36.906,"end":37.206},
+{"word":"pas","start":37.206,"end":37.356},
+{"word":"de","start":37.371,"end":37.521},
+{"word":"grandes","start":37.521,"end":37.821},
+{"word":"r","start":37.821,"end":37.971},
+{"word":"é","start":37.971,"end":38.121},
+{"word":"ussites","start":38.121,"end":38.57}
+]}</script>
+</head>
+<body>
+<div id="film" data-composition-id="film" data-width="1080" data-height="1920">
+  <audio id="om-sound" src="assets/sound.wav" data-start="0" data-duration="41.47" data-track-index="8" data-volume="1"></audio>
+  <audio id="om-voice" src="assets/voice.wav" data-start="0" data-duration="38.571" data-track-index="9" data-volume="1"></audio>
+<div class="stripe"></div>
+
+<!-- 1 · Accroche -->
+<section class="sc" id="s1"><div class="dots"></div>
+  <div class="abs" data-om-id="hook-type" style="left:84px;top:150px;width:920px">
+    <div class="d" style="font-size:260px"><span class="m"><span class="h1">20 h.</span></span></div>
+    <div class="d" style="font-size:100px;margin-top:10px"><span class="m"><span class="h2">Le cahier est ouvert.</span></span></div>
+    <div class="d" style="font-size:100px;margin-top:6px;color:var(--red)"><span class="m"><span class="h3">Personne ne</span></span><span class="m"><span class="h4">comprend.</span></span></div>
+  </div>
+  <svg class="abs" id="scrib" style="left:84px;top:760px" width="760" height="40" viewBox="0 0 760 40" fill="none"><path d="M4 26 C 110 6, 200 38, 300 20 S 480 8, 600 24 S 720 14, 756 22" stroke="#ce1126" stroke-width="10" stroke-linecap="round" stroke-dasharray="900" stroke-dashoffset="900"/></svg>
+  <div class="ph" id="ph1" data-om-id="phone-hook" style="left:300px;top:880px"><div class="scr"><img src="assets/shots/v3-parent-ce-soir.png"></div></div>
+</section>
+
+<!-- 2 · Promesse -->
+<section class="sc" id="s2" style="background:var(--green)"><div class="dots w"></div>
+  <div class="abs" id="s2-disc" style="left:90px;top:220px;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#16b089,#007a5e 62%,#005a46)"></div>
+  <div class="abs" id="s2-card" data-om-id="logo-card" style="left:90px;top:440px;width:900px;height:400px;border-radius:70px;background:#fffdf8;box-shadow:0 60px 120px -40px rgba(0,0,0,.55);display:grid;place-items:center"><img src="assets/logo-klas237.png" style="width:700px;height:auto"></div>
+  <div class="d abs" style="left:84px;right:84px;top:960px;text-align:center;color:#fff;font-size:96px"><span class="m"><span class="t1">L’école et la maison</span></span><span class="m"><span class="t2" style="color:var(--gold)">avancent ensemble.</span></span></div>
+  <div id="s2-lv"></div>
+</section>
+
+<!-- 3 · Parents -->
+<section class="sc" id="s3"><div class="dots"></div>
+  <div class="kick" id="s3-k" style="top:150px">Pour les parents</div>
+  <div class="d abs" id="s3-a" style="left:84px;top:210px;width:920px;font-size:104px"><span class="m"><span>Ce soir,</span></span><span class="m"><span style="color:var(--green)">on sait quoi faire.</span></span></div>
+  <div class="d abs" id="s3-b" style="left:84px;top:210px;width:920px;font-size:104px"><span class="m"><span>10 minutes.</span></span><span class="m"><span style="color:var(--green)">Un petit exercice.</span></span></div>
+  <div class="d abs" id="s3-c" style="left:84px;top:210px;width:920px;font-size:104px"><span class="m"><span>Des progrès</span></span><span class="m"><span style="color:var(--green)">qu’on voit enfin.</span></span></div>
+  <div id="s3-cam" class="abs" style="left:0;top:0;width:1080px;height:1920px;transform-origin:540px 900px">
+    <div class="ph" id="ph3" data-om-id="phone-parents" style="left:220px;top:520px"><div class="scr">
+      <img class="p1" src="assets/shots/v3-parent-ce-soir.png">
+      <img class="p2" src="assets/shots/v3-parent-ce-soir-2.png">
+      <img class="p3" src="assets/shots/v3-parent-progres.png">
+    </div></div>
+  </div>
+  <div class="abs band" style="background:linear-gradient(#f6f4ee 82%,rgba(246,244,238,0))"></div><div class="abs" id="s3-top" style="inset:0"></div>
+  <div class="chip" id="s3-c1" style="left:600px;top:1180px"><span class="dot" style="background:#e8590c"></span>2 soirs de suite</div>
+</section>
+
+<!-- 4 · Assistant IA -->
+<section class="sc" id="s4" style="background:var(--ink);color:#fff"><div class="dots w"></div>
+  <div class="abs" id="s4-glow" style="left:-160px;top:600px;width:1400px;height:1400px;border-radius:50%;background:radial-gradient(circle,rgba(252,209,22,.30),rgba(252,209,22,0) 60%)"></div>
+  <div class="kick" id="s4-k" style="top:150px;color:var(--gold)">L’assistant IA</div>
+  <div class="d abs" id="s4-a" style="left:84px;top:210px;width:920px;font-size:120px"><span class="m"><span>Une leçon</span></span><span class="m"><span>bloque ?</span></span></div>
+  <div class="d abs" id="s4-b" style="left:84px;top:210px;width:920px;font-size:112px;color:var(--gold)"><span class="m"><span>Il l’explique</span></span><span class="m"><span>autrement.</span></span></div>
+  <div id="s4-cam" class="abs" style="left:0;top:0;width:1080px;height:1920px;transform-origin:540px 1180px">
+    <div class="ph" id="ph4" data-om-id="phone-ai" style="left:220px;top:540px"><div class="scr"><img src="assets/shots/v3-assistant-reponse.png"></div></div>
+    <div class="hl" id="s4-hl" style="left:232px;top:1222px;width:612px;height:258px"></div>
+  </div>
+  <div class="abs band" style="background:linear-gradient(#141b2e 82%,rgba(20,27,46,0))"></div><div class="abs" id="s4-top" style="inset:0"></div>
+  <div class="chip" id="s4-c1" style="left:84px;top:1560px">🧺 le marché</div>
+  <div class="chip" id="s4-c2" style="left:430px;top:1560px">💰 les FCFA</div>
+  <div class="chip" id="s4-c3" style="left:250px;top:1680px">⚽ le football</div>
+</section>
+
+<!-- 5 · Enseignants -->
+<section class="sc" id="s5"><div class="dots"></div>
+  <div class="abs" id="s5-ring" style="left:520px;top:-240px;width:800px;height:800px;border-radius:50%;background:var(--soft)"></div>
+  <div class="kick" id="s5-k" style="top:150px">Pour les enseignants</div>
+  <div class="d abs" id="s5-h" style="left:84px;top:210px;width:920px;font-size:112px"><span class="m"><span>La classe</span></span><span class="m"><span style="color:var(--green)">sous contrôle.</span></span></div>
+  <div class="ph" id="ph5a" data-om-id="phone-teacher-1" style="left:60px;top:640px;transform:rotate(-5deg)"><div class="scr"><img class="t" src="assets/shots/t-prof-aujourdhui.png"></div></div>
+  <div class="ph" id="ph5b" data-om-id="phone-teacher-2" style="left:400px;top:760px;transform:rotate(5deg)"><div class="scr"><img class="t" src="assets/shots/t-prof-annee.png"></div></div>
+  <div class="chip" id="s5-c1" style="left:84px;top:600px"><span class="dot"></span>L’appel en 30 s</div>
+  <div class="chip" id="s5-c2" style="left:84px;top:1240px"><span class="dot" style="background:var(--red)"></span>Notes</div>
+  <div class="chip" id="s5-c3" style="left:420px;top:1380px"><span class="dot" style="background:var(--gold)"></span>Bulletins</div>
+  <div class="chip" id="s5-c4" style="left:150px;top:1520px"><span class="dot" style="background:var(--ink)"></span>Le programme, à jour</div>
+</section>
+
+<!-- 6 · Élèves -->
+<section class="sc" id="s6" style="background:var(--gold)"><div class="dots"></div>
+  <div class="kick" id="s6-k" style="top:150px;color:var(--ink)">Pour les élèves</div>
+  <div class="d abs" style="left:70px;top:230px;width:960px;font-size:190px"><span class="m"><span class="a1">Des</span></span><span class="m"><span class="a2">indices,</span></span><span class="m"><span class="a3">pas des</span></span><span class="m"><span class="a4" style="color:var(--red)">réponses.</span></span></div>
+  <div class="ph" id="ph6" data-om-id="phone-student" style="left:300px;top:1180px;transform:rotate(6deg)"><div class="scr"><img src="assets/shots/v3-eleve.png"></div></div>
+</section>
+
+<!-- 7 · Prix -->
+<section class="sc" id="s7"><div class="dots"></div>
+  <div class="kick" id="s7-k" style="top:150px">Simple et sans engagement</div>
+  <div class="d abs" id="s7-badge" data-om-id="badge-trial" style="left:84px;top:230px;padding:34px 54px;border-radius:40px;background:var(--gold);font-size:120px;transform-origin:0 50%;box-shadow:0 40px 70px -30px rgba(120,100,0,.7)"><span data-var-text="trial">7 jours gratuits</span></div>
+  <div class="d abs" id="s7-pr" style="left:84px;top:480px;font-size:84px"><span data-var-text="price">dès 2 000 FCFA / mois</span></div>
+  <div class="chip" id="s7-om" style="left:84px;top:640px"><span class="dot" style="background:#ff7900"></span>Orange Money</div>
+  <div class="chip" id="s7-mtn" style="left:520px;top:640px"><span class="dot" style="background:#ffcb05;box-shadow:0 0 0 3px var(--ink) inset"></span>MTN MoMo</div>
+  <div class="ph" id="ph7" data-om-id="phone-offers" style="left:220px;top:830px;transform:rotate(-3deg)"><div class="scr"><img src="assets/shots/04-offres.png"></div></div>
+</section>
+
+<!-- 8 · Fin -->
+<section class="sc" id="s8" style="background:var(--green)"><div class="dots w"></div>
+  <div class="abs" id="s8-card" data-om-id="end-logo" style="left:140px;top:300px;width:800px;height:350px;border-radius:64px;background:#fffdf8;display:grid;place-items:center;box-shadow:0 60px 120px -40px rgba(0,0,0,.55)"><img src="assets/logo-klas237.png" style="width:620px;height:auto"></div>
+  <div class="d abs" style="left:60px;right:60px;top:780px;text-align:center;color:#fff;font-size:116px"><span class="m"><span class="e1">De petits pas.</span></span><span class="m"><span class="e2" style="color:var(--gold)">De grandes réussites.</span></span></div>
+  <div class="abs" id="s8-url" data-om-id="end-url" style="left:0;right:0;top:1150px;text-align:center"><span class="d" style="display:inline-block;background:#fff;color:var(--ink);font-size:68px;padding:28px 56px;border-radius:999px;box-shadow:0 30px 70px -30px rgba(0,0,0,.6)" data-var-text="url">klas237.jengu-ai.com</span></div>
+  <div class="abs" id="s8-wa" style="left:0;right:0;top:1330px;text-align:center;font:700 46px/1 Manrope;color:#d6f1e8">WhatsApp <span data-var-text="whatsapp">+237 672 705 729</span></div>
+  <div class="abs" id="s8-by" style="left:0;right:0;top:1450px;text-align:center"><div style="width:360px;height:5px;margin:0 auto 24px;background:linear-gradient(90deg,transparent,#0A7CF2 20%,#0A7CF2 48%,#EEA90C 52%,#EEA90C 80%,transparent)"></div><div class="d" style="font-size:42px;color:#fff;font-weight:600;letter-spacing:.01em">Une création <b style="font-weight:800">JenguAI</b> · Cameroun</div></div>
+</section>
+
+<div class="wipe" id="wipe"></div>
+</div>
+
+<script>
+const V = OM.vars();
+const tl = gsap.timeline({ paused: true, defaults: { ease: 'power3.out' } });
+const EXPO = 'expo.out', IN = 'power3.in';
+
+// Repères de la voix : début exact d'un mot (ignore la ponctuation et la casse)
+const WORDS = OM.words();
+const nz = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9'’-]/g, '');
+function W(word, nth = 1, edge) {
+  const t = nz(word); let n = 0;
+  for (const w of WORDS) if (nz(w.word) === t || nz(w.word).startsWith(t)) { if (++n === nth) return edge === 'end' ? w.end : w.start; }
+  throw new Error('mot introuvable : ' + word + ' #' + nth);
+}
+const VOICE_END = WORDS.length ? WORDS[WORDS.length - 1].end : 40;
+
+// début de chaque scène = premier mot de la phrase, un souffle avant
+const S2 = W('avec') - 0.25, S3 = W('parents') - 0.25, S4 = W('une', 1) - 0.25, S5 = W('enseignants') - 0.25,
+      S6 = W('ves') - 0.65, S7 = W('sept') - 0.25, S8 = W('klas', 2) - 0.3;
+
+const show = (id, a, b) => { tl.set(id, { autoAlpha: 1 }, a); if (b != null) tl.set(id, { autoAlpha: 0 }, b); };
+// bandeau diagonal qui balaie l'écran de haut en bas ; la scène change quand il couvre tout
+function wipe(at, color) {
+  tl.set('#wipe', { background: color }, at - 0.36)
+    .fromTo('#wipe', { yPercent: 0 }, { yPercent: 150, duration: 0.7, ease: 'power2.inOut', immediateRender: false }, at - 0.35);
+  OM.sfx('whoosh', at - 0.08, { gain: 0.7 });
+}
+const pop = (sel, at, from = {}) => tl.fromTo(sel, { opacity: 0, y: 50, scale: 0.85, ...from }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: 'back.out(1.7)' }, at);
+const rise = (sel, at, stag = 0.1) => tl.fromTo(sel, { yPercent: 130 }, { yPercent: 0, duration: 0.75, ease: EXPO, stagger: stag }, at);
+const swap = (out, inn, at) => { tl.to(out, { opacity: 0, y: -40, duration: 0.3, ease: IN }, at - 0.32); tl.set(inn, { opacity: 1 }, at); rise(inn + ' .m>span', at, 0.1); };
+
+/* 1 · Accroche — le téléphone est déjà à l'image (affiche) */
+tl.addLabel('scene:hook', 0); show('#s1', 0, S2);
+tl.fromTo('.h1', { scale: 1.25, transformOrigin: '0 60%' }, { scale: 1, duration: 0.9, ease: EXPO }, 0)
+  .fromTo('#ph1', { y: 120, rotate: -6 }, { y: 0, rotate: -3, duration: 1.2, ease: EXPO }, 0)
+  .to('#ph1', { y: -90, duration: S2, ease: 'none' }, 1.2);
+rise('.h2', W('cahier') - 0.35, 0);
+rise('.h3,.h4', W('personne') - 0.2, 0.12);
+tl.to('#scrib path', { strokeDashoffset: 0, duration: 0.5, ease: 'power2.inOut' }, W('comprend') + 0.1);
+OM.sfx('thud', 0.02, { gain: 0.8 }); OM.sfx('pop', W('cahier') - 0.3); OM.sfx('pop', W('personne') - 0.15); OM.sfx('draw', W('comprend') + 0.1, { dur: 0.5 }); OM.sfx('riser', S2 - 1.4, { dur: 1.4 });
+
+/* 2 · Promesse */
+wipe(S2, 'var(--green)');
+tl.addLabel('scene:promise', S2); show('#s2', S2, S3);
+const levels = ['SIL','CP','CE1','CE2','CM1','CM2','6e','5e','4e','3e','2nde','1re','Tle'];
+document.getElementById('s2-lv').innerHTML = levels.map((l, i) => { const r = Math.floor(i / 5), c = i % 5; return `<span class="lv" style="left:${105 + c * 178 + (r === 2 ? 178 : 0)}px;top:${1240 + r * 112}px">${l}</span>`; }).join('');
+tl.fromTo('#s2-disc', { scale: 0.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.3, ease: EXPO }, S2 + 0.05)
+  .fromTo('#s2-card', { scale: 0.4, rotate: -8, opacity: 0 }, { scale: 1, rotate: 0, opacity: 1, duration: 0.85, ease: 'back.out(1.8)' }, S2 + 0.1)
+  .to('#s2-card', { y: -14, rotate: 1.2, duration: 3, ease: 'sine.inOut' }, S2 + 1);
+rise('.t1', W('cole') - 0.4, 0); rise('.t2', W('avancent') - 0.2, 0);
+tl.fromTo('.lv', { y: 60, opacity: 0, scale: 0.6 }, { y: 0, opacity: 1, scale: 1, duration: 0.45, stagger: 0.07, ease: 'back.out(1.8)' }, W('sil') - 0.2);
+tl.fromTo('#s2', { scale: 1 }, { scale: 1.04, duration: S3 - S2, ease: 'none' }, S2);
+OM.sfx('impact', S2 + 0.12, { gain: 0.8 }); OM.sfx('chime', W('avancent'));
+for (let i = 0; i < 13; i += 3) OM.sfx('tick', W('sil') - 0.2 + i * 0.07);
+
+/* 3 · Parents — on pousse dans l'écran à chaque idée */
+wipe(S3, 'var(--gold)');
+tl.addLabel('scene:parents', S3); show('#s3', S3, S4);
+tl.set('#s3-b,#s3-c,#ph3 .p2,#ph3 .p3', { opacity: 0 }, 0)
+  .fromTo('#s3-k', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5 }, S3 + 0.05)
+  .fromTo('#ph3', { y: 500, rotate: 8 }, { y: 0, rotate: 0, duration: 1, ease: EXPO }, S3 + 0.05);
+rise('#s3-a .m>span', S3 + 0.1, 0.1);
+// gros plan sur « 2 soirs de suite »
+const tDix = W('dix') - 0.1, tProg = W('progr') - 0.2;
+tl.to('#s3-cam', { scale: 1.3, y: 40, duration: 1.1, ease: 'power3.inOut' }, tDix - 0.3)
+  .to('#ph3 .p1', { opacity: 0, duration: 0.3 }, tDix).set('#ph3 .p2', { opacity: 1 }, tDix);
+swap('#s3-a', '#s3-b', tDix);
+tl.to('#s3-cam', { scale: 1, y: 0, duration: 0.9, ease: 'power3.inOut' }, tProg - 0.35)
+  .to('#ph3 .p2', { opacity: 0, duration: 0.3 }, tProg).set('#ph3 .p3', { opacity: 1 }, tProg);
+swap('#s3-b', '#s3-c', tProg);
+pop('#s3-c1', W('enfin') - 0.1);
+OM.sfx('thud', S3 + 0.15); OM.sfx('whip', tDix - 0.2); OM.sfx('pop', tDix + 0.1); OM.sfx('whip', tProg - 0.3); OM.sfx('ding', W('enfin'));
+
+/* 4 · Assistant IA — le pic : fond encre, poussée sur la réponse « Au marché » */
+wipe(S4, 'var(--ink)');
+tl.addLabel('scene:ai', S4); show('#s4', S4, S5);
+tl.set('#s4-b,#s4-hl', { opacity: 0 }, 0)
+  .fromTo('#s4-glow', { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.4, ease: EXPO }, S4)
+  .fromTo('#s4-k', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5 }, S4 + 0.05)
+  .fromTo('#ph4', { y: 520, rotate: -9 }, { y: 0, rotate: 0, duration: 1, ease: EXPO }, S4 + 0.05);
+rise('#s4-a .m>span', S4 + 0.1, 0.12);
+const tExp = W("l'assistant") - 0.1, tMar = W('march') - 0.25;
+swap('#s4-a', '#s4-b', tExp);
+tl.to('#s4-cam', { scale: 1.25, y: -60, duration: 1, ease: 'power3.inOut' }, tMar - 0.6)
+  .fromTo('#s4-hl', { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(2)' }, tMar);
+pop('#s4-c1', tMar); pop('#s4-c2', W('francs') - 0.15); pop('#s4-c3', W('football') - 0.15);
+OM.sfx('impact', S4 + 0.1, { gain: 0.7 }); OM.sfx('sparkle', tExp); OM.sfx('whip', tMar - 0.5); OM.sfx('stamp', tMar, { gain: 0.6 });
+OM.sfx('pop', tMar + 0.05, { note: 1 }); OM.sfx('pop', W('francs') - 0.1, { note: 3 }); OM.sfx('pop', W('football') - 0.1, { note: 5 });
+
+/* 5 · Enseignants */
+wipe(S5, 'var(--red)');
+tl.addLabel('scene:teachers', S5); show('#s5', S5, S6);
+tl.fromTo('#s5-ring', { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.2, ease: EXPO }, S5)
+  .fromTo('#s5-k', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5 }, S5 + 0.05)
+  .fromTo('#ph5a', { y: 600, rotate: -14 }, { y: 0, rotate: -5, duration: 1, ease: EXPO }, S5 + 0.05)
+  .fromTo('#ph5b', { y: 700, rotate: 14 }, { y: 0, rotate: 5, duration: 1, ease: EXPO }, S5 + 0.2)
+  .to('#ph5a .t', { y: -1500, duration: S6 - S5 - 1, ease: 'power1.inOut' }, S5 + 0.8)
+  .to('#ph5b .t', { y: -1300, duration: S6 - S5 - 1.2, ease: 'power1.inOut' }, S5 + 1);
+rise('#s5-h .m>span', S5 + 0.1, 0.1);
+pop('#s5-c1', W("l'appel") - 0.15); pop('#s5-c2', W('notes') - 0.15); pop('#s5-c3', W('bulletins') - 0.15); pop('#s5-c4', W('programme') - 0.15);
+OM.sfx('thud', S5 + 0.15); OM.sfx('thud', S5 + 0.3, { gain: 0.6 });
+OM.sfx('ding', W("l'appel") - 0.1, { note: 1 }); OM.sfx('ding', W('notes') - 0.1, { note: 3 }); OM.sfx('ding', W('bulletins') - 0.1, { note: 5 }); OM.sfx('chime', W('programme') - 0.1);
+
+/* 6 · Élèves — la typo remplit l'écran */
+wipe(S6, 'var(--ink)');
+tl.addLabel('scene:students', S6); show('#s6', S6, S7);
+tl.fromTo('#s6-k', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5 }, S6 + 0.05);
+rise('.a1', S6 + 0.05, 0); rise('.a2', W('indices') - 0.2, 0); rise('.a3', W('pas') - 0.15, 0); rise('.a4', W('ponses') - 0.15, 0);
+tl.fromTo('.a4', { scale: 1.2, transformOrigin: '0 50%' }, { scale: 1, duration: 0.6, ease: 'back.out(2)' }, W('ponses') - 0.15)
+  .fromTo('#ph6', { y: 700, rotate: 16 }, { y: 0, rotate: 6, duration: 1, ease: EXPO }, S6 + 0.3);
+OM.sfx('boing', S6 + 0.1); OM.sfx('pop', W('indices') - 0.15); OM.sfx('pop', W('pas') - 0.1); OM.sfx('stamp', W('ponses') - 0.1, { gain: 0.8 });
+
+/* 7 · Prix */
+wipe(S7, 'var(--gold)');
+tl.addLabel('scene:price', S7); show('#s7', S7, S8);
+tl.fromTo('#s7-k', { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5 }, S7 + 0.05)
+  .fromTo('#s7-badge', { scale: 0, rotate: -10 }, { scale: 1, rotate: -2, duration: 0.7, ease: 'back.out(2.2)' }, S7 + 0.15)
+  .fromTo('#ph7', { y: 700, rotate: -14 }, { y: 0, rotate: -3, duration: 1, ease: EXPO }, S7 + 0.2);
+pop('#s7-pr', W('deux', 2) - 0.2); pop('#s7-om', W('orange') - 0.15); pop('#s7-mtn', W('mtn') - 0.15);
+OM.sfx('stamp', S7 + 0.2, { gain: 0.9 }); OM.sfx('count', W('deux', 2) - 0.2, { dur: 0.6 }); OM.sfx('ding', W('orange') - 0.1, { note: 3 }); OM.sfx('ding', W('mtn') - 0.1, { note: 5 });
+
+/* 8 · Fin */
+wipe(S8, 'var(--green)');
+tl.addLabel('scene:end', S8); show('#s8', S8);
+tl.fromTo('#s8-card', { scale: 0.4, rotate: 6, opacity: 0 }, { scale: 1, rotate: 0, opacity: 1, duration: 0.85, ease: 'back.out(1.8)' }, S8 + 0.05)
+  .to('#s8-card', { y: -12, duration: 3, ease: 'sine.inOut' }, S8 + 1);
+rise('.e1', W('petits') - 0.3, 0); rise('.e2', W('grandes') - 0.3, 0);
+pop('#s8-url', VOICE_END + 0.1); pop('#s8-wa', VOICE_END + 0.5);
+tl.fromTo('#s8-by', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6 }, VOICE_END + 0.9);
+OM.sfx('impact', S8 + 0.1, { gain: 0.8 }); OM.sfx('chime', W('grandes')); OM.sfx('pop', VOICE_END + 0.15); OM.sfx('pop', VOICE_END + 0.55);
+tl.to({}, { duration: V.endHold }, VOICE_END + 0.3);
+
+/* Mouvement continu : rien ne reste figé pendant que la voix parle */
+const END = VOICE_END + 0.3 + V.endHold;
+tl.fromTo('.dots', { x: 0, y: 0 }, { x: -52, y: -208, duration: END, ease: 'none' }, 0);
+[['#ph3', S3 + 1.1, S4, 1.05], ['#ph4', S4 + 1.1, S5, 1.06], ['#ph6', S6 + 1.3, S7, 1.08], ['#ph7', S7 + 1.2, S8, 1.07]].forEach(([s, a, b, k]) => tl.fromTo(s, { scale: 1 }, { scale: k, duration: b - a, ease: 'none' }, a));
+tl.to('#ph4 .scr img', { y: -70, duration: tMar - S4 - 1.6, ease: 'sine.inOut' }, S4 + 1)
+  .to('#ph7 .scr img', { y: -120, duration: S8 - S7 - 1.4, ease: 'sine.inOut' }, S7 + 1.2)
+  .to('#ph6 .scr img', { y: -140, duration: S7 - S6 - 1.4, ease: 'sine.inOut' }, S6 + 1.3)
+  .to('#ph3 .p3', { y: -110, duration: S4 - tProg - 0.6, ease: 'sine.inOut' }, tProg + 0.5)
+  .to('#ph3 .p2', { y: -90, duration: tProg - tDix - 0.6, ease: 'sine.inOut' }, tDix + 0.4)
+  .to('#ph3 .p1', { y: -60, duration: tDix - S3 - 1.3, ease: 'sine.inOut' }, S3 + 1.1)
+  .fromTo('#s4-glow', { x: 0 }, { x: 160, y: -120, duration: S5 - S4 - 1.4, ease: 'sine.inOut' }, S4 + 1.4)
+  .fromTo('#s8', { scale: 1 }, { scale: 1.035, duration: END - S8, ease: 'none' }, S8)
+  .fromTo('#s7-badge', { rotate: -2 }, { rotate: 1.5, duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: 1, immediateRender: false }, S7 + 0.9);
+
+OM.music({ style: 'mallet', bpm: 112, drop: 'ai', ending: 'button', brand: 'Klas 237', energy: { hook: 0.35, promise: 0.7, parents: 0.6, ai: 1, teachers: 0.8, students: 0.9, price: 0.8, end: 0.7 } });
+
+window.__timelines = window.__timelines || {};
+window.__timelines['film'] = tl;
+['s3','s4'].forEach(s=>{const top=document.getElementById(s+'-top');document.querySelectorAll('#'+s+'>.kick,#'+s+'>.d').forEach(e=>top.appendChild(e));});
+</script>
+</body>
+</html>

@@ -1,0 +1,680 @@
+{
+ "source": "tts:kokoro:ff_siwis",
+ "precision": "tts",
+ "offset": 0,
+ "duration": 38.571,
+ "sentences": [
+  {
+   "text": "Vingt heures.",
+   "start": 0,
+   "end": 0.737
+  },
+  {
+   "text": "Le cahier est ouvert… et personne ne comprend.",
+   "start": 0.987,
+   "end": 3.2
+  },
+  {
+   "text": "Avec Klas deux-trois-sept, l'école et la maison avancent ensemble, du SIL à la Terminale.",
+   "start": 3.45,
+   "end": 8.572
+  },
+  {
+   "text": "Parents : vous savez quoi faire ce soir.",
+   "start": 8.822,
+   "end": 10.652
+  },
+  {
+   "text": "Dix minutes, un petit exercice, et des progrès qu'on voit enfin.",
+   "start": 10.902,
+   "end": 14.453
+  },
+  {
+   "text": "Une leçon bloque ?",
+   "start": 14.703,
+   "end": 15.823
+  },
+  {
+   "text": "L'assistant l'explique autrement, avec des exemples d'ici : le marché, les francs CFA, le football.",
+   "start": 16.073,
+   "end": 22.203
+  },
+  {
+   "text": "Enseignants : l'appel en trente secondes, les notes, les bulletins, et le programme toujours sous les yeux.",
+   "start": 22.453,
+   "end": 27.448
+  },
+  {
+   "text": "Élèves : des indices, pas des réponses.",
+   "start": 27.698,
+   "end": 29.611
+  },
+  {
+   "text": "Sept jours gratuits, puis dès deux mille francs CFA par mois, avec Orange Money ou MTN MoMo.",
+   "start": 29.86,
+   "end": 35.122
+  },
+  {
+   "text": "Klas deux-trois-sept.",
+   "start": 35.372,
+   "end": 36.506
+  },
+  {
+   "text": "De petits pas, de grandes réussites.",
+   "start": 36.756,
+   "end": 38.57
+  }
+ ],
+ "words": [
+  {
+   "word": "Vingt",
+   "start": 0,
+   "end": 0.246
+  },
+  {
+   "word": "heures",
+   "start": 0.246,
+   "end": 0.737
+  },
+  {
+   "word": "Le",
+   "start": 0.987,
+   "end": 1.156
+  },
+  {
+   "word": "cahier",
+   "start": 1.156,
+   "end": 1.494
+  },
+  {
+   "word": "est",
+   "start": 1.494,
+   "end": 1.663
+  },
+  {
+   "word": "ouvert",
+   "start": 1.663,
+   "end": 2.001
+  },
+  {
+   "word": "et",
+   "start": 2.018,
+   "end": 2.186
+  },
+  {
+   "word": "personne",
+   "start": 2.186,
+   "end": 2.693
+  },
+  {
+   "word": "ne",
+   "start": 2.693,
+   "end": 2.862
+  },
+  {
+   "word": "comprend",
+   "start": 2.862,
+   "end": 3.2
+  },
+  {
+   "word": "Avec",
+   "start": 3.45,
+   "end": 3.929
+  },
+  {
+   "word": "Klas",
+   "start": 3.929,
+   "end": 4.169
+  },
+  {
+   "word": "deux-trois-sept",
+   "start": 4.169,
+   "end": 4.888
+  },
+  {
+   "word": "l",
+   "start": 5.058,
+   "end": 5.195
+  },
+  {
+   "word": "é",
+   "start": 5.209,
+   "end": 5.346
+  },
+  {
+   "word": "cole",
+   "start": 5.346,
+   "end": 5.621
+  },
+  {
+   "word": "et",
+   "start": 5.621,
+   "end": 5.758
+  },
+  {
+   "word": "la",
+   "start": 5.758,
+   "end": 5.895
+  },
+  {
+   "word": "maison",
+   "start": 5.895,
+   "end": 6.17
+  },
+  {
+   "word": "avancent",
+   "start": 6.17,
+   "end": 6.581
+  },
+  {
+   "word": "ensemble",
+   "start": 6.581,
+   "end": 6.993
+  },
+  {
+   "word": "du",
+   "start": 7.199,
+   "end": 7.371
+  },
+  {
+   "word": "SIL",
+   "start": 7.371,
+   "end": 7.542
+  },
+  {
+   "word": "à",
+   "start": 7.542,
+   "end": 7.714
+  },
+  {
+   "word": "la",
+   "start": 7.714,
+   "end": 7.886
+  },
+  {
+   "word": "Terminale",
+   "start": 7.886,
+   "end": 8.572
+  },
+  {
+   "word": "Parents",
+   "start": 8.822,
+   "end": 9.184
+  },
+  {
+   "word": "vous",
+   "start": 9.202,
+   "end": 9.384
+  },
+  {
+   "word": "savez",
+   "start": 9.384,
+   "end": 9.746
+  },
+  {
+   "word": "quoi",
+   "start": 9.746,
+   "end": 9.927
+  },
+  {
+   "word": "faire",
+   "start": 9.927,
+   "end": 10.29
+  },
+  {
+   "word": "ce",
+   "start": 10.29,
+   "end": 10.471
+  },
+  {
+   "word": "soir",
+   "start": 10.471,
+   "end": 10.652
+  },
+  {
+   "word": "Dix",
+   "start": 10.902,
+   "end": 11.063
+  },
+  {
+   "word": "minutes",
+   "start": 11.063,
+   "end": 11.546
+  },
+  {
+   "word": "un",
+   "start": 11.546,
+   "end": 11.705
+  },
+  {
+   "word": "petit",
+   "start": 11.705,
+   "end": 12.024
+  },
+  {
+   "word": "exercice",
+   "start": 12.024,
+   "end": 12.661
+  },
+  {
+   "word": "et",
+   "start": 12.661,
+   "end": 12.82
+  },
+  {
+   "word": "des",
+   "start": 12.82,
+   "end": 13.184
+  },
+  {
+   "word": "progr",
+   "start": 13.184,
+   "end": 13.342
+  },
+  {
+   "word": "è",
+   "start": 13.342,
+   "end": 13.501
+  },
+  {
+   "word": "s",
+   "start": 13.501,
+   "end": 13.66
+  },
+  {
+   "word": "qu'on",
+   "start": 13.66,
+   "end": 13.977
+  },
+  {
+   "word": "voit",
+   "start": 13.977,
+   "end": 14.136
+  },
+  {
+   "word": "enfin",
+   "start": 14.136,
+   "end": 14.453
+  },
+  {
+   "word": "Une",
+   "start": 14.703,
+   "end": 15.023
+  },
+  {
+   "word": "le",
+   "start": 15.023,
+   "end": 15.183
+  },
+  {
+   "word": "ç",
+   "start": 15.183,
+   "end": 15.343
+  },
+  {
+   "word": "on",
+   "start": 15.343,
+   "end": 15.503
+  },
+  {
+   "word": "bloque",
+   "start": 15.503,
+   "end": 15.823
+  },
+  {
+   "word": "L'assistant",
+   "start": 16.073,
+   "end": 16.859
+  },
+  {
+   "word": "l'explique",
+   "start": 16.859,
+   "end": 17.644
+  },
+  {
+   "word": "autrement",
+   "start": 17.644,
+   "end": 18.423
+  },
+  {
+   "word": "avec",
+   "start": 18.423,
+   "end": 18.817
+  },
+  {
+   "word": "des",
+   "start": 18.817,
+   "end": 19.014
+  },
+  {
+   "word": "exemples",
+   "start": 19.014,
+   "end": 19.803
+  },
+  {
+   "word": "d'ici",
+   "start": 19.803,
+   "end": 20.393
+  },
+  {
+   "word": "le",
+   "start": 20.393,
+   "end": 20.594
+  },
+  {
+   "word": "march",
+   "start": 20.594,
+   "end": 20.795
+  },
+  {
+   "word": "é",
+   "start": 20.795,
+   "end": 20.996
+  },
+  {
+   "word": "les",
+   "start": 20.996,
+   "end": 21.198
+  },
+  {
+   "word": "francs",
+   "start": 21.198,
+   "end": 21.399
+  },
+  {
+   "word": "CFA",
+   "start": 21.399,
+   "end": 21.6
+  },
+  {
+   "word": "le",
+   "start": 21.6,
+   "end": 21.801
+  },
+  {
+   "word": "football",
+   "start": 21.801,
+   "end": 22.203
+  },
+  {
+   "word": "Enseignants",
+   "start": 22.453,
+   "end": 22.953
+  },
+  {
+   "word": "l'appel",
+   "start": 22.953,
+   "end": 23.442
+  },
+  {
+   "word": "en",
+   "start": 23.442,
+   "end": 23.605
+  },
+  {
+   "word": "trente",
+   "start": 23.605,
+   "end": 23.931
+  },
+  {
+   "word": "secondes",
+   "start": 23.931,
+   "end": 24.42
+  },
+  {
+   "word": "les",
+   "start": 24.42,
+   "end": 24.586
+  },
+  {
+   "word": "notes",
+   "start": 24.586,
+   "end": 24.919
+  },
+  {
+   "word": "les",
+   "start": 24.919,
+   "end": 25.085
+  },
+  {
+   "word": "bulletins",
+   "start": 25.085,
+   "end": 25.58
+  },
+  {
+   "word": "et",
+   "start": 25.58,
+   "end": 25.983
+  },
+  {
+   "word": "le",
+   "start": 25.983,
+   "end": 26.146
+  },
+  {
+   "word": "programme",
+   "start": 26.146,
+   "end": 26.634
+  },
+  {
+   "word": "toujours",
+   "start": 26.634,
+   "end": 26.96
+  },
+  {
+   "word": "sous",
+   "start": 26.96,
+   "end": 27.123
+  },
+  {
+   "word": "les",
+   "start": 27.123,
+   "end": 27.285
+  },
+  {
+   "word": "yeux",
+   "start": 27.285,
+   "end": 27.448
+  },
+  {
+   "word": "É",
+   "start": 27.698,
+   "end": 27.833
+  },
+  {
+   "word": "l",
+   "start": 27.833,
+   "end": 27.967
+  },
+  {
+   "word": "è",
+   "start": 27.967,
+   "end": 28.102
+  },
+  {
+   "word": "ves",
+   "start": 28.102,
+   "end": 28.237
+  },
+  {
+   "word": "des",
+   "start": 28.25,
+   "end": 28.385
+  },
+  {
+   "word": "indices",
+   "start": 28.385,
+   "end": 28.789
+  },
+  {
+   "word": "pas",
+   "start": 28.803,
+   "end": 28.937
+  },
+  {
+   "word": "des",
+   "start": 28.937,
+   "end": 29.072
+  },
+  {
+   "word": "r",
+   "start": 29.072,
+   "end": 29.207
+  },
+  {
+   "word": "é",
+   "start": 29.207,
+   "end": 29.341
+  },
+  {
+   "word": "ponses",
+   "start": 29.341,
+   "end": 29.611
+  },
+  {
+   "word": "Sept",
+   "start": 29.86,
+   "end": 30.112
+  },
+  {
+   "word": "jours",
+   "start": 30.112,
+   "end": 30.363
+  },
+  {
+   "word": "gratuits",
+   "start": 30.363,
+   "end": 30.865
+  },
+  {
+   "word": "puis",
+   "start": 31.07,
+   "end": 31.241
+  },
+  {
+   "word": "d",
+   "start": 31.241,
+   "end": 31.411
+  },
+  {
+   "word": "è",
+   "start": 31.411,
+   "end": 31.582
+  },
+  {
+   "word": "s",
+   "start": 31.582,
+   "end": 31.752
+  },
+  {
+   "word": "deux",
+   "start": 31.752,
+   "end": 31.923
+  },
+  {
+   "word": "mille",
+   "start": 31.923,
+   "end": 32.264
+  },
+  {
+   "word": "francs",
+   "start": 32.264,
+   "end": 32.434
+  },
+  {
+   "word": "CFA",
+   "start": 32.434,
+   "end": 32.604
+  },
+  {
+   "word": "par",
+   "start": 32.604,
+   "end": 32.775
+  },
+  {
+   "word": "mois",
+   "start": 32.775,
+   "end": 32.945
+  },
+  {
+   "word": "avec",
+   "start": 33.199,
+   "end": 33.549
+  },
+  {
+   "word": "Orange",
+   "start": 33.549,
+   "end": 34.073
+  },
+  {
+   "word": "Money",
+   "start": 34.073,
+   "end": 34.423
+  },
+  {
+   "word": "ou",
+   "start": 34.423,
+   "end": 34.598
+  },
+  {
+   "word": "MTN",
+   "start": 34.598,
+   "end": 34.773
+  },
+  {
+   "word": "MoMo",
+   "start": 34.773,
+   "end": 35.122
+  },
+  {
+   "word": "Klas",
+   "start": 35.372,
+   "end": 35.656
+  },
+  {
+   "word": "deux-trois-sept",
+   "start": 35.656,
+   "end": 36.506
+  },
+  {
+   "word": "De",
+   "start": 36.756,
+   "end": 36.906
+  },
+  {
+   "word": "petits",
+   "start": 36.906,
+   "end": 37.206
+  },
+  {
+   "word": "pas",
+   "start": 37.206,
+   "end": 37.356
+  },
+  {
+   "word": "de",
+   "start": 37.371,
+   "end": 37.521
+  },
+  {
+   "word": "grandes",
+   "start": 37.521,
+   "end": 37.821
+  },
+  {
+   "word": "r",
+   "start": 37.821,
+   "end": 37.971
+  },
+  {
+   "word": "é",
+   "start": 37.971,
+   "end": 38.121
+  },
+  {
+   "word": "ussites",
+   "start": 38.121,
+   "end": 38.57
+  }
+ ]
+}
