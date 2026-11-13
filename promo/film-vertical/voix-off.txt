@@ -9,25 +9,25 @@ Entre les phrases, la musique joue seule une seconde environ : c'est voulu, ça 
 | Moment | Phrase (à générer, un fichier par ligne) | À l'image |
 |---|---|---|
 | 0–6,3 s | 1. « Vingt heures. Le petit tend son cahier : “Papa, aide-moi.” Papa regarde… regarde encore… “Euh… va demander à ta mère.” » | « 20 h. » en très grand ; une bulle « Papa, aide-moi. », puis la réponse « Euh… va demander à ta mère. » |
-| 6,8–12,8 s | 2. « Maman sourit… et ouvre Klas deux-trois-sept. Du SIL à la Terminale, l'école et la maison avancent ensemble. » | La maman et sa fille (01) ; le logo claque, l'accueil du site (02), puis le primaire (03) et le secondaire (04) |
+| 6,8–12,8 s | 2. « Maman sourit… et ouvre Klasse deux-trois-sept. Du SIL à la Terminale, l'école et la maison avancent ensemble. » | La maman et sa fille (01) ; le logo claque, l'accueil du site (02), puis le primaire (03) et le secondaire (04) |
 | 13,5–21 s | 3. « Ce soir, dix minutes, un petit exercice, on fait ça ensemble… et les progrès se voient, matière par matière. » | « Ce soir avec Alex » (05), zoom sur le minuteur 10:00 (06), puis « Ses progrès » (07) |
 | 21–25 s | (musique seule) | Les barres de progrès se remplissent, « 2 soirs de suite » s'allume |
 | 25–32,5 s | 4. « La leçon bloque encore ? L'assistant l'explique autrement : au marché, huit tomates, quatre cents francs… Même papa a compris ! » | Fond sombre ; gros plan sur « Au marché : 8 tomates à 400 FCFA » (08), puis « Même papa a compris ! » ; les boutons Dicter / Photo du cahier (09) |
 | 33,5–40,5 s | 5. « À l'école, l'enseignant suit tout : l'appel en trente secondes, les notes, et le programme toujours à jour. » | L'enseignante et sa classe (10), « Ma classe aujourd'hui » (11), « Évaluations et notes » (12), « Où devrais-je en être ? » (13) |
 | 41,5–46,5 s | 6. « Et le grand frère, au lycée, révise seul : des indices… pas les réponses. » | Les lycéens (04) ; minuteur 15:00 (14), puis « Ma journée » et le bouton « Un indice » (15) |
 | 47,5–54,5 s | 7. « Sept jours gratuits, puis dès deux mille francs CFA par mois, par Orange Money ou MTN MoMo. » | Badge « 7 jours gratuits », la page des offres (16, 17), Orange Money et MTN MoMo |
-| 55–60 s | 8. « Klas deux-trois-sept : maintenant, papa aussi sait aider. De petits pas… de grandes réussites. » | Logo (18), klas237.jengu-ai.com, WhatsApp +237 672 705 729, « Une création JenguAI » |
+| 55–60 s | 8. « Klasse deux-trois-sept : maintenant, c'est papa qui explique. De petits pas… de grandes réussites. » | Logo (18), klas237.jengu-ai.com, WhatsApp +237 672 705 729, « Une création JenguAI » |
 
 Le texte à coller dans Flow, une phrase par génération (sans le numéro) :
 
 1. Vingt heures. Le petit tend son cahier : « Papa, aide-moi. » Papa regarde… regarde encore… « Euh… va demander à ta mère. »
-2. Maman sourit… et ouvre Klas deux-trois-sept. Du SIL à la Terminale, l'école et la maison avancent ensemble.
+2. Maman sourit… et ouvre Klasse deux-trois-sept. Du SIL à la Terminale, l'école et la maison avancent ensemble.
 3. Ce soir, dix minutes, un petit exercice, on fait ça ensemble… et les progrès se voient, matière par matière.
 4. La leçon bloque encore ? L'assistant l'explique autrement : au marché, huit tomates, quatre cents francs… Même papa a compris !
 5. À l'école, l'enseignant suit tout : l'appel en trente secondes, les notes, et le programme toujours à jour.
 6. Et le grand frère, au lycée, révise seul : des indices… pas les réponses.
 7. Sept jours gratuits, puis dès deux mille francs CFA par mois, par Orange Money ou MTN MoMo.
-8. Klas deux-trois-sept : maintenant, papa aussi sait aider. De petits pas… de grandes réussites.
+8. Klasse deux-trois-sept : maintenant, c'est papa qui explique. De petits pas… de grandes réussites.
 
 Ton par phrase (à indiquer à Flow si possible, sinon générer plusieurs prises) :
 1. complice et amusé, on joue la scène du papa qui hésite ;
