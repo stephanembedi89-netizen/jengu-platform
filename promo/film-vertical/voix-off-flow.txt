@@ -1,0 +1,50 @@
+KLAS 237 · TEXTE DE LA VOIX OFF À GÉNÉRER DANS FLOW · PUB 60 s · VERSION B
+==========================================================================
+
+Une phrase = un fichier. Nommez-les 1, 1b, 2, 3, 4, 5, 6, 7, 8 (mp3 ou wav).
+Collez seulement le texte, sans le numéro.
+
+VOIX
+- Narratrice : Sulafat (chaleureuse). À défaut : Vindemiatrix (douce) ou Aoede (légère).
+- Fichier 1b (la réplique du papa) : une voix d'homme, Achird (amicale) ou Umbriel (décontractée).
+- Consigne de style à coller :
+  « Narratrice camerounaise chaleureuse, comme une maman de Douala qui raconte sa soirée en souriant.
+    Débit posé, vraie pause sur chaque “…”. Ton complice sur la première phrase. »
+
+LE TEXTE
+
+1.  Vingt heures. Le petit tend son cahier : « Papa, aide-moi. » Papa regarde… regarde encore…
+
+1b. (voix du papa) Euh… va demander à ta mère.
+
+2.  Maman sourit… et ouvre Klasse deux-trois-sept. Du SIL à la Terminale, l'école et la maison avancent ensemble.
+
+3.  Ce soir, dix minutes, un petit exercice, on fait ça ensemble… et les progrès se voient, matière par matière.
+
+4.  La leçon bloque encore ? L'assistant l'explique autrement : au marché, huit tomates, quatre cents francs… Même papa a compris !
+
+5.  À l'école, l'enseignant suit tout : l'appel en trente secondes, les notes, et le programme toujours à jour.
+
+6.  Et le grand frère, au lycée, révise seul : des indices… pas les réponses.
+
+7.  Sept jours gratuits, puis dès deux mille francs CFA par mois, par Orange Money ou MTN MoMo.
+
+8.  Klasse deux-trois-sept : maintenant, c'est papa qui explique. De petits pas… de grandes réussites.
+
+TON PAR PHRASE (si Flow le permet, sinon faire 2 ou 3 prises et garder la meilleure)
+1  complice et amusé, on sent le papa qui hésite
+1b le papa, gêné et drôle, petit rire nerveux
+2  posé, souriant, un peu malicieux
+3  chaleureux, rassurant
+4  léger, un petit rire sur « Même papa a compris ! »
+5  clair et sérieux, on parle aux enseignants
+6  encourageant
+7  net, bien articuler les chiffres
+8  fier et chaleureux, vraie pause avant « De petits pas… »
+
+SI UN MOT EST MAL DIT
+- « Klasse deux-trois-sept » est écrit exprès comme ça se prononce (à l'écran : Klas 237).
+- « SIL » : écrire « le sil » si la voix épelle.
+- « MTN » : écrire « èm-té-ène » si besoin.
+
+Si vous ne faites pas le 1b, mettez « Euh… va demander à ta mère. » à la fin de la phrase 1.
