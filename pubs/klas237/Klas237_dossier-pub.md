@@ -13,7 +13,7 @@ Source : visite du site **klas237.jengu-ai.com** le 13/11/2026 (accueil, offres,
 | **Le rituel du soir** : 3 gestes guidés, minuteur de 10 minutes | Bénéfice n° 1 : « 10 minutes, chaque soir. » |
 | **L'assistant IA qui explique autrement** : dicter, photo du cahier, à la main ; exemple « au marché, 8 tomates à 400 FCFA. La moitié ? 4 tomates, 200 FCFA. » | Bénéfice n° 2 : « Il explique autrement. » (l'exemple des tomates est l'ancrage local parfait) |
 | **La méthode** : « Un appui, pas une réponse à copier. » · la série des soirs · « Même sans réseau » · le relais WhatsApp | Bénéfice n° 3 |
-| Du SIL à la Terminale, francophone et anglophone, CEP · BEPC · Probatoire · Bac | À garder pour les versions élève et enseignant |
+| De la SIL à la Terminale, francophone et anglophone, CEP · BEPC · Probatoire · Bac | À garder pour les versions élève et enseignant |
 | **7 jours gratuits, sans carte bancaire** | CTA |
 | Famille : **2 500 FCFA/mois** le 1er enfant, 1 500 FCFA chaque enfant suivant · Élève 2 000 · Enseignant 5 000 · Accompagnateur 5 000 | « puis dès 2 500 FCFA / mois » |
 | Paiement Orange Money ou MTN MoMo, en une fois | À l'écran : « Mobile Money » (pas de logo d'opérateur) |
@@ -25,7 +25,7 @@ Source : visite du site **klas237.jengu-ai.com** le 13/11/2026 (accueil, offres,
 
 ## 2. Fiche brief
 ```
-APPLICATION      : Klas 237 — le relais entre l'école et la maison (du SIL à la Terminale)
+APPLICATION      : Klas 237 — le relais entre l'école et la maison (de la SIL à la Terminale)
 CIBLE PRINCIPALE : parents d'élèves du primaire, Douala, 28–45 ans, smartphone Android
 CIBLES SECOND.   : élèves du secondaire, enseignants, accompagnateurs (répétiteurs)
 PROBLÈME VÉCU    : « Il est 20 h, il y a compo demain, et je ne connais pas la méthode de l'école. »

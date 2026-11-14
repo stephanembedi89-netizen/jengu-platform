@@ -30,7 +30,7 @@ Les voix 1 à 3 et 5 font partie du catalogue Gemini, mais je n'ai pas pu vérif
 |---|---|---|---|---|
 | 0:00 – 0:03 | 3 s | Vingt heures. Compo demain. | Complice, un peu fatigué, sourire en coin | Horloge, « 20 h. Compo demain. » |
 | 0:03 – 0:07 | 4 s | À la maison, tout le monde veut aider… mais personne n'a le temps de tout refaire. | Compréhensif, doux | Bulles : l'enfant, le cahier, la maman |
-| 0:07 – 0:10,5 | 3,5 s | Klas 237, c'est le relais entre l'école et la maison. Du SIL à la Terminale. | Lumineux, rassurant | Logo, classes du SIL à la Tle |
+| 0:07 – 0:10,5 | 3,5 s | Klas 237, c'est le relais entre l'école et la maison. De la SIL à la Terminale. | Lumineux, rassurant | Logo, classes de la SIL à la Tle |
 | 0:10,5 – 0:15 | 4,5 s | Parents : dix minutes chaque soir. On ouvre le cahier, on voit où ça bloque, on essaie ensemble. | Amical, posé | Écran « Ce soir avec Alex », minuteur |
 | 0:15 – 0:22 | 7 s | Et si la méthode a changé, l'assistant explique autrement. Comme au marché, avec les tomates. | Souriant, malicieux sur « les tomates » | Assistant, carte « 8 tomates à 400 FCFA » |
 | 0:22 – 0:31 | 9 s | Élèves : pas la réponse, un indice. Des révisions chronométrées, et le compte à rebours jusqu'à l'examen. | Encourageant, dynamique | Indice, chrono, CEP · BEPC · Probatoire · Bac |
@@ -54,7 +54,7 @@ Soft, warm and friendly female narrator, calm and reassuring, gentle smile, clos
 ```
 **Texte :**
 ```
-Vingt heures. <short pause> Compo demain. <long pause> À la maison, tout le monde veut aider… <short pause> mais personne n'a le temps de tout refaire. <long pause> Klasse deux-trois-sept, c'est le relais entre l'école et la maison. <short pause> Du SIL à la Terminale. <long pause>
+Vingt heures. <short pause> Compo demain. <long pause> À la maison, tout le monde veut aider… <short pause> mais personne n'a le temps de tout refaire. <long pause> Klasse deux-trois-sept, c'est le relais entre l'école et la maison. <short pause> De la SIL à la Terminale. <long pause>
 ```
 
 ### BLOC 2 · Les quatre espaces (0:10 → 0:47)
