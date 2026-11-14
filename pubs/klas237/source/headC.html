@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><title>Klas 237 — pub 30 s</title>
+<style>
+@font-face{font-family:Sora;font-weight:700;src:url(node_modules/@fontsource/sora/files/sora-latin-700-normal.woff2)}
+@font-face{font-family:Sora;font-weight:800;src:url(node_modules/@fontsource/sora/files/sora-latin-800-normal.woff2)}
+@font-face{font-family:Manrope;font-weight:500;src:url(node_modules/@fontsource/manrope/files/manrope-latin-500-normal.woff2)}
+@font-face{font-family:Manrope;font-weight:700;src:url(node_modules/@fontsource/manrope/files/manrope-latin-700-normal.woff2)}
+@font-face{font-family:Caveat;font-weight:700;src:url(node_modules/@fontsource/caveat/files/caveat-latin-700-normal.woff2)}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#0B1B33;--cream:#FBF6EC;--green:#0E8A5F;--red:#E0393E;--yel:#FFD23F}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--navy)}
+.abs{position:absolute;left:0;top:0}
+#night{position:absolute;inset:0;background:radial-gradient(90% 60% at 50% 40%,#1B3560 0%,#0B1B33 60%,#060F1F 100%)}
+#day{position:absolute;inset:0;opacity:0;background:
+ radial-gradient(60% 40% at 0% 0%,rgba(14,138,95,.20),transparent 70%),radial-gradient(60% 40% at 100% 20%,rgba(255,210,63,.30),transparent 70%),
+ radial-gradient(70% 40% at 50% 100%,rgba(224,57,62,.14),transparent 70%),var(--cream)}
+#dots{position:absolute;inset:0;opacity:.5;background-image:radial-gradient(rgba(11,27,51,.10) 2px,transparent 2px);background-size:36px 36px}
+.blob{position:absolute;border-radius:50%;filter:blur(80px)}
+.t{position:absolute;left:0;top:0;width:1080px;text-align:center;padding:0 80px;opacity:0;will-change:transform,opacity}
+.h{font:800 92px/1.06 Sora;letter-spacing:-.02em;color:#fff}
+.h.dk{color:var(--navy)} .h em{font-style:normal;color:var(--yel)} .h.dk em{color:var(--green)} .h.dk em.r{color:var(--red)}
+.s{font:700 44px/1.3 Manrope;color:#C8D6EE} .s.dk{color:#3B4A63}
+.hand{font:700 76px/1.1 Caveat;color:var(--yel)} .hand.dk{color:var(--red)}
+.w{display:inline-block;opacity:0}
+.bub{position:absolute;left:0;top:0;max-width:760px;padding:34px 42px;border-radius:44px;font:700 50px/1.25 Manrope;opacity:0;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.bub.kid{background:#fff;color:var(--navy);border-bottom-left-radius:10px}
+.bub.par{background:var(--yel);color:var(--navy);border-bottom-right-radius:10px}
+.bub small{display:block;font:700 26px/1 Sora;letter-spacing:.14em;opacity:.55;margin-bottom:12px}
+#phone{position:absolute;left:0;top:0;width:500px;height:1000px;border-radius:64px;background:#0B1220;padding:14px;opacity:0;
+ box-shadow:0 60px 120px rgba(11,27,51,.45),0 0 0 2px rgba(255,255,255,.08) inset}
+#scr{position:relative;width:100%;height:100%;border-radius:52px;overflow:hidden;background:var(--cream)}
+#scr img{position:absolute;left:0;top:0;width:100%;opacity:0}
+#notch{position:absolute;left:50%;top:26px;width:130px;height:30px;margin-left:-65px;border-radius:20px;background:#0B1220;z-index:3}
+.chip{position:absolute;left:0;top:0;padding:20px 30px;border-radius:999px;font:700 36px/1 Manrope;opacity:0;box-shadow:0 16px 40px rgba(11,27,51,.22);white-space:nowrap}
+.card{position:absolute;left:0;top:0;border-radius:36px;opacity:0;box-shadow:0 24px 70px rgba(11,27,51,.28)}
+#logo{position:absolute;left:0;top:0;width:1080px;text-align:center;opacity:0}
+#logo .k{font:800 150px/1 Sora;color:var(--navy);letter-spacing:-.03em}
+#logo .n{display:inline-block;font:800 118px/1 Sora;color:var(--red);border:9px solid var(--red);border-radius:50%;padding:14px 26px 18px;margin-left:10px;transform:rotate(-4deg)}
+#logo.wh .k{color:#fff}
+#cap{position:absolute;left:0;top:0;width:1080px;text-align:center;padding:0 90px;z-index:50}
+#cap span{display:inline;font:700 42px/1.5 Manrope;color:#fff;background:rgba(11,27,51,.82);padding:8px 18px;border-radius:14px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+#flag{position:absolute;left:0;top:0;width:1080px;height:14px;z-index:60;background:linear-gradient(90deg,var(--green) 0 33.3%,var(--red) 33.3% 66.6%,var(--yel) 66.6%)}
+#grain{position:absolute;inset:0;mix-blend-mode:overlay;opacity:.10;z-index:90;pointer-events:none}
+#fade{position:absolute;inset:0;background:#000;z-index:95;pointer-events:none}
+svg{position:absolute;left:0;top:0}
+
+.sc{position:absolute;inset:0;opacity:0;overflow:hidden}
+.per{position:absolute;left:0;top:0;width:400px;height:520px;transform-origin:50% 100%}
+.bb{position:absolute;left:0;top:0;max-width:700px;padding:30px 40px;border-radius:44px;font:700 48px/1.25 Manrope;background:#fff;color:#0B1B33;opacity:0;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.bb:after{content:"";position:absolute;bottom:-24px;width:0;height:0;border:26px solid transparent;border-top-color:#fff;border-bottom:0}
+.bb.l:after{left:70px}.bb.r:after{right:70px}.bb.y{background:#FFD23F}.bb.y:after{border-top-color:#FFD23F}
+</style></head><body><div id="stage">
+<div id="night"></div><div id="day"><div id="dots"></div></div>
+<div class="blob" id="b1" style="width:700px;height:700px;background:#1E4FD8;opacity:.25"></div>
+<div id="L"></div>
+<div id="flag"></div><div id="cap"><span></span></div>
+<canvas id="grain" width="540" height="960"></canvas><div id="fade"></div>
+</div>
+<script>
+const C=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),P=(t,a,b)=>C((t-a)/(b-a));
+const eo=x=>x>=1?1:1-Math.pow(2,-10*x),ei=x=>x*x*x,eio=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const back=x=>{const c1=1.7,c3=c1+1;return 1+c3*Math.pow(x-1,3)+c1*Math.pow(x-1,2)};
+const lerp=(a,b,k)=>a+(b-a)*k,$=s=>document.querySelector(s),Lr=$('#L');
+const el=h=>{const d=document.createElement('div');d.innerHTML=h.trim();const e=d.firstChild;Lr.appendChild(e);return e};
+let seed=3;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};
+const IO=(t,a,b,din=.7,dout=.4)=>({i:eo(P(t,a,a+din)),o:ei(P(t,b-dout,b)),on:t>=a&&t<=b});
+
+// ---------- texts (kinetic) ----------
+const TX=[];
+function tx(html,cls,a,b,y,o={}){const parts=html.split(/(<em[^>]*>.*?<\/em>|<br>|\s+)/).filter(s=>s&&!/^\s+$/.test(s));
+ const e=el(`<div class="t ${cls}" style="${o.style||''}">${parts.map(w=>w==='<br>'?'<br>':`<span class="w">${w}</span>`).join(' ')}</div>`);
+ TX.push({e,a,b,y,ws:[...e.querySelectorAll('.w')],st:o.st||.09})}
+function drawTx(o,t){const {i,o:out,on}=IO(t,o.a,o.b);if(!on){o.e.style.opacity=0;return}
+ o.e.style.opacity=1-out;o.e.style.transform=`translateY(${o.y-out*50}px) scale(${1-out*.04})`;
+ o.ws.forEach((w,k)=>{const p=back(P(t,o.a+k*o.st,o.a+k*o.st+.5));const q=C(P(t,o.a+k*o.st,o.a+k*o.st+.25));
+  w.style.opacity=q;w.style.transform=`translateY(${(1-p)*60}px) rotate(${(1-p)*4}deg)`})}
+
+

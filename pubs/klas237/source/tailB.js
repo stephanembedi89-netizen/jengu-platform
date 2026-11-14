@@ -1,0 +1,236 @@
+
+// ================= PERSONNAGES (illustration vectorielle) =================
+function person(o){
+ const sk=o.skin||'#7A4A2B',sk2=o.skin2||'#5E3720',hair='#1B1310';
+ let back='',top='',extra='';
+ if(o.hair==='short'||o.hair==='kid') top=`<path d="M92 190 Q84 58 200 58 Q316 58 308 190 Q300 128 200 120 Q100 128 92 190Z" fill="${hair}"/>`;
+ if(o.beard) extra+=`<path d="M100 215 Q104 318 200 320 Q296 318 300 215 Q290 282 200 284 Q110 282 100 215Z" fill="${hair}" opacity=".92"/>`;
+ if(o.hair==='afro'){back=`<circle cx="200" cy="140" r="138" fill="${hair}"/>`;top=`<path d="M100 170 Q110 100 200 98 Q290 100 300 170 Q250 130 200 132 Q150 130 100 170Z" fill="${hair}"/>`}
+ if(o.hair==='bun'){back=`<circle cx="200" cy="52" r="46" fill="${hair}"/>`;top=`<path d="M92 195 Q82 62 200 62 Q318 62 308 195 Q296 126 200 122 Q104 126 92 195Z" fill="${hair}"/>`}
+ if(o.hair==='wrap'){back=`<path d="M96 210 Q70 260 96 330 L120 330 Q104 262 116 214Z M304 210 Q330 260 304 330 L280 330 Q296 262 284 214Z" fill="${hair}"/>`;
+  top=`<g><path d="M82 170 Q70 40 200 34 Q330 40 318 170 Q300 118 200 112 Q100 118 82 170Z" fill="#FFC72C"/>
+   <path d="M96 120 Q130 50 200 44 Q160 80 150 128Z" fill="#1E4FD8"/><path d="M230 46 Q300 66 312 140 Q280 100 238 96Z" fill="#D7263D"/><path d="M168 60 Q200 52 226 66 Q200 86 176 88Z" fill="#0E8A5F"/>
+   <ellipse cx="292" cy="56" rx="50" ry="34" fill="#FFC72C" transform="rotate(28 292 56)"/><ellipse cx="300" cy="50" rx="24" ry="16" fill="#1E4FD8" transform="rotate(28 300 50)"/></g>`;
+  extra+=`<circle cx="97" cy="238" r="13" fill="none" stroke="#F2B53A" stroke-width="6"/><circle cx="303" cy="238" r="13" fill="none" stroke="#F2B53A" stroke-width="6"/>`}
+ if(o.glasses) extra+=`<g fill="none" stroke="#0B1B33" stroke-width="7"><circle cx="158" cy="198" r="34"/><circle cx="242" cy="198" r="34"/><path d="M192 196 L208 196"/></g>`;
+ const collar=o.collar?`<path d="M150 322 L200 372 L250 322 L232 316 L200 346 L168 316Z" fill="${o.collar}"/>`:'';
+ const d=document.createElement('div');d.className='per';
+ d.innerHTML=`<svg width="400" height="520" viewBox="0 0 400 520" style="position:static;overflow:visible">
+  ${back}
+  <path d="M34 520 Q34 338 200 326 Q366 338 366 520Z" fill="${o.shirt}"/>
+  <rect x="168" y="268" width="64" height="78" rx="22" fill="${sk2}"/>${collar}
+  <circle cx="96" cy="202" r="22" fill="${sk}"/><circle cx="304" cy="202" r="22" fill="${sk}"/>
+  <ellipse cx="200" cy="192" rx="106" ry="116" fill="${sk}"/>
+  ${top}${extra.includes('opacity=".92"')?'':''}
+  <g class="eyes"><ellipse cx="158" cy="198" rx="21" ry="23" fill="#fff"/><ellipse cx="242" cy="198" rx="21" ry="23" fill="#fff"/>
+   <g class="pup"><circle cx="158" cy="200" r="11" fill="#1B1310"/><circle cx="242" cy="200" r="11" fill="#1B1310"/><circle cx="162" cy="195" r="4" fill="#fff"/><circle cx="246" cy="195" r="4" fill="#fff"/></g></g>
+  <rect class="lid" x="130" y="170" width="140" height="56" rx="26" fill="${sk}" opacity="0"/>
+  <path class="bl" d="M134 160 Q158 148 182 158" stroke="${hair}" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path class="br" d="M218 158 Q242 148 266 160" stroke="${hair}" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <circle cx="128" cy="240" r="20" fill="#E0393E" opacity=".16"/><circle cx="272" cy="240" r="20" fill="#E0393E" opacity=".16"/>
+  <path d="M192 222 Q200 232 208 222" stroke="${sk2}" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <g class="m m-smile"><path d="M162 252 Q200 290 238 252" stroke="#3A1F14" stroke-width="9" fill="none" stroke-linecap="round"/></g>
+  <g class="m m-grin" opacity="0"><path d="M156 248 Q200 306 244 248Z" fill="#3A1F14"/><path d="M166 252 Q200 268 234 252 L230 250 L170 250Z" fill="#fff"/></g>
+  <g class="m m-o" opacity="0"><ellipse cx="200" cy="262" rx="17" ry="21" fill="#3A1F14"/></g>
+  <g class="m m-flat" opacity="0"><path d="M170 262 L230 262" stroke="#3A1F14" stroke-width="9" stroke-linecap="round"/></g>
+  <g class="m m-wavy" opacity="0"><path d="M164 262 Q178 250 192 262 T220 262 T240 258" stroke="#3A1F14" stroke-width="8" fill="none" stroke-linecap="round"/></g>
+  ${extra}
+ </svg>`;
+ d.q=s=>d.querySelector(s);return d}
+function face(p,{dx=0,dy=0,brow=0,mouth='smile',blink=0}={}){
+ p.q('.pup').setAttribute('transform',`translate(${dx} ${dy})`);
+ p.q('.bl').setAttribute('transform',`rotate(${-brow} 158 156) translate(0 ${-Math.abs(brow)*.5})`);p.q('.br').setAttribute('transform',`rotate(${brow} 242 156) translate(0 ${-Math.abs(brow)*.5})`);
+ p.querySelectorAll('.m').forEach(m=>m.setAttribute('opacity',m.classList.contains('m-'+mouth)?1:0));
+ p.q('.lid').setAttribute('opacity',blink)}
+function put(p,x,yb,s=1,r=0,op=1){p.style.opacity=op;p.style.transform=`translate(${x-200}px,${yb-520}px) rotate(${r}deg) scale(${s})`}
+const blinkAt=t=>((t*1.0)%3.1)<.12?1:0;
+
+// ================= DÉCORS =================
+const scene=(html)=>{const e=el(`<div class="sc">${html}</div>`);return e};
+const ROOM=(night)=>`<div style="position:absolute;inset:0;background:${night?'linear-gradient(#3B2A4A,#6B3F3A 55%,#8A5536)':'linear-gradient(#F6E3BE,#F3D3A0 60%,#E9BE84)'}"></div>
+ <svg width="1080" height="1920">
+  <rect x="640" y="250" width="330" height="430" rx="18" fill="${night?'#16264F':'#BFE3F5'}" stroke="#5B3A22" stroke-width="18"/>
+  <path d="M805 250 V680 M640 465 H970" stroke="#5B3A22" stroke-width="12"/>
+  ${night?'<circle cx="890" cy="340" r="38" fill="#FFF3C4"/><circle cx="700" cy="320" r="4" fill="#fff"/><circle cx="745" cy="420" r="3" fill="#fff"/><circle cx="930" cy="560" r="4" fill="#fff"/>':'<circle cx="890" cy="350" r="46" fill="#FFD23F"/>'}
+  <path d="M590 210 H1020 V250 H590Z" fill="#5B3A22"/>
+  <g><path d="M600 250 Q570 480 620 720 L700 720 Q650 480 690 250Z" fill="#D7263D"/><path d="M612 300 Q600 420 628 520 L668 520 Q640 420 660 300Z" fill="#FFC72C"/><circle cx="640" cy="600" r="22" fill="#1E4FD8"/>
+     <path d="M1010 250 Q1040 480 990 720 L910 720 Q960 480 920 250Z" fill="#D7263D"/><path d="M998 300 Q1010 420 982 520 L942 520 Q970 420 950 300Z" fill="#FFC72C"/><circle cx="970" cy="600" r="22" fill="#1E4FD8"/></g>
+  <g><rect x="150" y="330" width="250" height="190" rx="10" fill="#fff" stroke="#5B3A22" stroke-width="14"/><path d="M170 480 L240 400 L290 450 L330 410 L380 480Z" fill="#0E8A5F"/><circle cx="330" cy="380" r="20" fill="#FFD23F"/></g>
+  <path d="M250 0 V120" stroke="#3A2A1C" stroke-width="8"/><path d="M170 190 Q250 60 330 190Z" fill="#FFD23F"/>
+  ${night?'<ellipse cx="250" cy="420" rx="330" ry="300" fill="#FFD98A" opacity=".16"/>':''}
+ </svg>`;
+const TABLE=`<svg width="1080" height="1920"><path d="M-20 1215 H1100 V1420 H-20Z" fill="#8A5A34"/><path d="M-20 1215 H1100 V1250 H-20Z" fill="#A9713F"/><rect x="-20" y="1420" width="1120" height="520" fill="#5B3A22"/></svg>`;
+const NOTE=`<svg width="230" height="170" viewBox="0 0 230 170" style="position:static;overflow:visible"><rect x="4" y="4" width="222" height="162" rx="10" fill="#fff" stroke="#1E4FD8" stroke-width="8"/><path d="M115 4 V166" stroke="#1E4FD8" stroke-width="5"/>
+ <g stroke="#9AA8BF" stroke-width="5" stroke-linecap="round"><path d="M22 40 H98 M22 66 H90 M22 92 H98 M22 118 H76 M132 40 H208 M132 66 H196 M132 92 H208"/></g><text x="150" y="140" font-family="Sora" font-weight="800" font-size="34" fill="#E0393E">3/4 ?</text></svg>`;
+
+// ---- S1 : la soirée (nuit) ----
+const S1=scene(ROOM(true));
+const papa=person({shirt:'#0E8A5F',hair:'short',beard:1,collar:'#0B6B4A'});const kid=person({shirt:'#2F6FE0',hair:'kid',skin:'#84512F',collar:'#fff'});
+S1.appendChild(papa);S1.appendChild(kid);S1.insertAdjacentHTML('beforeend',TABLE);
+const note=document.createElement('div');note.style.cssText='position:absolute;left:0;top:0';note.innerHTML=NOTE;S1.appendChild(note);
+const qm=['?','?','?'].map((q,k)=>{const d=document.createElement('div');d.style.cssText='position:absolute;left:0;top:0;font:800 120px Sora;color:#FFD23F;opacity:0;text-shadow:0 8px 24px rgba(0,0,0,.4)';d.textContent=q;S1.appendChild(d);return d});
+const sweat=document.createElement('div');sweat.style.cssText='position:absolute;left:0;top:0;width:34px;height:48px;border-radius:50% 50% 50% 50%/65% 65% 35% 35%;background:#9FE8F7;opacity:0';S1.appendChild(sweat);
+const bK=document.createElement('div');bK.className='bb l';bK.textContent='« Papa, aide-moi. »';S1.appendChild(bK);
+const bP=document.createElement('div');bP.className='bb r y';bP.textContent='« Euh… va demander à ta mère. »';S1.appendChild(bP);
+const h20=document.createElement('div');h20.style.cssText='position:absolute;left:0;top:0;padding:18px 40px;border-radius:999px;background:#0B1B33;color:#FFD23F;font:800 76px/1 Sora;opacity:0;box-shadow:0 14px 40px rgba(0,0,0,.4)';h20.textContent='20 h';S1.appendChild(h20);
+
+// ---- S2 : maman + Klas 237 ----
+const S2=scene(ROOM(true));const maman=person({shirt:'#8E1F3A',hair:'wrap',skin:'#6E4023',skin2:'#573018'});S2.appendChild(maman);
+const mph=document.createElement('div');mph.style.cssText='position:absolute;left:0;top:0;width:230px;height:430px;border-radius:38px;background:#0B1220;padding:10px;box-shadow:0 30px 60px rgba(0,0,0,.45)';
+mph.innerHTML=`<div style="width:100%;height:100%;border-radius:30px;background:#FBF6EC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px"><div style="font:800 46px/1 Sora;color:#0B1B33">Klas</div><div style="font:800 40px/1 Sora;color:#E0393E;border:5px solid #E0393E;border-radius:50%;padding:6px 14px;transform:rotate(-4deg)">237</div></div>`;S2.appendChild(mph);
+const mhand=document.createElement('div');mhand.style.cssText='position:absolute;left:0;top:0;width:120px;height:96px;border-radius:48px;background:#6E4023';S2.appendChild(mhand);
+
+// ---- S5 : la classe ----
+const S5=scene(`<div style="position:absolute;inset:0;background:linear-gradient(#F4E8CF,#EBD7AE)"></div><svg width="1080" height="1920">
+ <rect x="90" y="560" width="900" height="470" rx="14" fill="#1F5B45" stroke="#7A5230" stroke-width="22"/>
+ <text x="150" y="660" font-family="Caveat" font-weight="700" font-size="74" fill="#fff">Leçon du jour</text>
+ <path d="M150 690 H520" stroke="#fff" stroke-width="5" stroke-dasharray="14 10"/>
+ <text x="150" y="800" font-family="Caveat" font-weight="700" font-size="92" fill="#FFD23F">3/4 = 0,75</text>
+ <circle cx="800" cy="790" r="110" fill="none" stroke="#fff" stroke-width="7"/><path d="M800 790 L800 680 A110 110 0 1 1 690 790Z" fill="#FFD23F" opacity=".85"/><path d="M690 790 H910 M800 680 V900" stroke="#fff" stroke-width="5"/>
+ <rect x="-20" y="1250" width="1120" height="700" fill="#C99A62"/><rect x="-20" y="1250" width="1120" height="26" fill="#DDB07A"/></svg>`);
+const prof=person({shirt:'#F2B53A',hair:'bun',glasses:1,skin:'#754527',collar:'#fff'});S5.appendChild(prof);
+
+// ---- S6 : le grand frère ----
+const S6=scene(`<div style="position:absolute;inset:0;background:linear-gradient(#DCE9F7,#C7DBF0)"></div><svg width="1080" height="1920">
+ <rect x="110" y="560" width="300" height="380" rx="12" fill="#fff" stroke="#0B1B33" stroke-width="12"/><text x="150" y="650" font-family="Sora" font-weight="800" font-size="52" fill="#E0393E">BAC</text><text x="150" y="720" font-family="Manrope" font-weight="700" font-size="34" fill="#0B1B33">Objectif</text><path d="M150 760 H370 M150 800 H330 M150 840 H370" stroke="#C3CEDD" stroke-width="10" stroke-linecap="round"/>
+ <path d="M-20 1215 H1100 V1420 H-20Z" fill="#8A5A34"/><path d="M-20 1215 H1100 V1250 H-20Z" fill="#A9713F"/><rect x="-20" y="1420" width="1120" height="520" fill="#5B3A22"/>
+ <g transform="translate(700 1120)"><rect width="230" height="110" rx="8" fill="#fff" stroke="#1E4FD8" stroke-width="7"/><path d="M24 34 H200 M24 60 H170 M24 86 H190" stroke="#9AA8BF" stroke-width="6" stroke-linecap="round"/></g></svg>`);
+const frere=person({shirt:'#D7263D',hair:'afro',skin:'#80502F'});S6.appendChild(frere);
+const fph=document.createElement('div');fph.style.cssText='position:absolute;left:0;top:0;width:150px;height:270px;border-radius:26px;background:#0B1220;padding:8px;box-shadow:0 20px 40px rgba(0,0,0,.35)';fph.innerHTML='<div style="width:100%;height:100%;border-radius:20px;background:#FBF6EC;display:flex;align-items:center;justify-content:center;font:800 54px Sora">💡</div>';S6.appendChild(fph);
+const bF=document.createElement('div');bF.className='bb l';bF.style.maxWidth='620px';bF.innerHTML='<span style="font:700 26px/1 Sora;letter-spacing:.14em;color:#E0393E;display:block;margin-bottom:10px">💡 INDICE</span>Que te demande-t-on de calculer <span style="color:#0E8A5F">en premier</span> ?';S6.appendChild(bF);
+
+// ---- S8 : la famille, le jour ----
+const S8=scene(ROOM(false));const papa2=person({shirt:'#0E8A5F',hair:'short',beard:1,collar:'#0B6B4A'});const kid2=person({shirt:'#2F6FE0',hair:'kid',skin:'#84512F',collar:'#fff'});const maman2=person({shirt:'#8E1F3A',hair:'wrap',skin:'#6E4023',skin2:'#573018'});
+S8.appendChild(maman2);S8.appendChild(papa2);S8.appendChild(kid2);S8.insertAdjacentHTML('beforeend',TABLE);
+const note2=document.createElement('div');note2.style.cssText='position:absolute;left:0;top:0';note2.innerHTML=NOTE.replace('3/4 ?','3/4 ✓').replace('#E0393E','#0E8A5F');S8.appendChild(note2);
+const arm=document.createElement('div');arm.style.cssText='position:absolute;left:0;top:0;width:210px;height:70px;border-radius:35px;background:#7A4A2B;transform-origin:10% 50%';S8.appendChild(arm);
+const stars=['✨','⭐','✨'].map(c=>{const d=document.createElement('div');d.style.cssText='position:absolute;left:0;top:0;font-size:90px;opacity:0';d.textContent=c;S8.appendChild(d);return d});
+
+// ================= APP / MOTION =================
+const mk=(s,bg='#fff',fg='#0B1B33')=>el(`<div class="chip" style="background:${bg};color:${fg}">${s}</div>`);
+const logo=el(`<div id="logo"><span class="k">Klas</span><span class="n">237</span></div>`);
+const lv=['SIL','CP','CE1','CE2','CM1','CM2','6e','5e','4e','3e','2nde','1re','Tle'].map(s=>el(`<div class="chip" style="background:#fff;color:#0B1B33;padding:14px 22px;font-size:32px">${s}</div>`));
+const phone=el(`<div id="phone"><div id="notch"></div><div id="scr"><img id="i1" src="kl/soir_0.png"><img id="i2" src="kl/assistant_0.png"></div></div>`);
+const I=['#i1','#i2'].map(s=>phone.querySelector(s));
+const timer=el(`<svg width="1080" height="1920" style="opacity:0"><circle cx="850" cy="640" r="96" fill="#0E8A5F"/><circle cx="850" cy="640" r="78" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="12"/><circle id="tr" cx="850" cy="640" r="78" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" transform="rotate(-90 850 640)"/><text id="tt" x="850" y="656" text-anchor="middle" font-family="Sora" font-weight="800" font-size="44" fill="#fff">10:00</text></svg>`);
+const tr=timer.querySelector('#tr'),tt=timer.querySelector('#tt'),TR=2*Math.PI*78;
+const prog=el(`<div class="card" style="width:560px;padding:34px 38px;background:#fff;color:#0B1B33"><div style="font:800 38px/1.1 Sora;margin-bottom:22px">Ses progrès</div><div id="pb"></div></div>`);
+const PB=[['Maths','#0E8A5F',.82],['Français','#FFB703',.68],['Sciences','#1E4FD8',.74]].map(([n,c,v])=>{const d=document.createElement('div');d.style.cssText='margin:16px 0';d.innerHTML=`<div style="font:700 32px/1 Manrope;margin-bottom:10px">${n}</div><div style="height:26px;border-radius:13px;background:#E8EEF0;overflow:hidden"><div class="f" style="height:100%;width:0;border-radius:13px;background:${c}"></div></div>`;prog.querySelector('#pb').appendChild(d);return {f:d.querySelector('.f'),v}});
+const tomC=el(`<div class="card" style="width:900px;height:430px;background:#0B1B33;color:#fff"><div style="position:absolute;left:44px;top:34px;font:700 26px/1 Sora;letter-spacing:.14em;color:#FFD23F">✦ UNE AUTRE FAÇON · AU MARCHÉ</div><div id="tm"></div>
+ <div id="p1" style="position:absolute;left:44px;bottom:36px;font:800 50px/1 Sora">8 tomates · <span style="color:#FFD23F">400 FCFA</span></div><div id="p2" style="position:absolute;right:44px;bottom:36px;font:800 50px/1 Sora;color:#7CF0B6;opacity:0">4 · 200 FCFA</div></div>`);
+const TM=[...Array(8)].map((_,k)=>{const d=document.createElement('div');d.style.cssText='position:absolute;left:0;top:0;width:84px;height:78px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FF7A6B,#D7263D 70%)';d.innerHTML='<div style="position:absolute;left:30px;top:-10px;width:24px;height:20px;background:#0E8A5F;border-radius:50% 50% 0 0"></div>';tomC.querySelector('#tm').appendChild(d);return d});
+const papaPop=person({shirt:'#0E8A5F',hair:'short',beard:1,collar:'#0B6B4A'});Lr.appendChild(papaPop);
+const bulb=el(`<div class="abs" style="font-size:130px;opacity:0">💡</div>`);
+const tch=['✓ L’appel en 30 secondes','✓ Les notes','✓ Le programme à jour'].map(s=>mk(s,'#fff'));
+const exams=['BEPC','Probatoire','Bac'].map(s=>mk(s,'#FFD23F'));
+const payc=el(`<div class="card" style="width:860px;padding:34px 30px;background:#fff;color:#0B1B33;text-align:center;border-radius:40px;font:800 46px/1.25 Sora">Orange Money <span style="color:#9AA8BF">ou</span> MTN MoMo</div>`);
+const cta=el(`<div class="card" style="width:880px;padding:38px 30px;background:#FFD23F;color:#0B1B33;text-align:center;border-radius:999px;font:800 56px/1 Sora">klas237.jengu-ai.com</div>`);
+const by=el(`<div class="t" style="font:700 34px/1 Sora;letter-spacing:.2em;color:#0B1B33">PAR <span style="color:#B8860B">JENGUAI</span> · DOUALA</div>`);
+const veil=el(`<div class="abs" style="width:1080px;height:1920px;background:#FBF6EC;opacity:0"></div>`);
+[logo,cta,by].forEach(e=>Lr.appendChild(e)); // au-dessus du voile
+
+function place(e,x,y,w,h,{s=1,r=0,op=1}={}){e.style.opacity=op;e.style.transform=`translate(${x-w/2}px,${y-h/2}px) rotate(${r}deg) scale(${s})`}
+function pop(e,t,a,b,x,y,r=0){const on=t>=a&&t<=b;if(!on){e.style.opacity=0;return}const k=back(P(t,a,a+.5)),o=ei(P(t,b-.3,b));
+ const w=e.offsetWidth,h=e.offsetHeight;place(e,x,y+(1-k)*60-o*40+Math.sin(t*1.6+x)*4,w,h,{s:(.6+.4*k)*(1-o*.1),r,op:C(P(t,a,a+.2))*(1-o)})}
+function bubble(e,t,a,b,x,y){const on=t>=a&&t<=b;if(!on){e.style.opacity=0;return}const k=back(P(t,a,a+.45)),o=ei(P(t,b-.25,b));e.style.opacity=C(P(t,a,a+.15))*(1-o);e.style.transform=`translate(${x}px,${y+(1-k)*40}px) scale(${.6+.4*k})`;e.style.transformOrigin='30% 100%'}
+function sc(e,t,a,b,z=0){const on=t>=a-.05&&t<=b+.05;e.style.opacity=on?eio(P(t,a,a+.5))*(1-eio(P(t,b-.5,b))):0;if(on)e.style.transform=`scale(${1+z*P(t,a,b)})`;return on}
+
+// ================= TEXTES (titres) =================
+const HY=300;
+tx('L’école et la maison<br><em>avancent ensemble.</em>','h dk',13.6,17.8,1230,{style:'font-size:66px'});
+tx('<em>10 minutes,</em><br>on fait ça ensemble.','h dk',18.1,25.3,HY,{style:'font-size:72px'});
+tx('La leçon bloque ?<br><em>Il explique autrement.</em>','h dk',25.6,33.8,HY,{style:'font-size:66px'});
+tx('À l’école,<br><em>l’enseignant suit tout.</em>','h dk',34.1,40.8,270,{style:'font-size:70px'});
+tx('Des indices…<br><em class="r">pas les réponses.</em>','h dk',41.1,46.3,270,{style:'font-size:74px'});
+tx('<em>7 jours</em><br>gratuits','h',46.7,52.8,520,{style:'font-size:150px'});
+tx('puis dès 2 000 FCFA par mois','s',48.0,52.8,890,{style:'font-size:52px;color:#fff'});
+tx('Maintenant, c’est <em>papa</em><br>qui explique.','h dk',53.3,56.9,280,{style:'font-size:72px'});
+tx('De petits pas…','h dk',57.2,60,760,{style:'font-size:96px'});
+tx('<em>de grandes réussites.</em>','h dk',57.9,60,880,{style:'font-size:84px'});
+TX.forEach(o=>Lr.appendChild(o.e));Lr.appendChild(logo);
+
+const VO=[[0.4,7.3,'Vingt heures.|Le petit tend son cahier : « Papa, aide-moi. »|Papa regarde… regarde encore…'],[7.5,9.9,'« Euh… va demander à ta mère. »'],
+[10.1,17.8,'Maman sourit… et ouvre Klas 237.|Du SIL à la Terminale,|l’école et la maison avancent ensemble.'],
+[18.1,25.3,'Ce soir, dix minutes, un petit exercice,|on fait ça ensemble…|et les progrès se voient, matière par matière.'],
+[25.6,33.8,'La leçon bloque encore ?|L’assistant l’explique autrement :|au marché, huit tomates, quatre cents francs…|Même papa a compris !'],
+[34.1,40.8,'À l’école, l’enseignant suit tout :|l’appel en trente secondes, les notes,|et le programme toujours à jour.'],
+[41.1,46.3,'Et le grand frère, au lycée, révise seul :|des indices… pas les réponses.'],
+[46.7,52.8,'Sept jours gratuits,|puis dès deux mille francs CFA par mois,|par Orange Money ou MTN MoMo.'],
+[53.2,59.6,'Klas 237 : maintenant, c’est papa qui explique.|De petits pas… de grandes réussites.']];
+const CAP=[];VO.forEach(([a,b,s])=>{const ps=s.split('|'),tot=ps.reduce((n,p)=>n+p.length,0);let c=a;ps.forEach(p=>{const d=(b-a)*p.length/tot;CAP.push([c,c+d-.05,p]);c+=d})});
+const capS=$('#cap span');
+const gc=$('#grain').getContext('2d'),G=[];for(let k=0;k<5;k++){const im=gc.createImageData(540,960);for(let i=0;i<im.data.length;i+=4){const v=128+(rnd()-.5)*255;im.data[i]=im.data[i+1]=im.data[i+2]=v;im.data[i+3]=255}G.push(im)}
+
+window.DUR=60;
+window.render=function(t){
+ // fond motion : jour 13–46.5 et fin ; nuit pour le prix
+ const day=eio(P(t,12.6,13.4))*(1-eio(P(t,46.3,46.9)));$('#day').style.opacity=day;$('#dots').style.transform=`translate(${-t*6%36}px,${-t*4%36}px)`;
+ const b=$('#b1');b.style.transform=`translate(${200+120*Math.sin(t*.4)}px,${300+200*Math.cos(t*.3)}px)`;b.style.opacity=.25*(1-day);
+ TX.forEach(o=>drawTx(o,t));
+
+ // ---------- S1 0–10 ----------
+ if(sc(S1,t,0,10.1,.05)){
+  const look=eio(P(t,2.6,3.4));const squint=P(t,4.6,5.2);const panic=P(t,5.6,6.2);const give=P(t,7.5,7.9);
+  face(kid,{dx:7,dy:-3,brow:give?-4:6,mouth:give?'flat':(t<3?'o':'smile'),blink:blinkAt(t+1)});
+  face(papa,{dx:lerp(-2,-9,look)+(t>4.6&&t<7.3?Math.sin(t*5)*3:0)+give*14,dy:lerp(0,9,look)*(1-give),brow:give?10:lerp(4,-12,squint),mouth:give?'grin':(panic?'wavy':(squint?'flat':'smile')),blink:blinkAt(t)});
+  put(kid,300,1225,.92,Math.sin(t*1.3)*1);put(papa,770,1225,1.28,lerp(0,-4,squint)*(1-give)+Math.sin(t*1.1)*.8+give*3);
+  const nx=lerp(330,560,eio(P(t,1.4,2.6))),ny=lerp(1150,1090,eio(P(t,1.4,2.6)));note.style.transform=`translate(${nx}px,${ny+Math.sin(t*2)*4}px) rotate(${lerp(-10,6,P(t,1.4,2.6))}deg)`;
+  qm.forEach((q,k)=>{const a=4.8+k*.45;const p=back(P(t,a,a+.4));q.style.opacity=t>a&&t<7.5?C(p):0;q.style.transform=`translate(${[640,880,770][k]}px,${[430,470,330][k]-p*30+Math.sin(t*3+k)*8}px) rotate(${[-14,12,0][k]}deg) scale(${.5+.5*p})`});
+  const sw=P(t,5.8,7.3);sweat.style.opacity=sw>0&&sw<1?1:0;sweat.style.transform=`translate(${930}px,${640+sw*120}px)`;
+  bubble(bK,t,1.6,4.4,150,590);bubble(bP,t,7.6,10.0,330,360);
+  const h=back(P(t,.3,.9));h20.style.opacity=C(P(t,.3,.5))*(1-P(t,9.6,10));h20.style.transform=`translate(70px,${130+(1-h)*-60}px) rotate(-4deg) scale(${.6+.4*h})`;
+ }
+ // ---------- S2 10–13.4 (maman), puis logo ----------
+ if(sc(S2,t,10.0,13.6,.06)){
+  const k=eo(P(t,10.0,11.0));face(maman,{dx:lerp(-8,2,P(t,11.2,11.8)),dy:lerp(0,8,P(t,11.6,12.2)),brow:5,mouth:t>11.0?'grin':'smile',blink:blinkAt(t+.5)});
+  put(maman,lerp(1300,560,k),1420,1.75,Math.sin(t*1.2)*.8);
+  const pk=eo(P(t,11.3,12.2)),z=eio(P(t,12.5,13.5));
+  place(mph,lerp(820,540,z),lerp(1900,1150,pk)-z*250,230,430,{s:1+z*5,r:lerp(12,-6,pk)*(1-z)});
+  place(mhand,lerp(830,560,z),lerp(2110,1360,pk),120,96,{op:1-z*2});
+ }
+ {let op=0,y=640,s=1;
+  if(t>=13.2&&t<17.9){const k=back(P(t,13.2,13.9)),o=ei(P(t,17.5,17.9));op=C(P(t,13.2,13.4))*(1-o);s=.5+.5*k;y=640-o*80}
+  else if(t>=56.9){const k=back(P(t,56.9,57.6));op=C(P(t,56.9,57.1));s=(.5+.5*k)*.8;y=480}
+  logo.style.opacity=op;logo.style.transform=`translateY(${y-90}px) scale(${s})`}
+ lv.forEach((e,k)=>{const col=k%7,row=k<7?0:1;pop(e,t,14.4+k*.08,17.7,170+col*124+(row?62:0),930+row*86,k%2?2:-2)});
+
+ // ---------- téléphone 18–33.8 ----------
+ {const on=t>=18.0&&t<=33.9;if(!on)phone.style.opacity=0;else{const k=eo(P(t,18.0,18.9)),o=ei(P(t,33.5,33.9));
+   const side=eio(P(t,18.8,19.5))*(1-eio(P(t,21.6,22.3)))+0;const x=lerp(540,330,eio(P(t,18.8,19.5)));
+   place(phone,x,975+(1-k)*900+o*200+Math.sin(t*1.2)*6,500,1000,{s:.84*(1+.03*Math.sin(Math.PI*P(t,25.5,26))),r:lerp(8,-3,k)+Math.sin(t*.8)*.6,op:1-o});
+   I[0].style.opacity=1;I[1].style.opacity=eio(P(t,25.5,26.0));I[0].style.transform=`translateY(${-lerp(0,230,eio(P(t,19.4,22)))}px)`}}
+ {const on=t>=19.2&&t<=22.6;timer.style.opacity=on?eo(P(t,19.2,19.7))*(1-ei(P(t,22.3,22.6))):0;const q=P(t,19.6,22.4);tr.setAttribute('stroke-dasharray',`${TR*(1-q*.35)} ${TR}`);const sec=Math.round(600-q*210);tt.textContent=`${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`}
+ pop(prog,t,22.4,25.3,770,960,2);PB.forEach((p,k)=>{p.f.style.width=(100*p.v*eo(P(t,22.9+k*.3,24.3+k*.3)))+'%'});
+ // tomates
+ pop(tomC,t,27.6,33.8,540,1180,-1);{const sp=eio(P(t,29.6,30.4));TM.forEach((d,k)=>{const i=back(P(t,28.0+k*.08,28.4+k*.08));const right=k>=4;const x=70+k*98+(right?sp*50:-sp*10),y=120+(right?sp*26:0);d.style.transform=`translate(${x}px,${y+(1-i)*-60}px) scale(${i>0?(.4+.6*i):0})`;d.style.opacity=right?1-sp*.72:1});
+  tomC.querySelector('#p2').style.opacity=eo(P(t,30.2,30.8));tomC.querySelector('#p1').style.opacity=1-.5*P(t,30.2,30.8)}
+ {const on=t>=31.3&&t<=33.9;const k=back(P(t,31.3,31.9)),o=ei(P(t,33.5,33.9));if(on){face(papaPop,{dx:-6,dy:-4,brow:12,mouth:'grin'});put(papaPop,850,lerp(2100,1010,k)+o*400,1.0,-6+Math.sin(t*6)*2)}else papaPop.style.opacity=0;
+  const bk=back(P(t,31.8,32.3));bulb.style.opacity=on?C(P(t,31.8,32))*(1-o):0;bulb.style.transform=`translate(${790}px,${330-bk*20+Math.sin(t*4)*6}px) scale(${.4+.6*bk}) rotate(8deg)`}
+
+ // ---------- S5 34–41 ----------
+ if(sc(S5,t,34.0,41.0,.04)){face(prof,{dx:5,dy:-2,brow:5,mouth:'smile',blink:blinkAt(t+.8)});put(prof,250,1300,1.22,Math.sin(t*1.2)*.8)}
+ tch.forEach((e,k)=>pop(e,t,35.6+k*1.3,40.8,700,1100+k*100,k%2?2:-2));
+ // ---------- S6 41–46.4 ----------
+ if(sc(S6,t,41.0,46.5,.04)){face(frere,{dx:lerp(4,-6,P(t,43,43.6)),dy:8,brow:lerp(-4,8,P(t,43.6,44.2)),mouth:t>43.8?'grin':'flat',blink:blinkAt(t)});put(frere,560,1235,1.35,Math.sin(t*1.1)*.8);
+  place(fph,400,1150+Math.sin(t*1.5)*5,150,270,{r:-10});bubble(bF,t,42.2,46.2,330,610)}
+ exams.forEach((e,k)=>pop(e,t,44.4+k*.25,46.2,[250,520,810][k],1400,k%2?2:-2));
+ // ---------- S7 prix ----------
+ pop(payc,t,49.8,52.8,540,1080,0);
+ // ---------- S8 53–60 ----------
+ if(sc(S8,t,52.9,60.5,.05)){
+  face(papa2,{dx:-8,dy:8,brow:9,mouth:'grin',blink:blinkAt(t)});face(kid2,{dx:8,dy:lerp(6,-4,P(t,55,55.5)),brow:8,mouth:'grin',blink:blinkAt(t+1)});face(maman2,{dx:-4,dy:6,brow:5,mouth:'smile',blink:blinkAt(t+.4)});
+  put(maman2,880,1080,.95,2+Math.sin(t)*.6);put(kid2,290,1225,.92,Math.sin(t*1.5)*1.5-P(t,55,55.5)*3);put(papa2,700,1225,1.28,-3+Math.sin(t*1.2)*.8);
+  note2.style.transform=`translate(380px,${1085+Math.sin(t*2)*3}px) rotate(-4deg)`;
+  arm.style.transform=`translate(455px,1120px) rotate(${188+Math.sin(t*5)*5}deg)`;
+  stars.forEach((s,k)=>{const a=54.6+k*.3;const p=back(P(t,a,a+.5));s.style.opacity=t>a?C(p):0;s.style.transform=`translate(${[120,330,470][k]}px,${[640,560,700][k]+Math.sin(t*3+k)*10}px) scale(${.4+.6*p})`})}
+ // carte de fin
+ veil.style.opacity=.93*eio(P(t,56.7,57.3));
+ {const on=t>=58.2;if(!on)cta.style.opacity=0;else{const k=back(P(t,58.2,58.8));place(cta,540,1110,880,132,{s:(.6+.4*k)*(1+.02*Math.sin(t*5)),op:C(P(t,58.2,58.4))})}
+  const p2=eo(P(t,58.7,59.3));by.style.opacity=p2;by.style.transform=`translateY(${1260+(1-p2)*20}px)`}
+
+ const c=CAP.find(c=>t>=c[0]&&t<=c[1]);$('#cap').style.transform='translateY(1475px)';$('#cap').style.opacity=c&&t<56.8?C(P(t,c[0],c[0]+.15))*(1-P(t,c[1]-.1,c[1])):0;if(c)capS.textContent=c[2];
+ gc.putImageData(G[Math.floor(t*30)%5],0,0);
+ $('#fade').style.opacity=(1-C(P(t,0,.3)))+ei(P(t,59.5,60));
+};
+window.ready=Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode().catch(()=>{}))]);
+if(location.hash==='#play'){const t0=performance.now();(function L(){render(((performance.now()-t0)/1000)%DUR);requestAnimationFrame(L)})()}else render(0);
